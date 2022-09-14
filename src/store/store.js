@@ -9,7 +9,6 @@ export const store =new Vuex.Store({
         token:"",
         datos:{},
         cotizaciones:{},
-        backend:"https://laboratorio-jjai-2.herokuapp.com/api",
     },
     mutations:{
         setToken(state,value){

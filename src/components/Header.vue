@@ -1,9 +1,9 @@
 
 <template>
   <div class="mt-5">
-    <v-app-bar app flex color="black" dark>
+    <v-app-bar app flex  dark>
       <img height="100" width="100 " src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" >
-      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token == ''"></v-app-bar-nav-icon>
       <img src="" alt="">
 
       <v-toolbar-title class="font-weight-black"> Lab </v-toolbar-title>
@@ -35,49 +35,36 @@
 
         <!-- //Pagina inicio -->
 
-        <v-list-item to="/inicio">
+        <v-list-item to="/login">
           <v-list-item-icon class="white--text">
+          
             <v-icon color="white">mdi-home</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-title class="white--text">Home</v-list-item-title>
+          <v-list-item-title class="white--text">Login</v-list-item-title>
         </v-list-item>
 
         <!-- //grupo holders -->
-        <v-list-item to="/holders" v-if="$store.state.datos.rol == 'ADMIN'">
+        <v-list-item to="/cotizacion">
           <v-list-item-icon class="white--text">
             <v-icon color="white">mdi-account</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-title class="white--text">holders</v-list-item-title>
+          <v-list-item-title class="white--text">Cotizacion</v-list-item-title>
         </v-list-item>
 
-        <v-list-item to="/favoritos">
-          <v-list-item-icon class="white--text">
+        <v-list-item to="/DetallesCotizacion">
+          <v-list-item-icon class="">
             <v-icon color="white">mdi-heart-outline</v-icon>
           </v-list-item-icon>
-          <v-list-item-title class="white--text">Lista de pelis favoritas</v-list-item-title>
+          <v-list-item-title class="white--text">Detalles Cotizacion</v-list-item-title>
         </v-list-item>
 
-        <v-list-item to="/actores" v-if="$store.state.datos.rol == 'ADMIN'">
+        <v-list-item to="/">
           <v-list-item-icon class="white--text">
             <v-icon color="white">mdi-sword</v-icon>
           </v-list-item-icon>
-          <v-list-item-title class="white--text">Agregar actor</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item to="/peliculas"  v-if="$store.state.datos.rol == 'ADMIN'">
-          <v-list-item-icon class="white--text">
-            <v-icon color="white">mdi-arrow-up-bold</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title class="white--text">Agregar pelis</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item to="/listarActores">
-          <v-list-item-icon class="white--text">
-            <v-icon color="white">mdi-sword</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title class="white--text">Actores</v-list-item-title>
+          <v-list-item-title class="white--text">Home</v-list-item-title>
         </v-list-item>
 
       </v-list>

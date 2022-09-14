@@ -6,6 +6,9 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import {store} from './store/store.js';
 import {routes} from './routes/routes.js';
+import axios from 'axios'
+
+axios.defaults.baseURL = 'https://laboratorio-jjai-2.herokuapp.com/api';
 
 Vue.use(VueRouter)
 Vue.use(VueSweetalert2);
