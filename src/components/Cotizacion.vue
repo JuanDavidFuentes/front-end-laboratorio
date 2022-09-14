@@ -38,7 +38,7 @@
 
                             <v-list three-line subheader>
                                 <v-row style="margin: 0">
-                                    <v-col cols="3" >
+                                    <v-col cols="3">
                                         <img height="300" width="300 "
                                             src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" />
                                     </v-col>
@@ -294,6 +294,7 @@
                                     </v-col>
                                 </v-row>
 
+                                <!-- item 1 -->
                                 <v-row class="mx-5"
                                     style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
                                     <v-col cols="12">
@@ -303,42 +304,413 @@
                                     </v-col>
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
-                                    <v-col cols="12">
+                                    <v-col cols="12" class="ma-0 pa-0">
                                         <v-simple-table>
-                                        <template v-slot:default>
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center text-center white--text text-no-wrap deep-orange">
-                                                        Código de referencia
-                                                    </th>
-                                                    <th class="text-center">
-                                                        Descripción del ensayo
-                                                    </th>
-                                                    <th class="text-center">
-                                                        Unidades
-                                                    </th>
-                                                    <th class="text-center">
-                                                        Técnica analítica
-                                                    </th>
-                                                    <th class="text-center">
-                                                        Método analítico
-                                                    </th>
-                                                    <th class="text-center">
-                                                        Limite de cuantificación
-                                                    </th>
-                                                    <th class="text-center">
-                                                        Costo del ensayo
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="item in desserts" :key="item.name">
-                                                    <td>{{ item.name }}</td>
-                                                    <td>{{ item.calories }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </template>
-                                    </v-simple-table>
+                                            <template v-slot:default>
+                                                <thead style="  background-color: #ff5722; border-top: 0px;">
+                                                    <tr>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Código de referencia </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Descripción del ensayo </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Unidades </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Técnica analítica </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Método analítico </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Limite de cuantificación </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Costo del ensayo </h2>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            a
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            b
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            c
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            d
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            e
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            f
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            g
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Costo del ítem 1 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="pa-0 ma-0">
+                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
+                                                                hide-details>
+                                                            </v-text-field>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </template>
+                                        </v-simple-table>
+                                    </v-col>
+                                </v-row>
+                                <!-- item 2 -->
+                                <v-row class="mx-5"
+                                    style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                                    <v-col cols="12">
+                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                            <h3>Ítem 2</h3>
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                                <v-row style=" margin: 0;" class="mx-5">
+                                    <v-col cols="12" class="ma-0 pa-0">
+                                        <v-simple-table>
+                                            <template v-slot:default>
+                                                <thead style="  background-color: #ff5722; border-top: 0px;">
+                                                    <tr>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Código de referencia </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Descripción del ensayo </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Unidades </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Técnica analítica </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Método analítico </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Limite de cuantificación </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Costo del ensayo </h2>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            a
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            b
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            c
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            d
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            e
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            f
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            g
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Costo del ítem 2 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="pa-0 ma-0">
+                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
+                                                                hide-details>
+                                                            </v-text-field>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </template>
+                                        </v-simple-table>
+                                    </v-col>
+                                </v-row>
+                                <!-- item 3 -->
+                                <v-row class="mx-5"
+                                    style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                                    <v-col cols="12">
+                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                            <h3>Ítem 3</h3>
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                                <v-row style=" margin: 0;" class="mx-5">
+                                    <v-col cols="12" class="ma-0 pa-0">
+                                        <v-simple-table>
+                                            <template v-slot:default>
+                                                <thead style="  background-color: #ff5722; border-top: 0px;">
+                                                    <tr>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Código de referencia </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Descripción del ensayo </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Unidades </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Técnica analítica </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Método analítico </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Limite de cuantificación </h2>
+                                                        </th>
+                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="text-center white--text">
+                                                            <h2> Costo del ensayo </h2>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            a
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            b
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            c
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            d
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            e
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            f
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            g
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Costo del ítem 3 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="pa-0 ma-0">
+                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
+                                                                hide-details>
+                                                            </v-text-field>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Subtotal </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px; border-top: 0px;"
+                                                            class="pa-0 ma-0">
+                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
+                                                                hide-details>
+                                                            </v-text-field>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
+                                                            class="text-center white--text">
+                                                            <h2>Observaciones de la propuesta técnica y económica</h2>
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-right white--text">
+                                                            <h2> IVA </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px; border-top: 0px;"
+                                                            class="pa-0 ma-0">
+                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
+                                                                hide-details>
+                                                            </v-text-field>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Total </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px; border-top: 0px;"
+                                                            class="pa-0 ma-0">
+                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
+                                                                hide-details>
+                                                            </v-text-field>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </template>
+                                        </v-simple-table>
                                     </v-col>
                                 </v-row>
                             </v-container-fluid>

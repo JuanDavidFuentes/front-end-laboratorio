@@ -17,7 +17,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer temporary v-model="drawer" absolute color="deep-orange lighten-5">
+    <v-navigation-drawer temporary v-model="drawer" absolute color="deep-orange">
       <v-list>
         <v-list-item>
           <h1></h1>
