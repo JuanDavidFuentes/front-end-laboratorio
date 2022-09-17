@@ -11,30 +11,37 @@
              <v-dialog v-model="dialog" class="mr-15">
                  <template v-slot:activator="{ on, attrs }">
                      <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                         Nuevo Deudor
+                         Nuevo usuario
                      </v-btn>
                  </template>
-                 <v-card>
+                 <v-card class="">
                      <v-card-title class="text-h5">
-                         Datos Prestamo
+                         Datos Usuario
                      </v-card-title>
                      <v-col cols="12">
-                         <v-text-field v-model="deuda" label="Deuda*" filled rounded dense></v-text-field>
-                         <v-text-field v-model="cuota" label="Cuota*" filled rounded dense></v-text-field>
-                         <v-text-field v-model="interes" label="Interes*" filled rounded dense></v-text-field>
-                         <v-text-field v-model="tiempo" label="Tiempo*" filled rounded dense></v-text-field>
-                     </v-col>
-                     <v-card-actions>
+                        <v-select :items="tipoPersona" dense filled rounded label="Tipo persona"></v-select>
+                        <v-select :items="rol" dense filled rounded label="Rol"></v-select>
+                        <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
+                        <v-text-field v-model="apellidos" label="Apellidos*" filled rounded dense></v-text-field>
+                        <v-text-field v-model="documento" label="Documento*" filled rounded dense></v-text-field>
+                        <v-text-field v-model="direccion" label="Dirección*" filled rounded dense></v-text-field>
+                     
+                        <v-select :items="Ciudades" filled rounded dense label="Departamento" @click="ListarDepar()" ></v-select>
+                        <v-select :items="Ciudades" filled rounded dense label="Ciudad" ></v-select>
+                        <!-- contacto -->
+                        <v-text-field v-model="telefono" label="Telefono*" filled rounded dense></v-text-field>
+                        <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
+                        <v-text-field v-model="password" type="password" label="Password*" filled rounded dense></v-text-field>
+                        <!-- foto -->
+                        </v-col>
+
+                     <v-card-actions class="mt-n7">
                          <v-spacer></v-spacer>
                          <v-btn class="mr-15" outlined color="red darken-3" @click="Volver()">
-                             Cancelar
+                            Cancelar
                          </v-btn>
-                         <v-btn class="" :loading="loading2" :disabled="loading2" color="success"
-                             @click="loader = 'loading2'">
-                             Guardar Datos
-                             <template v-slot:loader>
-                                 <span>Guardando...</span>
-                             </template>
+                         <v-btn color="success" @click="guardar()">
+                            Guardar Datos
                          </v-btn>
                      </v-card-actions>
                  </v-card>
@@ -48,27 +55,27 @@
                  <template v-slot:default>
                      <thead>
                          <tr>
-                             <th class="text-left black--text title"> Nombres</th>
-                             <th class="text-left black--text title"> Fecha </th>
-                             <th class="text-left black--text title"> Deuda </th>
-                             <th class="text-left black--text title"> Interes </th>
-                             <th class="text-left black--text title"> Tiempo </th>
-                             <th class="text-left black--text title"> Cuota </th>
+                             <th class="text-left black--text title"> Nombre</th>
+                             <th class="text-left black--text title"> Apellidos </th>
+                             <th class="text-left black--text title"> Documento </th>
+                             <th class="text-left black--text title"> Dirección </th>
+                             <th class="text-left black--text title"> Ciudad </th>
+                             <th class="text-left black--text title"> Departamento </th>
+                             <th class="text-left black--text title"> Telefono </th>
                              <th class="text-left black--text title"> Estado </th>
                          </tr>
                      </thead>
                      <tbody>
-
-                         <tr v-for="(p, i) in Deudores" :key="i">
-                             <td>{{p.nombres}} nombres</td>
-                             <td>{{p.fecha}}</td>
-                             <td>${{p.deuda}}</td>
-                             <td>{{p.interes}}%</td>
-                             <td>{{p.tiempo}}Meses</td>
-                             <td>{{p.cuota}}Cuota</td>
-                             <td><button type="button"
-                                     class="mr-3 v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default success"><span
-                                         class="v-btn__content"> Activo </span></button>
+                         <tr v-for="(p, i) in Usuarios" :key="i">
+                             <td>{{p.nombre}} nombres</td>
+                             <td>{{p.apellidos}}</td>
+                             <td>{{p.documento}}</td>
+                             <td>{{p.direccion}}</td>
+                             <td>{{p.ciudad}}</td>
+                             <td>{{p.telefono}}</td>
+                             <td>
+                                <button class="">
+                                <span> Activo </span></button>
                              </td>
                          </tr>
                      </tbody>
@@ -80,22 +87,76 @@
  </v-container>
 </template>
 <script>
+import axios from 'axios';
 
 export default {
- name: 'AgregarPrestamo',
+ name: 'PageUsuarios',
  data: () => ({
-     deuda: "",
-     interes: "",
-     tiempo: "",
-     cuota: "",
-     loader: null,
-     loading2: false,
-     dialog: false,
+    Ciudad:[],
+    depar:{},
+    municipio:{},
+    Depar:[],
+
+    Usuarios:[],
+    nombre:"",
+    apellidos:"",
+    documento:"",
+    direccion:"",
+    ciudad:"",
+    departamento:"",
+    telefono:"",
+    email:"",
+    password:"",
+    tipoPersona: ['Natural','Juridica'],
+    rol:['CLIENTE','ADMIN','TECNICO','SUPERVISOR','CIENTIFICO','RECEPCIONISTA'],
+
+    dialog: false,alog: false,
  }),
 
  methods: {
      Volver() {
          this.dialog = false
+     },
+
+     guardar(){
+        let header = { headers: { "token": this.$store.state.token } }
+        axios.post("/usuarios", {
+            nombre: this.nombre,
+            apellidos: this.apellidos,
+            documento: this.documento,
+            direccion: this.direccion,
+            ciudad: this.ciudad,
+            departamento: this.departamento,
+            telefono: this.telefono,
+            email: this.email,
+            password: this.password,
+            tipoPersona:this.tipoPersona,
+            rol:this.rol
+      }, header)
+        .then(response => {
+          console.log("registro exitoso");
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+     },
+     ListarDepar(){
+        axios.get("/ciudad/CiudadDepartamento")
+        .then(response => {
+          console.log(response);
+          this.Ciudad=response.data.ciudad
+          for (let i = 0; i < this.Ciudad.length; i++) {
+            this.depar=this.Ciudad[i].departamento 
+            this.Depar.push(this.depar)
+          }
+    
+
+          console.log(this.Depar);
+        })
+        .catch(error => {
+          console.log(error);
+        })
      },
      Volver1() {
          this.$router.push("/")

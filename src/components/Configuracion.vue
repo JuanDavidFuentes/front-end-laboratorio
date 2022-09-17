@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-15">
+  <v-container class="mt-15 mb-15">
     <v-row>
       <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
         <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
@@ -8,99 +8,79 @@
       </v-col>
     </v-row>
 
-
     <v-row>
-      <v-col cols="4">
-        <v-card class="mx-auto" max-width="344">
+      <v-col cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+        <v-card class="mx-auto" max-width="345">
           <v-row>
-            
             <v-col cols="10" class="text-center">
-              <v-img height="210px" max-width="250px" 
-            src="https://thumbs.dreamstime.com/b/icono-de-vector-herramientas-signo-ilustraci%C3%B3n-configuraci%C3%B3n-s%C3%ADmbolo-o-logotipo-reparaci%C3%B3n-para-sitios-web-m%C3%B3viles-165306743.jpg"></v-img>
+              <v-img
+                height="300px"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQUaEQ2HVBSGk45uNUTgI8xRErCwsTTieMfA&usqp=CAU"
+              ></v-img>
             </v-col>
           </v-row>
-          
           <v-card-title> Setup </v-card-title>
-          <v-card-title>
-            <v-card-text>
-              <v-btn block> Consecutivo cotizacion </v-btn>
-            </v-card-text>
-            <v-card-text>
-              <v-btn block> Consecutivo muestra </v-btn>
-            </v-card-text>
-          </v-card-title>
-          <v-expand-transition>
-            <div v-show="show">
-              <v-divider></v-divider>
-            </div>
-          </v-expand-transition>
-
-          <v-expand-transition>
-            <div v-show="show">
-              <v-divider></v-divider>
-            </div>
-          </v-expand-transition>
-
+          <v-card-text>
+            <v-btn color="deep-orange" class="ml-0 mb-2">
+              Mostrar setup
+            </v-btn>
+          </v-card-text>
         </v-card>
       </v-col>
-        
-
-        <v-col>
-        <v-card class="mx-auto" max-width="344">
+ 
+      <v-col cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+        <v-card class="mx-auto" max-width="345">
           <v-img
-
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQUaEQ2HVBSGk45uNUTgI8xRErCwsTTieMfA&usqp=CAU"
-            height="300px"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQUaEQ2HVBSGk45uNUTgI8xRErCwsTTieMfA&usqp=CAU"
+            height="345px"
           ></v-img>
           <v-card-title> Ciudades</v-card-title>
           <v-card-text>
-              <v-btn block> Ageagar ciudad</v-btn>
-              </v-card-text>
+            <v-btn color ="deep-orange" class="mr-6"> Ageagar ciudad</v-btn>
+          </v-card-text>
         </v-card>
       </v-col>
 
-      
-      <v-col>
-        <v-card class="mx-auto" max-width="344">
+      <v-col cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+        <v-card class="mx-auto" max-width="345">
           <v-img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUv3qtlvC8AE41rrfyFlkfKn8KfWCOxrW8LA&usqp=CAU"
-            height="350px"
+            height="345px"
           ></v-img>
           <v-card-title> Ensayo</v-card-title>
           <v-card-text>
-              <v-btn block> Registro ensayo</v-btn>
-              </v-card-text>
+            <v-btn color="deep-orange" class="mr-6">Registro ensayo</v-btn>
+          </v-card-text>
         </v-card>
       </v-col>
-      
 
-      <v-col>
-        <v-card class="mx-auto" max-width="344">
+      <v-col cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+        <v-card class="mx-auto" max-width="345">
           <v-img
             src="https://us.123rf.com/450wm/denysdrozd/denysdrozd2008/denysdrozd200804351/164282913-icono-de-vector-de-libro-de-escritura-s%C3%ADmbolo-de-ilustraci%C3%B3n-de-cuaderno-de-bit%C3%A1cora-signo-de-cuader.jpg?ver=6"
-            height="300px"
+            height="345px"
           ></v-img>
           <v-card-title> Bitacora</v-card-title>
           <v-card-text>
-              <v-btn block> log</v-btn>
-              </v-card-text>
+            <v-btn color="deep-orange" class="mr-6"> log</v-btn>
+          </v-card-text>
         </v-card>
       </v-col>
 
-
-      <v-col>
-        <v-card class="mx-auto" max-width="344">
+      <v-col cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+        <v-card class="mx-auto" max-width="345">
           <v-img
-            src="https://https://www.flaticon.es/icono-gratis/calidad_115778"
-            height="200px"
+            src="https://es.dreamstime.com/icono-de-la-cinta-del-control-calidad-opci-n-certificada-o-mejor-producto-vector-recomend-marca-aprobada-certificado-premio-y-image142671070"
+            height="345px"
           ></v-img>
           <v-card-title> Calidad</v-card-title>
           <v-card-text>
-              <v-btn block> Editar vercimes anteriore</v-btn>
-              </v-card-text>
+            <v-btn color="deep-orange" class="ml-n1"
+              >Editar versiones<br>anteriores
+            </v-btn>
+          </v-card-text>
         </v-card>
       </v-col>
-      
     </v-row>
   </v-container>
 </template>
@@ -118,8 +98,7 @@ export default {
     Volver1() {
       this.$router.push("/");
     },
-  },
+
+    },
 };
 </script>
-
-
