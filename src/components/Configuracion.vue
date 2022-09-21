@@ -11,19 +11,13 @@
     <v-row>
       <v-col cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
         <v-card class="mx-auto" max-width="345">
-          <v-row>
-            <v-col cols="10" class="text-center">
-              <v-img
-                height="300px"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQUaEQ2HVBSGk45uNUTgI8xRErCwsTTieMfA&usqp=CAU"
-              ></v-img>
-            </v-col>
-          </v-row>
+          <v-img
+          src="https://static.vecteezy.com/system/resources/previews/005/374/887/non_2x/eye-icon-thin-line-for-web-and-mobile-modern-minimalistic-flat-design-icon-on-light-white-background-vector.jpg"
+            height="345px"
+          ></v-img>
           <v-card-title> Setup </v-card-title>
           <v-card-text>
-            <v-btn color="deep-orange" class="ml-0 mb-2">
-              Mostrar setup
-            </v-btn>
+            <v-btn color ="deep-orange" class="mr-6" @click="Setup()">Mostrar setup</v-btn>
           </v-card-text>
         </v-card>
       </v-col>
@@ -36,7 +30,7 @@
           ></v-img>
           <v-card-title> Ciudades</v-card-title>
           <v-card-text>
-            <v-btn color ="deep-orange" class="mr-6"> Ageagar ciudad</v-btn>
+            <v-btn color ="deep-orange" class="mr-6" @click="AggCiudades()"> Agregar ciudad</v-btn>
           </v-card-text>
         </v-card>
       </v-col>
@@ -97,6 +91,12 @@ export default {
     },
     Volver1() {
       this.$router.push("/");
+    },
+    Setup() {
+      this.$router.push("/setup");
+    },
+    AggCiudades(){
+      this.$router.push("/AggCiudades");
     },
 
     },

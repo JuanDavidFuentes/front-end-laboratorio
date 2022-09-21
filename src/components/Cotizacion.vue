@@ -805,14 +805,212 @@
                         <v-card-title>
                             Seleccione el cliente
                         </v-card-title>
-                        <v-card-text>
-                            <v-select :items="cotizaciones" label="Seleccione un cliente" item-value="text"></v-select>
-                        </v-card-text>
+                        <v-simple-table class="mb-15" align-center justify-center>
+                            <template v-slot:default>
+                                <thead>
+                                    <tr>
+                                        <th class="text-left">Nombres</th>
+                                        <th class="text-left">Apellidos</th>
+                                        <th class="text-left">Documento</th>
+                                        <th class="text-left">Tipo de persona</th>
+                                        <th class="text-left">Email</th>
+                                        <th class="text-left">Añadir</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(cliente, i) in clientes" :key="i">
+                                        <td>{{ cliente.nombre }}</td>
+                                        <td>{{ cliente.apellidos }}</td>
+                                        <td>{{ cliente.documento }}</td>
+                                        <td>{{ cliente.email }}</td>
+                                        <td>{{ cliente.tipoPersona }}</td>
+                                        <td>
+                                            <v-btn color="green" rounded dark>
+                                                <v-icon> mdi-plus-circle </v-icon>
+                                            </v-btn>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </template>
+                        </v-simple-table>
+                        <div>
+                            <h2>¿ Desea crear un nuevo cliente ?</h2>
+                        </div>
                         <v-card-actions>
-                            <v-btn color="red" text @click="dialog2 = false" dark>
-                                Cerrar
-                            </v-btn>
+                            <v-row style="margin:0">
+                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                    <v-btn color="green" rounded dark @click="dialog3 = !dialog3">
+                                        Crear
+                                    </v-btn>
+                                </v-col>
+                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                </v-col>
+                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                    <v-btn color="red" @click="dialog2 = false" rounded dark>
+                                        Cerrar
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
                         </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+
+                <v-dialog v-model="dialog3" fullscreen hide-overlay transition="dialog-bottom-transition">
+                    <v-card>
+                        <v-toolbar dark>
+                            <v-btn icon dark @click="dialog3 = false">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                            <v-toolbar-title>Crear nuevo cliente</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-items>
+                                <v-btn dark text @click="dialog3 = false">
+                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                </v-btn>
+                            </v-toolbar-items>
+                        </v-toolbar>
+                        <div v-if="si===1">
+                            <v-card-title>
+                                ¿ Desea ingresar los datos del contacto del cliente ?
+                            </v-card-title>
+                            <v-card-actions>
+                                <v-row style="margin:0">
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                        <v-btn color="green" @click="si = 2" rounded dark>
+                                            Si
+                                        </v-btn>
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                        <v-btn color="red" @click="si = 0" rounded dark>
+                                            No
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-actions>
+                        </div>
+
+                        <div v-if="si===2">
+                            <v-card-title>
+                                Ingrese los datos del contacto del cliente
+                            </v-card-title>
+                            <v-row>
+                                <v-col cols="2"> </v-col>
+                                    <v-col cols="8" class="items-center">
+                                        <br><br>
+                                        <div>
+                                            <span class="text-center display-1 black--text font-weight-Normal">
+                                                Titulo:
+                                            </span>
+                                            <span>
+                                                <v-text-field v-model="titulo" label="Titulo" type="text">
+                                                </v-text-field>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center display-1 black--text font-weight-Normal">
+                                                Subtitulo:
+                                            </span>
+                                            <span>
+                                                <v-text-field v-model="subtitulo" label="Subtitulo" type="text">
+                                                </v-text-field>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center display-1  black--text font-weight-Normal">
+                                                Fecha:
+                                            </span>
+                                            <span>
+                                                <v-text-field v-model="fecha" label="Fecha" type="date"></v-text-field>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center display-1 black--text font-weight-Normal">
+                                                Descripcion:
+                                            </span>
+                                            <span>
+                                                <v-textarea v-model="descripcion" outlined name="input-7-4"
+                                                    label="Descripcion">
+                                                </v-textarea>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center display-1 black--text font-weight-Normal">
+                                                Genero:
+                                            </span>
+                                            <span>
+                                                <v-text-field v-model="genero" label="Genero" type="text">
+                                                </v-text-field>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center display-1 black--text font-weight-Normal">
+                                                Duracion:
+                                            </span>
+                                            <span>
+                                                <v-text-field v-model="duracion" label="Duracion" type="text">
+                                                </v-text-field>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center display-1 black--text font-weight-Normal">
+                                                Calificacion:
+                                            </span>
+                                            <span>
+                                                <v-text-field v-model="calificacion" label="Calificacion" type="text">
+                                                </v-text-field>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center display-1 black--text font-weight-Normal">
+                                                Reparto:
+                                            </span>
+                                        </div>
+                                </v-col>
+                            </v-row>
+                            <v-card-actions>
+                                <v-row style="margin:0">
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                        <v-btn color="green" @click="si=0" rounded dark>
+                                            Crear
+                                        </v-btn>
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                        <v-btn color="red" @click="si=1" rounded dark>
+                                            Cancelar
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-actions>
+                        </div>
+
+                        <div v-if="si===0">
+                            <v-card-title>
+                                Ingresar los datos del cliente
+                            </v-card-title>
+
+                            <v-card-actions>
+                                <v-row style="margin:0">
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                        <v-btn color="green" rounded dark>
+                                            Crear
+                                        </v-btn>
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                        <v-btn color="red" @click="si=1" rounded dark>
+                                            Cancelar
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-actions>
+                        </div>
+
                     </v-card>
                 </v-dialog>
             </v-col>
@@ -832,13 +1030,18 @@ export default {
             cotizaciones: [],
             dialog: false,
             dialog2: false,
+            dialog3: false,
             notifications: false,
             sound: true,
             widgets: false,
             calidadOferta: [],
             datos: [],
             numerocoti: 0,
-            numeroactual: ""
+            numeroactual: "",
+            clientes: [],
+            clientesNombres: [],
+            si: 1,
+            botones: 1
         };
     },
     methods: {
@@ -852,7 +1055,7 @@ export default {
                     this.numerocoti = this.cotizaciones[0].numero_cotizacion
                     const division = Number(this.numerocoti.split("")[this.numerocoti.length - 8])
                     const sumar = division + 1
-                    const cambio = this.numerocoti.replace(division, sumar)
+                    const cambio = this.numerocoti.replace(division, sumar) // esta incompleto xd
                     this.numeroactual = cambio
                 })
                 .catch((error) => {
@@ -918,18 +1121,21 @@ export default {
         },
         usuarios() {
             let header = { headers: { "token": this.$store.state.token } };
-            axios.get(`/usuarios`,{},header)
+            axios.get(`/usuarios/listarClientes`, header)
                 .then((response) => {
                     console.log(response);
+                    response.data.usuarios.forEach(usuarios => {
+                        this.clientes.push(usuarios)
+                    })
+                    console.log(this.clientes);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        crearContacto() {
+
         }
-        // buscar(){
-        //     this.$router.push("/search")
-        //     this.$store.state.titulo=this.titulo
-        // }
     },
     created() {
         this.listar();
