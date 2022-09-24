@@ -123,10 +123,27 @@
 
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        class="pa-0 ma-0">
-                                        <v-btn color="primary" dark class="ma-2" @click="dialog2 = !dialog2">
-                                            Open Dialog 2
+                                        class="pa-0 ma-0 text-center">
+                                        <v-btn v-if="botones==1" color="deep-orange" dark class="my-3"
+                                            @click="dialog2 = !dialog2">
+                                            Elegir cliente
                                         </v-btn>
+                                        <v-row style="margin:0">
+                                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"></v-col>
+                                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                                <div v-if="botones==0"
+                                                    class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                    hide-details>
+                                                    {{nombre}}
+                                                </div>
+                                            </v-col>
+                                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                                <v-btn v-if="botones==0" color="red" dark class="my-3"
+                                                    @click="borrarclientes()">
+                                                    <v-icon> mdi-window-close </v-icon>
+                                                </v-btn>
+                                            </v-col>
+                                        </v-row>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -138,8 +155,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{documento}}
+                                        </div>
                                     </v-col>
                                 </v-row>
 
@@ -148,15 +167,17 @@
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
                                         cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text text-no-wrap deep-orange ">
                                             <h3>Dirección</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{direccion}}
+                                        </div>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -168,8 +189,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{ciudad.ciudad}}
+                                        </div>
                                     </v-col>
                                 </v-row>
 
@@ -185,8 +208,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{ciudad.departamento}}
+                                        </div>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -198,8 +223,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{telefono}}
+                                        </div>
                                     </v-col>
                                 </v-row>
 
@@ -214,8 +241,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{nombrecontacto}}
+                                        </div>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -227,8 +256,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{cargo}}
+                                        </div>
                                     </v-col>
                                 </v-row>
 
@@ -243,8 +274,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{celular}}
+                                        </div>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -256,8 +289,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{email}}
+                                        </div>
                                     </v-col>
                                 </v-row>
 
@@ -272,8 +307,7 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <v-text-field class="mt-5" type="date" outlined dense> </v-text-field>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -285,8 +319,7 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <v-text-field class="mt-5" type="date" outlined dense> </v-text-field>
                                     </v-col>
                                 </v-row>
 
@@ -301,8 +334,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{recep.nombre}} {{recep.apellidos}}
+                                        </div>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -314,8 +349,10 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="pa-0 ma-0" full-width hide-details filled disabled>
-                                        </v-text-field>
+                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                            hide-details>
+                                            {{recep.rol}}
+                                        </div>
                                     </v-col>
                                 </v-row>
 
@@ -825,7 +862,7 @@
                                         <td>{{ cliente.email }}</td>
                                         <td>{{ cliente.tipoPersona }}</td>
                                         <td>
-                                            <v-btn color="green" rounded dark>
+                                            <v-btn color="green" rounded dark @click="seleccionarclientes(cliente)">
                                                 <v-icon> mdi-plus-circle </v-icon>
                                             </v-btn>
                                         </td>
@@ -833,13 +870,13 @@
                                 </tbody>
                             </template>
                         </v-simple-table>
-                        <div>
+                        <div class="text-center">
                             <h2>¿ Desea crear un nuevo cliente ?</h2>
                         </div>
                         <v-card-actions>
                             <v-row style="margin:0">
                                 <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                    <v-btn color="green" rounded dark @click="dialog3 = !dialog3">
+                                    <v-btn color="green" rounded dark @click="aceptar()">
                                         Crear
                                     </v-btn>
                                 </v-col>
@@ -870,104 +907,91 @@
                                 </v-btn>
                             </v-toolbar-items>
                         </v-toolbar>
-                        <div v-if="si===1">
-                            <v-card-title>
-                                ¿ Desea ingresar los datos del contacto del cliente ?
-                            </v-card-title>
-                            <v-card-actions>
-                                <v-row style="margin:0">
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                        <v-btn color="green" @click="si = 2" rounded dark>
-                                            Si
-                                        </v-btn>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn color="red" @click="si = 0" rounded dark>
-                                            No
-                                        </v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-card-actions>
-                        </div>
 
                         <div v-if="si===2">
-                            <v-card-title>
-                                Ingrese los datos del contacto del cliente
-                            </v-card-title>
+                            <v-row style="margin:0">
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                                <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                                    <h1>Ingrese los datos del contacto del cliente</h1>
+                                </v-col>
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                            </v-row>
                             <v-row>
-                                <v-col cols="2"> </v-col>
-                                    <v-col cols="8" class="items-center">
-                                        <br><br>
-                                        <div>
-                                            <span class="text-center display-1 black--text font-weight-Normal">
-                                                Titulo:
-                                            </span>
-                                            <span>
-                                                <v-text-field v-model="titulo" label="Titulo" type="text">
-                                                </v-text-field>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="text-center display-1 black--text font-weight-Normal">
-                                                Subtitulo:
-                                            </span>
-                                            <span>
-                                                <v-text-field v-model="subtitulo" label="Subtitulo" type="text">
-                                                </v-text-field>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="text-center display-1  black--text font-weight-Normal">
-                                                Fecha:
-                                            </span>
-                                            <span>
-                                                <v-text-field v-model="fecha" label="Fecha" type="date"></v-text-field>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="text-center display-1 black--text font-weight-Normal">
-                                                Descripcion:
-                                            </span>
-                                            <span>
-                                                <v-textarea v-model="descripcion" outlined name="input-7-4"
-                                                    label="Descripcion">
-                                                </v-textarea>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="text-center display-1 black--text font-weight-Normal">
-                                                Genero:
-                                            </span>
-                                            <span>
-                                                <v-text-field v-model="genero" label="Genero" type="text">
-                                                </v-text-field>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="text-center display-1 black--text font-weight-Normal">
-                                                Duracion:
-                                            </span>
-                                            <span>
-                                                <v-text-field v-model="duracion" label="Duracion" type="text">
-                                                </v-text-field>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="text-center display-1 black--text font-weight-Normal">
-                                                Calificacion:
-                                            </span>
-                                            <span>
-                                                <v-text-field v-model="calificacion" label="Calificacion" type="text">
-                                                </v-text-field>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="text-center display-1 black--text font-weight-Normal">
-                                                Reparto:
-                                            </span>
-                                        </div>
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+                                <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                                    <br><br>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Tipo de persona:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="tipoPersona" label="Tipo de persona" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Nombres:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="nombre" label="Nombres" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1  black--text font-weight-Normal">
+                                            Apellidos:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="apellidos" label="Apellidos" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Documento:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="documento" label="Documento" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Dirección:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="direccion" label="Dirección" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Ciudad:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="ciudad" label="Ciudad" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Telefono:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="telefono" label="Telefono" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Correo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="email" label="Correo" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
                                 </v-col>
                             </v-row>
                             <v-card-actions>
@@ -980,7 +1004,7 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn color="red" @click="si=1" rounded dark>
+                                        <v-btn color="red" @click="dialog3 = false" rounded dark>
                                             Cancelar
                                         </v-btn>
                                     </v-col>
@@ -989,10 +1013,101 @@
                         </div>
 
                         <div v-if="si===0">
-                            <v-card-title>
-                                Ingresar los datos del cliente
-                            </v-card-title>
+                            <v-row style="margin:0">
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                                <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                                    <h1>Ingresar los datos del cliente</h1>
+                                </v-col>
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                            </v-row>
 
+                            <v-row>
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+                                <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                                    <br><br>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Tipo de persona:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="tipoPersona" label="Tipo de persona" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Nombres:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="nombre" label="Nombres" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1  black--text font-weight-Normal">
+                                            Apellidos:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="apellidos" label="Apellidos" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Documento:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="documento" label="Documento" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Contacto:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="contacto" label="Contacto" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Dirección:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="direccion" label="Dirección" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Ciudad:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="ciudad" label="Ciudad" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Telefono:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="telefono" label="Telefono" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Correo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="email" label="Correo" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                </v-col>
+                            </v-row>
                             <v-card-actions>
                                 <v-row style="margin:0">
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
@@ -1003,7 +1118,7 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn color="red" @click="si=1" rounded dark>
+                                        <v-btn color="red" @click="dialog3 = false" rounded dark>
                                             Cancelar
                                         </v-btn>
                                     </v-col>
@@ -1039,14 +1154,80 @@ export default {
             numerocoti: 0,
             numeroactual: "",
             clientes: [],
+            nombrecontacto: "",
             clientesNombres: [],
             si: 1,
-            botones: 1
+            botones: 1,
+
+            tipoPersona: "",
+            nombre: "",
+            apellidos: "",
+            contacto: "",
+            documento: "",
+            direccion: "",
+            ciudad: "",
+            telefono: "",
+            email: "",
+            celular: "",
+            cargo: "",
+
+            recep:{},
         };
     },
     methods: {
         Volver() {
             this.$router.push("/");
+        },
+        seleccionarclientes(cliente) {
+            console.log(cliente);
+            if (cliente.contacto) {
+                this.tipoPersona = cliente.tipoPersona
+                this.nombre = cliente.nombre
+                this.apellidos = cliente.apellidos
+                this.contacto = cliente.contacto
+                this.nombrecontacto = cliente.contacto.nombre
+                this.documento = cliente.documento
+                this.direccion = cliente.direccion
+                this.ciudad = cliente.ciudad
+                this.telefono = cliente.telefono
+                this.celular = cliente.celular
+                this.cargo = cliente.cargo
+                this.email = cliente.email
+                this.dialog2 = false
+                this.botones = 0
+            } else {
+                this.tipoPersona = cliente.tipoPersona
+                this.nombre = cliente.nombre
+                this.apellidos = cliente.apellidos
+                this.contacto = ""
+                this.nombrecontacto = ""
+                this.documento = cliente.documento
+                this.direccion = cliente.direccion
+                this.ciudad = cliente.ciudad
+                this.telefono = cliente.telefono
+                this.celular = cliente.celular
+                this.cargo = cliente.cargo
+                this.email = cliente.email
+                this.dialog2 = false
+                this.botones = 0
+            }
+
+        },
+        borrarclientes() {
+            this.tipoPersona = ""
+            this.nombre = ""
+            this.apellidos = ""
+            this.contacto = ""
+            this.nombrecontacto = ""
+            this.documento = ""
+            this.direccion = ""
+            this.ciudad = ""
+            this.telefono = ""
+            this.celular = ""
+            this.cargo = ""
+            this.email = ""
+            this.dialog2 = false
+            this.botones = 1
         },
         listar() {
             axios.get(`/cotizacion/listarTodasLasCotizaciones`)
@@ -1104,7 +1285,6 @@ export default {
             axios.get("/calidad/listar")
                 .then((response) => {
                     this.calidadOferta = response.data.listado[0].OfertaServicios
-                    console.log(this.calidadOferta);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -1123,11 +1303,9 @@ export default {
             let header = { headers: { "token": this.$store.state.token } };
             axios.get(`/usuarios/listarClientes`, header)
                 .then((response) => {
-                    console.log(response);
                     response.data.usuarios.forEach(usuarios => {
                         this.clientes.push(usuarios)
                     })
-                    console.log(this.clientes);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -1135,13 +1313,41 @@ export default {
         },
         crearContacto() {
 
-        }
+        },
+        aceptar() {
+            this.$swal.fire({
+                title: '¿ Desea ingresar los datos del contacto del cliente ?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Si',
+                denyButtonText: `No`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    this.si = 2
+                    this.dialog3 = !this.dialog3
+                } else if (result.isDenied) {
+                    this.dialog3 = !this.dialog3
+                    this.si = 0
+                }
+            })
+        },
+        recepcionista() {
+            this.recep=this.$store.state.datos
+            console.log(this.$store.state.datos);
+                        // if("RECEPCIONISTA"==""){
+                        //         this.nombrer="usuarios.nombre"
+                        //         this.apellidor="usuarios.apellidos"
+                        //         this.rol="rusuarios.rol"
+                        // }
+        },
     },
     created() {
         this.listar();
         this.calidad();
         this.info();
         this.usuarios();
+        this.recepcionista();
     },
 };
 </script>

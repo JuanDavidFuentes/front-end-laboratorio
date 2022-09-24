@@ -56,7 +56,7 @@
           ></v-img>
           <v-card-title> Bitacora</v-card-title>
           <v-card-text>
-            <v-btn color="deep-orange" class="mr-6"> log</v-btn>
+            <v-btn color="deep-orange" class="mr-6" @click="Log()"> log</v-btn>
           </v-card-text>
         </v-card>
       </v-col>
@@ -97,6 +97,9 @@ export default {
     },
     AggCiudades(){
       this.$router.push("/AggCiudades");
+    },
+    Log() {
+      this.$router.push("/log");
     },
 
     },

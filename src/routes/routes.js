@@ -6,6 +6,9 @@ import Configuracion from '../components/Configuracion.vue';
 import AgregarUsuario from '../components/AgregarUsuario.vue';
 import Setup from '../components/Setup.vue';
 import AggCiudad from '../components/AggCiudades.vue';
+import Log from '../components/Bitacora.vue';
+
+
 
 export const routes = [
     {path: '/login', component: login},
@@ -16,5 +19,6 @@ export const routes = [
     {path: '/agregarusuario', component: AgregarUsuario},
     {path: '/setup', component: Setup},
     {path: '/AggCiudades', component: AggCiudad},
-    
+    {path: '/log', component: Log},
+
 ]

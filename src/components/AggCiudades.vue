@@ -4,8 +4,7 @@
         <v-row>
           <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
             <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
-              Volver
-              
+              Volver                           
             </v-btn>
           </v-col>
         </v-row>
@@ -17,22 +16,18 @@
                         <template v-slot:default>
                             <thead>
                                 <tr>
+                                    <th class="text-center">Codigo Departamento</th>
+                                    <th class="text-center">Departamento</th>
+                                    <th class="text-center">Codigo Ciudad</th>
                                     <th class="text-center">Ciudad</th>
-                                    <th class="text-center">IdCiudad</th>
-                                    <th class="text-center">hgrtb</th>
-                                    <th class="text-center">rgrtr</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(consecutivo, i) in infoConsecutivo" :key="i">
-                                    <td class="text-center">{{ consecutivo.numero_cotizacion }}</td>
-                                    <td class="text-center">
-                                        {{ consecutivo.codMuestra }}
-                                    </td>
-                                    <td class="text-center">{{ consecutivo.iva }}</td>
-    
-                                    <td class="text-center"><v-btn color="deep-orange" rounded dark @click="editarC()">
-                                            <v-icon> mdi-border-color </v-icon></v-btn></td>
+                              <tr v-for="(ciudad, i) in ciudades" :key="i">
+                                    <td class="text-center">{{ ciudad.coddepartamento }}</td>
+                                    <td class="text-center">{{ ciudad.departamento}}{{idPut}}</td>
+                                    <td class="text-center">{{ ciudad.codciudad }}</td>
+                                    <td class="text-center">{{ ciudad.ciudad}}</td>
                                 </tr>
                             </tbody>
                         </template>
@@ -44,16 +39,30 @@
 </template>
     
 <script>
-// import axios  from 'axios';
+  import axios  from 'axios';
 export default {
   name: 'AggCiudad',
   data: () => ({
-    Ciudades:[],
+    ciudades:[],
   }),
   methods: {
-    volver1() {
-      this.router.push("/Configuracion")
+        Volver1() {
+      this.$router.push("/Configuracion");
     },
+    listar() {
+                axios.get(`/ciudad/CiudadDepartamento`)
+                    .then((response) => {
+                      console.log(response);
+                         this.ciudades=response.data.ciudad
+                        console.log(this.ciudades);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+      },
+      created() {
+        this.listar();
   }
 }
 

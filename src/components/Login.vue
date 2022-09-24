@@ -29,11 +29,11 @@
             <br>
             <br>
             <div>
-              <span class="text-center title black--text font-weight-Normal">
+              <span class="text-center title black--text font-weight-Normal" autocomplete="email" label="Email">
                 Correo:
               </span>
               <span>
-                <v-text-field color="black" v-model="correo" label="Correo" type="text" filled rounded dense>
+                <v-text-field color="black" v-model="correo" label="Correo" type="email" filled rounded dense>
                 </v-text-field>
               </span>
             </div>
@@ -42,7 +42,7 @@
                 Contraseña:
               </span>
               <span>
-                <v-text-field color="black" v-model="password" label="Contraseña" type="text" filled rounded dense>
+                <v-text-field color="black" v-model="password" label="Contraseña" type="password" filled rounded dense>
                 </v-text-field>
               </span>
             </div>
@@ -83,7 +83,7 @@ export default {
                   this.$swal.fire({
                      position: 'top-end',
                      icon: 'error',
-                     title: error.response.data.errors[0].msg,
+                     title: "a",// error.response.data.errors[0].msg,
                      showConfirmButton: false,
                      timer: 1500
                   })

@@ -41,14 +41,14 @@
                 </v-card>
             </v-col>
 
-            <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
+            <!-- <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
                 <v-card color="#385F73" dark>
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
                             <v-card-title class="text-h5">Recepcion <br> Muestras </v-card-title>
                             <v-card-subtitle>Listar</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5" outlined rounded @click="Listar()">
+                                <v-btn class="ml-2 mt-5" outlined rounded @click="Listar()" to="/muestras">
                                     <v-icon>mdi-text-box-check-outline</v-icon>
                                     Muestras
                                 </v-btn>
@@ -59,7 +59,7 @@
                         </v-avatar> 
                     </div>
                 </v-card>
-            </v-col>
+            </v-col> -->
 
 
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
