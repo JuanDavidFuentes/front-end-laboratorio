@@ -112,7 +112,6 @@
                                 </v-row>
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <!-- xs="8" sm="8" md="4" lg="4" xl="4" -->
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
                                         cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
@@ -138,10 +137,15 @@
                                                 </div>
                                             </v-col>
                                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                                <v-btn v-if="botones==0" color="red" dark class="my-3"
-                                                    @click="borrarclientes()">
-                                                    <v-icon> mdi-window-close </v-icon>
-                                                </v-btn>
+                                                <v-tooltip v-if="botones==0" bottom>
+                                                    <template v-slot:activator="{ on, attrs }">
+                                                        <v-icon dark class="my-3" color="red" rounded v-bind="attrs" v-on="on"
+                                                            @click="borrarclientes()">
+                                                            mdi-close-circle
+                                                        </v-icon>
+                                                    </template>
+                                                    <span>Eliminar los datos del cliente</span>
+                                                </v-tooltip>
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -792,85 +796,89 @@
                 </v-row>
             </v-col>
         </v-row>
-        <!-- xs="12" md="12" lg="12" xl="12" -->
         <v-row style="margin: 0">
-            <v-col cols="2"></v-col>
-            <v-col cols="8">
-                <v-simple-table class="mb-15" align-center justify-center>
-                    <template v-slot:default>
-                        <thead>
-                            <tr>
-                                <th class="text-left">Codigo de cotización</th>
-                                <th class="text-left">Nombre completo del cliente</th>
-                                <th class="text-left">Documento</th>
-                                <th class="text-left">Fecha</th>
-                                <th class="text-left">Otros</th>
-                                <th class="text-left">Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(cotizacion, i) in cotizaciones" :key="i">
-                                <td>{{ cotizacion.numero_cotizacion }}</td>
-                                <td>
-                                    {{ cotizacion.idCliente.nombre }}
-                                    {{ cotizacion.idCliente.apellidos }}
-                                </td>
-                                <td>{{ cotizacion.idCliente.documento }}</td>
-                                <td>{{ cotizacion.fecha_emision.slice(0, 10) }}</td>
-                                <td>
-                                    <v-btn color="success" class="mr-3" v-if="cotizacion.estado === 1" rounded
-                                        @click="activar(cotizacion._id)">
-                                        Activo
-                                    </v-btn>
-                                    <v-btn color="error" v-if="cotizacion.estado === 0" rounded
-                                        @click="desactivar(cotizacion._id)">
-                                        Desactivado
-                                    </v-btn>
-                                </td>
-                                <td>
-                                    <v-btn color="deep-orange" rounded dark>
-                                        <v-icon> mdi-border-color </v-icon>
-                                    </v-btn>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </template>
-                </v-simple-table>
-
-                <v-dialog v-model="dialog2" max-width="800px">
+            <v-col cols="1"></v-col>
+            <v-col cols="10">
+                <template>
                     <v-card>
                         <v-card-title>
-                            Seleccione el cliente
+                            Buscar cotización
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                hide-details></v-text-field>
                         </v-card-title>
-                        <v-simple-table class="mb-15" align-center justify-center>
-                            <template v-slot:default>
-                                <thead>
-                                    <tr>
-                                        <th class="text-left">Nombres</th>
-                                        <th class="text-left">Apellidos</th>
-                                        <th class="text-left">Documento</th>
-                                        <th class="text-left">Tipo de persona</th>
-                                        <th class="text-left">Email</th>
-                                        <th class="text-left">Añadir</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(cliente, i) in clientes" :key="i">
-                                        <td>{{ cliente.nombre }}</td>
-                                        <td>{{ cliente.apellidos }}</td>
-                                        <td>{{ cliente.documento }}</td>
-                                        <td>{{ cliente.email }}</td>
-                                        <td>{{ cliente.tipoPersona }}</td>
-                                        <td>
-                                            <v-btn color="green" rounded dark @click="seleccionarclientes(cliente)">
-                                                <v-icon> mdi-plus-circle </v-icon>
-                                            </v-btn>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                        <v-data-table :headers="headers2" :items="cotizaciones" :search="search">
+                            <template v-slot:[`item.fecha`]="{item}">
+                                {{fechaSalida(item.fecha_emision)}}
                             </template>
-                        </v-simple-table>
-                        <div class="text-center">
+                            <template v-slot:[`item.opciones`]="{item}">
+                                <template v-if="item.estado===1">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="error" rounded v-bind="attrs" v-on="on"
+                                                @click="activar(item._id)">
+                                                mdi-calendar-remove
+                                            </v-icon>
+                                        </template>
+                                        <span>Desactivar</span>
+                                    </v-tooltip>
+                                </template>
+                                <template v-else>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="success" rounded v-bind="attrs" v-on="on"
+                                                @click="desactivar(item._id)">
+                                                mdi-calendar-plus
+                                            </v-icon>
+                                        </template>
+                                        <span>Activar</span>
+                                    </v-tooltip>
+                                </template>
+                                <template>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon class="ml-3" color="blue" rounded v-bind="attrs" v-on="on">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar</span>
+                                    </v-tooltip>
+                                </template>
+                            </template>
+                            <template v-slot:[`item.estado`]="{item}">
+                                <span class="green--text" v-if="item.estado===1">Activo</span>
+                                <span class="red--text" v-else>Inactivo</span>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </template>
+
+                <v-dialog v-model="dialog2" max-width="1000px">
+                    <v-card>
+                        <template>
+                            <v-card>
+                                <v-card-title>
+                                    Seleccione un cliente
+                                    <v-spacer></v-spacer>
+                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                        hide-details></v-text-field>
+                                </v-card-title>
+                                <v-data-table :headers="headers" :items="clientes" :search="search">
+                                    <template v-slot:[`item.agregar`]="{item}">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                    @click="seleccionarclientes(item)">
+                                                    mdi-plus-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Añadir cliente</span>
+                                        </v-tooltip>
+                                    </template>
+                                </v-data-table>
+                            </v-card>
+                        </template>
+                        <div class="text-center mt-3">
                             <h2>¿ Desea crear un nuevo cliente ?</h2>
                         </div>
                         <v-card-actions>
@@ -976,10 +984,10 @@
                                     </div>
                                     <div>
                                         <span class="text-center display-1 black--text font-weight-Normal">
-                                            Telefono:
+                                            Celular:
                                         </span>
                                         <span>
-                                            <v-text-field v-model="telefono" label="Telefono" type="text">
+                                            <v-text-field v-model="celular" label="Telefono" type="text">
                                             </v-text-field>
                                         </span>
                                     </div>
@@ -997,7 +1005,7 @@
                             <v-card-actions>
                                 <v-row style="margin:0">
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                        <v-btn color="green" @click="si=0" rounded dark>
+                                        <v-btn color="green" @click="crearContacto()" rounded dark>
                                             Crear
                                         </v-btn>
                                     </v-col>
@@ -1129,7 +1137,7 @@
                     </v-card>
                 </v-dialog>
             </v-col>
-            <v-col cols="2"></v-col>
+            <v-col cols="1"></v-col>
         </v-row>
     </v-container>
 </template>
@@ -1142,6 +1150,7 @@ export default {
 
     data() {
         return {
+            search: '',
             cotizaciones: [],
             dialog: false,
             dialog2: false,
@@ -1171,10 +1180,98 @@ export default {
             celular: "",
             cargo: "",
 
-            recep:{},
+            recep: {},
+
+            headers: [
+                {
+                    text: 'Nombres',
+                    align: 'start',
+                    sortable: false,
+                    value: "nombre",
+                },
+                {
+                    text: 'Apellidos',
+                    align: 'start',
+                    sortable: false,
+                    value: 'apellidos',
+                },
+                {
+                    text: 'C.C. / NIT',
+                    align: 'start',
+                    sortable: false,
+                    value: 'documento',
+                },
+                {
+                    text: 'Tipo de persona',
+                    align: 'start',
+                    sortable: false,
+                    value: 'email',
+                },
+                {
+                    text: 'Correo',
+                    align: 'start',
+                    sortable: false,
+                    value: 'email',
+                },
+                {
+                    text: 'Añadir',
+                    align: 'center',
+                    sortable: false,
+                    value: 'agregar',
+                },
+            ],
+            headers2: [
+                {
+                    text: 'Codigo de cotización',
+                    align: 'start',
+                    sortable: false,
+                    value: "numero_cotizacion",
+                },
+                {
+                    text: 'Nombres del cliente',
+                    align: 'start',
+                    sortable: false,
+                    value: 'idCliente.nombre',
+                },
+                {
+                    text: 'Apellidos del cliente',
+                    align: 'start',
+                    sortable: false,
+                    value: 'idCliente.apellidos',
+                },
+                {
+                    text: 'C.C. / NIT',
+                    align: 'start',
+                    sortable: false,
+                    value: 'idCliente.documento',
+                },
+                {
+                    text: 'Fecha',
+                    align: 'start',
+                    sortable: false,
+                    value: 'fecha',
+                },
+                {
+                    text: 'Estado',
+                    align: 'start',
+                    sortable: false,
+                    value: 'estado',
+                },
+                {
+                    text: 'Opciones',
+                    align: 'start',
+                    sortable: false,
+                    value: 'opciones',
+                },
+            ]
         };
     },
     methods: {
+        fechaSalida(r) {
+            let d = new Date(r);
+            this.span = true
+            return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
+        },
         Volver() {
             this.$router.push("/");
         },
@@ -1238,6 +1335,7 @@ export default {
                     const sumar = division + 1
                     const cambio = this.numerocoti.replace(division, sumar) // esta incompleto xd
                     this.numeroactual = cambio
+
                 })
                 .catch((error) => {
                     console.log(error);
@@ -1312,7 +1410,37 @@ export default {
                 });
         },
         crearContacto() {
-
+            axios.post(`/usuarios/`, {
+                tipoPersona:this.tipoPersona,
+                nombre:this.nombre,
+                apellidos:this.apellidos,
+                documento:this.documento,
+                direccion:this.direccion,
+                ciudad:this.ciudad,
+                celular:this.celular,
+                email:this.email,
+                password:this.documento,
+                rol:"CONTACTO"
+            })
+                .then((response) => {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    this.si=0
+                })
+                .catch((error) => {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: error.response.data.errores.errors[0].msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                });
         },
         aceptar() {
             this.$swal.fire({
@@ -1333,13 +1461,13 @@ export default {
             })
         },
         recepcionista() {
-            this.recep=this.$store.state.datos
+            this.recep = this.$store.state.datos
             console.log(this.$store.state.datos);
-                        // if("RECEPCIONISTA"==""){
-                        //         this.nombrer="usuarios.nombre"
-                        //         this.apellidor="usuarios.apellidos"
-                        //         this.rol="rusuarios.rol"
-                        // }
+            // if("RECEPCIONISTA"==""){
+            //         this.nombrer="usuarios.nombre"
+            //         this.apellidor="usuarios.apellidos"
+            //         this.rol="rusuarios.rol"
+            // }
         },
     },
     created() {

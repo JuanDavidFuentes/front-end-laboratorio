@@ -7,6 +7,9 @@ import AgregarUsuario from '../components/AgregarUsuario.vue';
 import Setup from '../components/Setup.vue';
 import AggCiudad from '../components/AggCiudades.vue';
 import Log from '../components/Bitacora.vue';
+import Clientes from '../components/Clientes.vue';
+import Ensayo from '../components/Ensayo.vue';
+import ListaMuestras from '../components/ListaMuestras.vue';
 
 
 
@@ -20,5 +23,8 @@ export const routes = [
     {path: '/setup', component: Setup},
     {path: '/AggCiudades', component: AggCiudad},
     {path: '/log', component: Log},
+    {path: '/clientes', component: Clientes},
+    {path: '/EnsayoLab', component: Ensayo},
+    {path: '/ListaMuestras', component: ListaMuestras},
 
 ]

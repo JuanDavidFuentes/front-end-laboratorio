@@ -9,6 +9,7 @@ export const store =new Vuex.Store({
         token:"",
         datos:{},
         cotizaciones:{},
+        muestras:{},
     },
     mutations:{
         setToken(state,value){
@@ -20,6 +21,9 @@ export const store =new Vuex.Store({
         setCotizacion(state, value){
             state.cotizaciones = value
         },
+        setMuestras(state, value){
+            state.muestras = value
+        },
     },
     actions:{
         setToken(context,value){
@@ -30,6 +34,9 @@ export const store =new Vuex.Store({
         },
         setCotizacion(context,value){
             context.commit('setCotizacion',value)
+        },
+        setMuestras(context,value){
+            context.commit('setMuestras',value)
         },
     }
 }); 

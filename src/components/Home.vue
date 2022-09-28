@@ -61,6 +61,25 @@
                 </v-card>
             </v-col> -->
 
+            <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
+                <v-card color="amber darken-4" dark>
+                    <div class="d-flex flex-no-wrap justify-space-between">
+                        <div>
+                            <v-card-title class="text-h5">Clientes</v-card-title>
+                            <v-card-subtitle>Nuevo</v-card-subtitle>
+                            <v-card-actions>
+                                <v-btn class="ml-2 mt-5" outlined rounded to="/clientes">
+                                    <v-icon>mdi-clipboard-alert-outline</v-icon>
+                                    Clientes
+                                </v-btn>
+                            </v-card-actions>
+                        </div>
+                        <v-avatar class="ml-n7 mr-5 mt-4" size="125">
+                            <img  height=90% src="https://img.lovepik.com/element/45007/5080.png_860.png" alt="John">
+                        </v-avatar>
+                    </div>
+                </v-card>
+            </v-col>
 
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
                 <v-card color="amber darken-4" dark>
