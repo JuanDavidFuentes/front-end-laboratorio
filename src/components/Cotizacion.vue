@@ -139,8 +139,8 @@
                                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
                                                 <v-tooltip v-if="botones==0" bottom>
                                                     <template v-slot:activator="{ on, attrs }">
-                                                        <v-icon dark class="my-3" color="red" rounded v-bind="attrs" v-on="on"
-                                                            @click="borrarclientes()">
+                                                        <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
+                                                            v-on="on" @click="borrarclientes()">
                                                             mdi-close-circle
                                                         </v-icon>
                                                     </template>
@@ -977,10 +977,12 @@
                                         <span class="text-center display-1 black--text font-weight-Normal">
                                             Ciudad:
                                         </span>
-                                        <span>
-                                            <v-text-field v-model="ciudad" label="Ciudad" type="text">
-                                            </v-text-field>
-                                        </span>
+                                        <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio"
+                                            :filter="customFilter" item-text="ciudad" item-value="_id" label="Ciudad">
+                                        </v-autocomplete>
+                                        <!-- <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio" rounded dense filled label="Ciudades">
+                                        </v-autocomplete> -->
+
                                     </div>
                                     <div>
                                         <span class="text-center display-1 black--text font-weight-Normal">
@@ -1074,8 +1076,10 @@
                                             Contacto:
                                         </span>
                                         <span>
-                                            <v-text-field v-model="contacto" label="Contacto" type="text">
+                                            <v-text-field v-model="idcontacto.nombre" label="Contacto" filled readonly>
                                             </v-text-field>
+                                            <!-- <v-text-field v-model="idcontacto.nombre"  label="Contacto" type="text">
+                                            </v-text-field> -->
                                         </span>
                                     </div>
                                     <div>
@@ -1091,10 +1095,9 @@
                                         <span class="text-center display-1 black--text font-weight-Normal">
                                             Ciudad:
                                         </span>
-                                        <span>
-                                            <v-text-field v-model="ciudad" label="Ciudad" type="text">
-                                            </v-text-field>
-                                        </span>
+                                        <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio"
+                                            :filter="customFilter" item-text="ciudad" item-value="_id" label="Ciudad">
+                                        </v-autocomplete>
                                     </div>
                                     <div>
                                         <span class="text-center display-1 black--text font-weight-Normal">
@@ -1151,6 +1154,7 @@ export default {
     data() {
         return {
             search: '',
+            ciudades: [],
             cotizaciones: [],
             dialog: false,
             dialog2: false,
@@ -1180,8 +1184,14 @@ export default {
             celular: "",
             cargo: "",
 
+            idcontacto: "",
             recep: {},
-
+            Municipio: [],
+            tipos:[
+                {
+                    
+                }
+            ],
             headers: [
                 {
                     text: 'Nombres',
@@ -1411,18 +1421,19 @@ export default {
         },
         crearContacto() {
             axios.post(`/usuarios/`, {
-                tipoPersona:this.tipoPersona,
-                nombre:this.nombre,
-                apellidos:this.apellidos,
-                documento:this.documento,
-                direccion:this.direccion,
-                ciudad:this.ciudad,
-                celular:this.celular,
-                email:this.email,
-                password:this.documento,
-                rol:"CONTACTO"
+                tipoPersona: this.tipoPersona,
+                nombre: this.nombre,
+                apellidos: this.apellidos,
+                documento: this.documento,
+                direccion: this.direccion,
+                ciudad: this.ciudad,
+                celular: this.celular,
+                email: this.email.toUpperCase(),    
+                password: this.documento,
+                rol: "CONTACTO"
             })
                 .then((response) => {
+                    console.log(response);
                     this.$swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -1430,9 +1441,20 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.si=0
+                    this.si = 0
+                    this.tipoPersona = ""
+                    this.nombre = ""
+                    this.apellidos = ""
+                    this.documento = ""
+                    this.direccion = ""
+                    this.ciudad = ""
+                    this.celular = ""
+                    this.email = ""
+                    this.documento = ""
+                    this.idcontacto = response.data.usuario
                 })
                 .catch((error) => {
+                    console.log(this.ciudad);
                     this.$swal.fire({
                         position: "top-end",
                         icon: "error",
@@ -1469,6 +1491,26 @@ export default {
             //         this.rol="rusuarios.rol"
             // }
         },
+        ciudadess() {
+            axios.get("/ciudad/CiudadDepartamento")
+                .then(response => {
+                    console.log(response);
+                    response.data.ciudad.forEach(city => {
+                        this.Municipio.push(city)
+                    })
+                    console.log(this.Municipio);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+
+        customFilter(item, queryText) {
+            const textOne = item.ciudad.toUpperCase()
+            const searchText = queryText.toUpperCase()
+
+            return textOne.indexOf(searchText) > -1
+        }
     },
     created() {
         this.listar();
@@ -1476,6 +1518,7 @@ export default {
         this.info();
         this.usuarios();
         this.recepcionista();
+        this.ciudadess();
     },
 };
 </script>

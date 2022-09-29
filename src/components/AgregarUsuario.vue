@@ -20,6 +20,7 @@
                          Datos Usuario
                      </v-card-title>
                      <v-col cols="12">
+
                         <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded label="Tipo Persona"></v-select>
 
                         <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded label="Rol"></v-select>
@@ -29,10 +30,12 @@
                         <v-text-field v-model="direccion" label="Dirección*" filled rounded dense></v-text-field>
                      
                         <!-- <v-select :items="Ciudad1" filled rounded dense label="Departamento" @click="ListarDepar()" ></v-select> -->
-                        <v-select v-model="seleccionadoCiudad" :items="Municipio" filled rounded dense label="Ciudad" @click="listarCiudad()" >
-                        </v-select>
+
+                        <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()" >
+                        </v-autocomplete>
+
                         <!-- contacto -->
-                        <v-text-field v-model="telefono" label="Telefono*" filled rounded dense></v-text-field>
+                        <v-text-field v-model="celular" label="celular*" filled rounded dense></v-text-field>
                         <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
                         <v-text-field v-model="password" type="password" label="Password*" filled rounded dense></v-text-field>
                         <!-- foto -->
@@ -64,26 +67,26 @@
                              <th class="text-left black--text title"> Documento </th>
                              <th class="text-left black--text title"> Dirección </th>
                              <th class="text-left black--text title"> Ciudad </th>
-                             <th class="text-left black--text title"> Departamento </th>
-                             <th class="text-left black--text title"> Telefono </th>
+                             <th class="text-left black--text title"> Celular </th>
                              <th class="text-left black--text title"> Estado </th>
                              <th class="text-left black--text title"> Cargo </th>
+                             <th> </th>
                          </tr>
                      </thead>
                      <tbody>
                          <tr v-for="(p, i) in Usuarios" :key="i">
                             <td>{{p.tipoPersona}}</td>
-                            
                              <td>{{p.nombre}}</td>
                              <td>{{p.apellidos}}</td>
                              <td>{{p.documento}}</td>
                              <td>{{p.direccion}}</td>
                              <td>{{p.ciudad.ciudad}}</td>
-                             <td>{{p.telefono}}</td>
+                             <td>{{p.celular}}</td>
                              <td>
                                 <button class="">
                                 <span> Activo </span></button>
                              </td>
+                             <td></td>
                          </tr>
                      </tbody>
                  </template>
@@ -100,16 +103,18 @@ export default {
  name: 'PageUsuarios',
  data: () => ({
     Ciudad:[],
-    municipio:{},
+    idciudad:"",
+    municipio:"",
     idmunicipio:{},
     Municipio:[],
+    MuniS:{},
     Usuarios:[],
     nombre:"",
     apellidos:"",
     documento:"",
     direccion:"",
     ciudad:"",
-    telefono:"",
+    celular:"",
     email:"",
     password:"",
 
@@ -127,7 +132,7 @@ export default {
         { text: "TECNICO", value: "TECNICO"},
         { text: "SUPERVISOR", value: "SUPERVISOR" },
         { text: "CIENTIFICO",  value: "CIENTIFICO"},
-        { text: "RECEPCIONISTA",  value: "Juridica" },
+        { text: "RECEPCIONISTA",  value: "RECEPCIONISTA" },
       ],
 
     dialog: false,
@@ -150,16 +155,22 @@ created(){
             apellidos: this.apellidos,
             documento: this.documento,
             direccion: this.direccion,
-            ciudad: this.ciudad,
-            telefono: this.telefono,
+            ciudad: this.seleccionadoCiudad,
+            celular: this.celular,
             email: this.email.toUpperCase(),
             password: this.password,
             rol:this.selecionadoRol
       }, header)
-
         .then(response => {
-          console.log("registro exitoso");
-          console.log(response);
+            console.log(response);
+            this.dialog = false
+            this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });          
         })
         .catch(error => {
           console.log(error);
@@ -185,22 +196,28 @@ created(){
                 console.log(error);
             });
     },
+
     listarCiudad(){
         axios.get("/ciudad/CiudadDepartamento")
         .then(response => {
-          console.log(response);
-          this.Ciudad=response.data.ciudad
-          for (let i = 0; i < this.Ciudad.length; i++) {
-            this.municipio=this.Ciudad[i].ciudad
+                    console.log(response);
+                    response.data.ciudad.forEach(city => {
+                        this.Municipio.push(city)
+                    })
+                    console.log(this.Municipio);
+                    
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
 
-            this.Municipio.push(this.municipio)
-          }
-          console.log(this.Municipio);
-        })
-        .catch(error => {
-          console.log(error);
-        })
-    },
+        customFilter(item, queryText) {
+            const textOne = item.ciudad.toUpperCase()
+            const searchText = queryText.toUpperCase()
+
+            return textOne.indexOf(searchText) > -1
+        },
 
     ListarDepar(){
         axios.get("/ciudad/CiudadDepartamento")
@@ -216,10 +233,10 @@ created(){
         .catch(error => {
           console.log(error);
         })
-     },
+        },
      Volver1() {
          this.$router.push("/")
-     }
+        }
  },
  watch: {
      loader() {
@@ -228,8 +245,8 @@ created(){
          setTimeout(() => (this[l] = false), 3000)
          this.loader = null
          this.dialog = false
-     },
- },
+        },
+    },
 }
 </script>
 
