@@ -124,7 +124,7 @@
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0 text-center">
                                         <v-btn v-if="botones==1" color="deep-orange" dark class="my-3"
-                                            @click="dialog2 = !dialog2">
+                                            @click="Elegircliente()">
                                             Elegir cliente
                                         </v-btn>
                                         <v-row style="margin:0">
@@ -799,12 +799,13 @@
         <v-row style="margin: 0">
             <v-col cols="1"></v-col>
             <v-col cols="10">
+
                 <template>
                     <v-card>
                         <v-card-title>
                             Buscar cotización
                             <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers2" :items="cotizaciones" :search="search">
@@ -860,8 +861,8 @@
                                 <v-card-title>
                                     Seleccione un cliente
                                     <v-spacer></v-spacer>
-                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                                        hide-details></v-text-field>
+                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente"
+                                        single-line hide-details></v-text-field>
                                 </v-card-title>
                                 <v-data-table :headers="headers" :items="clientes" :search="search">
                                     <template v-slot:[`item.agregar`]="{item}">
@@ -909,8 +910,13 @@
                             </v-btn>
                             <v-toolbar-title>Crear nuevo cliente</v-toolbar-title>
                             <v-spacer></v-spacer>
-                            <v-toolbar-items>
-                                <v-btn dark text @click="dialog3 = false">
+                            <v-toolbar-items v-if="si===2">
+                                <v-btn dark text @click="crearContacto()">
+                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                </v-btn>
+                            </v-toolbar-items>
+                            <v-toolbar-items v-if="si===0">
+                                <v-btn dark text @click="crearCliente()">
                                     <v-icon> mdi-plus-circle-outline </v-icon>Guardar
                                 </v-btn>
                             </v-toolbar-items>
@@ -933,8 +939,8 @@
                                             Tipo de persona:
                                         </span>
                                         <span>
-                                            <v-text-field v-model="tipoPersona" label="Tipo de persona" type="text">
-                                            </v-text-field>
+                                            <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
+                                            </v-select>
                                         </span>
                                     </div>
                                     <div>
@@ -980,9 +986,6 @@
                                         <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio"
                                             :filter="customFilter" item-text="ciudad" item-value="_id" label="Ciudad">
                                         </v-autocomplete>
-                                        <!-- <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio" rounded dense filled label="Ciudades">
-                                        </v-autocomplete> -->
-
                                     </div>
                                     <div>
                                         <span class="text-center display-1 black--text font-weight-Normal">
@@ -999,6 +1002,24 @@
                                         </span>
                                         <span>
                                             <v-text-field v-model="email" label="Correo" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div v-if="tipoPersona==='Juridica'">
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Cargo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="cargo" label="Telefono" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div v-if="tipoPersona==='Juridica'">
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Telefono:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="telefono" label="Telefono" type="text">
                                             </v-text-field>
                                         </span>
                                     </div>
@@ -1040,8 +1061,8 @@
                                             Tipo de persona:
                                         </span>
                                         <span>
-                                            <v-text-field v-model="tipoPersona" label="Tipo de persona" type="text">
-                                            </v-text-field>
+                                            <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
+                                            </v-select>
                                         </span>
                                     </div>
                                     <div>
@@ -1075,12 +1096,10 @@
                                         <span class="text-center display-1 black--text font-weight-Normal">
                                             Contacto:
                                         </span>
-                                        <span>
-                                            <v-text-field v-model="idcontacto.nombre" label="Contacto" filled readonly>
-                                            </v-text-field>
-                                            <!-- <v-text-field v-model="idcontacto.nombre"  label="Contacto" type="text">
-                                            </v-text-field> -->
-                                        </span>
+                                        <v-autocomplete class="mt-2" v-model="contacto" :items="contactos"
+                                            :filter="customFilter2" item-text="nombre" item-value="_id"
+                                            label="Contactos">
+                                        </v-autocomplete>
                                     </div>
                                     <div>
                                         <span class="text-center display-1 black--text font-weight-Normal">
@@ -1101,10 +1120,10 @@
                                     </div>
                                     <div>
                                         <span class="text-center display-1 black--text font-weight-Normal">
-                                            Telefono:
+                                            Celular:
                                         </span>
                                         <span>
-                                            <v-text-field v-model="telefono" label="Telefono" type="text">
+                                            <v-text-field v-model="celular" label="Celular" type="text">
                                             </v-text-field>
                                         </span>
                                     </div>
@@ -1117,12 +1136,30 @@
                                             </v-text-field>
                                         </span>
                                     </div>
+                                    <div v-if="tipoPersona==='Juridica'">
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Cargo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="cargo" label="Telefono" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div v-if="tipoPersona==='Juridica'">
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Telefono:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="telefono" label="Telefono" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
                                 </v-col>
                             </v-row>
                             <v-card-actions>
                                 <v-row style="margin:0">
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                        <v-btn color="green" rounded dark>
+                                        <v-btn color="green" @click="crearCliente()" rounded dark>
                                             Crear
                                         </v-btn>
                                     </v-col>
@@ -1154,6 +1191,7 @@ export default {
     data() {
         return {
             search: '',
+            search2: '',
             ciudades: [],
             cotizaciones: [],
             dialog: false,
@@ -1183,15 +1221,11 @@ export default {
             email: "",
             celular: "",
             cargo: "",
-
+            contactos: [],
             idcontacto: "",
             recep: {},
             Municipio: [],
-            tipos:[
-                {
-                    
-                }
-            ],
+            tipos: ["Natural", "Juridica"],
             headers: [
                 {
                     text: 'Nombres',
@@ -1215,7 +1249,7 @@ export default {
                     text: 'Tipo de persona',
                     align: 'start',
                     sortable: false,
-                    value: 'email',
+                    value: 'tipoPersona',
                 },
                 {
                     text: 'Correo',
@@ -1342,9 +1376,17 @@ export default {
                     this.cotizaciones = response.data.coti;
                     this.numerocoti = this.cotizaciones[0].numero_cotizacion
                     const division = Number(this.numerocoti.split("")[this.numerocoti.length - 8])
-                    const sumar = division + 1
-                    const cambio = this.numerocoti.replace(division, sumar) // esta incompleto xd
-                    this.numeroactual = cambio
+                    let date = new Date();
+                    let output = String(date.getFullYear());
+                    if (division.toString().length === 1) {
+                        this.numeroactual= `000${division}-${output}V${1}`
+                    } else if (division.toString().length === 2) {
+                        this.numeroactual= `00${division}-${output}V${1}`
+                    } else if (division.toString().length === 3) {
+                        this.numeroactual= `0${division}-${output}V${1}`
+                    } else if (division.toString().length === 4) {
+                        this.numeroactual= `${division}-${output}V${1}`
+                    }
 
                 })
                 .catch((error) => {
@@ -1420,49 +1462,98 @@ export default {
                 });
         },
         crearContacto() {
-            axios.post(`/usuarios/`, {
-                tipoPersona: this.tipoPersona,
-                nombre: this.nombre,
-                apellidos: this.apellidos,
-                documento: this.documento,
-                direccion: this.direccion,
-                ciudad: this.ciudad,
-                celular: this.celular,
-                email: this.email.toUpperCase(),    
-                password: this.documento,
-                rol: "CONTACTO"
-            })
-                .then((response) => {
-                    console.log(response);
-                    this.$swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: response.data.msg,
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    this.si = 0
-                    this.tipoPersona = ""
-                    this.nombre = ""
-                    this.apellidos = ""
-                    this.documento = ""
-                    this.direccion = ""
-                    this.ciudad = ""
-                    this.celular = ""
-                    this.email = ""
-                    this.documento = ""
-                    this.idcontacto = response.data.usuario
+            if (this.tipoPersona === "Juridica") {
+                axios.post(`/usuarios/`, {
+                    tipoPersona: this.tipoPersona,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento,
+                    direccion: this.direccion,
+                    ciudad: this.ciudad,
+                    celular: this.celular,
+                    telefono: this.telefono,
+                    cargo: this.cargo,
+                    email: this.email.toUpperCase(),
+                    password: this.documento,
+                    rol: "CONTACTO"
                 })
-                .catch((error) => {
-                    console.log(this.ciudad);
-                    this.$swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: error.response.data.errores.errors[0].msg,
-                        showConfirmButton: false,
-                        timer: 1500,
+                    .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.si = 0
+                        this.tipoPersona = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.ciudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.documento = ""
+                        this.telefono = ""
+                        this.cargo = ""
+                        this.listarContactos()
+                    })
+                    .catch((error) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
                     });
-                });
+            } else {
+                axios.post(`/usuarios/`, {
+                    tipoPersona: this.tipoPersona,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento,
+                    direccion: this.direccion,
+                    ciudad: this.ciudad,
+                    celular: this.celular,
+                    email: this.email.toUpperCase(),
+                    password: this.documento,
+                    rol: "CONTACTO"
+                })
+                    .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.si = 0
+                        this.tipoPersona = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.ciudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.documento = ""
+                        this.telefono = ""
+                        this.cargo = ""
+                        this.listarContactos()
+                    })
+                    .catch((error) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    });
+            }
+
         },
         aceptar() {
             this.$swal.fire({
@@ -1510,6 +1601,217 @@ export default {
             const searchText = queryText.toUpperCase()
 
             return textOne.indexOf(searchText) > -1
+        },
+        customFilter2(item, queryText) {
+            const textOne = item.nombre
+            const searchText = queryText
+
+            return textOne.indexOf(searchText) > -1
+        },
+        listarContactos() {
+            let header = { headers: { "token": this.$store.state.token } };
+            axios.get(`/usuarios/listarContactos`, header)
+                .then((response) => {
+                    response.data.usuarios.forEach(usuarios => {
+                        this.contactos.push(usuarios)
+                    })
+                    console.log(this.contactos);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        crearCliente() {
+            if (this.contacto === "" || this.contacto === null) {
+                if (this.tipoPersona === "Juridica") {
+                    axios.post(`/usuarios/`, {
+                        tipoPersona: this.tipoPersona,
+                        nombre: this.nombre,
+                        apellidos: this.apellidos,
+                        documento: this.documento,
+                        direccion: this.direccion,
+                        ciudad: this.ciudad,
+                        celular: this.celular,
+                        telefono: this.telefono,
+                        cargo: this.cargo,
+                        email: this.email.toUpperCase(),
+                        password: this.documento,
+                    })
+                        .then((response) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: response.data.msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            this.tipoPersona = ""
+                            this.nombre = ""
+                            this.apellidos = ""
+                            this.documento = ""
+                            this.direccion = ""
+                            this.ciudad = ""
+                            this.celular = ""
+                            this.email = ""
+                            this.documento = ""
+                            this.telefono = ""
+                            this.cargo = ""
+                            this.contacto = ""
+                            this.dialog3 = false
+                            this.usuarios()
+                        })
+                        .catch((error) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: error.response.data.errores.errors[0].msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        })
+                } else {
+                    axios.post(`/usuarios/`, {
+                        tipoPersona: this.tipoPersona,
+                        nombre: this.nombre,
+                        apellidos: this.apellidos,
+                        documento: this.documento,
+                        direccion: this.direccion,
+                        ciudad: this.ciudad,
+                        celular: this.celular,
+                        email: this.email.toUpperCase(),
+                        password: this.documento,
+                    })
+                        .then((response) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: response.data.msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            this.tipoPersona = ""
+                            this.nombre = ""
+                            this.apellidos = ""
+                            this.documento = ""
+                            this.direccion = ""
+                            this.ciudad = ""
+                            this.celular = ""
+                            this.email = ""
+                            this.documento = ""
+                            this.telefono = ""
+                            this.cargo = ""
+                            this.contacto = ""
+                            this.dialog3 = false
+                            this.usuarios()
+                        })
+                        .catch((error) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: error.response.data.errores.errors[0].msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        });
+                }
+            } else {
+                if (this.tipoPersona === "Juridica") {
+                    axios.post(`/usuarios/`, {
+                        tipoPersona: this.tipoPersona,
+                        nombre: this.nombre,
+                        apellidos: this.apellidos,
+                        documento: this.documento,
+                        direccion: this.direccion,
+                        ciudad: this.ciudad,
+                        contacto: this.contacto,
+                        celular: this.celular,
+                        telefono: this.telefono,
+                        cargo: this.cargo,
+                        email: this.email.toUpperCase(),
+                        password: this.documento,
+                    })
+                        .then((response) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: response.data.msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            this.tipoPersona = ""
+                            this.nombre = ""
+                            this.apellidos = ""
+                            this.documento = ""
+                            this.direccion = ""
+                            this.ciudad = ""
+                            this.celular = ""
+                            this.email = ""
+                            this.documento = ""
+                            this.telefono = ""
+                            this.cargo = ""
+                            this.contacto = ""
+                            this.dialog3 = false
+                            this.usuarios()
+                        })
+                        .catch((error) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: error.response.data.errores.errors[0].msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        })
+                } else {
+                    axios.post(`/usuarios/`, {
+                        tipoPersona: this.tipoPersona,
+                        nombre: this.nombre,
+                        apellidos: this.apellidos,
+                        documento: this.documento,
+                        direccion: this.direccion,
+                        ciudad: this.ciudad,
+                        celular: this.celular,
+                        email: this.email.toUpperCase(),
+                        password: this.documento,
+                    })
+                        .then((response) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: response.data.msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            this.tipoPersona = ""
+                            this.nombre = ""
+                            this.apellidos = ""
+                            this.documento = ""
+                            this.direccion = ""
+                            this.ciudad = ""
+                            this.celular = ""
+                            this.email = ""
+                            this.documento = ""
+                            this.telefono = ""
+                            this.cargo = ""
+                            this.contacto = ""
+                            this.dialog3 = false
+                            this.usuarios()
+                        })
+                        .catch((error) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: error.response.data.errores.errors[0].msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        });
+                }
+            }
+        },
+        Elegircliente(){
+            this.dialog2 = !this.dialog2
+            this.search=''
         }
     },
     created() {
@@ -1519,6 +1821,7 @@ export default {
         this.usuarios();
         this.recepcionista();
         this.ciudadess();
+        this.listarContactos();
     },
 };
 </script>

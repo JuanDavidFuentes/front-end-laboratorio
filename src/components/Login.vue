@@ -42,8 +42,9 @@
                 Contraseña:
               </span>
               <span>
-                <v-text-field color="black" v-model="password" label="Contraseña" type="password" filled rounded dense>
-                </v-text-field>
+                <v-text-field v-model="password" :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]"
+                  :type="show3 ? 'text' : 'password'" name="input-10-2" hint="At least 8 characters"
+                  value="wqfasds" class="input-group--focused" @click:append="show3 = !show3" rounded dense filled></v-text-field>
               </span>
             </div>
             <br>
@@ -62,42 +63,51 @@ export default {
 
   data: () => ({
     correo: "",
-    password: "",
-    valido:""
+    valido: "",
+    show1: false,
+    show2: true,
+    show3: false,
+    show4: false,
+    password2: 'Password2',
+    rules: {
+      required: value => !!value || 'Required.',
+      min: v => v.length >= 8 || 'Min 8 characters',
+      emailMatch: () => (`The email and password you entered don't match`),
+    },
   }),
   methods: {
     login() {
-      this.valido=this.correo.toUpperCase();
+      this.valido = this.correo.toUpperCase();
       axios.post("usuarios/login", {
-            email: this.valido,
-            password: this.password
-         })
-            .then(response => {
-               console.log(response.data);
-               this.$store.dispatch("setToken", response.data.token);
-               this.$store.dispatch("setDatos", response.data.usuario);
-               this.$router.push("/")
+        email: this.valido,
+        password: this.password
+      })
+        .then(response => {
+          console.log(response.data);
+          this.$store.dispatch("setToken", response.data.token);
+          this.$store.dispatch("setDatos", response.data.usuario);
+          this.$router.push("/")
+        })
+        .catch(error => {
+          if (error.response.data.errores) {
+            this.$swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: error.response.data.errores.errors[0].msg,
+              showConfirmButton: false,
+              timer: 1500
             })
-            .catch(error => {
-               if (error.response.data.errors) {
-                  this.$swal.fire({
-                     position: 'top-end',
-                     icon: 'error',
-                     title: "a",// error.response.data.errors[0].msg,
-                     showConfirmButton: false,
-                     timer: 1500
-                  })
-               }else{
-                  this.$swal.fire({
-                     position: 'top-end',
-                     icon: 'error',
-                     title: error.response.data.msg,
-                     showConfirmButton: false,
-                     timer: 1500
-                  })
-               }
-               console.log(error);
+          } else {
+            this.$swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: error.response.data.msg,
+              showConfirmButton: false,
+              timer: 1500
             })
+          }
+          console.log(error);
+        })
     },
     registro() {
       this.ocultar = 0

@@ -39,7 +39,7 @@
             <v-col cols="2"></v-col>
         </v-row>
 
-</v-container>
+    </v-container>
   </template>
     
   <script>

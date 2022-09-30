@@ -43,7 +43,7 @@
           ></v-img>
           <v-card-title> Ensayo</v-card-title>
           <v-card-text>
-            <v-btn color="deep-orange" class="mr-6">Registro ensayo</v-btn>
+            <v-btn color="deep-orange" class="mr-6" @click="ensayo()">Registro ensayo</v-btn>
           </v-card-text>
         </v-card>
       </v-col>
@@ -101,6 +101,9 @@ export default {
     Log() {
       this.$router.push("/log");
     },
+    ensayo(){
+      this.$router.push("/EnsayoLab")
+    }
 
     },
 };
