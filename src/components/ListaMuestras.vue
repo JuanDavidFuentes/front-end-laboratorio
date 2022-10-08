@@ -99,6 +99,7 @@
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                         class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.nombre}} {{datos.apellidos}}</h3>
                       </v-col>
                       <v-col
                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -109,7 +110,8 @@
                       </v-col>
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                        class="pa-0 ma-0">
+                        class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.ciudad.departamento}}</h3>
                       </v-col>
                     </v-row>
                     <v-row style="margin: 0" class="mx-5">
@@ -117,12 +119,13 @@
                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
                         cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                         <div class="text-center white--text text-no-wrap deep-orange">
-                          <h3>NIT/CC</h3>
+                          <h3>NIT/C.C.</h3>
                         </div>
                       </v-col>
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                         class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.documento}}</h3>
                       </v-col>
                       <v-col
                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -133,7 +136,8 @@
                       </v-col>
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                        class="pa-0 ma-0">
+                        class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.contacto.nombre}} {{datos.contacto.apellidos}}</h3>
                       </v-col>
                     </v-row>
                     <v-row style="margin: 0" class="mx-5">
@@ -147,6 +151,7 @@
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                         class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.direccion}}</h3>
                       </v-col>
                       <v-col
                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -157,7 +162,8 @@
                       </v-col>
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                        class="pa-0 ma-0">
+                        class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.telefono}}</h3>
                       </v-col>
                     </v-row>
                     <v-row style="margin: 0" class="mx-5">
@@ -171,6 +177,7 @@
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                         class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.ciudad.ciudad}}</h3>
                       </v-col>
                       <v-col
                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -181,16 +188,59 @@
                       </v-col>
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                        class="pa-0 ma-0">
+                        class="pa-0 ma-0 text-center">
+                        <h3 class="mt-3">{{datos.email}}</h3>
                       </v-col>
                     </v-row>
                     <v-row class="mx-5"
                       style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
-                      <v-col>
+                      <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                      </v-col>
+                      <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
                         <div class="text-center white--text text-no-wrap deep-orange">
                           <h3>Datos de la muestra</h3>
                         </div>
                       </v-col>
+                      <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn color="white" class="ma-2" dark @click="dialog2 = true">
+                              <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                mdi-plus-circle
+                              </v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Añadir ítem</span>
+                        </v-tooltip>
+                      </v-col>
+                      <v-dialog v-model="dialog2" max-width="500px">
+                        <v-card class="">
+                        <v-card-title class="text-h5">
+                            Datos Muestra
+                        </v-card-title>
+                        <v-col cols="12">                        
+                            <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
+                                item-value="_id" filled rounded dense label="Municipio de recolección" @click="listarCiudad()">
+                            </v-autocomplete>    
+                            <v-text-field v-model="direccionM" label="Dirección de toma de muestra*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="lugarM" label="Lugar de toma de muestra*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="recolectadaPor" label="Muestra recolectada por*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="procedimiento" label="Procedimiento de*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="tipoM" label="Tipo de muestra*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="matrizM" label="Matriz de la muestra*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="fecha" label="Fecha y hora de recolección*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="cotizacion" label="Cotización*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="item" label="ítem de la*" filled rounded dense></v-text-field>
+                            <v-text-field v-model="observacion" label="Observaciones" filled rounded dense></v-text-field>
+                            </v-col>
+                        <v-card-actions class="mt-n7">
+                            <v-btn color="success" @click="Guardar()">
+                                Añadir datos
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                      </v-dialog>
+
                     </v-row>
                     <v-row style=" margin: 0;" class="mx-5">
                       <v-col cols="12" class="ma-0 pa-0">
@@ -329,15 +379,101 @@
                       </v-col>
                     </v-row>
                     <v-row style="margin: 0" class="mx-5">
-                      <v-col style="border: solid 1px; border-color: black; border-top: 0px;" cols="1" >
+                      <v-col style="border: solid 1px; border-color: black; border-top: 0px;" cols="1">
                         <div class="text-center ">
                           <body-1>1</body-1>
                         </div>
                       </v-col>
-                      <v-col style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;" cols="5" >
+                      <v-col style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        cols="5">
                         <div class="text-center ">
                           <body-1>1</body-1>
                         </div>
+                      </v-col>
+                      <v-col style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        cols="6">
+                        <div class="text-left ">
+                          <body-1>El solicitante al afirmar la presente acta de recepción de muestras acepta lo
+                            siguiente:</body-1>
+                          <br>
+                          <body-1>1. Que a las muestras se le realicen todos los ensayos de acuerdo al ítem de la
+                            cotización indicado en el presente formato y los mismos sean reportados en el respectivo
+                            informe de los resultados.</body-1>
+                          <br>
+                          <body-1>2.</body-1>
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <v-row style="margin: 0" class="mx-5">
+                      <v-col
+                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                        <div class="text-center white--text text-no-wrap deep-orange">
+                          <h3>Quien entrega las muestras</h3>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        class="pa-0 ma-0 text-center">
+                      </v-col>
+                      <v-col
+                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                        <div class="text-center white--text text-no-wrap deep-orange">
+                          <h4>Fecha y hora de recepción de muestras</h4>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        class="pa-0 ma-0">
+                      </v-col>
+                    </v-row>
+                    <v-row style="margin: 0" class="mx-5">
+                      <v-col
+                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                        <div class="text-center white--text text-no-wrap deep-orange">
+                          <h3>C.C.</h3>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        class="pa-0 ma-0 text-center">
+                      </v-col>
+                      <v-col
+                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                        <div class="text-center white--text text-no-wrap deep-orange">
+                          <h3>Quien recibe las muestras</h3>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        class="pa-0 ma-0">
+                      </v-col>
+                    </v-row>
+                    <v-row style="margin: 0" class="mx-5">
+                      <v-col
+                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                        <div class="text-center white--text text-no-wrap deep-orange">
+                          <h3>Firma</h3>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        class="pa-0 ma-0 text-center">
+                      </v-col>
+                      <v-col
+                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                        <div class="text-center white--text text-no-wrap deep-orange">
+                          <h3>Firma</h3>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                        class="pa-0 ma-0">
                       </v-col>
                     </v-row>
                   </v-container-fluid>
@@ -389,10 +525,25 @@ export default {
   data() {
     return {
       datos: this.$store.state.muestras,
+      contacto: "",
       loading: false,
       selection: 1,
       dialog: false,
+      dialog2: false,
       infoMuestras: [],
+      Municipio: [],
+      direccionM:"",
+      lugarM:"",
+      recolectadaPor:"",
+      procedimiento:"",
+      tipoM:"",
+      matrizM:"",
+      fecha:"",
+      cotizacion:"",
+      item:"",
+
+      seleccionadoCiudad: "",
+
     };
   },
   methods: {
@@ -416,6 +567,62 @@ export default {
           console.log(error);
         });
     },
+
+    listarCiudad() {
+        axios.get("/ciudad/CiudadDepartamento")
+            .then(response => {
+                console.log(response);
+                response.data.ciudad.forEach(city => {
+                    this.Municipio.push(city)
+                })
+                console.log(this.Municipio);
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+    customFilter(item, queryText) {
+        const textOne = item.ciudad.toUpperCase()
+        const searchText = queryText.toUpperCase()
+
+        return textOne.indexOf(searchText) > -1
+    },
+    Guardar() {            
+                axios.post(`/DMuestra/`, {
+                    solicitante: this.seleccionadoCiudad,
+                    munRecoleccion: this.seleccionadoCiudad,
+                    direccionTomaMuestra: this.direccionM,
+                    lugarTomaMuestra: this.lugarM,
+                    muestraRecolectadaPor: this.recolectadaPor,
+                    procedimientoMuestreo: this.procedimiento,
+                    tipoMuestra: this.tipoM,
+                    matrizMuestra: this.matrizM,
+                    fechaRecoleccion: this.fecha,
+                    cotizacion: this.cotizacion,
+                    item: this.item,                                  
+                })
+                    .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                     
+                    })
+                    .catch((error) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    });
+          
+        },
   },
   created() {
     this.cliente();

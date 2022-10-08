@@ -1,3 +1,4 @@
+
 <template>
     <v-container style="margin-top: 100px">
         <v-row style="margin: 0" class="mt-n6">
@@ -372,10 +373,24 @@
                                 <!-- item 1 -->
                                 <v-row class="mx-5"
                                     style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
-                                    <v-col cols="12">
+                                    <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
                                         <div class="text-center white--text text-no-wrap deep-orange">
                                             <h3>Ítem 1</h3>
                                         </div>
+                                    </v-col>
+                                    <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn color="white" dark @click="dialog4 = true">
+                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                        mdi-plus-circle
+                                                    </v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <span>Añadir ensayo</span>
+                                        </v-tooltip>
                                     </v-col>
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
@@ -415,34 +430,68 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados" :key="i">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                            a
+                                                            {{ensayo.ensayo}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            b
+                                                            {{ensayo.descripcion}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            c
+                                                            {{ensayo.unidades}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            d
+                                                            {{ensayo.tecnica}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            e
+                                                            {{ensayo.metodo}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            f
+                                                            {{ensayo.limiteCuantificacion}}
+                                                        </td>
+                                                        <td 
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ensayo.costo}}
+                                                            <v-icon dark class="ml-9" color="red"
+                                                                rounded @click="eliminarEnsayos(i)">
+                                                                mdi-close-circle
+                                                            </v-icon>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="ensayosSeleccionados.length <=0">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            g
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -467,9 +516,10 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="pa-0 ma-0">
-                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
+                                                            {{sumar}}
+                                                            <!-- <v-text-field class="pa-0 ma-0" type="number" full-width
                                                                 hide-details>
-                                                            </v-text-field>
+                                                            </v-text-field> -->
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -932,6 +982,7 @@
                             </v-row>
                             <v-row>
                                 <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+
                                 <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
                                     <br><br>
                                     <div>
@@ -1023,6 +1074,7 @@
                                             </v-text-field>
                                         </span>
                                     </div>
+
                                 </v-col>
                             </v-row>
                             <v-card-actions>
@@ -1158,14 +1210,14 @@
                             </v-row>
                             <v-card-actions>
                                 <v-row style="margin:0">
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
                                         <v-btn color="green" @click="crearCliente()" rounded dark>
                                             Crear
                                         </v-btn>
                                     </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
                                     </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
                                         <v-btn color="red" @click="dialog3 = false" rounded dark>
                                             Cancelar
                                         </v-btn>
@@ -1174,6 +1226,51 @@
                             </v-card-actions>
                         </div>
 
+                    </v-card>
+                </v-dialog>
+                <!-- ensayo -->
+                <v-dialog v-model="dialog4" max-width="1000px">
+                    <v-card>
+                        <template>
+                            <v-card>
+                                <v-card-title>
+                                    Seleccione un ensayo
+                                    <v-spacer></v-spacer>
+                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
+                                        single-line hide-details></v-text-field>
+                                </v-card-title>
+                                <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                                    <template v-slot:[`item.agregar`]="{item}">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                    @click="seleccionarEnsayos(item)">
+                                                    mdi-plus-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Añadir ensayo</span>
+                                        </v-tooltip>
+                                    </template>
+                                </v-data-table>
+                            </v-card>
+                        </template>
+                        <div class="text-center mt-3">
+                            <h2>¿ Desea crear un nuevo ensayo ?</h2>
+                        </div>
+                        <v-card-actions>
+                            <v-row style="margin:0">
+                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                    Crear
+                                </v-col>
+                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                </v-col>
+                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                    <v-btn color="red" @click="dialog4 = false" rounded dark>
+                                        Cerrar
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-card-actions>
                     </v-card>
                 </v-dialog>
             </v-col>
@@ -1197,6 +1294,7 @@ export default {
             dialog: false,
             dialog2: false,
             dialog3: false,
+            dialog4: false,
             notifications: false,
             sound: true,
             widgets: false,
@@ -1209,7 +1307,7 @@ export default {
             clientesNombres: [],
             si: 1,
             botones: 1,
-
+            pos:0,
             tipoPersona: "",
             nombre: "",
             apellidos: "",
@@ -1225,6 +1323,24 @@ export default {
             idcontacto: "",
             recep: {},
             Municipio: [],
+
+            //esanyos
+            itemsEnsayo: [],
+            costoEnsayo: 0,
+            ensayos: [],
+            ensayosSeleccionados: [],
+            ensayo: "",
+            metodo: "",
+            tecnica: "",
+            valorMinimo: "",
+            valorMaximo: "",
+            unidades: "",
+            costo: 0,
+            descripcion: "",
+            limiteCuantificacion: 0,
+            titular: "",
+            suplente: "",
+            //headers
             tipos: ["Natural", "Juridica"],
             headers: [
                 {
@@ -1307,7 +1423,45 @@ export default {
                     sortable: false,
                     value: 'opciones',
                 },
-            ]
+            ],
+            headers3: [
+                {
+                    text: 'Código de referencia',
+                    align: 'start',
+                    sortable: false,
+                    value: "ensayo",
+                },
+                {
+                    text: 'Descripción del ensayo',
+                    align: 'start',
+                    sortable: false,
+                    value: 'descripcion',
+                },
+                // {
+                //     text: 'Costo del ensayo',
+                //     align: 'start',
+                //     sortable: false,
+                //     value: 'documento',
+                // },
+                // {
+                //     text: 'Tipo de persona',
+                //     align: 'start',
+                //     sortable: false,
+                //     value: 'tipoPersona',
+                // },
+                // {
+                //     text: 'Correo',
+                //     align: 'start',
+                //     sortable: false,
+                //     value: 'email',
+                // },
+                {
+                    text: 'Añadir',
+                    align: 'center',
+                    sortable: false,
+                    value: 'agregar',
+                },
+            ],
         };
     },
     methods: {
@@ -1379,13 +1533,13 @@ export default {
                     let date = new Date();
                     let output = String(date.getFullYear());
                     if (division.toString().length === 1) {
-                        this.numeroactual= `000${division}-${output}V${1}`
+                        this.numeroactual = `000${division + 1}-${output}V${1}`
                     } else if (division.toString().length === 2) {
-                        this.numeroactual= `00${division}-${output}V${1}`
+                        this.numeroactual = `00${division + 1}-${output}V${1}`
                     } else if (division.toString().length === 3) {
-                        this.numeroactual= `0${division}-${output}V${1}`
+                        this.numeroactual = `0${division + 1}-${output}V${1}`
                     } else if (division.toString().length === 4) {
-                        this.numeroactual= `${division}-${output}V${1}`
+                        this.numeroactual = `${division + 1}-${output}V${1}`
                     }
 
                 })
@@ -1809,9 +1963,51 @@ export default {
                 }
             }
         },
-        Elegircliente(){
+        Elegircliente() {
             this.dialog2 = !this.dialog2
-            this.search=''
+            this.search = ''
+        },
+        añadirEnsayo() {
+            console.log();
+        },
+        listarEnsayos() {
+            axios.get(`/ensayo`)
+                .then((response) => {
+                    this.ensayos = response.data.ensayo
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        seleccionarEnsayos(ensayo) {
+            console.log(ensayo);
+            this.ensayosSeleccionados.push(ensayo)
+            console.log(this.ensayosSeleccionados);
+            // fata mandar el array que entra de ensayo crear un array nuevo y push
+            // this.ensayo=ensayo.ensayo
+            // this.metodo=ensayo.metodo
+            // this.tecnica=ensayo.tecnica
+            // this.valorMinimo=ensayo.valorMinimo
+            // this.valorMaximo=ensayo.valorMaximo
+            // this.unidades=ensayo.unidades
+            // this.costoEnsayo=ensayo.costo
+            // this.descripcion=ensayo.descripcion
+            // this.limiteCuantificacion=ensayo.limiteCuantificacion
+            // this.titular=ensayo.responsables.titular._id
+            // this.suplente=ensayo.responsables.suplente._id
+        },
+        eliminarEnsayos(index) {
+            console.log(index);
+            this.ensayosSeleccionados.splice(index,1)
+            console.log(this.ensayosSeleccionados);
+            
+        }
+    },computed:{
+        sumar(){
+            this.ensayosSeleccionados.forEach(ensayo => { // esto le falta
+                this.costo+=ensayo.costo
+            });
+            return this.costo
         }
     },
     created() {
@@ -1822,6 +2018,7 @@ export default {
         this.recepcionista();
         this.ciudadess();
         this.listarContactos();
+        this.listarEnsayos();
     },
 };
 </script>

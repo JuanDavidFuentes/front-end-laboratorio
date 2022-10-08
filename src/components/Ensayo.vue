@@ -1,106 +1,95 @@
 <template>
   <v-container class="mt-15 mb -15">
     <v-row>
-      <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
+      <v-col cols="7" xs="5" sm="8" md="8" lg="10" xl="10">
         <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
           Volver
         </v-btn>
       </v-col>
-    </v-row> 
-    <validation-observer
-    ref="observer"
-    v-slot="{ invalid }"
-  >
-    <form @submit.prevent="submit">
-      <validation-provider
-        v-slot="{ errors }"
-        name="Name"
-        rules="required|max:10"
-      >
-        <v-text-field
-          v-model="name"
-          :counter="10"
-          :error-messages="errors"
-          label="Name"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="phoneNumber"
-        :rules="{
-          required: true,
-          digits: 7,
-          regex: '^(71|72|74|76|81|82|84|85|86|87|88|89)\\d{5}$'
-        }"
-      >
-        <v-text-field
-          v-model="phoneNumber"
-          :counter="7"
-          :error-messages="errors"
-          label="Phone Number"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="email"
-        rules="required|email"
-      >
-        <v-text-field
-          v-model="email"
-          :error-messages="errors"
-          label="E-mail"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="select"
-        rules="required"
-      >
-        <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="errors"
-          label="Select"
-          data-vv-name="select"
-          required
-        ></v-select>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        rules="required"
-        name="checkbox"
-      >
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="errors"
-          value="1"
-          label="Option"
-          type="checkbox"
-          required
-        ></v-checkbox>
-      </validation-provider>
-
-      <v-btn
-        class="mr-4"
-        type="submit"
-        :disabled="invalid"
-      >
-        submit
-      </v-btn>
-      <v-btn @click="clear">
-        clear
-      </v-btn>
-    </form>
-  </validation-observer>   
-    <v-row>
-
     </v-row>
+    
+    <v-form v-model="valid">
+      <v-row>
+        <v-col
+          cols="12"
+          md="4" 
+          
+        >
+        <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="ensayo"
+            required
+          ></v-text-field>
+        <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="metodo"
+            required
+          ></v-text-field>
 
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="tecnica"
+            required
+          ></v-text-field>
 
-  </v-container>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="valorMinimo"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="valorMaximo"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="unidades"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="costo"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="descripcion"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="limiteCuantificacion"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="titilar"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="suplente"
+            required
+          ></v-text-field>
+          <v-btn class="mt-n3" outlined color="red darken-3" @click="(insertar)">
+          insertar
+        </v-btn>
+        </v-col>
+      </v-row>
+  </v-form>
+</v-container>
 </template>
 
 <script>
