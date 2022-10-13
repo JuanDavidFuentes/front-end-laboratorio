@@ -62,7 +62,7 @@
             </v-col>
         </v-row>
 
-        <v-row>
+        <!-- <v-row>
             <v-col cols="12">
                 <v-simple-table fixed-header height="300px">
                     <template v-slot:default>
@@ -75,6 +75,7 @@
                                 <th class="text-left black--text title"> Documento </th>
                                 <th class="text-left black--text title"> Dirección </th>
                                 <th class="text-left black--text title"> Ciudad </th>
+
                                 <th class="text-left black--text title"> Celular </th>
                                 <th class="text-left black--text title"> Estado </th>
                                 <th class="text-left black--text title"> Cargo </th>
@@ -91,37 +92,153 @@
                                 <td>{{p.direccion}}</td>
                                 <td>{{p.ciudad.ciudad}}</td>
                                 <td>{{p.celular}}</td>
-
+                                <td>{{p.email}}</td>
                                 <td v-if="p.estado===1">
                                     <button @click="desactivar(p)">
                                         <span class="green--text"> Activo </span></button>
                                 </td>
-
                                 <td v-else>
                                     <button>
-                                        <span class="red--text" @click="activar(p)"> Desactivo </span></button>
+                                        <span class="red--text" @click="activar(p)"> Inactivo </span></button>
                                 </td>
                                 <td>{{p.cargo}}</td>
                                 <td>{{p.telefono}}</td>
-                                
                             </tr>
                         </tbody>
                     </template>
                 </v-simple-table>
             </v-col>
-        </v-row>
+        </v-row> -->
 
+        <!-- tabla -->
+        <div>
+            <v-card>
+                <v-card-title>
+                    Usuarios
+                    <v-spacer></v-spacer>
+                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
+                    </v-text-field>
+                </v-card-title>
+                <v-data-table :headers="headers" :items="Usuarios" :search="search">
+                    <template v-slot:[`item.estado`]="{item}">
+                        <span class="green--text" v-if="item.estado===1">
+                            Activo</span>
+                        <span class="red--text" v-else>Inactivo</span>
+                    </template>
+
+                    <template v-slot:[`item.opciones`]="{item}">
+                        <span v-if="item.estado===1">
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-icon color="error" rounded v-bind="attrs" v-on="on"
+                                        @click="desactivar(item._id)">
+                                        mdi-shield-off
+                                    </v-icon>
+                                </template>
+                                <span>Inactivar</span>
+                            </v-tooltip>
+
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item._id)">
+                                        mdi-pencil
+                                    </v-icon>
+                                </template>
+                                <span>Editar</span>
+                            </v-tooltip>
+                            <!-- editar  editar  editar  editar  editar  editar  editar      -->
+                        </span>
+
+                        <span v-else>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-icon color="success" rounded v-bind="attrs" v-on="on" @click="activar(item._id)">
+                                        mdi-shield-check-outline
+                                    </v-icon>
+                                </template>
+                                <span>Activar</span>
+                            </v-tooltip>
+
+
+                            <v-dialog v-model="dialog2" persistent max-width="1000px">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item._id)">
+                                        mdi-pencil
+                                    </v-icon>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="text-h5">Editar Datos Del Usuario</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12" sm="6" md="4">
+                                                    <v-text-field label="Nombre" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6" md="4">
+                                                    <v-text-field label="Legal middle name"
+                                                        hint="example of helper text only on focus"></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6" md="4">
+                                                    <v-text-field label="Legal last name*"
+                                                        hint="example of persistent helper text" persistent-hint
+                                                        required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field label="Email*" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field label="Password*" type="password" required>
+                                                    </v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6">
+                                                    <v-select :items="['0-17', '18-29', '30-54', '54+']" label="Age*"
+                                                        required></v-select>
+                                                </v-col>
+                                                <v-col cols="12" sm="6">
+                                                    <v-autocomplete
+                                                        :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
+                                                        label="Interests" multiple></v-autocomplete>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                        <small>*indicates required field</small>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="blue darken-1" text @click="dialog2 = false">
+                                            Close
+                                        </v-btn>
+                                        <v-btn color="blue darken-1" text @click="dialog2 = false">
+                                            Save
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+
+                        </span>
+                    </template>
+
+                </v-data-table>
+            </v-card>
+        </div>
+        <br><br><br>
     </v-container>
 </template>
+
 <script>
 import axios from 'axios';
 
 export default {
     name: 'PageUsuarios',
     data: () => ({
+        search: '',
         dialog: false,
+        dialog2: false,
         Municipio: [],
         Usuarios: [],
+        id: "",
         nombre: "",
         apellidos: "",
         documento: "",
@@ -130,14 +247,11 @@ export default {
         celular: "",
         email: "",
         password: "",
-
         cargo: "",
         telefono: "",
-
         seleccionadoCiudad: "",
         selecionadoTipo: "",
         selecionadoRol: "",
-
         tipoPersona: [
             { text: "Natural", value: "Natural" },
             { text: "Juridica", value: "Juridica" }
@@ -150,6 +264,80 @@ export default {
             { text: "CIENTIFICO", value: "CIENTIFICO" },
             { text: "RECEPCIONISTA", value: "RECEPCIONISTA" },
         ],
+        headers: [
+            {
+                text: 'Tipo Persona',
+                align: 'start',
+                value: "tipoPersona",
+            },
+            {
+                text: 'Rol',
+                align: 'start',
+                value: "rol",
+            },
+            {
+                text: 'Nombres',
+                align: 'start',
+                value: "nombre",
+            },
+            {
+                text: 'Apellidos',
+                align: 'start',
+                value: 'apellidos',
+            },
+            {
+                text: 'C.C. / NIT',
+                align: 'start',
+                sortable: false,
+                value: 'documento',
+            },
+            {
+                text: 'Correo',
+                align: 'start',
+                sortable: false,
+                value: 'email',
+            },
+            {
+                text: 'Ciudad',
+                align: 'start',
+                sortable: false,
+                value: "ciudad.ciudad",
+            },
+            {
+                text: 'Dirección',
+                align: 'start',
+                sortable: false,
+                value: "direccion",
+            },
+            {
+                text: 'Celular',
+                align: 'start',
+                sortable: false,
+                value: 'celular',
+            },
+            {
+                text: 'Cargo',
+                align: 'start',
+                sortable: false,
+                value: 'cargo',
+            },
+            {
+                text: 'Telefono',
+                align: 'start',
+                sortable: false,
+                value: 'telefono',
+            },
+            {
+                text: 'Estado',
+                align: 'start',
+                value: 'estado',
+            },
+            {
+                text: 'Opciones',
+                align: 'start',
+                value: 'opciones',
+            },
+        ],
     }),
 
     methods: {
@@ -159,36 +347,10 @@ export default {
             this.seleccionadoCiudad = this.Municipio[valor - 1];
         },
 
-        desactivar(id) {
-            let header = { headers: { token: this.$store.state.token } };
-            axios
-                .put(`/usuarios/desactivar/${id._id}`, {}, header)
-                .then((response) => {
-                    console.log(response);
-                    this.usuarios()
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        activar(id) {
-            let header = { headers: { token: this.$store.state.token } };
-            axios
-                .put(`/usuarios/activar/${id._id}`, {}, header)
-                .then((response) => {
-                    console.log(response);
-
-                    this.usuarios()
-                })
-                .catch((error) => {
-                    console.log(error);
-                    console.log("Bien :D");
-                });
-        },
-        Guardar() {
+        editar() {
             let header = { headers: { "token": this.$store.state.token } }
-            if (this.tipoPersona === "Juridica") {
-                axios.post(`/usuarios/`, {
+            if (this.selecionadoTipo === "Juridica") {
+                axios.put(`/datos/${this.id}`, {
                     tipoPersona: this.selecionadoTipo,
                     cargo: this.cargo,
                     telefono: this.telefono,
@@ -205,7 +367,6 @@ export default {
                     .then((response) => {
                         console.log(this.cargo);
                         console.log(this.telefono);
-
                         this.$swal.fire({
                             position: "top-end",
                             icon: "success",
@@ -213,7 +374,112 @@ export default {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                     
+                        this.selecionadoTipo = ""
+                        this.cargo = ""
+                        this.telefono = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.password = ""
+                    })
+                    .catch((error) => {
+                        console.log(this.cargo);
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    });
+            } else {
+                let header = { headers: { "token": this.$store.state.token } }
+                axios.put(`/datos/${this.id}`, {
+                    tipoPersona: this.selecionadoTipo,
+                    rol: this.selecionadoRol,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento,
+                    direccion: this.direccion,
+                    ciudad: this.seleccionadoCiudad,
+                    celular: this.celular,
+                    email: this.email.toUpperCase(),
+                    password: this.password,
+                }, header)
+                    .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.selecionadoTipo = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.password = ""
+                        this.dialog = false
+                    })
+                    .catch((error) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    });
+            }
+        },
+        Guardar() {
+            let header = { headers: { "token": this.$store.state.token } }
+            if (this.selecionadoTipo === "Juridica") {
+                axios.post(`/usuarios/`, {
+                    tipoPersona: this.selecionadoTipo,
+                    cargo: this.cargo,
+                    telefono: this.telefono,
+                    rol: this.selecionadoRol,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento,
+                    direccion: this.direccion,
+                    ciudad: this.seleccionadoCiudad,
+                    celular: this.celular,
+                    email: this.email.toUpperCase(),
+                    password: this.password,
+                }, header)
+                    .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.selecionadoTipo = ""
+                        this.cargo = ""
+                        this.telefono = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.password = ""
+                        this.dialog = false
                     })
                     .catch((error) => {
                         console.log(this.cargo);
@@ -247,8 +513,18 @@ export default {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        this.usuarios()
+                        this.selecionadoTipo = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.password = ""
                         this.dialog = false
+
                     })
                     .catch((error) => {
                         this.$swal.fire({
@@ -261,9 +537,52 @@ export default {
                     });
             }
         },
+        desactivar(id) {
+            let header = { headers: { token: this.$store.state.token } };
+            axios
+                .put(`/usuarios/desactivar/${id}`, {}, header)
+                .then((response) => {
+                    console.log(response);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        activar(id) {
+            let header = { headers: { token: this.$store.state.token } };
+            axios
+                .put(`/usuarios/activar/${id}`, {}, header)
+                .then((response) => {
+                    console.log(response);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
+
 
         Volver() {
             this.dialog = false
+            this.dialog2 = false
+        },
+        sacarid(id) {
+            console.log(id);
+            this.id = id
         },
         usuarios() {
             let header = { headers: { "token": this.$store.state.token } };
@@ -273,7 +592,6 @@ export default {
                     response.data.usuarios.forEach(usuarios => {
                         this.Usuarios.push(usuarios)
                     })
-                    console.log(this.Usuarios);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -287,8 +605,6 @@ export default {
                     response.data.ciudad.forEach(city => {
                         this.Municipio.push(city)
                     })
-                    console.log(this.Municipio);
-
                 })
                 .catch(error => {
                     console.log(error);
@@ -322,7 +638,8 @@ export default {
         }
     },
     created() {
-        this.usuarios()
+        this.usuarios(),
+            this.listarCiudad()
     },
 }
 </script>

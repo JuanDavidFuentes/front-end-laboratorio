@@ -3,6 +3,7 @@
         <v-row style="margin:0">
             <v-col cols="12" xs="1" sm="1" md="1" lg="1" xl="1"></v-col>
             <v-col cols="12" xs="10" sm="10" md="10" lg="10" xl="10">
+
                 <template>
                     <v-card>
                         <v-card-title>
@@ -109,6 +110,7 @@ export default {
                 });
         },
         pagmuestras(datos){
+            console.log(datos);
             this.$store.dispatch("setMuestras", datos);
             this.$router.push("/ListaMuestras")
         }

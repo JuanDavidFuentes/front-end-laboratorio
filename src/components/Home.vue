@@ -8,7 +8,7 @@
                             <v-card-title class="text-h5">Configuracion <br> Parametrización</v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5" outlined rounded @click="Deudor()" to="/Configuracion" >
+                                <v-btn class="ml-2 mt-5" outlined rounded to="/Configuracion" >
                                     <v-icon>mdi-cogs</v-icon>
                                     Configurar
                                 </v-btn>
@@ -28,20 +28,20 @@
                             <v-card-title class="text-h5">Nuevo <br> Usuario </v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5" outlined rounded @click="Prestamo()" to="/agregarusuario">
+                                <v-btn class="ml-2 mt-5" outlined rounded to="/agregarusuario">
                                     <v-icon>mdi-human-edit</v-icon>
                                     Agregar Usuario
                                 </v-btn>
                             </v-card-actions>
                         </div>
                         <v-avatar class="ml-n7 mr-5 mt-4" size="125">
-                            <img src="https://i.ibb.co/wB9Ydh9/Mesa-de-trabajo-100.jpg" alt="John">
+                            <img height=90% src="https://i.ibb.co/wB9Ydh9/Mesa-de-trabajo-100.jpg" alt="John">
                         </v-avatar>
                     </div>
                 </v-card>
             </v-col>
 
-            <!-- <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
+            <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
                 <v-card color="#385F73" dark>
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
@@ -57,6 +57,27 @@
                         <v-avatar class="ml-n7 mr-5 mt-4" size="125">
                             <img src="https://images.vexels.com/media/users/3/151869/isolated/preview/767ca771755f4675d4063c03e17c8595-icono-de-lista-de-verificacion-medica.png" alt="John">
                         </v-avatar> 
+                    </div>
+                </v-card>
+            </v-col>
+            
+
+            <!-- <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
+                <v-card color="amber darken-4" dark>
+                    <div class="d-flex flex-no-wrap justify-space-between">
+                        <div>
+                            <v-card-title class="text-h5">Clientes</v-card-title>
+                            <v-card-subtitle>Nuevo</v-card-subtitle>
+                            <v-card-actions>
+                                <v-btn class="ml-2 mt-5" outlined rounded to="/clientes">
+                                    <v-icon>mdi-clipboard-alert-outline</v-icon>
+                                    Clientes
+                                </v-btn>
+                            </v-card-actions>
+                        </div>
+                        <v-avatar class="ml-n7 mr-5 mt-4" size="125">
+                            <img   src="https://img.lovepik.com/element/45007/5080.png_860.png" alt="John">
+                        </v-avatar>
                     </div>
                 </v-card>
             </v-col> -->
@@ -75,27 +96,7 @@
                             </v-card-actions>
                         </div>
                         <v-avatar class="ml-n7 mr-5 mt-4" size="125">
-                            <img  height=90% src="https://img.lovepik.com/element/45007/5080.png_860.png" alt="John">
-                        </v-avatar>
-                    </div>
-                </v-card>
-            </v-col>
-
-            <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-                <v-card color="amber darken-4" dark>
-                    <div class="d-flex flex-no-wrap justify-space-between">
-                        <div>
-                            <v-card-title class="text-h5">Reportes </v-card-title>
-                            <v-card-subtitle>Nuevo</v-card-subtitle>
-                            <v-card-actions>
-                                <v-btn class="ml-2 mt-5" outlined rounded @click="Deudor()">
-                                    <v-icon>mdi-clipboard-alert-outline</v-icon>
-                                    Reportes
-                                </v-btn>
-                            </v-card-actions>
-                        </div>
-                        <v-avatar class="ml-n7 mr-5 mt-4" size="125">
-                            <img  height=90% src="https://img.lovepik.com/element/45007/5080.png_860.png" alt="John">
+                            <img   src="https://img.lovepik.com/element/45007/5080.png_860.png" alt="John">
                         </v-avatar>
                     </div>
                 </v-card>
@@ -111,7 +112,7 @@
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
 
-                                <v-btn class="ml-2 mt-5" outlined rounded @click="Cotizaciones()" to="/cotizacion">
+                                <v-btn class="ml-2 mt-5" outlined rounded to="/cotizacion">
                                     <v-icon>mdi-plus-circle-outline</v-icon>
                                     Agregar Cotizacion
                                 </v-btn>
@@ -131,13 +132,6 @@
 export default {
     name: 'PageHome',
     data: () => ({
-
     }),
-    methods: {
-        Cotizaciones(){
-            this.$router.push("/")
-        }   
-    }
-
 }
 </script>

@@ -137,7 +137,11 @@
                       <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                         class="pa-0 ma-0 text-center">
-                        <h3 class="mt-3">{{datos.contacto.nombre}} {{datos.contacto.apellidos}}</h3>
+                        <h3 class="mt-3">{{NombreContacto1}}</h3>
+
+
+
+
                       </v-col>
                     </v-row>
                     <v-row style="margin: 0" class="mx-5">
@@ -215,30 +219,37 @@
                       </v-col>
                       <v-dialog v-model="dialog2" max-width="500px">
                         <v-card class="">
-                        <v-card-title class="text-h5">
+                          <v-card-title class="text-h5">
                             Datos Muestra
-                        </v-card-title>
-                        <v-col cols="12">                        
+                          </v-card-title>
+                          <v-col cols="12">
                             <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
-                                item-value="_id" filled rounded dense label="Municipio de recolección" @click="listarCiudad()">
-                            </v-autocomplete>    
-                            <v-text-field v-model="direccionM" label="Dirección de toma de muestra*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="lugarM" label="Lugar de toma de muestra*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="recolectadaPor" label="Muestra recolectada por*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="procedimiento" label="Procedimiento de*" filled rounded dense></v-text-field>
+                              item-value="_id" filled rounded dense label="Municipio de recolección"
+                              @click="listarCiudad()">
+                            </v-autocomplete>
+                            <v-text-field v-model="direccionM" label="Dirección de toma de muestra*" filled rounded
+                              dense></v-text-field>
+                            <v-text-field v-model="lugarM" label="Lugar de toma de muestra*" filled rounded dense>
+                            </v-text-field>
+                            <v-text-field v-model="recolectadaPor" label="Muestra recolectada por*" filled rounded
+                              dense></v-text-field>
+                            <v-text-field v-model="procedimiento" label="Procedimiento de*" filled rounded dense>
+                            </v-text-field>
                             <v-text-field v-model="tipoM" label="Tipo de muestra*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="matrizM" label="Matriz de la muestra*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="fecha" label="Fecha y hora de recolección*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="cotizacion" label="Cotización*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="item" label="ítem de la*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="observacion" label="Observaciones" filled rounded dense></v-text-field>
-                            </v-col>
-                        <v-card-actions class="mt-n7">
+                            <v-text-field v-model="matrizM" label="Matriz de la muestra*" filled rounded dense>
+                            </v-text-field>
+                            <v-text-field v-model="fecha" type="date" label="Fecha y hora de recolección*" filled
+                              rounded dense></v-text-field>
+                            <v-text-field v-model="cotizacion" :value="cotizacion2.numero_cotizacion" :label="cotizacion2.numero_cotizacion" disabled filled rounded dense></v-text-field>
+                            <v-select v-model="item" color="pink" label="Items" required></v-select>
+                            <!-- <v-text-field v-model="observacion" label="Observaciones" filled rounded dense></v-text-field> -->
+                          </v-col>
+                          <v-card-actions class="mt-n7">
                             <v-btn color="success" @click="Guardar()">
-                                Añadir datos
+                              Añadir datos
                             </v-btn>
-                        </v-card-actions>
-                    </v-card>
+                          </v-card-actions>
+                        </v-card>
                       </v-dialog>
 
                     </v-row>
@@ -312,7 +323,7 @@
                               <tr>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-
+                                  <h3>{{numeroactual}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
@@ -525,6 +536,7 @@ export default {
   data() {
     return {
       datos: this.$store.state.muestras,
+      datos2: [],
       contacto: "",
       loading: false,
       selection: 1,
@@ -532,21 +544,35 @@ export default {
       dialog2: false,
       infoMuestras: [],
       Municipio: [],
-      direccionM:"",
-      lugarM:"",
-      recolectadaPor:"",
-      procedimiento:"",
-      tipoM:"",
-      matrizM:"",
-      fecha:"",
-      cotizacion:"",
-      item:"",
+      NombreContacto1: "",
+      ApellidoContacto1: "",
+      direccionM: "",
+      lugarM: "",
+      recolectadaPor: "",
+      procedimiento: "",
+      tipoM: "",
+      matrizM: "",
+      fecha: "",
+      cotizacion: "",
+      item: "",
+      numeroactual: "",
+      numerocoti: 0,
+      cotizacion2:[],
+      infoItem2:[],
+
 
       seleccionadoCiudad: "",
 
     };
   },
   methods: {
+    NombreContacto() {
+      if (this.datos.contacto) {
+        this.NombreContacto1 = this.datos.contacto.nombre
+      } else {
+        this.NombreContacto1 = ""
+      }
+    },
     cliente() {
       console.log(this.datos);
     },
@@ -569,64 +595,108 @@ export default {
     },
 
     listarCiudad() {
-        axios.get("/ciudad/CiudadDepartamento")
-            .then(response => {
-                console.log(response);
-                response.data.ciudad.forEach(city => {
-                    this.Municipio.push(city)
-                })
-                console.log(this.Municipio);
+      axios.get("/ciudad/CiudadDepartamento")
+        .then(response => {
+          console.log(response);
+          response.data.ciudad.forEach(city => {
+            this.Municipio.push(city)
+          })
+          console.log(this.Municipio);
 
-            })
-            .catch(error => {
-                console.log(error);
-            })
-        },
-    customFilter(item, queryText) {
-        const textOne = item.ciudad.toUpperCase()
-        const searchText = queryText.toUpperCase()
-
-        return textOne.indexOf(searchText) > -1
+        })
+        .catch(error => {
+          console.log(error);
+        })
     },
-    Guardar() {            
-                axios.post(`/DMuestra/`, {
-                    solicitante: this.seleccionadoCiudad,
-                    munRecoleccion: this.seleccionadoCiudad,
-                    direccionTomaMuestra: this.direccionM,
-                    lugarTomaMuestra: this.lugarM,
-                    muestraRecolectadaPor: this.recolectadaPor,
-                    procedimientoMuestreo: this.procedimiento,
-                    tipoMuestra: this.tipoM,
-                    matrizMuestra: this.matrizM,
-                    fechaRecoleccion: this.fecha,
-                    cotizacion: this.cotizacion,
-                    item: this.item,                                  
-                })
-                    .then((response) => {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: response.data.msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                     
-                    })
-                    .catch((error) => {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: error.response.data.errores.errors[0].msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    });
-          
-        },
+    customFilter(item, queryText) {
+      const textOne = item.ciudad.toUpperCase()
+      const searchText = queryText.toUpperCase()
+
+      return textOne.indexOf(searchText) > -1
+    },
+    Guardar() {
+      let header = { headers: { "token": this.$store.state.token } }
+      axios.post(`/DMuestra/insertar`, {
+        solicitante: this.seleccionadoCiudad,
+        munRecoleccion: this.seleccionadoCiudad,
+        direccionTomaMuestra: this.direccionM,
+        lugarTomaMuestra: this.lugarM,
+        muestraRecolectadaPor: this.recolectadaPor,
+        procedimientoMuestreo: this.procedimiento,
+        tipoMuestra: this.tipoM,
+        matrizMuestra: this.matrizM,
+        fechaRecoleccion: this.fecha,
+        cotizacion: this.cotizacion,
+        item: this.item,
+      }, header)
+        .then((response) => {
+          this.$swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.data.msg,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+        })
+        .catch((error) => {
+          this.$swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: error.response.data.errores.errors[0].msg,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+
+    },
+    traerCotizacion() {
+      let header = { headers: { "token": this.$store.state.token } }
+      axios.get(`cotizacion/buscarNombre/${this.datos._id}`,header)
+      .then(response => {
+          console.log(response);
+          this.cotizacion2=response.data.coti[0]
+          console.log(this.cotizacion2);
+
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    },
+    info() {
+      axios.get("/cotizacion/traerInfo")
+        .then((response) => {
+          this.datos2 = response.data.info
+          this.numerocoti = this.datos2[0].codMuestra
+          let date = new Date();
+          let output = String(date.getFullYear());
+          if (this.numerocoti.toString().length === 1) {
+            this.numeroactual = `000${this.numerocoti + 1}-${output}`
+          } else if (this.numerocoti.toString().length === 2) {
+            this.numeroactual = `00${this.numerocoti + 1}-${output}`
+          } else if (this.numerocoti.toString().length === 3) {
+            this.numeroactual = `0${this.numerocoti + 1}-${output}`
+          } else if (this.numerocoti.toString().length === 4) {
+            this.numeroactual = `${this.numerocoti + 1}-${output}`
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    infoItem(){
+      axios.get(`/cotizacion/listarporIdCoti/${this.datos._id}`)
+    },
+
   },
   created() {
     this.cliente();
     this.listar();
+    this.NombreContacto();
+    this.traerCotizacion();
+    this.info();
   },
+  //cotizacion/listarporIdCoti/${this.datos._id}
 };
 </script>
+ 

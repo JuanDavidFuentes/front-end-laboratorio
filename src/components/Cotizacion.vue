@@ -363,10 +363,35 @@
 
                                 <v-row class="mx-5"
                                     style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
-                                    <v-col cols="12">
+                                    <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4">
+                                    </v-col>
+                                    <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
                                         <div class="text-center white--text text-no-wrap deep-orange">
                                             <h3>2. Propuesta técnica y económica</h3>
                                         </div>
+                                    </v-col>
+                                    <v-col class="text-right" cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn color="white black--text" dark @click="dialog7 = true">
+                                                    Agregar ensayo
+                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                        mdi-beaker
+                                                    </v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <span>Crear nuevo ensayo</span>
+                                        </v-tooltip>
+                                        <!-- <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn @click="dialog7=true" v-bind="attrs" v-on="on">
+                                                    <v-icon dark class="my-3" color="red" rounded>
+                                                        mdi-beaker
+                                                    </v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <span>Crear nuevo ensayo</span>
+                                        </v-tooltip> -->
                                     </v-col>
                                 </v-row>
 
@@ -430,7 +455,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados" :key="i">
+                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados"
+                                                        :key="i">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
                                                             {{ensayo.ensayo}}
@@ -455,11 +481,11 @@
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
                                                             {{ensayo.limiteCuantificacion}}
                                                         </td>
-                                                        <td 
+                                                        <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.costo}}
-                                                            <v-icon dark class="ml-9" color="red"
-                                                                rounded @click="eliminarEnsayos(i)">
+                                                            ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
+                                                            <v-icon dark class="ml-9" color="red" rounded
+                                                                @click="eliminarEnsayos(i,ensayo)">
                                                                 mdi-close-circle
                                                             </v-icon>
                                                         </td>
@@ -516,10 +542,7 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="pa-0 ma-0">
-                                                            {{sumar}}
-                                                            <!-- <v-text-field class="pa-0 ma-0" type="number" full-width
-                                                                hide-details>
-                                                            </v-text-field> -->
+                                                            ${{Intl.NumberFormat("de-DE").format(costo)}}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -530,10 +553,24 @@
                                 <!-- item 2 -->
                                 <v-row class="mx-5"
                                     style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
-                                    <v-col cols="12">
+                                    <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
                                         <div class="text-center white--text text-no-wrap deep-orange">
                                             <h3>Ítem 2</h3>
                                         </div>
+                                    </v-col>
+                                    <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn color="white" dark @click="dialog5 = true">
+                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                        mdi-plus-circle
+                                                    </v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <span>Añadir ensayo</span>
+                                        </v-tooltip>
                                     </v-col>
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
@@ -573,34 +610,69 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2"
+                                                        :key="i">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                            a
+                                                            {{ensayo.ensayo}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            b
+                                                            {{ensayo.descripcion}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            c
+                                                            {{ensayo.unidades}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            d
+                                                            {{ensayo.tecnica}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            e
+                                                            {{ensayo.metodo}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            f
+                                                            {{ensayo.limiteCuantificacion}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            g
+                                                            ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
+                                                            <v-icon dark class="ml-9" color="red" rounded
+                                                                @click="eliminarEnsayos2(i,ensayo)">
+                                                                mdi-close-circle
+                                                            </v-icon>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="ensayosSeleccionados2.length <=0">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -625,9 +697,7 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="pa-0 ma-0">
-                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
-                                                                hide-details>
-                                                            </v-text-field>
+                                                            ${{Intl.NumberFormat("de-DE").format(costo2)}}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -638,10 +708,24 @@
                                 <!-- item 3 -->
                                 <v-row class="mx-5"
                                     style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
-                                    <v-col cols="12">
+                                    <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
                                         <div class="text-center white--text text-no-wrap deep-orange">
                                             <h3>Ítem 3</h3>
                                         </div>
+                                    </v-col>
+                                    <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn color="white" dark @click="dialog6 = true">
+                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                        mdi-plus-circle
+                                                    </v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <span>Añadir ensayo</span>
+                                        </v-tooltip>
                                     </v-col>
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
@@ -681,34 +765,69 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3"
+                                                        :key="i">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                            a
+                                                            {{ensayo.ensayo}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            b
+                                                            {{ensayo.descripcion}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            c
+                                                            {{ensayo.unidades}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            d
+                                                            {{ensayo.tecnica}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            e
+                                                            {{ensayo.metodo}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            f
+                                                            {{ensayo.limiteCuantificacion}}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            g
+                                                            ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
+                                                            <v-icon dark class="ml-9" color="red" rounded
+                                                                @click="eliminarEnsayos3(i,ensayo)">
+                                                                mdi-close-circle
+                                                            </v-icon>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="ensayosSeleccionados3.length <=0">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -733,9 +852,7 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="pa-0 ma-0">
-                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
-                                                                hide-details>
-                                                            </v-text-field>
+                                                            ${{Intl.NumberFormat("de-DE").format(costo3)}}
                                                         </td>
                                                     </tr>
 
@@ -763,11 +880,9 @@
                                                             class="text-right white--text">
                                                             <h2> Subtotal </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px; border-top: 0px;"
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
-                                                                hide-details>
-                                                            </v-text-field>
+                                                            ${{Intl.NumberFormat("de-DE").format(sumar)}}
                                                         </td>
                                                     </tr>
 
@@ -796,11 +911,9 @@
                                                             class="text-right white--text">
                                                             <h2> IVA </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px; border-top: 0px;"
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
-                                                                hide-details>
-                                                            </v-text-field>
+                                                            <div>{{iva}}%</div>
                                                         </td>
                                                     </tr>
 
@@ -828,16 +941,27 @@
                                                             class="text-right white--text">
                                                             <h2> Total </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px; border-top: 0px;"
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            <v-text-field class="pa-0 ma-0" type="number" full-width
-                                                                hide-details>
-                                                            </v-text-field>
+                                                            ${{Intl.NumberFormat("de-DE").format(resultIva)}}
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </template>
                                         </v-simple-table>
+                                    </v-col>
+                                </v-row>
+                                <v-row style=" margin: 0;" class="mx-5">
+                                    <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
+                                        <v-btn>
+
+                                        </v-btn>
+                                    </v-col>
+                                    <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
+                                    <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4" class="text-right">
+                                        <v-btn dark color="green" @click="dialog = false">
+                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                        </v-btn>
                                     </v-col>
                                 </v-row>
                             </v-container-fluid>
@@ -1193,7 +1317,7 @@
                                             Cargo:
                                         </span>
                                         <span>
-                                            <v-text-field v-model="cargo" label="Telefono" type="text">
+                                            <v-text-field v-model="cargo" label="Cargo" type="text">
                                             </v-text-field>
                                         </span>
                                     </div>
@@ -1251,26 +1375,256 @@
                                             <span>Añadir ensayo</span>
                                         </v-tooltip>
                                     </template>
+                                    <template v-slot:[`item.ensayocosto`]="{item}">
+                                        <template>
+                                            ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                        </template>
+                                    </template>
                                 </v-data-table>
                             </v-card>
                         </template>
-                        <div class="text-center mt-3">
-                            <h2>¿ Desea crear un nuevo ensayo ?</h2>
-                        </div>
                         <v-card-actions>
                             <v-row style="margin:0">
-                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                    Crear
-                                </v-col>
-                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
-                                </v-col>
-                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                <v-col cols="12" class="text-center">
                                     <v-btn color="red" @click="dialog4 = false" rounded dark>
                                         Cerrar
                                     </v-btn>
                                 </v-col>
                             </v-row>
                         </v-card-actions>
+                    </v-card>
+                </v-dialog>
+                <!-- 2 -->
+                <v-dialog v-model="dialog5" max-width="1000px">
+                    <v-card>
+                        <template>
+                            <v-card>
+                                <v-card-title>
+                                    Seleccione un ensayo
+                                    <v-spacer></v-spacer>
+                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
+                                        single-line hide-details></v-text-field>
+                                </v-card-title>
+                                <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                                    <template v-slot:[`item.agregar`]="{item}">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                    @click="seleccionarEnsayos2(item)">
+                                                    mdi-plus-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Añadir ensayo</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-slot:[`item.ensayocosto`]="{item}">
+                                        <template>
+                                            ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                        </template>
+                                    </template>
+                                </v-data-table>
+                            </v-card>
+                        </template>
+                        <v-card-actions>
+                            <v-row style="margin:0">
+                                <v-col cols="12" class="text-center">
+                                    <v-btn color="red" @click="dialog5 = false" rounded dark>
+                                        Cerrar
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <!-- 3 -->
+                <v-dialog v-model="dialog6" max-width="1000px">
+                    <v-card>
+                        <template>
+                            <v-card>
+                                <v-card-title>
+                                    Seleccione un ensayo
+                                    <v-spacer></v-spacer>
+                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
+                                        single-line hide-details></v-text-field>
+                                </v-card-title>
+                                <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                                    <template v-slot:[`item.agregar`]="{item}">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                    @click="seleccionarEnsayos3(item)">
+                                                    mdi-plus-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Añadir ensayo</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-slot:[`item.ensayocosto`]="{item}">
+                                        <template>
+                                            ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                        </template>
+                                    </template>
+                                </v-data-table>
+                            </v-card>
+                        </template>
+                        <v-card-actions>
+                            <v-row style="margin:0">
+                                <v-col cols="12" class="text-center">
+                                    <v-btn color="red" @click="dialog6 = false" rounded dark>
+                                        Cerrar
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+                <!-- ensayos -->
+
+                <v-dialog v-model="dialog7" fullscreen hide-overlay transition="dialog-bottom-transition">
+                    <v-card>
+                        <v-toolbar dark>
+                            <v-btn icon dark @click="dialog7 = false">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                            <v-toolbar-title>Crear nuevo ensayo</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-items>
+                                <v-btn dark text @click="crearEnsayo()">
+                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                </v-btn>
+                            </v-toolbar-items>
+                        </v-toolbar>
+                        <div>
+                            <v-row style="margin:0">
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                                <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                                    <h1>Ingresar los del ensayo</h1>
+                                </v-col>
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                            </v-row>
+
+                            <v-row>
+                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+                                <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                                    <br><br>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Número del ensayo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="ensayo" label="Número del ensayo" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Metodo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="metodo" label="Metodo" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1  black--text font-weight-Normal">
+                                            Tecnica:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="tecnica" label="Tecnica" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Valor Minimo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="valorMinimo" label="Valor Minimo" type="number">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Valor Maximo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="valorMaximo" label="Valor Maximo" type="number">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Unidades:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="unidades" label="Unidades" type="number">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            costo:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="costo4" label="costo" type="number">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Descripcion:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="descripcion" label="Descripcion" type="text">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Limite de cuantificación:
+                                        </span>
+                                        <span>
+                                            <v-text-field v-model="limiteCuantificacion"
+                                                label="Limite de cuantificación" type="number">
+                                            </v-text-field>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Titular:
+                                        </span>
+                                        <v-autocomplete class="mt-2" v-model="titular" :items="soloUsuarios"
+                                            :filter="customFilter" item-text="nombre" item-value="_id" label="Titular">
+                                        </v-autocomplete>
+                                    </div>
+                                    <div>
+                                        <span class="text-center display-1 black--text font-weight-Normal">
+                                            Suplente:
+                                        </span>
+                                        <v-autocomplete class="mt-2" v-model="suplente" :items="soloUsuarios"
+                                            :filter="customFilter" item-text="nombre" item-value="_id" label="Suplente">
+                                        </v-autocomplete>
+                                    </div>
+                                </v-col>
+                            </v-row>
+                            <v-card-actions>
+                                <v-row style="margin:0">
+                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                        <v-btn color="green" @click="crearEnsayo()" rounded dark>
+                                            Crear
+                                        </v-btn>
+                                    </v-col>
+                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                    </v-col>
+                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                        <v-btn color="red" @click="dialog7 = false" rounded dark>
+                                            Cancelar
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-actions>
+                        </div>
                     </v-card>
                 </v-dialog>
             </v-col>
@@ -1295,6 +1649,9 @@ export default {
             dialog2: false,
             dialog3: false,
             dialog4: false,
+            dialog5: false,
+            dialog6: false,
+            dialog7: false,
             notifications: false,
             sound: true,
             widgets: false,
@@ -1307,7 +1664,7 @@ export default {
             clientesNombres: [],
             si: 1,
             botones: 1,
-            pos:0,
+            pos: 0,
             tipoPersona: "",
             nombre: "",
             apellidos: "",
@@ -1329,6 +1686,8 @@ export default {
             costoEnsayo: 0,
             ensayos: [],
             ensayosSeleccionados: [],
+            ensayosSeleccionados2: [],
+            ensayosSeleccionados3: [],
             ensayo: "",
             metodo: "",
             tecnica: "",
@@ -1336,10 +1695,17 @@ export default {
             valorMaximo: "",
             unidades: "",
             costo: 0,
+            costo2: 0,
+            costo3: 0,
+            costo4: 0,
             descripcion: "",
             limiteCuantificacion: 0,
             titular: "",
             suplente: "",
+            subtotal: 0,
+            iva: 0,
+            responsables: {},
+            soloUsuarios: [],
             //headers
             tipos: ["Natural", "Juridica"],
             headers: [
@@ -1364,7 +1730,6 @@ export default {
                 {
                     text: 'Tipo de persona',
                     align: 'start',
-                    sortable: false,
                     value: 'tipoPersona',
                 },
                 {
@@ -1384,7 +1749,6 @@ export default {
                 {
                     text: 'Codigo de cotización',
                     align: 'start',
-                    sortable: false,
                     value: "numero_cotizacion",
                 },
                 {
@@ -1428,7 +1792,6 @@ export default {
                 {
                     text: 'Código de referencia',
                     align: 'start',
-                    sortable: false,
                     value: "ensayo",
                 },
                 {
@@ -1437,12 +1800,12 @@ export default {
                     sortable: false,
                     value: 'descripcion',
                 },
-                // {
-                //     text: 'Costo del ensayo',
-                //     align: 'start',
-                //     sortable: false,
-                //     value: 'documento',
-                // },
+                {
+                    text: 'Costo del ensayo',
+                    align: 'start',
+                    sortable: false,
+                    value: 'ensayocosto',
+                },
                 // {
                 //     text: 'Tipo de persona',
                 //     align: 'start',
@@ -1527,20 +1890,21 @@ export default {
         listar() {
             axios.get(`/cotizacion/listarTodasLasCotizaciones`)
                 .then((response) => {
+                    console.log(response);
                     this.cotizaciones = response.data.coti;
-                    this.numerocoti = this.cotizaciones[0].numero_cotizacion
-                    const division = Number(this.numerocoti.split("")[this.numerocoti.length - 8])
-                    let date = new Date();
-                    let output = String(date.getFullYear());
-                    if (division.toString().length === 1) {
-                        this.numeroactual = `000${division + 1}-${output}V${1}`
-                    } else if (division.toString().length === 2) {
-                        this.numeroactual = `00${division + 1}-${output}V${1}`
-                    } else if (division.toString().length === 3) {
-                        this.numeroactual = `0${division + 1}-${output}V${1}`
-                    } else if (division.toString().length === 4) {
-                        this.numeroactual = `${division + 1}-${output}V${1}`
-                    }
+                    // this.numerocoti = this.cotizaciones[0].numero_cotizacion
+                    // const division = Number(this.numerocoti.split("")[this.numerocoti.length - 8])
+                    // let date = new Date();
+                    // let output = String(date.getFullYear());
+                    // if (division.toString().length === 1) {
+                    //     this.numeroactual = `000${division + 1}-${output}V${1}`
+                    // } else if (division.toString().length === 2) {
+                    //     this.numeroactual = `00${division + 1}-${output}V${1}`
+                    // } else if (division.toString().length === 3) {
+                    //     this.numeroactual = `0${division + 1}-${output}V${1}`
+                    // } else if (division.toString().length === 4) {
+                    //     this.numeroactual = `${division + 1}-${output}V${1}`
+                    // }
 
                 })
                 .catch((error) => {
@@ -1598,6 +1962,19 @@ export default {
             axios.get("/cotizacion/traerInfo")
                 .then((response) => {
                     this.datos = response.data.info
+                    this.iva = this.datos[0].iva
+                    this.numerocoti = this.datos[0].numero_cotizacion
+                    let date = new Date();
+                    let output = String(date.getFullYear());
+                    if (this.numerocoti.toString().length === 1) {
+                        this.numeroactual = `000${this.numerocoti + 1}-${output}V${1}`
+                    } else if (this.numerocoti.toString().length === 2) {
+                        this.numeroactual = `00${this.numerocoti + 1}-${output}V${1}`
+                    } else if (this.numerocoti.toString().length === 3) {
+                        this.numeroactual = `0${this.numerocoti + 1}-${output}V${1}`
+                    } else if (this.numerocoti.toString().length === 4) {
+                        this.numeroactual = `${this.numerocoti + 1}-${output}V${1}`
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -1730,11 +2107,6 @@ export default {
         recepcionista() {
             this.recep = this.$store.state.datos
             console.log(this.$store.state.datos);
-            // if("RECEPCIONISTA"==""){
-            //         this.nombrer="usuarios.nombre"
-            //         this.apellidor="usuarios.apellidos"
-            //         this.rol="rusuarios.rol"
-            // }
         },
         ciudadess() {
             axios.get("/ciudad/CiudadDepartamento")
@@ -1980,34 +2352,122 @@ export default {
                 });
         },
         seleccionarEnsayos(ensayo) {
-            console.log(ensayo);
             this.ensayosSeleccionados.push(ensayo)
-            console.log(this.ensayosSeleccionados);
-            // fata mandar el array que entra de ensayo crear un array nuevo y push
-            // this.ensayo=ensayo.ensayo
-            // this.metodo=ensayo.metodo
-            // this.tecnica=ensayo.tecnica
-            // this.valorMinimo=ensayo.valorMinimo
-            // this.valorMaximo=ensayo.valorMaximo
-            // this.unidades=ensayo.unidades
-            // this.costoEnsayo=ensayo.costo
-            // this.descripcion=ensayo.descripcion
-            // this.limiteCuantificacion=ensayo.limiteCuantificacion
-            // this.titular=ensayo.responsables.titular._id
-            // this.suplente=ensayo.responsables.suplente._id
+            this.costo += ensayo.costo
         },
-        eliminarEnsayos(index) {
-            console.log(index);
-            this.ensayosSeleccionados.splice(index,1)
-            console.log(this.ensayosSeleccionados);
-            
+        seleccionarEnsayos2(ensayo) {
+            this.ensayosSeleccionados2.push(ensayo)
+            this.costo2 += ensayo.costo
+        },
+        seleccionarEnsayos3(ensayo) {
+            this.ensayosSeleccionados3.push(ensayo)
+            this.costo3 += ensayo.costo
+        },
+        eliminarEnsayos(index, ensayo) {
+            this.ensayosSeleccionados.splice(index, 1)
+            this.costo -= ensayo.costo
+        },
+        eliminarEnsayos2(index, ensayo) {
+            this.ensayosSeleccionados2.splice(index, 1)
+            this.costo2 -= ensayo.costo
+        },
+        eliminarEnsayos3(index, ensayo) {
+            this.ensayosSeleccionados3.splice(index, 1)
+            this.costo3 -= ensayo.costo
+        },
+        crearEnsayo() {
+            let header = { headers: { "token": this.$store.state.token } };
+            axios.post(`/ensayo/`, {
+                ensayo: this.ensayo,
+                metodo: this.metodo,
+                tecnica: this.tecnica,
+                valorMinimo: this.valorMinimo,
+                valorMaximo: this.valorMaximo,
+                unidades: this.unidades,
+                costo: this.costo4,
+                descripcion: this.descripcion,
+                limiteCuantificacion: this.limiteCuantificacion,
+                responsables: {
+                    titular: this.titular,
+                    suplente: this.suplente,
+                },
+            }, header)
+                .then((response) => {
+                    console.log(response);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Ensayo creado exitosamente",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    this.ensayo = ""
+                    this.metodo = ""
+                    this.tecnica = ""
+                    this.valorMinimo = ""
+                    this.valorMaximo = ""
+                    this.unidades = ""
+                    this.costo4 = ""
+                    this.descripcion = ""
+                    this.limiteCuantificacion = ""
+                    this.dialog7 = false
+                })
+                .catch((error) => {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: error.response.data.errores.errors[0].msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                });
+        },
+        crearcotizacion() {
+            let header = { headers: { "token": this.$store.state.token } };
+            axios.post(`/ensayo/`, {
+            }, header)
+                .then((response) => {
+                    console.log(response);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Ensayo creado exitosamente",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    this.dialog7 = false
+                })
+                .catch((error) => {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: error.response.data.errores.errors[0].msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                });
+        },
+        listarUsuarios() {
+            axios.get(`/usuarios/ListarSoloUsuarios`)
+                .then((response) => {
+                    console.log(response);
+                    response.data.usuarios.forEach(usuarios => {
+                        this.soloUsuarios.push(usuarios)
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
-    },computed:{
-        sumar(){
-            this.ensayosSeleccionados.forEach(ensayo => { // esto le falta
-                this.costo+=ensayo.costo
-            });
-            return this.costo
+    }, computed: {
+        sumar() {
+            let subtotal = this.costo + this.costo2 + this.costo3
+            return subtotal
+        },
+        resultIva() {
+            let total = this.sumar * this.iva / 100
+            let total2 = total + this.sumar
+            return total2
         }
     },
     created() {
@@ -2019,6 +2479,7 @@ export default {
         this.ciudadess();
         this.listarContactos();
         this.listarEnsayos();
+        this.listarUsuarios();
     },
 };
 </script>
