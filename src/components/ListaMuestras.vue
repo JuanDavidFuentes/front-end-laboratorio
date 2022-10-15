@@ -217,41 +217,6 @@
                           <span>Añadir ítem</span>
                         </v-tooltip>
                       </v-col>
-                      <v-dialog v-model="dialog2" max-width="500px">
-                        <v-card class="">
-                          <v-card-title class="text-h5">
-                            Datos Muestra
-                          </v-card-title>
-                          <v-col cols="12">
-                            <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
-                              item-value="_id" filled rounded dense label="Municipio de recolección"
-                              @click="listarCiudad()">
-                            </v-autocomplete>
-                            <v-text-field v-model="direccionM" label="Dirección de toma de muestra*" filled rounded
-                              dense></v-text-field>
-                            <v-text-field v-model="lugarM" label="Lugar de toma de muestra*" filled rounded dense>
-                            </v-text-field>
-                            <v-text-field v-model="recolectadaPor" label="Muestra recolectada por*" filled rounded
-                              dense></v-text-field>
-                            <v-text-field v-model="procedimiento" label="Procedimiento de*" filled rounded dense>
-                            </v-text-field>
-                            <v-text-field v-model="tipoM" label="Tipo de muestra*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="matrizM" label="Matriz de la muestra*" filled rounded dense>
-                            </v-text-field>
-                            <v-text-field v-model="fecha" type="date" label="Fecha y hora de recolección*" filled
-                              rounded dense></v-text-field>
-                            <v-text-field v-model="cotizacion" :value="cotizacion2.numero_cotizacion" :label="cotizacion2.numero_cotizacion" disabled filled rounded dense></v-text-field>
-                            <v-select v-model="item" color="pink" label="Items" required></v-select>
-                            <!-- <v-text-field v-model="observacion" label="Observaciones" filled rounded dense></v-text-field> -->
-                          </v-col>
-                          <v-card-actions class="mt-n7">
-                            <v-btn color="success" @click="Guardar()">
-                              Añadir datos
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-
                     </v-row>
                     <v-row style=" margin: 0;" class="mx-5">
                       <v-col cols="12" class="ma-0 pa-0">
@@ -291,8 +256,17 @@
                                 </th>
                                 <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                   class="text-center white--text">
-                                  <h2> Tipo de </h2>
-                                  <h2> muestra </h2>
+                                  <h2> Tipo de muestra</h2>
+                                  <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                      <v-btn color="white" class="ma-2" dark @click="dialog3 = true">
+                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                          mdi-plus-circle
+                                        </v-icon>
+                                      </v-btn>
+                                    </template>
+                                    <span>Añadir tipo de la muestra</span>
+                                  </v-tooltip>
                                 </th>
                                 <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                   class="text-center white--text">
@@ -320,50 +294,50 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
+                              <tr v-for="(datosss, i ) in mostrasDatos" :key="i">
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                  <h3>{{numeroactual}}</h3>
+                                  <h3>{{datosss.codMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.munRecoleccion}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.direccionTomaMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.lugarTomaMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.muestraRecolectadaPor}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.procedimientoMuestreo}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.tipoMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.matrizMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.fechaRecoleccion}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.cotizacion}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-
+                                  <h3>{{datosss.item}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
@@ -527,6 +501,55 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-dialog v-model="dialog2" max-width="500px">
+      <v-card class="">
+        <v-card-title class="text-h5">
+          Datos de la muestra
+        </v-card-title>
+        <v-col cols="12">
+          <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad" item-value="_id" filled
+            rounded dense label="Municipio de recolección" @click="listarCiudad()"></v-autocomplete>
+          <v-text-field v-model="direccionM" label="Dirección de toma de muestra*" filled rounded dense></v-text-field>
+          <v-text-field v-model="lugarM" label="Lugar de toma de muestra*" filled rounded dense>
+          </v-text-field>
+          <v-text-field v-model="recolectadaPor" label="Muestra recolectada por*" filled rounded dense></v-text-field>
+          <v-text-field v-model="procedimiento" label="Procedimiento de*" filled rounded dense>
+          </v-text-field>
+          <v-autocomplete v-model="tipoM" :items="listarTipos" item-text="tipos" item-value="_id" filled
+            rounded dense label="Tipo de muestra" @click="listarTiposs()"></v-autocomplete>
+          <v-text-field v-model="matrizM" label="Matriz de la muestra*" filled rounded dense>
+          </v-text-field>
+          <v-text-field v-model="fecha" type="date" label="Fecha y hora de recolección*" filled rounded dense>
+          </v-text-field>
+          <v-text-field v-model="cotizacion" value="aa" :label="cotizacion2.numero_cotizacion" disabled filled rounded
+            dense></v-text-field>
+
+          <v-select v-model="item" filled rounded dense label="Items" :items="seleccionarItem" item-text="items" @click="listarItems()"></v-select>
+          <!-- <v-text-field v-model="observacion" label="Observaciones" filled rounded dense></v-text-field> -->
+        </v-col>
+        <v-card-actions class="mt-n7">
+          <v-btn color="success" @click="Guardar()">
+            Añadir datos
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="dialog3" max-width="500px">
+      <v-card>
+        <v-card-title class="text-h5">
+          <span>Añadir tipo muestra</span>
+        </v-card-title>
+        <v-col cols="12">
+        <v-text-field v-model="agregaTipoM" label="Tipo muestra" filled rounded dense></v-text-field>
+      </v-col>
+        <v-card-actions>
+          <v-btn color="primary" text @click="guardar2()">
+            Agregar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container-fluid>
 </template>
 <script>
@@ -542,6 +565,7 @@ export default {
       selection: 1,
       dialog: false,
       dialog2: false,
+      dialog3: false,
       infoMuestras: [],
       Municipio: [],
       NombreContacto1: "",
@@ -555,10 +579,18 @@ export default {
       fecha: "",
       cotizacion: "",
       item: "",
+      agregaTipoM: "",
       numeroactual: "",
       numerocoti: 0,
-      cotizacion2:[],
-      infoItem2:[],
+      cotizacion2: [],
+      infoItem2: [],
+      idCoti: "",
+      itemsCoti: [],
+      infoMuestraa: [],
+      seleccionarItem:[],
+      listarTipos:[],
+      seleccionarDatos:[],
+      mostrasDatos:[],
 
 
       seleccionadoCiudad: "",
@@ -566,6 +598,10 @@ export default {
     };
   },
   methods: {
+    infoMuestraa1() {
+      this.infoMuestraa.push()
+    },
+
     NombreContacto() {
       if (this.datos.contacto) {
         this.NombreContacto1 = this.datos.contacto.nombre
@@ -617,7 +653,7 @@ export default {
     Guardar() {
       let header = { headers: { "token": this.$store.state.token } }
       axios.post(`/DMuestra/insertar`, {
-        solicitante: this.seleccionadoCiudad,
+        solicitante: this.datos._id,
         munRecoleccion: this.seleccionadoCiudad,
         direccionTomaMuestra: this.direccionM,
         lugarTomaMuestra: this.lugarM,
@@ -626,10 +662,12 @@ export default {
         tipoMuestra: this.tipoM,
         matrizMuestra: this.matrizM,
         fechaRecoleccion: this.fecha,
-        cotizacion: this.cotizacion,
+        cotizacion: this.idCoti,
         item: this.item,
+
       }, header)
         .then((response) => {
+          console.log(response);
           this.$swal.fire({
             position: "top-end",
             icon: "success",
@@ -637,9 +675,21 @@ export default {
             showConfirmButton: false,
             timer: 1500,
           });
-
+          this.mostrasDatos.push(response.data.coti)
+          this.seleccionadoCiudad = ""
+          this.direccionM = ""
+          this.lugarM = ""
+          this.recolectadaPor = ""
+          this.procedimiento = ""
+          this.tipoM = ""
+          this.matrizM = ""
+          this.cotizacion = ""
+          this.item = ""
+          this.dialog2 = false
+          
         })
         .catch((error) => {
+          console.log(error);
           this.$swal.fire({
             position: "top-end",
             icon: "error",
@@ -650,13 +700,40 @@ export default {
         });
 
     },
+
+    guardar2(){
+      axios.post(`/Tipo_muestra/`, {
+        tipos: this.agregaTipoM,
+      })
+        .then((response) => {
+          console.log(this.tipos);
+          this.$swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.data.msg,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.dialog3 = false
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: error.response.data.errores.errors[0].msg,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });      
+    },
     traerCotizacion() {
       let header = { headers: { "token": this.$store.state.token } }
-      axios.get(`cotizacion/buscarNombre/${this.datos._id}`,header)
-      .then(response => {
-          console.log(response);
-          this.cotizacion2=response.data.coti[0]
-          console.log(this.cotizacion2);
+      axios.get(`cotizacion/buscarNombre/${this.datos._id}`, header)
+        .then(response => {
+          this.cotizacion2 = response.data.coti[0]
+          this.idCoti = this.cotizacion2._id
+          this.infoItem();
 
         })
         .catch(error => {
@@ -684,17 +761,58 @@ export default {
           console.log(error);
         });
     },
-    infoItem(){
-      axios.get(`/cotizacion/listarporIdCoti/${this.datos._id}`)
+    infoItem() {
+      let header = { headers: { "token": this.$store.state.token } }
+      axios.get(`/cotizacion/listarporIdCoti/${this.idCoti}`, header)
+        .then((response) => {
+          this.itemsCoti.push(response.data.items)
+          console.log(this.itemsCoti);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    listarItems(){
+      let header = { headers: { "token": this.$store.state.token } }
+      axios.get(`/cotizacion/listarporIdCoti/${this.idCoti}`, header)
+        .then((response) => {
+          console.log(response);
+          response.data.items.forEach(itemss => {
+            this.seleccionarItem.push(itemss)
+          })
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+//response.data.coti
+    },
+    listarTiposs(){      
+      axios.get(`/Tipo_muestra/`)
+        .then((response) => {
+          console.log(response);
+          response.data.tipo.forEach(tiposs => {
+            this.listarTipos.push(tiposs)
+          })
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
     },
 
   },
   created() {
     this.cliente();
+    this.listarCiudad();
     this.listar();
     this.NombreContacto();
     this.traerCotizacion();
     this.info();
+    this.listarItems();
+    this.listarTiposs();
+
   },
   //cotizacion/listarporIdCoti/${this.datos._id}
 };

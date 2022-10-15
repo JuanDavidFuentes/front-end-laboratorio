@@ -12,7 +12,6 @@ import Ensayo from '../components/Ensayo.vue';
 import ListaMuestras from '../components/ListaMuestras.vue';
 
 
-
 export const routes = [
     {path: '/login', component: login},
     {path: '/cotizacion', component: cotizacion},
@@ -26,5 +25,4 @@ export const routes = [
     {path: '/clientes', component: Clientes},
     {path: '/EnsayoLab', component: Ensayo},
     {path: '/ListaMuestras', component: ListaMuestras},
-
 ]

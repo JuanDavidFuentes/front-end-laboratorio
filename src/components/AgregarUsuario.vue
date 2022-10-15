@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-row class="mt-13 ">
+        <v-row class="mt-13">
             <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
                 <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
                     Volver
@@ -14,48 +14,81 @@
                             Nuevo usuario
                         </v-btn>
                     </template>
-                    <v-card class="">
-                        <v-card-title class="text-h5">
-                            Datos Usuario
-                        </v-card-title>
-                        <v-col cols="12">
-                            <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded
-                                label="Tipo Persona"></v-select>
+                    <v-card >
+                        <v-card-title class="text-h5"> Datos Usuario </v-card-title>
+                        <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <v-select v-model="selecionadoTipo" :items="tipoPersona" dense
+                                                        filled rounded label="Tipo Persona"></v-select>
+                                                </v-col>
+                                                <v-col cols="6" class="mt-n7">
+                                                    <div v-if="selecionadoTipo === 'Juridica'">
+                                                        <v-text-field v-model="cargo" label="Cargo" filled rounded
+                                                            dense>
+                                                        </v-text-field>
+                                                    </div>
+                                                </v-col>
+                                                <v-col cols="6" class="mt-n7">
+                                                    <div v-if="selecionadoTipo === 'Juridica'">
+                                                        <v-text-field v-model="telefono" label="Telefono" filled rounded
+                                                            dense>
+                                                        </v-text-field>
+                                                    </div>
+                                                </v-col>
+                                                
+                                                <v-col cols="12" class="mt-n7">
+                                                    <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded label="Rol">
+                                                    </v-select>
+                                                </v-col>
 
-                            <div v-if="selecionadoTipo==='Juridica'">
-                                <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
-                                </v-text-field>
-                            </div>
-                            <div v-if="selecionadoTipo==='Juridica'">
-                                <v-text-field v-model="telefono" label="Telefono" filled rounded dense>
-                                </v-text-field>
-                            </div>
-                            <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded label="Rol">
-                            </v-select>
-                            <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="apellidos" label="Apellidos*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="documento" label="Documento*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="direccion" label="Dirección*" filled rounded dense></v-text-field>
-                            <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
-                                item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
-                            </v-autocomplete>
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
+                                                </v-col>
 
-                            <!-- contacto -->
-                            <v-text-field v-model="celular" label="Celular*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
-                            <v-text-field v-model="password" type="password" label="Password*" filled rounded dense>
-                            </v-text-field>
-                            <!-- foto -->
-                        </v-col>
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint
+                                                        required filled rounded dense></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" class="mt-n7">
+                                                    <v-text-field v-model="documento" label="Documento*" filled rounded dense></v-text-field>
+                                                </v-col>
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
+                                                     item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
+                                                    </v-autocomplete>
+                                                </v-col>
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="direccion" label="Dirección*" filled rounded dense></v-text-field>
+                                                </v-col>
+                                                
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
+                                                </v-col>
+                                                <v-col cols="6" class="mt-n7">
+                                                    <v-text-field v-model="celular" label="Celular*" filled rounded dense></v-text-field>
+                                                </v-col>
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="password" type="password" label="Password*" filled rounded dense>
+                                                    </v-text-field>
+                                                </v-col>
+                                                <!-- 
+                                                    CONFIRMAR CONTRTASEÑA
+                                                    <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="password1" type="password" label="Confirm Password*" filled rounded dense>
+                                                    </v-text-field>
+                                                </v-col> -->
+                                            </v-row>
+                                        </v-container>
+                                    </v-card-text>
 
                         <v-card-actions class="mt-n7">
                             <v-spacer></v-spacer>
                             <v-btn class="mr-15" outlined color="red darken-3" @click="Volver()">
                                 Cancelar
                             </v-btn>
-                            <v-btn color="success" @click="Guardar()">
-                                Guardar Datos
-                            </v-btn>
+                            <v-btn color="success" @click="Guardar()"> Guardar Datos </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -120,14 +153,13 @@
                     </v-text-field>
                 </v-card-title>
                 <v-data-table :headers="headers" :items="Usuarios" :search="search">
-                    <template v-slot:[`item.estado`]="{item}">
-                        <span class="green--text" v-if="item.estado===1">
-                            Activo</span>
+                    <template v-slot:[`item.estado`]="{ item }">
+                        <span class="green--text" v-if="item.estado === 1"> Activo</span>
                         <span class="red--text" v-else>Inactivo</span>
                     </template>
 
-                    <template v-slot:[`item.opciones`]="{item}">
-                        <span v-if="item.estado===1">
+                    <template v-slot:[`item.opciones`]="{ item }">
+                        <span v-if="item.estado === 1">
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-icon color="error" rounded v-bind="attrs" v-on="on"
@@ -140,14 +172,14 @@
 
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item._id)">
+                                    <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
                                         mdi-pencil
                                     </v-icon>
                                 </template>
                                 <span>Editar</span>
                             </v-tooltip>
-                            <!-- editar  editar  editar  editar  editar  editar  editar      -->
-                        </span>
+                            
+                            </span>
 
                         <span v-else>
                             <v-tooltip bottom>
@@ -159,89 +191,127 @@
                                 <span>Activar</span>
                             </v-tooltip>
 
-
-                            <v-dialog v-model="dialog2" persistent max-width="1000px">
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item._id)">
+                                    <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
                                         mdi-pencil
                                     </v-icon>
                                 </template>
+                                <span>Editar</span>
+                            </v-tooltip>
+
+                            <v-dialog v-model="dialog2" persistent max-width="1000px">
                                 <v-card>
                                     <v-card-title>
-                                        <span class="text-h5">Editar Datos Del Usuario</span>
+                                        <span class="text-h5 mb-n2">Editar Datos Del Usuario</span>
                                     </v-card-title>
                                     <v-card-text>
                                         <v-container>
                                             <v-row>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field label="Nombre" required></v-text-field>
+                                                <v-col cols="12" class=" ml-6">
+                                                    <h3>Documento</h3><br>
                                                 </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field label="Legal middle name"
-                                                        hint="example of helper text only on focus"></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field label="Legal last name*"
-                                                        hint="example of persistent helper text" persistent-hint
-                                                        required></v-text-field>
+                                                <v-col cols="12" class="mt-n11 mb-2 ml-6">
+                                                    <h2>{{usuario.documento}}</h2>
                                                 </v-col>
                                                 <v-col cols="12">
-                                                    <v-text-field label="Email*" required></v-text-field>
+                                                    <v-select v-model="selecionadoTipo" :items="tipoPersona" dense
+                                                        filled rounded label="Tipo Persona"></v-select>
                                                 </v-col>
-                                                <v-col cols="12">
-                                                    <v-text-field label="Password*" type="password" required>
+                                                <v-col cols="6" class="mt-n7">
+                                                    <div v-if="selecionadoTipo === 'Juridica'">
+                                                        <v-text-field v-model="cargo" label="Cargo" filled rounded
+                                                            dense>
+                                                        </v-text-field>
+                                                    </div>
+                                                </v-col>
+                                                <v-col cols="6" class="mt-n7">
+                                                    <div v-if="selecionadoTipo === 'Juridica'">
+                                                        <v-text-field v-model="telefono" label="Telefono" filled rounded
+                                                            dense>
+                                                        </v-text-field>
+                                                    </div>
+                                                </v-col>
+                                                
+                                                <v-col cols="12" class="mt-n7">
+                                                    <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded label="Rol">
+                                                    </v-select>
+                                                </v-col>
+
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
+                                                </v-col>
+
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint
+                                                        required filled rounded dense></v-text-field>
+                                                </v-col>
+                                                
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
+                                                     item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
+                                                    </v-autocomplete>
+                                                </v-col>
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="direccion" label="Dirección*" filled rounded dense></v-text-field>
+                                                </v-col>
+                                                
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
+                                                </v-col>
+                                                <v-col cols="6" class="mt-n7">
+                                                    <v-text-field v-model="celular" label="Celular*" filled rounded dense></v-text-field>
+                                                </v-col>
+                                                <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="password" type="password" label="Password*" filled rounded dense>
                                                     </v-text-field>
                                                 </v-col>
-                                                <v-col cols="12" sm="6">
-                                                    <v-select :items="['0-17', '18-29', '30-54', '54+']" label="Age*"
-                                                        required></v-select>
-                                                </v-col>
-                                                <v-col cols="12" sm="6">
-                                                    <v-autocomplete
-                                                        :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                                                        label="Interests" multiple></v-autocomplete>
-                                                </v-col>
+                                                <!-- 
+                                                    CONFIRMAR CONTRTASEÑA
+                                                    <v-col cols="6" sm="6" class="mt-n7">
+                                                    <v-text-field v-model="password1" type="password" label="Confirm Password*" filled rounded dense>
+                                                    </v-text-field>
+                                                </v-col> -->
                                             </v-row>
                                         </v-container>
-                                        <small>*indicates required field</small>
                                     </v-card-text>
-                                    <v-card-actions>
+                                    <v-card-actions class="mt-n11">
                                         <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="dialog2 = false">
+                                        <v-btn color="blue darken-1" text @click="cerrar()">
                                             Close
                                         </v-btn>
-                                        <v-btn color="blue darken-1" text @click="dialog2 = false">
+                                        <v-btn color="blue darken-1" text @click="editar()">
                                             Save
                                         </v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
-
                         </span>
                     </template>
-
                 </v-data-table>
             </v-card>
         </div>
-        <br><br><br>
+        <br /><br /><br />
     </v-container>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-    name: 'PageUsuarios',
+    name: "PageUsuarios",
     data: () => ({
-        search: '',
+        search: "",
         dialog: false,
         dialog2: false,
         Municipio: [],
         Usuarios: [],
-        id: "",
+        usuario:{},
+        id:"",
         nombre: "",
         apellidos: "",
         documento: "",
+        documento1:"",
         direccion: "",
         ciudad: "",
         celular: "",
@@ -254,7 +324,7 @@ export default {
         selecionadoRol: "",
         tipoPersona: [
             { text: "Natural", value: "Natural" },
-            { text: "Juridica", value: "Juridica" }
+            { text: "Juridica", value: "Juridica" },
         ],
         rolPersona: [
             { text: "CLIENTE", value: "CLIENTE" },
@@ -266,76 +336,76 @@ export default {
         ],
         headers: [
             {
-                text: 'Tipo Persona',
-                align: 'start',
+                text: "Tipo Persona",
+                align: "start",
                 value: "tipoPersona",
             },
             {
-                text: 'Rol',
-                align: 'start',
+                text: "Rol",
+                align: "start",
                 value: "rol",
             },
             {
-                text: 'Nombres',
-                align: 'start',
+                text: "Nombres",
+                align: "start",
                 value: "nombre",
             },
             {
-                text: 'Apellidos',
-                align: 'start',
-                value: 'apellidos',
+                text: "Apellidos",
+                align: "start",
+                value: "apellidos",
             },
             {
-                text: 'C.C. / NIT',
-                align: 'start',
+                text: "C.C. / NIT",
+                align: "start",
                 sortable: false,
-                value: 'documento',
+                value: "documento",
             },
             {
-                text: 'Correo',
-                align: 'start',
+                text: "Correo",
+                align: "start",
                 sortable: false,
-                value: 'email',
+                value: "email",
             },
             {
-                text: 'Ciudad',
-                align: 'start',
+                text: "Ciudad",
+                align: "start",
                 sortable: false,
                 value: "ciudad.ciudad",
             },
             {
-                text: 'Dirección',
-                align: 'start',
+                text: "Dirección",
+                align: "start",
                 sortable: false,
                 value: "direccion",
             },
             {
-                text: 'Celular',
-                align: 'start',
+                text: "Celular",
+                align: "start",
                 sortable: false,
-                value: 'celular',
+                value: "celular",
             },
             {
-                text: 'Cargo',
-                align: 'start',
+                text: "Cargo",
+                align: "start",
                 sortable: false,
-                value: 'cargo',
+                value: "cargo",
             },
             {
-                text: 'Telefono',
-                align: 'start',
+                text: "Telefono",
+                align: "start",
                 sortable: false,
-                value: 'telefono',
+                value: "telefono",
             },
             {
-                text: 'Estado',
-                align: 'start',
-                value: 'estado',
+                text: "Estado",
+                align: "start",
+                value: "estado",
             },
             {
-                text: 'Opciones',
-                align: 'start',
-                value: 'opciones',
+                text: "Opciones",
+                align: "start",
+                value: "opciones",
             },
         ],
     }),
@@ -346,27 +416,28 @@ export default {
             this.selecionadoTipo = this.tipoPersona[valor - 1];
             this.seleccionadoCiudad = this.Municipio[valor - 1];
         },
-
+        
         editar() {
             let header = { headers: { "token": this.$store.state.token } }
             if (this.selecionadoTipo === "Juridica") {
-                axios.put(`/datos/${this.id}`, {
+                axios.put(`/usuarios/datos/${this.id}`, {
                     tipoPersona: this.selecionadoTipo,
                     cargo: this.cargo,
                     telefono: this.telefono,
                     rol: this.selecionadoRol,
                     nombre: this.nombre,
                     apellidos: this.apellidos,
-                    documento: this.documento,
+                    documento: this.documento1,
                     direccion: this.direccion,
                     ciudad: this.seleccionadoCiudad,
                     celular: this.celular,
                     email: this.email.toUpperCase(),
                     password: this.password,
-                }, header)
+                }, header)                
                     .then((response) => {
                         console.log(this.cargo);
                         console.log(this.telefono);
+                        console.log(response);
                         this.$swal.fire({
                             position: "top-end",
                             icon: "success",
@@ -386,25 +457,20 @@ export default {
                         this.celular = ""
                         this.email = ""
                         this.password = ""
+                        this.dialog2=false
+                        this.usuarios()
                     })
                     .catch((error) => {
-                        console.log(this.cargo);
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: error.response.data.errores.errors[0].msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
+                        console.log(error);
                     });
             } else {
                 let header = { headers: { "token": this.$store.state.token } }
-                axios.put(`/datos/${this.id}`, {
+                axios.put(`/usuarios/datos/${this.id}`, {
                     tipoPersona: this.selecionadoTipo,
                     rol: this.selecionadoRol,
                     nombre: this.nombre,
                     apellidos: this.apellidos,
-                    documento: this.documento,
+                    documento: this.documento1,
                     direccion: this.direccion,
                     ciudad: this.seleccionadoCiudad,
                     celular: this.celular,
@@ -442,23 +508,43 @@ export default {
                     });
             }
         },
+        cerrar(){
+            this.selecionadoTipo = ""
+            this.cargo = ""
+            this.telefono = ""
+            this.selecionadoRol = ""
+            this.nombre = ""
+            this.apellidos = ""
+            this.documento = ""
+            this.direccion = ""
+            this.seleccionadoCiudad = ""
+            this.celular = ""
+            this.email = ""
+            this.password = ""
+            this.dialog2=false
+        },
         Guardar() {
-            let header = { headers: { "token": this.$store.state.token } }
+            let header = { headers: { token: this.$store.state.token } };
             if (this.selecionadoTipo === "Juridica") {
-                axios.post(`/usuarios/`, {
-                    tipoPersona: this.selecionadoTipo,
-                    cargo: this.cargo,
-                    telefono: this.telefono,
-                    rol: this.selecionadoRol,
-                    nombre: this.nombre,
-                    apellidos: this.apellidos,
-                    documento: this.documento,
-                    direccion: this.direccion,
-                    ciudad: this.seleccionadoCiudad,
-                    celular: this.celular,
-                    email: this.email.toUpperCase(),
-                    password: this.password,
-                }, header)
+                axios
+                    .post(
+                        `/usuarios/`,
+                        {
+                            tipoPersona: this.selecionadoTipo,
+                            cargo: this.cargo,
+                            telefono: this.telefono,
+                            rol: this.selecionadoRol,
+                            nombre: this.nombre,
+                            apellidos: this.apellidos,
+                            documento: this.documento,
+                            direccion: this.direccion,
+                            ciudad: this.seleccionadoCiudad,
+                            celular: this.celular,
+                            email: this.email.toUpperCase(),
+                            password: this.password,
+                        },
+                        header
+                    )
                     .then((response) => {
                         this.$swal.fire({
                             position: "top-end",
@@ -467,19 +553,20 @@ export default {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        this.selecionadoTipo = ""
-                        this.cargo = ""
-                        this.telefono = ""
-                        this.selecionadoRol = ""
-                        this.nombre = ""
-                        this.apellidos = ""
-                        this.documento = ""
-                        this.direccion = ""
-                        this.seleccionadoCiudad = ""
-                        this.celular = ""
-                        this.email = ""
-                        this.password = ""
-                        this.dialog = false
+                        this.selecionadoTipo = "";
+                        this.cargo = "";
+                        this.telefono = "";
+                        this.selecionadoRol = "";
+                        this.nombre = "";
+                        this.apellidos = "";
+                        this.documento = "";
+                        this.direccion = "";
+                        this.seleccionadoCiudad = "";
+                        this.celular = "";
+                        this.email = "";
+                        this.password = "";
+                        this.dialog = false;
+                        this.usuarios();
                     })
                     .catch((error) => {
                         console.log(this.cargo);
@@ -492,19 +579,24 @@ export default {
                         });
                     });
             } else {
-                let header = { headers: { "token": this.$store.state.token } }
-                axios.post(`/usuarios/`, {
-                    tipoPersona: this.selecionadoTipo,
-                    rol: this.selecionadoRol,
-                    nombre: this.nombre,
-                    apellidos: this.apellidos,
-                    documento: this.documento,
-                    direccion: this.direccion,
-                    ciudad: this.seleccionadoCiudad,
-                    celular: this.celular,
-                    email: this.email.toUpperCase(),
-                    password: this.password,
-                }, header)
+                let header = { headers: { token: this.$store.state.token } };
+                axios
+                    .post(
+                        `/usuarios/`,
+                        {
+                            tipoPersona: this.selecionadoTipo,
+                            rol: this.selecionadoRol,
+                            nombre: this.nombre,
+                            apellidos: this.apellidos,
+                            documento: this.documento,
+                            direccion: this.direccion,
+                            ciudad: this.seleccionadoCiudad,
+                            celular: this.celular,
+                            email: this.email.toUpperCase(),
+                            password: this.password,
+                        },
+                        header
+                    )
                     .then((response) => {
                         this.$swal.fire({
                             position: "top-end",
@@ -513,18 +605,17 @@ export default {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        this.selecionadoTipo = ""
-                        this.selecionadoRol = ""
-                        this.nombre = ""
-                        this.apellidos = ""
-                        this.documento = ""
-                        this.direccion = ""
-                        this.seleccionadoCiudad = ""
-                        this.celular = ""
-                        this.email = ""
-                        this.password = ""
-                        this.dialog = false
-
+                        this.selecionadoTipo = "";
+                        this.selecionadoRol = "";
+                        this.nombre = "";
+                        this.apellidos = "";
+                        this.documento = "";
+                        this.direccion = "";
+                        this.seleccionadoCiudad = "";
+                        this.celular = "";
+                        this.email = "";
+                        this.password = "";
+                        this.dialog = false;
                     })
                     .catch((error) => {
                         this.$swal.fire({
@@ -550,6 +641,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    this.usuarios();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -568,30 +660,34 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    this.usuarios();
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
 
-
-
         Volver() {
-            this.dialog = false
-            this.dialog2 = false
+            this.dialog = false;
+            this.dialog2 = false;
         },
-        sacarid(id) {
-            console.log(id);
-            this.id = id
+        sacarid(usuario) {
+            console.log(usuario);
+            this.nombre = usuario.nombre
+            this.apellidos = usuario.apellidos
+            this.documento = usuario.documento
+            this.direccion = usuario.direccion
+            this.celular = usuario.celular
+            this.email = usuario.email
+            this.dialog2= true
         },
         usuarios() {
-            let header = { headers: { "token": this.$store.state.token } };
-            axios.get(`/usuarios`, header)
+            let header = { headers: { token: this.$store.state.token } };
+            axios
+                .get(`/usuarios`, header)
                 .then((response) => {
                     console.log(response);
-                    response.data.usuarios.forEach(usuarios => {
-                        this.Usuarios.push(usuarios)
-                    })
+                    this.Usuarios = response.data.usuarios;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -599,48 +695,49 @@ export default {
         },
 
         listarCiudad() {
-            axios.get("/ciudad/CiudadDepartamento")
-                .then(response => {
+            axios
+                .get("/ciudad/CiudadDepartamento")
+                .then((response) => {
                     console.log(response);
-                    response.data.ciudad.forEach(city => {
-                        this.Municipio.push(city)
-                    })
+                    response.data.ciudad.forEach((city) => {
+                        this.Municipio.push(city);
+                    });
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.log(error);
-                })
+                });
         },
 
         customFilter(item, queryText) {
-            const textOne = item.ciudad.toUpperCase()
-            const searchText = queryText.toUpperCase()
+            const textOne = item.ciudad.toUpperCase();
+            const searchText = queryText.toUpperCase();
 
-            return textOne.indexOf(searchText) > -1
+            return textOne.indexOf(searchText) > -1;
         },
 
         ListarDepar() {
-            axios.get("/ciudad/CiudadDepartamento")
-                .then(response => {
+            axios
+                .get("/ciudad/CiudadDepartamento")
+                .then((response) => {
                     console.log(response);
-                    this.Ciudad = response.data.ciudad
+                    this.Ciudad = response.data.ciudad;
                     for (let i = 0; i < this.Ciudad.length; i++) {
-                        this.depar = this.Ciudad[i].departamento
-                        this.Depar.push(this.depar)
+                        this.depar = this.Ciudad[i].departamento;
+                        this.Depar.push(this.depar);
                     }
                     console.log(this.Depar);
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.log(error);
-                })
+                });
         },
         Volver1() {
-            this.$router.push("/")
-        }
+            this.$router.push("/");
+        },
     },
     created() {
-        this.usuarios(),
-            this.listarCiudad()
+        this.usuarios(), 
+        this.listarCiudad();
     },
-}
+};
 </script>
-
