@@ -10,7 +10,7 @@
 
             <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
                 <div class="text-center black--text font-weight-Normal">
-                    <h1>Cotizaciones</h1>
+                    <h1>Cotizaciones Activas</h1>
                 </div>
             </v-col>
             <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="mt-3">
@@ -35,8 +35,11 @@
                                 <v-toolbar-title>Crear Cotización</v-toolbar-title>
                                 <v-spacer></v-spacer>
                                 <v-toolbar-items>
-                                    <v-btn dark text @click="crearcotizacion()">
+                                    <v-btn v-if="BtnEditar===0" dark text @click="crearcotizacion()">
                                         <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                    </v-btn>
+                                    <v-btn v-if="BtnEditar===1" dark text @click="editarCoti()">
+                                        <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
                                     </v-btn>
                                 </v-toolbar-items>
                             </v-toolbar>
@@ -73,10 +76,12 @@
                                         <div class="text-center black--text headline">
                                             <h4>Cotización No.</h4>
                                         </div>
-                                        <div class="text-center red--text font-italic headline">
+                                        <div v-if="BtnEditar===0" class="text-center red--text font-italic headline">
                                             {{numeroactual}}
                                         </div>
-
+                                        <div v-if="BtnEditar===1" class="text-center red--text font-italic headline">
+                                            {{numeroCoti}}
+                                        </div>
                                         <div class="text-center black--text headline mt-10">
                                             <h4>Fecha de emisión:</h4>
                                         </div>
@@ -143,7 +148,7 @@
                                                 </div>
                                             </v-col>
                                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                                <v-tooltip v-if="botones==0" bottom>
+                                                <v-tooltip v-if="botones===0" bottom>
                                                     <template v-slot:activator="{ on, attrs }">
                                                         <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
                                                             v-on="on" @click="borrarclientes()">
@@ -998,8 +1003,11 @@
                                     </v-col>
                                     <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
                                     <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn dark color="green" @click="crearcotizacion()">
+                                        <v-btn v-if="BtnEditar===0" dark color="green" @click="crearcotizacion()">
                                             <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                        </v-btn>
+                                        <v-btn v-if="BtnEditar===1" dark color="green" @click="editarCoti()">
+                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
                                         </v-btn>
                                     </v-col>
                                 </v-row>
@@ -1670,6 +1678,80 @@
             </v-col>
             <v-col cols="1"></v-col>
         </v-row>
+        <v-row style="margin:0px">
+            <v-col cols="1"></v-col>
+            <v-col cols="10">
+                <v-row style="margin:0px">
+                    <v-col cols="1"></v-col>
+                    <v-col class="text-center" cols="10">
+                        <h1>Cotizaciónes Inactivas</h1>
+                    </v-col>
+                    <v-col cols="1"></v-col>
+                </v-row>
+                <template>
+                    <v-card>
+                        <v-card-title>
+                            Buscar cotización
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
+                                hide-details></v-text-field>
+                        </v-card-title>
+                        <v-data-table :headers="headers2" :items="TodasCotis" :search="search">
+                            <template v-slot:[`item.fecha`]="{item}">
+                                {{fechaSalida(item.fecha_emision)}}
+                            </template>
+                            <template v-slot:[`item.opciones`]="{item}">
+                                <template v-if="item.estado===1">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="error" rounded v-bind="attrs" v-on="on"
+                                                @click="activar(item._id)">
+                                                mdi-calendar-remove
+                                            </v-icon>
+                                        </template>
+                                        <span>Desactivar</span>
+                                    </v-tooltip>
+                                </template>
+                                <template v-else>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="success" rounded v-bind="attrs" v-on="on"
+                                                @click="desactivar(item._id)">
+                                                mdi-calendar-plus
+                                            </v-icon>
+                                        </template>
+                                        <span>Activar</span>
+                                    </v-tooltip>
+                                </template>
+                                <template>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon class="ml-3" color="blue" @click="editar(item)" rounded
+                                                v-bind="attrs" v-on="on">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar</span>
+                                    </v-tooltip>
+                                </template>
+                            </template>
+                            <template v-slot:[`item.estado`]="{item}">
+                                <span class="green--text" v-if="item.estado===1">Activo</span>
+                                <span class="red--text" v-else>Inactivo</span>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </template>
+            </v-col>
+            <v-col cols="1"></v-col>
+        </v-row>
+        <v-row style="margin:0px">
+            <v-col class="text-left" cols="12">
+                <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+                    Volver
+                </v-btn>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
@@ -1755,6 +1837,11 @@ export default {
             subtotal: 0,
             descuento: 0,
             iva: 0,
+            idCotizacion: "",
+            BtnEditar: 0,
+            numeroCoti: "",
+            search3:'',
+            TodasCotis:[],
             //la computada "suma" es el total
             //headers
             tipos: ["Natural", "Juridica"],
@@ -1968,6 +2055,7 @@ export default {
                         timer: 1500,
                     });
                     this.listar();
+                    this.listarTodasLasCotis();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -1985,6 +2073,7 @@ export default {
                         timer: 1500,
                     });
                     this.listar();
+                    this.listarTodasLasCotis();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2179,10 +2268,6 @@ export default {
             axios.get(`/usuarios/listarContactos`, header)
                 .then((response) => {
                     this.contactos = response.data.usuarios
-                    // response.data.usuarios.forEach(usuarios => {
-                    //     this.contactos.push(usuarios)
-                    // })
-                    // console.log(this.contactos);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2507,12 +2592,26 @@ export default {
                     this.costo2 = 0
                     this.itemsEnsayo3 = []
                     this.costo3 = 0
-                    this.sumar = 0
                     this.descuento = 0
-                    this.resultIva = 0
                     this.ensayosSeleccionados = []
                     this.ensayosSeleccionados2 = []
                     this.ensayosSeleccionados3 = []
+                    this.idCliente = ""
+                    this.idcontacto = ""
+                    this.tipoPersona = ""
+                    this.nombre = ""
+                    this.apellidos = ""
+                    this.contacto = ""
+                    this.nombrecontacto = ""
+                    this.documento = ""
+                    this.direccion = ""
+                    this.ciudad = ""
+                    this.telefono = ""
+                    this.celular = ""
+                    this.cargo = ""
+                    this.email = ""
+                    this.botones = 1
+                    this.BtnEditar = 0
                     this.dialog = false
                 }
             })
@@ -2539,6 +2638,7 @@ export default {
                 });
             }
             if (this.contacto === "") {
+                this.elaborado = this.recep._id
                 let header = { headers: { "token": this.$store.state.token } };
                 axios.post(`/cotizacion/`, {
                     fecha_emision: this.fechaEmision,
@@ -2566,6 +2666,13 @@ export default {
                     total: this.resultIva
                 }, header)
                     .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Cotización creada con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
                         console.log(response);
                         this.listar();
                         this.fechaEmision = ""
@@ -2579,10 +2686,14 @@ export default {
                         this.costo2 = 0
                         this.itemsEnsayo3 = []
                         this.costo3 = 0
+                        this.ensayosSeleccionados = []
+                        this.ensayosSeleccionados2 = []
+                        this.ensayosSeleccionados3 = []
                         this.sumar = 0
                         this.descuento = 0
                         this.resultIva = 0
                         this.dialog = false
+                        this.listarTodasLasCotis();
                     })
                     .catch((error) => {
                         console.log(error);
@@ -2620,6 +2731,7 @@ export default {
                         this.itemsEnsayo = []
                     });
             } else {
+                this.elaborado = this.recep._id
                 let header = { headers: { "token": this.$store.state.token } };
                 axios.post(`/cotizacion/`, {
                     fecha_emision: this.fechaEmision,
@@ -2648,6 +2760,13 @@ export default {
                     total: this.resultIva
                 }, header)
                     .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Cotización creada con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
                         console.log(response);
                         this.listar();
                         this.fechaEmision = ""
@@ -2661,11 +2780,15 @@ export default {
                         this.itemsEnsayo2 = []
                         this.costo2 = 0
                         this.itemsEnsayo3 = []
+                        this.ensayosSeleccionados = []
+                        this.ensayosSeleccionados2 = []
+                        this.ensayosSeleccionados3 = []
                         this.costo3 = 0
                         this.sumar = 0
                         this.descuento = 0
                         this.resultIva = 0
                         this.dialog = false
+                        this.listarTodasLasCotis();
                     })
                     .catch((error) => {
                         if (error.response.data.msg === "No hay token en la peticion") {
@@ -2706,45 +2829,297 @@ export default {
 
         },
         editar(datos) {
-            this.dialog = true;
             console.log(datos);
-                if (datos.idContacto) { // aun no lleva la informacion
-                    this.idCliente = datos.idCliente._id
-                    this.idcontacto = datos.idCliente.contacto._id
-                    this.tipoPersona = datos.idCliente.tipoPersona
-                    this.nombre = datos.idCliente.nombre
-                    this.apellidos = datos.idCliente.apellidos
-                    this.contacto = datos.idCliente.contacto
-                    this.nombrecontacto = datos.contacto.nombre
-                    this.documento = datos.idCliente.documento
-                    this.direccion = datos.idCliente.direccion
-                    this.ciudad = datos.idCliente.ciudad
-                    this.telefono = datos.idCliente.telefono
-                    this.celular = datos.idCliente.celular
-                    this.cargo = datos.idCliente.cargo
-                    this.email = datos.idCliente.email
-                    this.dialog2 = false
-                    this.botones = 0
-                } else {
-                    this.idCliente = datos.idCliente._id
-                    this.idcontacto = datos.idCliente.contacto._id
-                    this.tipoPersona = datos.idCliente.tipoPersona
-                    this.nombre = datos.idCliente.nombre
-                    this.apellidos = datos.idCliente.apellidos
-                    this.contacto = ""
-                    this.nombrecontacto = ""
-                    this.documento = datos.idCliente.documento
-                    this.direccion = datos.idCliente.direccion
-                    this.ciudad = datos.idCliente.ciudad
-                    this.telefono = datos.idCliente.telefono
-                    this.celular = datos.idCliente.celular
-                    this.cargo = datos.idCliente.cargo
-                    this.email = datos.idCliente.email
-                    this.dialog2 = false
-                    this.botones = 0
+            if (datos.idCliente.contacto) { // aun no lleva la informacion
+                console.log("contacto");
+                this.idCotizacion = datos._id
+                this.elaborado = this.recep._id
+                this.numeroCoti = datos.numero_cotizacion
+                this.idCliente = datos.idCliente._id
+                this.idcontacto = datos.idCliente.contacto._id
+                this.tipoPersona = datos.idCliente.tipoPersona
+                this.nombre = datos.idCliente.nombre
+                this.apellidos = datos.idCliente.apellidos
+                this.contacto = datos.idCliente.contacto
+                this.nombrecontacto = datos.idCliente.contacto.nombre
+                this.documento = datos.idCliente.documento
+                this.direccion = datos.idCliente.direccion
+                this.ciudad = datos.idCliente.ciudad
+                this.telefono = datos.idCliente.telefono
+                this.celular = datos.idCliente.celular
+                this.cargo = datos.idCliente.cargo
+                this.email = datos.idCliente.email
+                this.descuento = datos.descuento
+                this.BtnEditar = 1
+                this.botones = 0
+                if (datos.items.item1.itemsEnsayo) {
+                    this.costo = datos.items.item1.costo
+                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados.push(ensayo.ensayo)
+                    });
                 }
+                if (datos.items.item2.itemsEnsayo) {
+                    this.costo2 = datos.items.item2.costo
+                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados2.push(ensayo.ensayo)
+                    })
+                }
+                if (datos.items.item3.itemsEnsayo) {
+                    this.costo3 = datos.items.item3.costo
+                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados3.push(ensayo.ensayo)
+                    })
+                }
+                this.dialog = true;
+            } else {
+                console.log("sin");
+                this.idCotizacion = datos._id
+                this.numeroCoti = datos.numero_cotizacion
+                this.idCliente = datos.idCliente._id
+                this.tipoPersona = datos.idCliente.tipoPersona
+                this.elaborado = this.recep._id
+                this.nombre = datos.idCliente.nombre
+                this.apellidos = datos.idCliente.apellidos
+                this.contacto = ""
+                this.nombrecontacto = ""
+                this.documento = datos.idCliente.documento
+                this.direccion = datos.idCliente.direccion
+                this.ciudad = datos.idCliente.ciudad
+                this.telefono = datos.idCliente.telefono
+                this.celular = datos.idCliente.celular
+                this.cargo = datos.idCliente.cargo
+                this.email = datos.idCliente.email
+                this.descuento = datos.descuento
+                this.BtnEditar = 1
+                this.botones = 0
+                if (datos.items.item1.itemsEnsayo) {
+                    this.costo = datos.items.item1.costo
+                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados.push(ensayo.ensayo)
+                    });
+                }
+                if (datos.items.item2.itemsEnsayo) {
+                    this.costo2 = datos.items.item2.costo
+                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados2.push(ensayo.ensayo)
+                    })
+                }
+                if (datos.items.item3.itemsEnsayo) {
+                    this.costo3 = datos.items.item3.costo
+                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados3.push(ensayo.ensayo)
+                    })
+                }
+                this.dialog = true;
+            }
+        },
+        editarCoti() {
+            if (this.ensayosSeleccionados.length !== 0) {
+                this.ensayosSeleccionados.forEach(ensayos => {
+                    let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
+                    this.itemsEnsayo.push(ensayo)
+                });
+            } else {
+                this.itemsEnsayo = [{ ensayo: "", costoEnsayo: 0 }]
+            }
+            if (this.ensayosSeleccionados2.length !== 0) {
+                this.ensayosSeleccionados2.forEach(ensayos => {
+                    let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
+                    this.itemsEnsayo2.push(ensayo)
+                });
+            }
+            if (this.ensayosSeleccionados3.length !== 0) {
+                this.ensayosSeleccionados3.forEach(ensayos => {
+                    let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
+                    this.itemsEnsayo3.push(ensayo)
+                });
+            }
+            if (this.contacto === "") {
+                let header = { headers: { "token": this.$store.state.token } };
+                axios.put(`/cotizacion/${this.idCotizacion}`, {
+                    fecha_emision: this.fechaEmision,
+                    idCliente: this.idCliente,
+                    validez_oferta: this.validezOferta,
+                    entrega_resultados: this.entregaResultados,
+                    elabordo_por: this.elaborado,
+                    items: {
+                        item1: {
+                            itemsEnsayo: this.itemsEnsayo,
+                            costo: this.costo,
+                        },
+                        item2: {
+                            itemsEnsayo: this.itemsEnsayo2,
+                            costo: this.costo2,
+                        },
+                        item3: {
+                            itemsEnsayo: this.itemsEnsayo3,
+                            costo: this.costo3,
+                        },
+                    },
+                    subtotal: this.sumar,
+                    descuento: this.descuento,
+                    iva: this.iva,
+                    total: this.resultIva
+                }, header)
+                    .then((response) => {
+                        console.log(response);
+                        this.listar();
+                        this.fechaEmision = ""
+                        this.idCliente = ""
+                        this.validezOferta = ""
+                        this.entregaResultados = ""
+                        this.elaborado = ""
+                        this.itemsEnsayo = []
+                        this.costo = 0
+                        this.itemsEnsayo2 = []
+                        this.costo2 = 0
+                        this.itemsEnsayo3 = []
+                        this.ensayosSeleccionados = []
+                        this.ensayosSeleccionados2 = []
+                        this.ensayosSeleccionados3 = []
+                        this.costo3 = 0
+                        this.sumar = 0
+                        this.descuento = 0
+                        this.resultIva = 0
+                        this.dialog = false
+                        this.listarTodasLasCotis()
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        if (error.response.data.msg === "No hay token en la peticion") {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: error.response.data.msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            console.log();
+                        } else {
+                            if (error.response.data.errores.errors[0].msg === 'Invalid value') {
+                                console.log(error.response.data.errores.errors[0]);
+                                this.$swal.fire({
+                                    position: "top-end",
+                                    icon: "error",
+                                    title: "Porfavor seleccione un cliente!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            } else {
+                                console.log(error.response.data.errores.errors[0]);
+                                this.$swal.fire({
+                                    position: "top-end",
+                                    icon: "error",
+                                    title: error.response.data.errores.errors[0].msg,
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            }
+                        }
+                        console.log(error);
+                        this.itemsEnsayo = []
+                    });
+            } else {
+                let header = { headers: { "token": this.$store.state.token } };
+                axios.put(`/cotizacion/${this.idCotizacion}`, {
+                    fecha_emision: this.fechaEmision,
+                    idCliente: this.idCliente,
+                    idContacto: this.idcontacto,
+                    validez_oferta: this.validezOferta,
+                    entrega_resultados: this.entregaResultados,
+                    elabordo_por: this.elaborado,
+                    items: {
+                        item1: {
+                            itemsEnsayo: this.itemsEnsayo,
+                            costo: this.costo,
+                        },
+                        item2: {
+                            itemsEnsayo: this.itemsEnsayo2,
+                            costo: this.costo2,
+                        },
+                        item3: {
+                            itemsEnsayo: this.itemsEnsayo3,
+                            costo: this.costo3,
+                        },
+                    },
+                    subtotal: this.sumar,
+                    descuento: this.descuento,
+                    iva: this.iva,
+                    total: this.resultIva
+                }, header)
+                    .then((response) => {
+                        console.log(response);
+                        this.listar();
+                        this.listarTodasLasCotis();
+                        this.fechaEmision = ""
+                        this.idCliente = ""
+                        this.idcontacto = ""
+                        this.validezOferta = ""
+                        this.entregaResultados = ""
+                        this.elaborado = ""
+                        this.itemsEnsayo = []
+                        this.costo = 0
+                        this.itemsEnsayo2 = []
+                        this.costo2 = 0
+                        this.itemsEnsayo3 = []
+                        this.costo3 = 0
+                        this.sumar = 0
+                        this.descuento = 0
+                        this.resultIva = 0
+                        this.ensayosSeleccionados = []
+                        this.ensayosSeleccionados2 = []
+                        this.ensayosSeleccionados3 = []
+                        this.dialog = false
+                    })
+                    .catch((error) => {
+                        if (error.response.data.msg === "No hay token en la peticion") {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: error.response.data.msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            console.log();
+                        } else {
+                            if (error.response.data.errores.errors[0].msg === 'Invalid value') {
+                                console.log(error.response.data.errores.errors[0]);
+                                this.$swal.fire({
+                                    position: "top-end",
+                                    icon: "error",
+                                    title: "Porfavor seleccione un cliente!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            } else {
+                                console.log(error.response.data.errores.errors[0]);
+                                this.$swal.fire({
+                                    position: "top-end",
+                                    icon: "error",
+                                    title: error.response.data.errores.errors[0].msg,
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            }
+                        }
+                        console.log(error);
+                        this.itemsEnsayo = []
+
+                    });
+            }
+        },
+        listarTodasLasCotis(){
+            axios.get(`/cotizacion/listarLasCotizacionesAD`)
+                .then((response) => {
+                    console.log(response);
+                    this.TodasCotis = response.data.coti;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
-    }, computed: {
+    }, 
+    computed: {
         sumar() {
             let subtotal = this.costo + this.costo2 + this.costo3 - this.descuento
             return subtotal
@@ -2765,6 +3140,7 @@ export default {
         this.listarContactos();
         this.listarEnsayos();
         this.listarUsuarios();
+        this.listarTodasLasCotis();
     },
 };
 </script>

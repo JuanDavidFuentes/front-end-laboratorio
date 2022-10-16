@@ -48,7 +48,7 @@
                             <v-card-title class="text-h5">Recepcion <br> Muestras </v-card-title>
                             <v-card-subtitle>Listar</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5" outlined rounded @click="Listar()" to="/muestras">
+                                <v-btn class="ml-2 mt-5" outlined rounded @click="Listar()" to="/Muestras">
                                     <v-icon>mdi-text-box-check-outline</v-icon>
                                     Muestras
                                 </v-btn>
@@ -89,7 +89,7 @@
                             <v-card-title class="text-h5">Clientes</v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5" outlined rounded to="/clientes">
+                                <v-btn class="ml-2 mt-5" outlined rounded to="/Clientes">
                                     <v-icon>mdi-clipboard-alert-outline</v-icon>
                                     Clientes
                                 </v-btn>

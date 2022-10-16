@@ -613,7 +613,7 @@ export default {
       console.log(this.datos);
     },
     Volver() {
-      this.$router.push("/clientes");
+      this.$router.push("/Muestras");
     },
     reserve() {
       this.loading = true;

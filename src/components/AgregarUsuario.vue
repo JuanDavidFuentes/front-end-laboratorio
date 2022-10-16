@@ -14,74 +14,80 @@
                             Nuevo usuario
                         </v-btn>
                     </template>
-                    <v-card >
+                    <v-card>
                         <v-card-title class="text-h5"> Datos Usuario </v-card-title>
                         <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12">
-                                                    <v-select v-model="selecionadoTipo" :items="tipoPersona" dense
-                                                        filled rounded label="Tipo Persona"></v-select>
-                                                </v-col>
-                                                <v-col cols="6" class="mt-n7">
-                                                    <div v-if="selecionadoTipo === 'Juridica'">
-                                                        <v-text-field v-model="cargo" label="Cargo" filled rounded
-                                                            dense>
-                                                        </v-text-field>
-                                                    </div>
-                                                </v-col>
-                                                <v-col cols="6" class="mt-n7">
-                                                    <div v-if="selecionadoTipo === 'Juridica'">
-                                                        <v-text-field v-model="telefono" label="Telefono" filled rounded
-                                                            dense>
-                                                        </v-text-field>
-                                                    </div>
-                                                </v-col>
-                                                
-                                                <v-col cols="12" class="mt-n7">
-                                                    <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded label="Rol">
-                                                    </v-select>
-                                                </v-col>
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded
+                                            label="Tipo Persona"></v-select>
+                                    </v-col>
+                                    <v-col cols="6" class="mt-n7">
+                                        <div v-if="selecionadoTipo === 'Juridica'">
+                                            <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
+                                            </v-text-field>
+                                        </div>
+                                    </v-col>
+                                    <v-col cols="6" class="mt-n7">
+                                        <div v-if="selecionadoTipo === 'Juridica'">
+                                            <v-text-field v-model="telefono" label="Telefono" filled rounded dense>
+                                            </v-text-field>
+                                        </div>
+                                    </v-col>
 
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
-                                                </v-col>
+                                    <v-col cols="12" class="mt-n7">
+                                        <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded
+                                            label="Rol">
+                                        </v-select>
+                                    </v-col>
 
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint
-                                                        required filled rounded dense></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" class="mt-n7">
-                                                    <v-text-field v-model="documento" label="Documento*" filled rounded dense></v-text-field>
-                                                </v-col>
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
-                                                     item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
-                                                    </v-autocomplete>
-                                                </v-col>
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="direccion" label="Dirección*" filled rounded dense></v-text-field>
-                                                </v-col>
-                                                
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
-                                                </v-col>
-                                                <v-col cols="6" class="mt-n7">
-                                                    <v-text-field v-model="celular" label="Celular*" filled rounded dense></v-text-field>
-                                                </v-col>
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="password" type="password" label="Password*" filled rounded dense>
-                                                    </v-text-field>
-                                                </v-col>
-                                                <!-- 
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="nombre" label="Nombre*" filled rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint required
+                                            filled rounded dense></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" class="mt-n7">
+                                        <v-text-field v-model="documento" label="Documento*" filled rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio"
+                                            item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad"
+                                            @click="listarCiudad()">
+                                        </v-autocomplete>
+                                    </v-col>
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="email" label="Email*" filled rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+                                    <v-col cols="6" class="mt-n7">
+                                        <v-text-field v-model="celular" label="Celular*" filled rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="password" type="password" label="Password*" filled
+                                            rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+                                    <!-- 
                                                     CONFIRMAR CONTRTASEÑA
                                                     <v-col cols="6" sm="6" class="mt-n7">
                                                     <v-text-field v-model="password1" type="password" label="Confirm Password*" filled rounded dense>
                                                     </v-text-field>
                                                 </v-col> -->
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
 
                         <v-card-actions class="mt-n7">
                             <v-spacer></v-spacer>
@@ -178,9 +184,8 @@
                                 </template>
                                 <span>Editar</span>
                             </v-tooltip>
-                            
-                            </span>
 
+                        </span>
                         <span v-else>
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
@@ -200,98 +205,100 @@
                                 <span>Editar</span>
                             </v-tooltip>
 
-                            <v-dialog v-model="dialog2" persistent max-width="1000px">
-                                <v-card>
-                                    <v-card-title>
-                                        <span class="text-h5 mb-n2">Editar Datos Del Usuario</span>
-                                    </v-card-title>
-                                    <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12" class=" ml-6">
-                                                    <h3>Documento</h3><br>
-                                                </v-col>
-                                                <v-col cols="12" class="mt-n11 mb-2 ml-6">
-                                                    <h2>{{usuario.documento}}</h2>
-                                                </v-col>
-                                                <v-col cols="12">
-                                                    <v-select v-model="selecionadoTipo" :items="tipoPersona" dense
-                                                        filled rounded label="Tipo Persona"></v-select>
-                                                </v-col>
-                                                <v-col cols="6" class="mt-n7">
-                                                    <div v-if="selecionadoTipo === 'Juridica'">
-                                                        <v-text-field v-model="cargo" label="Cargo" filled rounded
-                                                            dense>
-                                                        </v-text-field>
-                                                    </div>
-                                                </v-col>
-                                                <v-col cols="6" class="mt-n7">
-                                                    <div v-if="selecionadoTipo === 'Juridica'">
-                                                        <v-text-field v-model="telefono" label="Telefono" filled rounded
-                                                            dense>
-                                                        </v-text-field>
-                                                    </div>
-                                                </v-col>
-                                                
-                                                <v-col cols="12" class="mt-n7">
-                                                    <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded label="Rol">
-                                                    </v-select>
-                                                </v-col>
+                        </span>
+                    </template>
+                </v-data-table>
+            </v-card>
 
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
-                                                </v-col>
+        </div>
+        <br /><br /><br />
+        <div>
+            <v-dialog v-model="dialog2" persistent max-width="1000px">
+                <v-card>
+                    <v-card-title>
+                        <span class="text-h5 mb-n2">Editar Datos Del Usuario</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container>
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded
+                                        label="Tipo Persona"></v-select>
+                                </v-col>
+                                <v-col cols="6" class="mt-n7">
+                                    <div v-if="selecionadoTipo === 'Juridica'">
+                                        <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
+                                        </v-text-field>
+                                    </div>
+                                </v-col>
+                                <v-col cols="6" class="mt-n7">
+                                    <div v-if="selecionadoTipo === 'Juridica'">
+                                        <v-text-field v-model="telefono" label="Telefono" filled rounded dense>
+                                        </v-text-field>
+                                    </div>
+                                </v-col>
 
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint
-                                                        required filled rounded dense></v-text-field>
-                                                </v-col>
-                                                
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
-                                                     item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
-                                                    </v-autocomplete>
-                                                </v-col>
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="direccion" label="Dirección*" filled rounded dense></v-text-field>
-                                                </v-col>
-                                                
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
-                                                </v-col>
-                                                <v-col cols="6" class="mt-n7">
-                                                    <v-text-field v-model="celular" label="Celular*" filled rounded dense></v-text-field>
-                                                </v-col>
-                                                <v-col cols="6" sm="6" class="mt-n7">
-                                                    <v-text-field v-model="password" type="password" label="Password*" filled rounded dense>
-                                                    </v-text-field>
-                                                </v-col>
-                                                <!-- 
+                                <v-col cols="12" class="mt-n7">
+                                    <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded
+                                        label="Rol">
+                                    </v-select>
+                                </v-col>
+
+                                <v-col cols="6" sm="6" class="mt-n7">
+                                    <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
+                                </v-col>
+
+                                <v-col cols="6" sm="6" class="mt-n7">
+                                    <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint required filled
+                                        rounded dense></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" class="mt-n7">
+                                    <v-text-field v-model="documento" label="Documento*" disabled filled rounded dense>
+                                    </v-text-field>
+                                </v-col>
+                                <v-col cols="6" sm="6" class="mt-n7">
+                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
+                                        item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
+                                    </v-autocomplete>
+                                </v-col>
+                                <v-col cols="6" sm="6" class="mt-n7">
+                                    <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
+                                    </v-text-field>
+                                </v-col>
+
+                                <v-col cols="6" sm="6" class="mt-n7">
+                                    <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
+                                </v-col>
+                                <v-col cols="6" class="mt-n7">
+                                    <v-text-field v-model="celular" label="Celular*" filled rounded dense>
+                                    </v-text-field>
+                                </v-col>
+                                <v-col cols="6" sm="6" class="mt-n7">
+                                    <v-text-field v-model="password" type="password" label="Password*" filled rounded
+                                        dense>
+                                    </v-text-field>
+                                </v-col>
+                                <!-- 
                                                     CONFIRMAR CONTRTASEÑA
                                                     <v-col cols="6" sm="6" class="mt-n7">
                                                     <v-text-field v-model="password1" type="password" label="Confirm Password*" filled rounded dense>
                                                     </v-text-field>
                                                 </v-col> -->
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text>
-                                    <v-card-actions class="mt-n11">
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="cerrar()">
-                                            Close
-                                        </v-btn>
-                                        <v-btn color="blue darken-1" text @click="editar()">
-                                            Save
-                                        </v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                        </span>
-                    </template>
-                </v-data-table>
-            </v-card>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions class="mt-n11">
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="cerrar()">
+                            Close
+                        </v-btn>
+                        <v-btn color="blue darken-1" text @click="editar()">
+                            Save
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </div>
-        <br /><br /><br />
     </v-container>
 </template>
 
@@ -306,12 +313,11 @@ export default {
         dialog2: false,
         Municipio: [],
         Usuarios: [],
-        usuario:{},
-        id:"",
+        usuario: {},
+        id: "",
         nombre: "",
         apellidos: "",
         documento: "",
-        documento1:"",
         direccion: "",
         ciudad: "",
         celular: "",
@@ -416,7 +422,7 @@ export default {
             this.selecionadoTipo = this.tipoPersona[valor - 1];
             this.seleccionadoCiudad = this.Municipio[valor - 1];
         },
-        
+
         editar() {
             let header = { headers: { "token": this.$store.state.token } }
             if (this.selecionadoTipo === "Juridica") {
@@ -427,13 +433,13 @@ export default {
                     rol: this.selecionadoRol,
                     nombre: this.nombre,
                     apellidos: this.apellidos,
-                    documento: this.documento1,
+                    documento: this.documento,
                     direccion: this.direccion,
                     ciudad: this.seleccionadoCiudad,
                     celular: this.celular,
                     email: this.email.toUpperCase(),
                     password: this.password,
-                }, header)                
+                }, header)
                     .then((response) => {
                         console.log(this.cargo);
                         console.log(this.telefono);
@@ -441,7 +447,7 @@ export default {
                         this.$swal.fire({
                             position: "top-end",
                             icon: "success",
-                            title: response.data.msg,
+                            title: "Datos Del Usuario actualizados correctamente",
                             showConfirmButton: false,
                             timer: 1500,
                         });
@@ -457,7 +463,7 @@ export default {
                         this.celular = ""
                         this.email = ""
                         this.password = ""
-                        this.dialog2=false
+                        this.dialog2 = false
                         this.usuarios()
                     })
                     .catch((error) => {
@@ -508,7 +514,7 @@ export default {
                     });
             }
         },
-        cerrar(){
+        cerrar() {
             this.selecionadoTipo = ""
             this.cargo = ""
             this.telefono = ""
@@ -521,7 +527,7 @@ export default {
             this.celular = ""
             this.email = ""
             this.password = ""
-            this.dialog2=false
+            this.dialog2 = false
         },
         Guardar() {
             let header = { headers: { token: this.$store.state.token } };
@@ -671,15 +677,17 @@ export default {
             this.dialog = false;
             this.dialog2 = false;
         },
+
         sacarid(usuario) {
             console.log(usuario);
+            this.id = usuario._id
+            this.dialog2 = true
             this.nombre = usuario.nombre
             this.apellidos = usuario.apellidos
             this.documento = usuario.documento
             this.direccion = usuario.direccion
             this.celular = usuario.celular
             this.email = usuario.email
-            this.dialog2= true
         },
         usuarios() {
             let header = { headers: { token: this.$store.state.token } };
@@ -736,8 +744,8 @@ export default {
         },
     },
     created() {
-        this.usuarios(), 
-        this.listarCiudad();
+        this.usuarios(),
+            this.listarCiudad();
     },
 };
 </script>
