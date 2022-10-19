@@ -212,6 +212,7 @@
 
         </div>
         <br /><br /><br />
+
         <div>
             <v-dialog v-model="dialog2" persistent max-width="1000px">
                 <v-card>
@@ -575,7 +576,7 @@ export default {
                         this.usuarios();
                     })
                     .catch((error) => {
-                        console.log(this.cargo);
+                        console.log(error);
                         this.$swal.fire({
                             position: "top-end",
                             icon: "error",
@@ -622,6 +623,7 @@ export default {
                         this.email = "";
                         this.password = "";
                         this.dialog = false;
+                        this.usuarios();
                     })
                     .catch((error) => {
                         this.$swal.fire({
@@ -650,7 +652,13 @@ export default {
                     this.usuarios();
                 })
                 .catch((error) => {
-                    console.log(error);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: error.response.data.errores.errors[0].msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });                
                 });
         },
         activar(id) {

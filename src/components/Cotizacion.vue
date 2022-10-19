@@ -24,7 +24,8 @@
 
                         <v-card>
                             <v-toolbar dark>
-                                <v-tooltip bottom>
+                                <div v-if="get===0">
+                                    <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-btn icon dark @click="cancelar()" v-bind="attrs" v-on="on">
                                             <v-icon>mdi-close</v-icon>
@@ -32,16 +33,31 @@
                                     </template>
                                     <span>Cancelar</span>
                                 </v-tooltip>
-                                <v-toolbar-title>Crear Cotización</v-toolbar-title>
+                                </div>
+                                <div v-if="get===1">
+                                    <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-btn icon dark @click="cancelar2()" v-bind="attrs" v-on="on">
+                                            <v-icon>mdi-close</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>Cerrar</span>
+                                </v-tooltip>
+                                </div>
+                                <v-toolbar-title v-if="BtnEditar===0 && get===0">Crear Cotización</v-toolbar-title>
+                                <v-toolbar-title v-if="BtnEditar===1">Editar Cotización</v-toolbar-title>
+                                <v-toolbar-title v-if="get===1">Información Cotización</v-toolbar-title>
                                 <v-spacer></v-spacer>
-                                <v-toolbar-items>
-                                    <v-btn v-if="BtnEditar===0" dark text @click="crearcotizacion()">
-                                        <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                                    </v-btn>
-                                    <v-btn v-if="BtnEditar===1" dark text @click="editarCoti()">
-                                        <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
-                                    </v-btn>
-                                </v-toolbar-items>
+                                <div v-if="get===0">
+                                    <v-toolbar-items>
+                                        <v-btn v-if="BtnEditar===0" dark text @click="crearcotizacion()">
+                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                        </v-btn>
+                                        <v-btn v-if="BtnEditar===1" dark text @click="editarCoti()">
+                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
+                                        </v-btn>
+                                    </v-toolbar-items>
+                                </div>
                             </v-toolbar>
 
                             <v-list three-line subheader>
@@ -85,7 +101,11 @@
                                         <div class="text-center black--text headline mt-10">
                                             <h4>Fecha de emisión:</h4>
                                         </div>
-                                        <v-text-field v-model="fechaEmision" type="date" outlined dense> </v-text-field>
+                                        <v-text-field v-if="get===0" v-model="fechaEmision" type="date" outlined dense>
+                                        </v-text-field>
+                                        <div v-if="get===1" class=" text-center black--text mt-2">
+                                            <h3>{{fechaEmision.slice(0, 10)}}</h3>
+                                        </div>
                                     </v-col>
                                     <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
                                         <div class="text-center black--text">
@@ -148,15 +168,17 @@
                                                 </div>
                                             </v-col>
                                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                                <v-tooltip v-if="botones===0" bottom>
-                                                    <template v-slot:activator="{ on, attrs }">
-                                                        <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
-                                                            v-on="on" @click="borrarclientes()">
-                                                            mdi-close-circle
-                                                        </v-icon>
-                                                    </template>
-                                                    <span>Eliminar los datos del cliente</span>
-                                                </v-tooltip>
+                                                <div v-if="get===0">
+                                                    <v-tooltip v-if="botones===0" bottom>
+                                                        <template v-slot:activator="{ on, attrs }">
+                                                            <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
+                                                                v-on="on" @click="borrarclientes()">
+                                                                mdi-close-circle
+                                                            </v-icon>
+                                                        </template>
+                                                        <span>Eliminar los datos del cliente</span>
+                                                    </v-tooltip>
+                                                </div>
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -322,8 +344,13 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="mt-5" v-model="validezOferta" type="date" outlined dense>
+                                        <v-text-field v-if="get===0" class="mt-5" v-model="validezOferta" type="date"
+                                            outlined dense>
                                         </v-text-field>
+                                        <div v-if="get===1" class="pa-0 ma-0 font-weight-black text-center my-3"
+                                            full-width hide-details>
+                                            {{validezOferta.slice(0, 10)}}
+                                        </div>
                                     </v-col>
                                     <v-col
                                         style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -335,8 +362,12 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field class="mt-5" v-model="entregaResultados" type="date" outlined
-                                            dense> </v-text-field>
+                                        <v-text-field v-if="get===0" class="mt-5" v-model="entregaResultados"
+                                            type="date" outlined dense> </v-text-field>
+                                        <div v-if="get===1" class="pa-0 ma-0 font-weight-black text-center my-3"
+                                            full-width hide-details>
+                                            {{entregaResultados.slice(0, 10)}}
+                                        </div>
                                     </v-col>
                                 </v-row>
 
@@ -383,17 +414,19 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-btn color="white black--text" dark @click="dialog7 = true">
-                                                    Agregar ensayo
-                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
-                                                        mdi-beaker
-                                                    </v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Crear nuevo ensayo</span>
-                                        </v-tooltip>
+                                        <div v-if="get===0">
+                                            <v-tooltip bottom>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-btn color="white black--text" dark @click="dialog7 = true">
+                                                        Agregar ensayo
+                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                            mdi-beaker
+                                                        </v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <span>Crear nuevo ensayo</span>
+                                            </v-tooltip>
+                                        </div>
                                         <!-- <v-tooltip bottom>
                                             <template v-slot:activator="{ on, attrs }">
                                                 <v-btn @click="dialog7=true" v-bind="attrs" v-on="on">
@@ -418,16 +451,18 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-btn color="white" dark @click="dialog4 = true">
-                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
-                                                        mdi-plus-circle
-                                                    </v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Añadir ensayo</span>
-                                        </v-tooltip>
+                                        <div v-if="get===0">
+                                            <v-tooltip bottom>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-btn color="white" dark @click="dialog4 = true">
+                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                            mdi-plus-circle
+                                                        </v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <span>Añadir ensayo</span>
+                                            </v-tooltip>
+                                        </div>
                                     </v-col>
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
@@ -496,7 +531,7 @@
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
                                                             ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
-                                                            <v-icon dark class="ml-9" color="red" rounded
+                                                            <v-icon v-if="get===0" dark class="ml-9" color="red" rounded
                                                                 @click="eliminarEnsayos(i,ensayo)">
                                                                 mdi-close-circle
                                                             </v-icon>
@@ -573,16 +608,18 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-btn color="white" dark @click="dialog5 = true">
-                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
-                                                        mdi-plus-circle
-                                                    </v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Añadir ensayo</span>
-                                        </v-tooltip>
+                                        <div v-if="get===0">
+                                            <v-tooltip bottom>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-btn color="white" dark @click="dialog5 = true">
+                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                            mdi-plus-circle
+                                                        </v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <span>Añadir ensayo</span>
+                                            </v-tooltip>
+                                        </div>
                                     </v-col>
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
@@ -651,7 +688,7 @@
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
                                                             ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
-                                                            <v-icon dark class="ml-9" color="red" rounded
+                                                            <v-icon v-if="get===0" dark class="ml-9" color="red" rounded
                                                                 @click="eliminarEnsayos2(i,ensayo)">
                                                                 mdi-close-circle
                                                             </v-icon>
@@ -728,16 +765,18 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-btn color="white" dark @click="dialog6 = true">
-                                                    <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
-                                                        mdi-plus-circle
-                                                    </v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Añadir ensayo</span>
-                                        </v-tooltip>
+                                        <div v-if="get===0">
+                                            <v-tooltip bottom>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-btn color="white" dark @click="dialog6 = true">
+                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                            mdi-plus-circle
+                                                        </v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <span>Añadir ensayo</span>
+                                            </v-tooltip>
+                                        </div>
                                     </v-col>
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
@@ -806,7 +845,7 @@
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
                                                             ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
-                                                            <v-icon dark class="ml-9" color="red" rounded
+                                                            <v-icon v-if="get===0" dark class="ml-9" color="red" rounded
                                                                 @click="eliminarEnsayos3(i,ensayo)">
                                                                 mdi-close-circle
                                                             </v-icon>
@@ -923,10 +962,16 @@
                                                             class="text-right white--text">
                                                             <h2> Descuento </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                        <td v-if="get===0"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
                                                             <v-text-field v-model="descuento" type="number">
                                                             </v-text-field>
+                                                        </td>
+                                                        <td v-if="get===1"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{Intl.NumberFormat("de-DE").format(descuento)}}
                                                         </td>
                                                     </tr>
 
@@ -997,18 +1042,23 @@
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
                                     <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <v-btn color="red" dark @click="cancelar()">
+                                        <v-btn div v-if="get===0" color="red" dark @click="cancelar()">
                                             <v-icon>mdi-close</v-icon> Cancelar
+                                        </v-btn>
+                                        <v-btn div v-if="get===1" color="red" dark @click="cancelar2()">
+                                            <v-icon>mdi-close</v-icon> Cerrar
                                         </v-btn>
                                     </v-col>
                                     <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
                                     <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn v-if="BtnEditar===0" dark color="green" @click="crearcotizacion()">
-                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                                        </v-btn>
-                                        <v-btn v-if="BtnEditar===1" dark color="green" @click="editarCoti()">
-                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
-                                        </v-btn>
+                                        <div v-if="get===0">
+                                            <v-btn v-if="BtnEditar===0" dark color="green" @click="crearcotizacion()">
+                                                <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                            </v-btn>
+                                            <v-btn v-if="BtnEditar===1" dark color="green" @click="editarCoti()">
+                                                <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
+                                            </v-btn>
+                                        </div>
                                     </v-col>
                                 </v-row>
                             </v-container-fluid>
@@ -1067,6 +1117,17 @@
                                         <span>Editar</span>
                                     </v-tooltip>
                                 </template>
+                                <template>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon class="ml-3" color="black" @click="traerDatos(item)" rounded
+                                                v-bind="attrs" v-on="on">
+                                                mdi-eye
+                                            </v-icon>
+                                        </template>
+                                        <span>Ver Cotización</span>
+                                    </v-tooltip>
+                                </template>
                             </template>
                             <template v-slot:[`item.estado`]="{item}">
                                 <span class="green--text" v-if="item.estado===1">Activo</span>
@@ -1075,606 +1136,6 @@
                         </v-data-table>
                     </v-card>
                 </template>
-
-                <v-dialog v-model="dialog2" max-width="1000px">
-                    <v-card>
-                        <template>
-                            <v-card>
-                                <v-card-title>
-                                    Seleccione un cliente
-                                    <v-spacer></v-spacer>
-                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente"
-                                        single-line hide-details></v-text-field>
-                                </v-card-title>
-                                <v-data-table :headers="headers" :items="clientes" :search="search">
-                                    <template v-slot:[`item.agregar`]="{item}">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                                    @click="seleccionarclientes(item)">
-                                                    mdi-plus-circle
-                                                </v-icon>
-                                            </template>
-                                            <span>Añadir cliente</span>
-                                        </v-tooltip>
-                                    </template>
-                                </v-data-table>
-                            </v-card>
-                        </template>
-                        <div class="text-center mt-3">
-                            <h2>¿ Desea crear un nuevo cliente ?</h2>
-                        </div>
-                        <v-card-actions>
-                            <v-row style="margin:0">
-                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                    <v-btn color="green" rounded dark @click="aceptar()">
-                                        Crear
-                                    </v-btn>
-                                </v-col>
-                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                </v-col>
-                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                    <v-btn color="red" @click="dialog2 = false" rounded dark>
-                                        Cerrar
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-
-
-                <v-dialog v-model="dialog3" fullscreen hide-overlay transition="dialog-bottom-transition">
-                    <v-card>
-                        <v-toolbar dark>
-                            <v-btn icon dark @click="dialog3 = false">
-                                <v-icon>mdi-close</v-icon>
-                            </v-btn>
-                            <v-toolbar-title>Crear nuevo cliente</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-toolbar-items v-if="si===2">
-                                <v-btn dark text @click="crearContacto()">
-                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                                </v-btn>
-                            </v-toolbar-items>
-                            <v-toolbar-items v-if="si===0">
-                                <v-btn dark text @click="crearCliente()">
-                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                                </v-btn>
-                            </v-toolbar-items>
-                        </v-toolbar>
-
-                        <div v-if="si===2">
-                            <v-row style="margin:0">
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                                <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
-                                    <h1>Ingrese los datos del contacto del cliente</h1>
-                                </v-col>
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
-
-                                <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
-                                    <br><br>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Tipo de persona:
-                                        </span>
-                                        <span>
-                                            <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
-                                            </v-select>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Nombres:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="nombre" label="Nombres" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1  black--text font-weight-Normal">
-                                            Apellidos:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="apellidos" label="Apellidos" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Documento:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="documento" label="Documento" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Dirección:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="direccion" label="Dirección" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Ciudad:
-                                        </span>
-                                        <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio"
-                                            :filter="customFilter" item-text="ciudad" item-value="_id" label="Ciudad">
-                                        </v-autocomplete>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Celular:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="celular" label="Telefono" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Correo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="email" label="Correo" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div v-if="tipoPersona==='Juridica'">
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Cargo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="cargo" label="Telefono" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div v-if="tipoPersona==='Juridica'">
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Telefono:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="telefono" label="Telefono" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-
-                                </v-col>
-                            </v-row>
-                            <v-card-actions>
-                                <v-row style="margin:0">
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                        <v-btn color="green" @click="crearContacto()" rounded dark>
-                                            Crear
-                                        </v-btn>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn color="red" @click="dialog3 = false" rounded dark>
-                                            Cancelar
-                                        </v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-card-actions>
-                        </div>
-
-                        <div v-if="si===0">
-                            <v-row style="margin:0">
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                                <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
-                                    <h1>Ingresar los datos del cliente</h1>
-                                </v-col>
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                            </v-row>
-
-                            <v-row>
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
-                                <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
-                                    <br><br>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Tipo de persona:
-                                        </span>
-                                        <span>
-                                            <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
-                                            </v-select>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Nombres:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="nombre" label="Nombres" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1  black--text font-weight-Normal">
-                                            Apellidos:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="apellidos" label="Apellidos" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Documento:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="documento" label="Documento" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Contacto:
-                                        </span>
-                                        <v-autocomplete class="mt-2" v-model="contacto" :items="contactos"
-                                            :filter="customFilter2" item-text="nombre" item-value="_id"
-                                            label="Contactos">
-                                        </v-autocomplete>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Dirección:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="direccion" label="Dirección" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Ciudad:
-                                        </span>
-                                        <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio"
-                                            :filter="customFilter" item-text="ciudad" item-value="_id" label="Ciudad">
-                                        </v-autocomplete>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Celular:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="celular" label="Celular" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Correo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="email" label="Correo" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div v-if="tipoPersona==='Juridica'">
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Cargo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="cargo" label="Cargo" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div v-if="tipoPersona==='Juridica'">
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Telefono:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="telefono" label="Telefono" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                </v-col>
-                            </v-row>
-                            <v-card-actions>
-                                <v-row style="margin:0">
-                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <v-btn color="green" @click="crearCliente()" rounded dark>
-                                            Crear
-                                        </v-btn>
-                                    </v-col>
-                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
-                                    </v-col>
-                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn color="red" @click="dialog3 = false" rounded dark>
-                                            Cancelar
-                                        </v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-card-actions>
-                        </div>
-
-                    </v-card>
-                </v-dialog>
-                <!-- ensayo -->
-                <v-dialog v-model="dialog4" max-width="1000px">
-                    <v-card>
-                        <template>
-                            <v-card>
-                                <v-card-title>
-                                    Seleccione un ensayo
-                                    <v-spacer></v-spacer>
-                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
-                                        single-line hide-details></v-text-field>
-                                </v-card-title>
-                                <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                                    <template v-slot:[`item.agregar`]="{item}">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                                    @click="seleccionarEnsayos(item)">
-                                                    mdi-plus-circle
-                                                </v-icon>
-                                            </template>
-                                            <span>Añadir ensayo</span>
-                                        </v-tooltip>
-                                    </template>
-                                    <template v-slot:[`item.ensayocosto`]="{item}">
-                                        <template>
-                                            ${{Intl.NumberFormat("de-DE").format(item.costo)}}
-                                        </template>
-                                    </template>
-                                </v-data-table>
-                            </v-card>
-                        </template>
-                        <v-card-actions>
-                            <v-row style="margin:0">
-                                <v-col cols="12" class="text-center">
-                                    <v-btn color="red" @click="dialog4 = false" rounded dark>
-                                        Cerrar
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-                <!-- 2 -->
-                <v-dialog v-model="dialog5" max-width="1000px">
-                    <v-card>
-                        <template>
-                            <v-card>
-                                <v-card-title>
-                                    Seleccione un ensayo
-                                    <v-spacer></v-spacer>
-                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
-                                        single-line hide-details></v-text-field>
-                                </v-card-title>
-                                <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                                    <template v-slot:[`item.agregar`]="{item}">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                                    @click="seleccionarEnsayos2(item)">
-                                                    mdi-plus-circle
-                                                </v-icon>
-                                            </template>
-                                            <span>Añadir ensayo</span>
-                                        </v-tooltip>
-                                    </template>
-                                    <template v-slot:[`item.ensayocosto`]="{item}">
-                                        <template>
-                                            ${{Intl.NumberFormat("de-DE").format(item.costo)}}
-                                        </template>
-                                    </template>
-                                </v-data-table>
-                            </v-card>
-                        </template>
-                        <v-card-actions>
-                            <v-row style="margin:0">
-                                <v-col cols="12" class="text-center">
-                                    <v-btn color="red" @click="dialog5 = false" rounded dark>
-                                        Cerrar
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-
-                <!-- 3 -->
-                <v-dialog v-model="dialog6" max-width="1000px">
-                    <v-card>
-                        <template>
-                            <v-card>
-                                <v-card-title>
-                                    Seleccione un ensayo
-                                    <v-spacer></v-spacer>
-                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
-                                        single-line hide-details></v-text-field>
-                                </v-card-title>
-                                <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                                    <template v-slot:[`item.agregar`]="{item}">
-                                        <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                                    @click="seleccionarEnsayos3(item)">
-                                                    mdi-plus-circle
-                                                </v-icon>
-                                            </template>
-                                            <span>Añadir ensayo</span>
-                                        </v-tooltip>
-                                    </template>
-                                    <template v-slot:[`item.ensayocosto`]="{item}">
-                                        <template>
-                                            ${{Intl.NumberFormat("de-DE").format(item.costo)}}
-                                        </template>
-                                    </template>
-                                </v-data-table>
-                            </v-card>
-                        </template>
-                        <v-card-actions>
-                            <v-row style="margin:0">
-                                <v-col cols="12" class="text-center">
-                                    <v-btn color="red" @click="dialog6 = false" rounded dark>
-                                        Cerrar
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-                <!-- ensayos -->
-
-                <v-dialog v-model="dialog7" fullscreen hide-overlay transition="dialog-bottom-transition">
-                    <v-card>
-                        <v-toolbar dark>
-                            <v-btn icon dark @click="dialog7 = false">
-                                <v-icon>mdi-close</v-icon>
-                            </v-btn>
-                            <v-toolbar-title>Crear nuevo ensayo</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-toolbar-items>
-                                <v-btn dark text @click="crearEnsayo()">
-                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                                </v-btn>
-                            </v-toolbar-items>
-                        </v-toolbar>
-                        <div>
-                            <v-row style="margin:0">
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                                <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
-                                    <h1>Ingresar los del ensayo</h1>
-                                </v-col>
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                            </v-row>
-
-                            <v-row>
-                                <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
-                                <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
-                                    <br><br>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Número del ensayo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="ensayo" label="Número del ensayo" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Metodo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="metodo" label="Metodo" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1  black--text font-weight-Normal">
-                                            Tecnica:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="tecnica" label="Tecnica" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Valor Minimo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="valorMinimo" label="Valor Minimo" type="number">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Valor Maximo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="valorMaximo" label="Valor Maximo" type="number">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Unidades:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="unidades" label="Unidades" type="number">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            costo:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="costo4" label="costo" type="number">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Descripcion:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="descripcion" label="Descripcion" type="text">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Limite de cuantificación:
-                                        </span>
-                                        <span>
-                                            <v-text-field v-model="limiteCuantificacion"
-                                                label="Limite de cuantificación" type="number">
-                                            </v-text-field>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Titular:
-                                        </span>
-                                        <v-autocomplete class="mt-2" v-model="titular" :items="soloUsuarios"
-                                            :filter="customFilter" item-text="nombre" item-value="_id" label="Titular">
-                                        </v-autocomplete>
-                                    </div>
-                                    <div>
-                                        <span class="text-center display-1 black--text font-weight-Normal">
-                                            Suplente:
-                                        </span>
-                                        <v-autocomplete class="mt-2" v-model="suplente" :items="soloUsuarios"
-                                            :filter="customFilter" item-text="nombre" item-value="_id" label="Suplente">
-                                        </v-autocomplete>
-                                    </div>
-                                </v-col>
-                            </v-row>
-                            <v-card-actions>
-                                <v-row style="margin:0">
-                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <v-btn color="green" @click="crearEnsayo()" rounded dark>
-                                            Crear
-                                        </v-btn>
-                                    </v-col>
-                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
-                                    </v-col>
-                                    <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
-                                        <v-btn color="red" @click="dialog7 = false" rounded dark>
-                                            Cancelar
-                                        </v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-card-actions>
-                        </div>
-                    </v-card>
-                </v-dialog>
             </v-col>
             <v-col cols="1"></v-col>
         </v-row>
@@ -1734,6 +1195,17 @@
                                         <span>Editar</span>
                                     </v-tooltip>
                                 </template>
+                                <template>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon class="ml-3" color="black" @click="traerDatos(item)" rounded
+                                                v-bind="attrs" v-on="on">
+                                                mdi-eye
+                                            </v-icon>
+                                        </template>
+                                        <span>Ver Cotización</span>
+                                    </v-tooltip>
+                                </template>
                             </template>
                             <template v-slot:[`item.estado`]="{item}">
                                 <span class="green--text" v-if="item.estado===1">Activo</span>
@@ -1752,6 +1224,604 @@
                 </v-btn>
             </v-col>
         </v-row>
+        <v-dialog v-model="dialog2" max-width="1000px">
+            <v-card>
+                <template>
+                    <v-card>
+                        <v-card-title>
+                            Seleccione un cliente
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
+                                hide-details></v-text-field>
+                        </v-card-title>
+                        <v-data-table :headers="headers" :items="clientes" :search="search">
+                            <template v-slot:[`item.agregar`]="{item}">
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                            @click="seleccionarclientes(item)">
+                                            mdi-plus-circle
+                                        </v-icon>
+                                    </template>
+                                    <span>Añadir cliente</span>
+                                </v-tooltip>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </template>
+                <div class="text-center mt-3">
+                    <h2>¿ Desea crear un nuevo cliente ?</h2>
+                </div>
+                <v-card-actions>
+                    <v-row style="margin:0">
+                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                            <v-btn color="green" rounded dark @click="aceptar()">
+                                Crear
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                        </v-col>
+                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                            <v-btn color="red" @click="dialog2 = false" rounded dark>
+                                Cerrar
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+
+        <v-dialog v-model="dialog3" fullscreen hide-overlay transition="dialog-bottom-transition">
+            <v-card>
+                <v-toolbar dark>
+                    <v-btn icon dark @click="dialog3 = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>Crear nuevo cliente</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items v-if="si===2">
+                        <v-btn dark text @click="crearContacto()">
+                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                        </v-btn>
+                    </v-toolbar-items>
+                    <v-toolbar-items v-if="si===0">
+                        <v-btn dark text @click="crearCliente()">
+                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+
+                <div v-if="si===2">
+                    <v-row style="margin:0">
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                        <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                            <h1>Ingrese los datos del contacto del cliente</h1>
+                        </v-col>
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+
+                        <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                            <br><br>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Tipo de persona:
+                                </span>
+                                <span>
+                                    <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
+                                    </v-select>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Nombres:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="nombre" label="Nombres" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1  black--text font-weight-Normal">
+                                    Apellidos:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="apellidos" label="Apellidos" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Documento:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="documento" label="Documento" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Dirección:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="direccion" label="Dirección" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Ciudad:
+                                </span>
+                                <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio" :filter="customFilter"
+                                    item-text="ciudad" item-value="_id" label="Ciudad">
+                                </v-autocomplete>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Celular:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="celular" label="Telefono" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Correo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="email" label="Correo" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div v-if="tipoPersona==='Juridica'">
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Cargo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="cargo" label="Telefono" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div v-if="tipoPersona==='Juridica'">
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Telefono:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="telefono" label="Telefono" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+
+                        </v-col>
+                    </v-row>
+                    <v-card-actions>
+                        <v-row style="margin:0">
+                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                <v-btn color="green" @click="crearContacto()" rounded dark>
+                                    Crear
+                                </v-btn>
+                            </v-col>
+                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                            </v-col>
+                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                <v-btn color="red" @click="dialog3 = false" rounded dark>
+                                    Cancelar
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-card-actions>
+                </div>
+
+                <div v-if="si===0">
+                    <v-row style="margin:0">
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                        <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                            <h1>Ingresar los datos del cliente</h1>
+                        </v-col>
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+                        <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                            <br><br>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Tipo de persona:
+                                </span>
+                                <span>
+                                    <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
+                                    </v-select>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Nombres:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="nombre" label="Nombres" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1  black--text font-weight-Normal">
+                                    Apellidos:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="apellidos" label="Apellidos" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Documento:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="documento" label="Documento" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Contacto:
+                                </span>
+                                <v-autocomplete class="mt-2" v-model="contacto" :items="contactos"
+                                    :filter="customFilter2" item-text="nombre" item-value="_id" label="Contactos">
+                                </v-autocomplete>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Dirección:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="direccion" label="Dirección" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Ciudad:
+                                </span>
+                                <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio" :filter="customFilter"
+                                    item-text="ciudad" item-value="_id" label="Ciudad">
+                                </v-autocomplete>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Celular:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="celular" label="Celular" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Correo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="email" label="Correo" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div v-if="tipoPersona==='Juridica'">
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Cargo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="cargo" label="Cargo" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div v-if="tipoPersona==='Juridica'">
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Telefono:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="telefono" label="Telefono" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                        </v-col>
+                    </v-row>
+                    <v-card-actions>
+                        <v-row style="margin:0">
+                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                <v-btn color="green" @click="crearCliente()" rounded dark>
+                                    Crear
+                                </v-btn>
+                            </v-col>
+                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                            </v-col>
+                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                <v-btn color="red" @click="dialog3 = false" rounded dark>
+                                    Cancelar
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-card-actions>
+                </div>
+
+            </v-card>
+        </v-dialog>
+        <!-- ensayo -->
+        <v-dialog v-model="dialog4" max-width="1000px">
+            <v-card>
+                <template>
+                    <v-card>
+                        <v-card-title>
+                            Seleccione un ensayo
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo" single-line
+                                hide-details></v-text-field>
+                        </v-card-title>
+                        <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                            <template v-slot:[`item.agregar`]="{item}">
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                            @click="seleccionarEnsayos(item)">
+                                            mdi-plus-circle
+                                        </v-icon>
+                                    </template>
+                                    <span>Añadir ensayo</span>
+                                </v-tooltip>
+                            </template>
+                            <template v-slot:[`item.ensayocosto`]="{item}">
+                                <template>
+                                    ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                </template>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </template>
+                <v-card-actions>
+                    <v-row style="margin:0">
+                        <v-col cols="12" class="text-center">
+                            <v-btn color="red" @click="dialog4 = false" rounded dark>
+                                Cerrar
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <!-- 2 -->
+        <v-dialog v-model="dialog5" max-width="1000px">
+            <v-card>
+                <template>
+                    <v-card>
+                        <v-card-title>
+                            Seleccione un ensayo
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo" single-line
+                                hide-details></v-text-field>
+                        </v-card-title>
+                        <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                            <template v-slot:[`item.agregar`]="{item}">
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                            @click="seleccionarEnsayos2(item)">
+                                            mdi-plus-circle
+                                        </v-icon>
+                                    </template>
+                                    <span>Añadir ensayo</span>
+                                </v-tooltip>
+                            </template>
+                            <template v-slot:[`item.ensayocosto`]="{item}">
+                                <template>
+                                    ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                </template>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </template>
+                <v-card-actions>
+                    <v-row style="margin:0">
+                        <v-col cols="12" class="text-center">
+                            <v-btn color="red" @click="dialog5 = false" rounded dark>
+                                Cerrar
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <!-- 3 -->
+        <v-dialog v-model="dialog6" max-width="1000px">
+            <v-card>
+                <template>
+                    <v-card>
+                        <v-card-title>
+                            Seleccione un ensayo
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo" single-line
+                                hide-details></v-text-field>
+                        </v-card-title>
+                        <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                            <template v-slot:[`item.agregar`]="{item}">
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                            @click="seleccionarEnsayos3(item)">
+                                            mdi-plus-circle
+                                        </v-icon>
+                                    </template>
+                                    <span>Añadir ensayo</span>
+                                </v-tooltip>
+                            </template>
+                            <template v-slot:[`item.ensayocosto`]="{item}">
+                                <template>
+                                    ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                </template>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </template>
+                <v-card-actions>
+                    <v-row style="margin:0">
+                        <v-col cols="12" class="text-center">
+                            <v-btn color="red" @click="dialog6 = false" rounded dark>
+                                Cerrar
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <!-- ensayos -->
+
+        <v-dialog v-model="dialog7" fullscreen hide-overlay transition="dialog-bottom-transition">
+            <v-card>
+                <v-toolbar dark>
+                    <v-btn icon dark @click="dialog7 = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>Crear nuevo ensayo</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn dark text @click="crearEnsayo()">
+                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+                <div>
+                    <v-row style="margin:0">
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                        <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                            <h1>Ingresar los del ensayo</h1>
+                        </v-col>
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+                        <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                            <br><br>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Número del ensayo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="ensayo" label="Número del ensayo" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Metodo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="metodo" label="Metodo" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1  black--text font-weight-Normal">
+                                    Tecnica:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="tecnica" label="Tecnica" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Valor Minimo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="valorMinimo" label="Valor Minimo" type="number">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Valor Maximo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="valorMaximo" label="Valor Maximo" type="number">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Unidades:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="unidades" label="Unidades" type="number">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    costo:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="costo4" label="costo" type="number">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Descripcion:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="descripcion" label="Descripcion" type="text">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Limite de cuantificación:
+                                </span>
+                                <span>
+                                    <v-text-field v-model="limiteCuantificacion" label="Limite de cuantificación"
+                                        type="number">
+                                    </v-text-field>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Titular:
+                                </span>
+                                <v-autocomplete class="mt-2" v-model="titular" :items="soloUsuarios"
+                                    :filter="customFilter" item-text="nombre" item-value="_id" label="Titular">
+                                </v-autocomplete>
+                            </div>
+                            <div>
+                                <span class="text-center display-1 black--text font-weight-Normal">
+                                    Suplente:
+                                </span>
+                                <v-autocomplete class="mt-2" v-model="suplente" :items="soloUsuarios"
+                                    :filter="customFilter" item-text="nombre" item-value="_id" label="Suplente">
+                                </v-autocomplete>
+                            </div>
+                        </v-col>
+                    </v-row>
+                    <v-card-actions>
+                        <v-row style="margin:0">
+                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                <v-btn color="green" @click="crearEnsayo()" rounded dark>
+                                    Crear
+                                </v-btn>
+                            </v-col>
+                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                            </v-col>
+                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                <v-btn color="red" @click="dialog7 = false" rounded dark>
+                                    Cancelar
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-card-actions>
+                </div>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -1840,8 +1910,9 @@ export default {
             idCotizacion: "",
             BtnEditar: 0,
             numeroCoti: "",
-            search3:'',
-            TodasCotis:[],
+            search3: '',
+            TodasCotis: [],
+            get: 0,
             //la computada "suma" es el total
             //headers
             tipos: ["Natural", "Juridica"],
@@ -1967,7 +2038,6 @@ export default {
     methods: {
         fechaSalida(r) {
             let d = new Date(r);
-            this.span = true
             return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
         },
         Volver() {
@@ -2469,9 +2539,6 @@ export default {
             this.dialog2 = !this.dialog2
             this.search = ''
         },
-        añadirEnsayo() {
-            console.log();
-        },
         listarEnsayos() {
             axios.get(`/ensayo`)
                 .then((response) => {
@@ -2610,11 +2677,50 @@ export default {
                     this.celular = ""
                     this.cargo = ""
                     this.email = ""
+                    this.BtnEditar = 0
+                    this.get = 0
                     this.botones = 1
                     this.BtnEditar = 0
                     this.dialog = false
                 }
             })
+        },
+        cancelar2() {
+            this.fechaEmision = ""
+            this.idCliente = ""
+            this.idcontacto = ""
+            this.validezOferta = ""
+            this.entregaResultados = ""
+            this.elaborado = ""
+            this.itemsEnsayo = []
+            this.costo = 0
+            this.itemsEnsayo2 = []
+            this.costo2 = 0
+            this.itemsEnsayo3 = []
+            this.costo3 = 0
+            this.descuento = 0
+            this.ensayosSeleccionados = []
+            this.ensayosSeleccionados2 = []
+            this.ensayosSeleccionados3 = []
+            this.idCliente = ""
+            this.idcontacto = ""
+            this.tipoPersona = ""
+            this.nombre = ""
+            this.apellidos = ""
+            this.contacto = ""
+            this.nombrecontacto = ""
+            this.documento = ""
+            this.direccion = ""
+            this.ciudad = ""
+            this.telefono = ""
+            this.celular = ""
+            this.cargo = ""
+            this.email = ""
+            this.BtnEditar = 0
+            this.get = 0
+            this.botones = 1
+            this.BtnEditar = 0
+            this.dialog = false
         },
         crearcotizacion() {
             if (this.ensayosSeleccionados.length !== 0) {
@@ -2692,6 +2798,8 @@ export default {
                         this.sumar = 0
                         this.descuento = 0
                         this.resultIva = 0
+                        this.BtnEditar = 0
+                        this.get = 0
                         this.dialog = false
                         this.listarTodasLasCotis();
                     })
@@ -2787,6 +2895,8 @@ export default {
                         this.sumar = 0
                         this.descuento = 0
                         this.resultIva = 0
+                        this.BtnEditar = 0
+                        this.get = 0
                         this.dialog = false
                         this.listarTodasLasCotis();
                     })
@@ -2833,6 +2943,9 @@ export default {
             if (datos.idCliente.contacto) { // aun no lleva la informacion
                 console.log("contacto");
                 this.idCotizacion = datos._id
+                this.fechaEmision = datos.fecha_emision.slice(0, 10)
+                this.entregaResultados = datos.entrega_resultados.slice(0, 10)
+                this.validezOferta = datos.validez_oferta.slice(0, 10)
                 this.elaborado = this.recep._id
                 this.numeroCoti = datos.numero_cotizacion
                 this.idCliente = datos.idCliente._id
@@ -2874,6 +2987,9 @@ export default {
             } else {
                 console.log("sin");
                 this.idCotizacion = datos._id
+                this.fechaEmision = datos.fecha_emision.slice(0, 10)
+                this.entregaResultados = datos.entrega_resultados.slice(0, 10)
+                this.validezOferta = datos.validez_oferta.slice(0, 10)
                 this.numeroCoti = datos.numero_cotizacion
                 this.idCliente = datos.idCliente._id
                 this.tipoPersona = datos.idCliente.tipoPersona
@@ -3108,7 +3224,7 @@ export default {
                     });
             }
         },
-        listarTodasLasCotis(){
+        listarTodasLasCotis() {
             axios.get(`/cotizacion/listarLasCotizacionesAD`)
                 .then((response) => {
                     console.log(response);
@@ -3117,8 +3233,102 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-        }
-    }, 
+        },
+        traerDatos(datos) {
+            console.log(datos);
+            if (datos.idCliente.contacto) { // aun no lleva la informacion
+                console.log("contacto");
+                this.idCotizacion = datos._id
+                this.fechaEmision = datos.fecha_emision.slice(0, 10)
+                this.entregaResultados = datos.entrega_resultados.slice(0, 10)
+                this.validezOferta = datos.validez_oferta.slice(0, 10)
+                this.descuento = datos.descuento
+                this.elaborado = this.recep._id
+                this.numeroCoti = datos.numero_cotizacion
+                this.idCliente = datos.idCliente._id
+                this.idcontacto = datos.idCliente.contacto._id
+                this.tipoPersona = datos.idCliente.tipoPersona
+                this.nombre = datos.idCliente.nombre
+                this.apellidos = datos.idCliente.apellidos
+                this.contacto = datos.idCliente.contacto
+                this.nombrecontacto = datos.idCliente.contacto.nombre
+                this.documento = datos.idCliente.documento
+                this.direccion = datos.idCliente.direccion
+                this.ciudad = datos.idCliente.ciudad
+                this.telefono = datos.idCliente.telefono
+                this.celular = datos.idCliente.celular
+                this.cargo = datos.idCliente.cargo
+                this.email = datos.idCliente.email
+                this.descuento = datos.descuento
+                this.get = 1
+                this.botones = 0
+                if (datos.items.item1.itemsEnsayo) {
+                    this.costo = datos.items.item1.costo
+                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados.push(ensayo.ensayo)
+                    });
+                }
+                if (datos.items.item2.itemsEnsayo) {
+                    this.costo2 = datos.items.item2.costo
+                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados2.push(ensayo.ensayo)
+                    })
+                }
+                if (datos.items.item3.itemsEnsayo) {
+                    this.costo3 = datos.items.item3.costo
+                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados3.push(ensayo.ensayo)
+                    })
+                }
+                this.dialog = true;
+            } else {
+                console.log("sin");
+                this.idCotizacion = datos._id
+                this.fechaEmision = datos.fecha_emision.slice(0, 10)
+                this.entregaResultados = datos.entrega_resultados.slice(0, 10)
+                this.validezOferta = datos.validez_oferta.slice(0, 10)
+                this.validezOferta = datos.validez_oferta
+                this.numeroCoti = datos.numero_cotizacion
+                this.descuento = datos.descuento
+                this.idCliente = datos.idCliente._id
+                this.tipoPersona = datos.idCliente.tipoPersona
+                this.elaborado = this.recep._id
+                this.nombre = datos.idCliente.nombre
+                this.apellidos = datos.idCliente.apellidos
+                this.contacto = ""
+                this.nombrecontacto = ""
+                this.documento = datos.idCliente.documento
+                this.direccion = datos.idCliente.direccion
+                this.ciudad = datos.idCliente.ciudad
+                this.telefono = datos.idCliente.telefono
+                this.celular = datos.idCliente.celular
+                this.cargo = datos.idCliente.cargo
+                this.email = datos.idCliente.email
+                this.descuento = datos.descuento
+                this.get = 1
+                this.botones = 0
+                if (datos.items.item1.itemsEnsayo) {
+                    this.costo = datos.items.item1.costo
+                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados.push(ensayo.ensayo)
+                    });
+                }
+                if (datos.items.item2.itemsEnsayo) {
+                    this.costo2 = datos.items.item2.costo
+                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados2.push(ensayo.ensayo)
+                    })
+                }
+                if (datos.items.item3.itemsEnsayo) {
+                    this.costo3 = datos.items.item3.costo
+                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                        this.ensayosSeleccionados3.push(ensayo.ensayo)
+                    })
+                }
+                this.dialog = true;
+            }
+        },
+    },
     computed: {
         sumar() {
             let subtotal = this.costo + this.costo2 + this.costo3 - this.descuento

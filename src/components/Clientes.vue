@@ -55,11 +55,12 @@
                                             <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint
                                                 required filled rounded dense></v-text-field>
                                         </v-col>
-                                        <v-col cols="12">
-                                        <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos" :filter="customFilter2"
-                                         item-text="nombre" item-value="_id" label="Contactos" filled rounded dense>
-                                        </v-autocomplete>
+                                        <v-col cols="12" v-if="selecionadoRol === 'CLIENTE'" >
+                                            <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos" :filter="customFilter2"
+                                            item-text="nombre" item-value="_id" label="Contacto" filled rounded dense>
+                                            </v-autocomplete>
                                         </v-col>
+
                                         <v-col cols="12" class="mt-n7">
                                             <v-text-field v-model="documento" label="Documento*" filled rounded dense>
                                             </v-text-field>
@@ -99,6 +100,7 @@
                 </v-dialog>
             </v-col>
         </v-row>
+
         <template>
             <v-col cols="12">
                 <v-card>
@@ -155,7 +157,6 @@
                                     </template>
                                     <span>Editar</span>
                                 </v-tooltip>
-
                             </span>
                         </template>
                     </v-data-table>
@@ -204,21 +205,24 @@
                                         rounded dense></v-text-field>
                                 </v-col>
 
-                                <v-col cols="12">
-                                    <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos" :filter="customFilter2"
-                                    item-text="nombre" item-value="_id" label="Contactos" filled rounded dense>
-                                </v-autocomplete>
+                                <v-col cols="12" v-if="selecionadoRol === 'CLIENTE'" >
+                                    <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos" 
+                                    :filter="customFilter2"
+                                    item-text="nombre" item-value="_id" label="Contacto" filled rounded dense>
+                                    </v-autocomplete>
                                 </v-col>
 
                                 <v-col cols="12" sm="12" class="mt-n7">
                                     <v-text-field v-model="documento" label="Documento*" disabled filled rounded dense>
                                     </v-text-field>
                                 </v-col>
+
                                 <v-col cols="6" sm="6" class="mt-n7">
                                     <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
                                         item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
                                     </v-autocomplete>
                                 </v-col>
+
                                 <v-col cols="6" sm="6" class="mt-n7">
                                     <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
                                     </v-text-field>
@@ -246,23 +250,24 @@
                 </v-card>
             </v-dialog>
         </div>
-      
+
     </v-container>
 </template>
-    
+
 <script>
 import axios from "axios";
+
 export default {
     name: 'PageMuestras',
     data: () => ({
         clientes: [],
         contactos:[],
+        
         search: "",
         dialog: false,
         dialog2: false,
         Municipio: [],
         usuario: {},
-        id: "",
         nombre: "",
         apellidos: "",
         documento: "",
@@ -272,8 +277,9 @@ export default {
         email: "",
         password: "",
         cargo: "",
-
         telefono: "",
+
+        contacto:"",
         seleccionadoCiudad: "",
         selecionadoTipo: "",
         selecionadoRol: "",
@@ -315,6 +321,12 @@ export default {
                 align: "start",
                 sortable: false,
                 value: "ciudad.ciudad",
+            },
+            {
+                text: "Contacto",
+                align: "start",
+                sortable: false,
+                value: "contacto.nombre",
             },
             {
                 text: "Dirección",
@@ -371,6 +383,7 @@ export default {
             this.cargo = ""
             this.telefono = ""
             this.selecionadoRol = ""
+            this.contacto= ""
             this.nombre = ""
             this.apellidos = ""
             this.documento = ""
@@ -386,6 +399,8 @@ export default {
             this.cargo = ""
             this.telefono = ""
             this.selecionadoRol = ""
+            this.contacto= ""
+
             this.nombre = ""
             this.apellidos = ""
             this.documento = ""
@@ -492,6 +507,7 @@ export default {
                     celular: this.celular,
                     email: this.email.toUpperCase(),
                     password: this.documento,
+                    
                 }, header)
                     .then((response) => {
                         this.$swal.fire({
@@ -510,7 +526,7 @@ export default {
                         this.seleccionadoCiudad = ""
                         this.celular = ""
                         this.email = ""
-                        this.dialog = false
+                        this.dialog2 = false
                     })
                     .catch((error) => {
                         this.$swal.fire({
@@ -548,6 +564,13 @@ export default {
 
             return textOne.indexOf(searchText) > -1;
         },
+
+        customFilter2(item, queryText) {
+            const textOne = item.nombre
+            const searchText = queryText
+            return textOne.indexOf(searchText) > -1
+        },
+
         Guardar() {
             let header = { headers: { token: this.$store.state.token } };
             if (this.selecionadoTipo === "Juridica") {
@@ -564,6 +587,7 @@ export default {
                             documento: this.documento,
                             direccion: this.direccion,
                             ciudad: this.seleccionadoCiudad,
+                            contacto:this.contacto,
                             celular: this.celular,
                             email: this.email.toUpperCase(),
                             password: this.documento,
@@ -587,6 +611,7 @@ export default {
                         this.documento = "";
                         this.direccion = "";
                         this.seleccionadoCiudad = "";
+                        this.contacto="";
                         this.celular = "";
                         this.email = "";
                         this.password = "";
@@ -594,7 +619,7 @@ export default {
                         this.usuarios();
                     })
                     .catch((error) => {
-                        console.log(this.cargo);
+                        console.log(error);
                         this.$swal.fire({
                             position: "top-end",
                             icon: "error",
@@ -615,10 +640,11 @@ export default {
                             apellidos: this.apellidos,
                             documento: this.documento,
                             direccion: this.direccion,
+                            contacto:this.contacto,
                             ciudad: this.seleccionadoCiudad,
                             celular: this.celular,
                             email: this.email.toUpperCase(),
-                            password: this.password,
+                            password: this.documento,
                         },
                         header
                     )
@@ -641,8 +667,10 @@ export default {
                         this.email = "";
                         this.password = "";
                         this.dialog = false;
+                        this.usuarios()
                     })
                     .catch((error) => {
+                        console.log(error);
                         this.$swal.fire({
                             position: "top-end",
                             icon: "error",
@@ -664,11 +692,13 @@ export default {
             this.celular = usuario.celular
             this.email = usuario.email
         },
+
         listarContactos() {
             let header = { headers: { "token": this.$store.state.token } };
             axios.get(`/usuarios/listarContactos`, header)
                 .then((response) => {
                     this.contactos = response.data.usuarios
+                    console.log(response);
                 })
                 .catch((error) => {
                     console.log(error);
