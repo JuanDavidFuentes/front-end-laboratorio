@@ -8,7 +8,7 @@
             </v-col>
 
             <v-col cols="5" xs="7" sm="4" md="2" lg="2" xl="2">
-                <v-dialog v-model="dialog">
+                <v-dialog v-model="dialog" persistent>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn color="primary" dark v-bind="attrs" v-on="on">
                             Nuevo usuario
@@ -20,7 +20,7 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="12">
-                                        <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded
+                                        <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded 
                                             label="Tipo Persona"></v-select>
                                     </v-col>
                                     <v-col cols="6" class="mt-n7">
@@ -55,6 +55,7 @@
                                         <v-text-field v-model="documento" label="Documento*" filled rounded dense>
                                         </v-text-field>
                                     </v-col>
+
                                     <v-col cols="6" sm="6" class="mt-n7">
                                         <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio"
                                             item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad"
@@ -65,20 +66,22 @@
                                         <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
                                         </v-text-field>
                                     </v-col>
-
-                                    <v-col cols="6" sm="6" class="mt-n7">
-                                        <v-text-field v-model="email" label="Email*" filled rounded dense>
-                                        </v-text-field>
-                                    </v-col>
                                     <v-col cols="6" class="mt-n7">
                                         <v-text-field v-model="celular" label="Celular*" filled rounded dense>
                                         </v-text-field>
                                     </v-col>
                                     <v-col cols="6" sm="6" class="mt-n7">
-                                        <v-text-field v-model="password" type="password" label="Password*" filled
-                                            rounded dense>
+                                        <v-text-field v-model="email" label="Correo*" filled rounded dense>
                                         </v-text-field>
                                     </v-col>
+                                    
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="password" label="Contraseña*" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]"
+                                          :type="show ? 'text' : 'password'" hint="Al menos 8 carácteres"
+                                           @click:append="show = !show" filled rounded dense>
+                                    </v-text-field>
+                                    </v-col>
+
                                     <!-- 
                                                     CONFIRMAR CONTRTASEÑA
                                                     <v-col cols="6" sm="6" class="mt-n7">
@@ -89,7 +92,7 @@
                             </v-container>
                         </v-card-text>
 
-                        <v-card-actions class="mt-n7">
+                        <v-card-actions class="mt-n15">
                             <v-spacer></v-spacer>
                             <v-btn class="mr-15" outlined color="red darken-3" @click="Volver()">
                                 Cancelar
@@ -253,6 +256,7 @@
                                     <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint required filled
                                         rounded dense></v-text-field>
                                 </v-col>
+
                                 <v-col cols="12" sm="12" class="mt-n7">
                                     <v-text-field v-model="documento" label="Documento*" disabled filled rounded dense>
                                     </v-text-field>
@@ -275,8 +279,9 @@
                                     </v-text-field>
                                 </v-col>
                                 <v-col cols="6" sm="6" class="mt-n7">
-                                    <v-text-field v-model="password" type="password" label="Password*" filled rounded
-                                        dense>
+                                        <v-text-field v-model="password" label="Contraseña*" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]"
+                                          :type="show ? 'text' : 'password'" hint="Al menos 8 carácteres"
+                                           @click:append="show = !show" filled rounded dense>
                                     </v-text-field>
                                 </v-col>
                                 <!-- 
@@ -312,6 +317,8 @@ export default {
         search: "",
         dialog: false,
         dialog2: false,
+        show: false,
+
         Municipio: [],
         Usuarios: [],
         usuario: {},
@@ -329,6 +336,10 @@ export default {
         seleccionadoCiudad: "",
         selecionadoTipo: "",
         selecionadoRol: "",
+        rules: {
+            required: value => !!value || 'La contraseña Es obligatoria.',
+            min: v => v.length >= 8 || 'Min 8 characters',
+        },
         tipoPersona: [
             { text: "Natural", value: "Natural" },
             { text: "Juridica", value: "Juridica" },
@@ -381,6 +392,12 @@ export default {
                 value: "ciudad.ciudad",
             },
             {
+                text: "Contacto",
+                align: "start",
+                sortable: false,
+                value: "contacto.nombre",
+            },
+            {
                 text: "Dirección",
                 align: "start",
                 sortable: false,
@@ -423,113 +440,6 @@ export default {
             this.selecionadoTipo = this.tipoPersona[valor - 1];
             this.seleccionadoCiudad = this.Municipio[valor - 1];
         },
-
-        editar() {
-            let header = { headers: { "token": this.$store.state.token } }
-            if (this.selecionadoTipo === "Juridica") {
-                axios.put(`/usuarios/datos/${this.id}`, {
-                    tipoPersona: this.selecionadoTipo,
-                    cargo: this.cargo,
-                    telefono: this.telefono,
-                    rol: this.selecionadoRol,
-                    nombre: this.nombre,
-                    apellidos: this.apellidos,
-                    documento: this.documento,
-                    direccion: this.direccion,
-                    ciudad: this.seleccionadoCiudad,
-                    celular: this.celular,
-                    email: this.email.toUpperCase(),
-                    password: this.password,
-                }, header)
-                    .then((response) => {
-                        console.log(this.cargo);
-                        console.log(this.telefono);
-                        console.log(response);
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Datos Del Usuario actualizados correctamente",
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                        this.selecionadoTipo = ""
-                        this.cargo = ""
-                        this.telefono = ""
-                        this.selecionadoRol = ""
-                        this.nombre = ""
-                        this.apellidos = ""
-                        this.documento = ""
-                        this.direccion = ""
-                        this.seleccionadoCiudad = ""
-                        this.celular = ""
-                        this.email = ""
-                        this.password = ""
-                        this.dialog2 = false
-                        this.usuarios()
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            } else {
-                let header = { headers: { "token": this.$store.state.token } }
-                axios.put(`/usuarios/datos/${this.id}`, {
-                    tipoPersona: this.selecionadoTipo,
-                    rol: this.selecionadoRol,
-                    nombre: this.nombre,
-                    apellidos: this.apellidos,
-                    documento: this.documento1,
-                    direccion: this.direccion,
-                    ciudad: this.seleccionadoCiudad,
-                    celular: this.celular,
-                    email: this.email.toUpperCase(),
-                    password: this.password,
-                }, header)
-                    .then((response) => {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: response.data.msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                        this.selecionadoTipo = ""
-                        this.selecionadoRol = ""
-                        this.nombre = ""
-                        this.apellidos = ""
-                        this.documento = ""
-                        this.direccion = ""
-                        this.seleccionadoCiudad = ""
-                        this.celular = ""
-                        this.email = ""
-                        this.password = ""
-                        this.dialog = false
-                    })
-                    .catch((error) => {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: error.response.data.errores.errors[0].msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    });
-            }
-        },
-        cerrar() {
-            this.selecionadoTipo = ""
-            this.cargo = ""
-            this.telefono = ""
-            this.selecionadoRol = ""
-            this.nombre = ""
-            this.apellidos = ""
-            this.documento = ""
-            this.direccion = ""
-            this.seleccionadoCiudad = ""
-            this.celular = ""
-            this.email = ""
-            this.password = ""
-            this.dialog2 = false
-        },
         Guardar() {
             let header = { headers: { token: this.$store.state.token } };
             if (this.selecionadoTipo === "Juridica") {
@@ -546,6 +456,7 @@ export default {
                             documento: this.documento,
                             direccion: this.direccion,
                             ciudad: this.seleccionadoCiudad,
+                            contacto: this.contacto,
                             celular: this.celular,
                             email: this.email.toUpperCase(),
                             password: this.password,
@@ -569,12 +480,14 @@ export default {
                         this.documento = "";
                         this.direccion = "";
                         this.seleccionadoCiudad = "";
+                        this.contacto = "";
                         this.celular = "";
                         this.email = "";
                         this.password = "";
                         this.dialog = false;
                         this.usuarios();
                     })
+
                     .catch((error) => {
                         console.log(error);
                         this.$swal.fire({
@@ -597,6 +510,7 @@ export default {
                             apellidos: this.apellidos,
                             documento: this.documento,
                             direccion: this.direccion,
+                            contacto: this.contacto,
                             ciudad: this.seleccionadoCiudad,
                             celular: this.celular,
                             email: this.email.toUpperCase(),
@@ -623,7 +537,98 @@ export default {
                         this.email = "";
                         this.password = "";
                         this.dialog = false;
-                        this.usuarios();
+                        this.usuarios()
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    });
+            }
+        },
+
+        editar() {
+            let header = { headers: { "token": this.$store.state.token } }
+            if (this.selecionadoTipo === "Juridica") {
+                axios.put(`/usuarios/datos/${this.id}`, {
+                    tipoPersona: this.selecionadoTipo,
+                    cargo: this.cargo,
+                    telefono: this.telefono,
+                    rol: this.selecionadoRol,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento,
+                    contacto: this.contacto,
+                    direccion: this.direccion,
+                    ciudad: this.seleccionadoCiudad,
+                    celular: this.celular,
+                    email: this.email.toUpperCase(),
+                    password: this.password,
+                }, header)
+                    .then((response) => {
+                        console.log(response);
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Datos Del Usuario actualizados correctamente",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.selecionadoTipo = ""
+                        this.cargo = ""
+                        this.telefono = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.dialog2 = false
+                        this.usuarios()
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                let header = { headers: { "token": this.$store.state.token } }
+                axios.put(`/usuarios/datos/${this.id}`, {
+                    tipoPersona: this.selecionadoTipo,
+                    rol: this.selecionadoRol,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento1,
+                    contacto: this.contacto,
+                    direccion: this.direccion,
+                    ciudad: this.seleccionadoCiudad,
+                    celular: this.celular,
+                    email: this.email.toUpperCase(),
+                    password: this.password,
+                }, header)
+                    .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.selecionadoTipo = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.dialog2 = false
                     })
                     .catch((error) => {
                         this.$swal.fire({
@@ -636,6 +641,23 @@ export default {
                     });
             }
         },
+
+        cerrar() {
+            this.selecionadoTipo = ""
+            this.cargo = ""
+            this.telefono = ""
+            this.selecionadoRol = ""
+            this.nombre = ""
+            this.apellidos = ""
+            this.documento = ""
+            this.direccion = ""
+            this.seleccionadoCiudad = ""
+            this.celular = ""
+            this.email = ""
+            this.password = ""
+            this.dialog2 = false
+        },
+
         desactivar(id) {
             let header = { headers: { token: this.$store.state.token } };
             axios
@@ -658,7 +680,7 @@ export default {
                         title: error.response.data.errores.errors[0].msg,
                         showConfirmButton: false,
                         timer: 1500,
-                    });                
+                    });
                 });
         },
         activar(id) {
@@ -696,6 +718,12 @@ export default {
             this.direccion = usuario.direccion
             this.celular = usuario.celular
             this.email = usuario.email
+            this.cargo = usuario.cargo
+            this.telefono = usuario.telefono
+            this.selecionadoTipo = usuario.tipoPersona
+            this.selecionadoRol = usuario.rol
+            this.contacto = usuario.contacto
+            this.seleccionadoCiudad = usuario.ciudad
         },
         usuarios() {
             let header = { headers: { token: this.$store.state.token } };

@@ -1,9 +1,13 @@
 <template>
     <v-container style="margin-top: 100px">
         <v-row style="margin:0">
-            <v-col cols="12" xs="1" sm="1" md="1" lg="1" xl="1"></v-col>
-            <v-col cols="12" xs="10" sm="10" md="10" lg="10" xl="10">
-
+            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
+            <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+          Volver
+            </v-btn>
+            </v-col>
+            
+            <v-col cols="12">
                 <template>
                     <v-card>
                         <v-card-title>
@@ -13,21 +17,6 @@
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers" :items="clientes" :search="search">
-                            <template v-slot:[`item.opciones`]="{item}">
-                                <template v-if="item.estado===1">
-                                    desactivar
-                                </template>
-                                <template v-else>
-                                    activar
-                                </template>
-                                <template>
-                                    editar
-                                </template>
-                            </template>
-                            <template v-slot:[`item.estado`]="{item}">
-                                <span v-if="item.estado">Activo</span>
-                                <span v-else>Inactivo</span>
-                            </template>
                             <template v-slot:[`item.muestras`]="{item}">
                                 <v-btn @click="pagmuestras(item)">Muestras</v-btn>
                             </template>
@@ -35,7 +24,6 @@
                     </v-card>
                 </template>
             </v-col>
-            <v-col cols="12" xs="1" sm="1" md="1" lg="1" xl="1"></v-col>
         </v-row>
     </v-container>
 </template>
@@ -52,37 +40,25 @@ export default {
                 text: 'Nombres',
                 align: 'start',
                 sortable: false,
-                value: "nombre",
+                value: "idCliente.nombre",
             },
             {
                 text: 'Apellidos',
                 align: 'start',
                 sortable: false,
-                value: 'apellidos',
+                value: 'idCliente.apellidos',
             },
             {
                 text: 'Correo',
                 align: 'start',
                 sortable: false,
-                value: 'email',
+                value: 'idCliente.email',
             },
             {
                 text: 'C.C. / NIT',
                 align: 'start',
                 sortable: false,
-                value: 'documento',
-            },
-            {
-                text: 'Estado',
-                align: 'start',
-                sortable: false,
-                value: 'estado',
-            },
-            {
-                text: 'Opciones',
-                align: 'start',
-                sortable: false,
-                value: 'opciones',
+                value: 'idCliente.documento',
             },
             {
                 text: 'Muestras',
@@ -98,10 +74,10 @@ export default {
             this.$router.push("/");
         },
         usuarios() {
-            let header = { headers: { "token": this.$store.state.token } };
-            axios.get(`/usuarios/listarClientes`, header)
+            axios.get(`/cotizacion/listarTodasLasCotizaciones`)
                 .then((response) => {
-                    this.clientes=response.data.usuarios
+                    console.log(response);
+                    this.clientes=response.data.coti
                 })
                 .catch((error) => {
                     console.log(error);
@@ -111,7 +87,8 @@ export default {
             console.log(datos);
             this.$store.dispatch("setMuestras", datos);
             this.$router.push("/ListaMuestras")
-        }
+        },
+        
     },
     created() {
         this.usuarios();

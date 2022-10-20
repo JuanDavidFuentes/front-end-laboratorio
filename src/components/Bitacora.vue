@@ -16,26 +16,16 @@
             <template>
               <v-card>
                 <v-card-title>
-                  Seleccione un ensayo
+                  Lista de movimientos
                   <v-spacer></v-spacer>
-                  <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ciudad" single-line
+                  <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar usuario" single-line
                     hide-details>
                   </v-text-field>
                 </v-card-title>
                 <v-data-table :headers="headers" :items="infoBitacora" :search="search">
-                  <template v-slot:[`item.agregar`]="{item}">
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon color="green" rounded v-bind="attrs" v-on="on" @click="seleccionarEnsayos3(item)">
-                          mdi-plus-circle
-                        </v-icon>
-                      </template>
-                      <span>Añadir ensayo</span>
-                    </v-tooltip>
-                  </template>
-                  <template v-slot:[`item.ensayocosto`]="{item}">
+                  <template v-slot:[`item.fechas`]="{item}">
                     <template>
-                      ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                      {{fechaSalida(item.fecha)}}
                     </template>
                   </template>
                 </v-data-table>
@@ -43,28 +33,6 @@
             </template>
           </v-card>
         </template>
-        <v-simple-table class="mb-15" align-center justify-center>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-center">Usuario</th>
-                <th class="text-center">Insertar/Editar</th>
-                <th class="text-center">Navegador</th>
-                <th class="text-center">Ip</th>
-                <th class="text-center">Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(log, i) in infoBitacora" :key="i">
-                <td class="text-center">{{ log.idUsuario }}</td>
-                <td class="text-center">{{ log.idPost}}{{idPut}}</td>
-                <td class="text-center">{{ log.navegador }}</td>
-                <td class="text-center">{{ log.ip}}</td>
-                <td class="text-center">{{ log.fecha.slice(0, 10)}}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
       </v-col>
       <v-col cols="1"></v-col>
     </v-row>
@@ -78,10 +46,12 @@ export default {
   name: 'PageBitacora',
   data: () => ({
     infoBitacora: [],
+    search: '',
     headers: [
       {
         text: 'Nombre del usuario',
         align: 'start',
+        sortable: false,
         value: "idUsuario.nombre",
       },
       {
@@ -96,23 +66,23 @@ export default {
         sortable: false,
         value: 'idPut',
       },
-      // {
-      //     text: 'Tipo de persona',
-      //     align: 'start',
-      //     sortable: false,
-      //     value: 'tipoPersona',
-      // },
-      // {
-      //     text: 'Correo',
-      //     align: 'start',
-      //     sortable: false,
-      //     value: 'email',
-      // },
       {
-        text: 'Añadir',
-        align: 'center',
+        text: 'Navegador',
+        align: 'start',
         sortable: false,
-        value: 'agregar',
+        value: 'navegador',
+      },
+      {
+        text: 'Ip',
+        align: 'start',
+        sortable: false,
+        value: 'ip',
+      },
+      {
+        text: 'Fecha',
+        align: 'start',
+        sortable: false,
+        value: 'fechas',
       },
     ],
 
@@ -125,12 +95,16 @@ export default {
       axios.get(`/cotizacion/traerBitacora`)
         .then((response) => {
           console.log(response);
-          this.infoBitacora = response.data.bitacora
+          this.infoBitacora = response.data.bitacora.reverse()
           console.log(this.infoBitacora);
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    fechaSalida(r) {
+      let d = new Date(r);
+      return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
     },
   },
   created() {

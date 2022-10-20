@@ -368,16 +368,18 @@
                         </div>
                       </v-col>
                     </v-row>
-                    <v-row style="margin: 0" class="mx-5">
+                    <v-row style="margin: 0 " class="mx-5" >
                       <v-col style="border: solid 1px; border-color: black; border-top: 0px;" cols="1">
                         <div class="text-center ">
                           <body-1>1</body-1>
                         </div>
                       </v-col>
-                      <v-col style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                        cols="5">
-                        <div class="text-center ">
-                          <body-1>1</body-1>
+                      <v-col style="padding: 0 ;border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;" cols="5">
+                        <div style="margin: 0 ;border: solid 1px; border-color: black; border-top: 0px; border-left: 0px; border-right: 0px;" class="text-center">
+                          <h5>Recipientes de recolección inadecuados.</h5>
+                        </div>
+                        <div style="margin: 0 ; border: solid 1px; border-color: black; border-top: 0px;border-left: 0px; border-right: 0px;" class="text-center">
+                          <h5>Envase roto, abierto o agujerado.</h5>
                         </div>
                       </v-col>
                       <v-col style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -481,15 +483,34 @@
             <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
           </template>
 
-          <v-card-title> {{muestras.codMuestra}}</v-card-title>
+          <v-card-title> 
+            <div class="ml-4">{{muestras.codMuestra}}</div>
+          </v-card-title>
 
           <v-card-text>
-            <div class="text-subtitle-1">Nombre: {{datos.nombre}} {{datos.apellidos}}</div>
-            <div class="text-subtitle-1">Ciudad: {{datos.ciudad.ciudad}}</div>          
-            <div class="text-subtitle-1">Correo: {{datos.email}}</div>
+            <div class="text-subtitle-1 ml-4">Nombre: {{datos.nombre}} {{datos.apellidos}}</div>
+            <div class="text-subtitle-1 ml-4">Ciudad: {{datos.ciudad.ciudad}}</div>          
+            <div class="text-subtitle-1 ml-4">Correo: {{datos.email}}</div>            
           </v-card-text>
           <v-card-actions>
-            <v-btn color="deep-orange lighten-2" text class="ma-2" dark @click="dialog4 = true">Ver muestra</v-btn>
+            <v-row>
+              <v-col class="text-left" >
+                <v-btn color="deep-orange lighten-2" text class="ma-2" dark @click="dialog4 = true">Ver muestra</v-btn>
+              </v-col>
+              <v-col class="text-right">
+                <v-tooltip bottom>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn color="white" class="ma-2" dark @click="dialog5 = true">
+                              <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                mdi-pencil
+                              </v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Editar muestra</span>
+                        </v-tooltip>
+              </v-col>
+            </v-row>
+           
 
           </v-card-actions>
         </v-card>
@@ -532,10 +553,10 @@
     <v-dialog v-model="dialog4" >
       <v-card>
                 <v-toolbar dark>
-                  <v-btn icon dark @click="dialog = false">
+                  <v-btn icon dark @click="dialog4 = false">
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
-                  <v-toolbar-title>Muestra</v-toolbar-title>
+                  <v-toolbar-title>Muestra </v-toolbar-title>
                   <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-list three-line subheader>
@@ -649,9 +670,6 @@
                         class="pa-0 ma-0 text-center">
                         <h3 class="mt-3">{{NombreContacto1}}</h3>
 
-
-
-
                       </v-col>
                     </v-row>
                     <v-row style="margin: 0" class="mx-5">
@@ -722,7 +740,7 @@
                           <template v-slot:default>
                             <thead style="  background-color: #ff5722; border-top: 0px;">
                               <tr>
-                                <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                <th style="border: solid 1px; border-color: black; border-top: 0px;"
                                   class="text-center white--text">
                                   <h2> Código de </h2>
                                   <h2> muestra </h2>
@@ -782,59 +800,53 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr v-for="(datosss, i ) in mostrasDatos" :key="i">
+                              <tr v-for="(ver, i ) in mostrasDatoss" :key="i">
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                  <h3>{{datosss.codMuestra}}</h3>
+                                  <h3>{{ver.codMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.munRecoleccion}}</h3>
+                                  <h3>{{ver.munRecoleccion}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.direccionTomaMuestra}}</h3>
+                                  <h3>{{ver.direccionTomaMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.lugarTomaMuestra}}</h3>
+                                  <h3>{{ver.lugarTomaMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.muestraRecolectadaPor}}</h3>
+                                  <h3>{{ver.muestraRecolectadaPor}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.procedimientoMuestreo}}</h3>
+                                  <h3>{{ver.procedimientoMuestreo}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.tipoMuestra}}</h3>
+                                  <h3>{{ver.tipoMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.matrizMuestra}}</h3>
+                                  <h3>{{ver.matrizMuestra}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.fechaRecoleccion}}</h3>
+                                  <h3>{{ver.fechaRecoleccion}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.cotizacion}}</h3>
+                                  <h3>{{ver.cotizacion}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <h3>{{datosss.item}}</h3>
+                                  <h3>{{ver.item}}</h3>
                                 </td>
                                 <td
                                   style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                  <v-icon dark class="mr-20" color="red" rounded
-                                       @click="eliminarMuestra(i, datosss)">
-                                       mdi-close-circle
-                                  </v-icon>
-                                  
-
                                 </td>
                               </tr>
                             </tbody>
@@ -991,6 +1003,7 @@ export default {
       dialog2: false,
       dialog3: false,
       dialog4: false,
+      dialog5: false,
       infoMuestras: [],
       Municipio: [],
       NombreContacto1: "",
@@ -1015,6 +1028,7 @@ export default {
       seleccionarItem:[],
       listarTipos:[],
       mostrasDatos:[],
+      mostrasDatoss:[],
 
 
       seleccionadoCiudad: "",
@@ -1051,6 +1065,7 @@ export default {
         .then((response) => {
           this.infoMuestras = response.data.muestras;
           console.log(response);
+          this.mostrasDatoss=response.data.muestras
         })
         .catch((error) => {
           console.log(error);
@@ -1113,6 +1128,7 @@ export default {
           this.cotizacion = ""
           this.item = ""
           this.dialog2 = false
+
           
         })
         .catch((error) => {
@@ -1153,6 +1169,10 @@ export default {
             timer: 1500,
           });
         });      
+    },
+
+    guardar3(){
+      axios.post(`/DMuestra/insertar`, {})
     },
 
     traerCotizacion() {

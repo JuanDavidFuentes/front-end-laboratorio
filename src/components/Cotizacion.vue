@@ -929,7 +929,7 @@
                                                         </td>
                                                         <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
                                                             class="text-right white--text">
-                                                            <h2> Subtotal </h2>
+                                                            <h2> Subtotal - Descuento </h2>
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
@@ -2809,7 +2809,7 @@ export default {
                             this.$swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: error.response.data.msg,
+                                title: "No has iniciado sesión",
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
@@ -2905,7 +2905,7 @@ export default {
                             this.$swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: error.response.data.msg,
+                                title: "No has iniciado sesión",
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
@@ -3106,7 +3106,7 @@ export default {
                             this.$swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: error.response.data.msg,
+                                title: "No has iniciado sesión",
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
@@ -3192,7 +3192,7 @@ export default {
                             this.$swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: error.response.data.msg,
+                                title: "No has iniciado sesión",
                                 showConfirmButton: false,
                                 timer: 1500,
                             });

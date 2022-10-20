@@ -65,6 +65,7 @@
                                             <v-text-field v-model="documento" label="Documento*" filled rounded dense>
                                             </v-text-field>
                                         </v-col>
+
                                         <v-col cols="6" sm="6" class="mt-n7">
                                             <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio"
                                                 item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad"
@@ -218,8 +219,9 @@
                                 </v-col>
 
                                 <v-col cols="6" sm="6" class="mt-n7">
-                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad"
-                                        item-value="_id" filled rounded dense label="Ciudad" @click="listarCiudad()">
+                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" 
+                                    item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad" 
+                                    @click="listarCiudad()">
                                     </v-autocomplete>
                                 </v-col>
 
@@ -231,10 +233,12 @@
                                 <v-col cols="6" sm="6" class="mt-n7">
                                     <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
                                 </v-col>
+
                                 <v-col cols="6" class="mt-n7">
                                     <v-text-field v-model="celular" label="Celular*" filled rounded dense>
                                     </v-text-field>
                                 </v-col>
+
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -262,11 +266,11 @@ export default {
     data: () => ({
         clientes: [],
         contactos:[],
-        
+        Municipio: [],
+
         search: "",
         dialog: false,
         dialog2: false,
-        Municipio: [],
         usuario: {},
         nombre: "",
         apellidos: "",
@@ -451,126 +455,6 @@ export default {
                     console.log(error);
                 });
         },
-        editar() {
-            let header = { headers: { "token": this.$store.state.token } }
-            if (this.selecionadoTipo === "Juridica") {
-                axios.put(`/usuarios/datos/${this.id}`, {
-                    tipoPersona: this.selecionadoTipo,
-                    cargo: this.cargo,
-                    telefono: this.telefono,
-                    rol: this.selecionadoRol,
-                    nombre: this.nombre,
-                    apellidos: this.apellidos,
-                    documento: this.documento,
-                    direccion: this.direccion,
-                    ciudad: this.seleccionadoCiudad,
-                    celular: this.celular,
-                    email: this.email.toUpperCase(),
-                    password: this.documento,
-                }, header)
-                    .then((response) => {
-                        console.log(response);
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Datos Del Usuario actualizados correctamente",
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                        this.selecionadoTipo = ""
-                        this.cargo = ""
-                        this.telefono = ""
-                        this.selecionadoRol = ""
-                        this.nombre = ""
-                        this.apellidos = ""
-                        this.documento = ""
-                        this.direccion = ""
-                        this.seleccionadoCiudad = ""
-                        this.celular = ""
-                        this.email = ""
-                        this.dialog2 = false
-                        this.usuarios()
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            } else {
-                let header = { headers: { "token": this.$store.state.token } }
-                axios.put(`/usuarios/datos/${this.id}`, {
-                    tipoPersona: this.selecionadoTipo,
-                    rol: this.selecionadoRol,
-                    nombre: this.nombre,
-                    apellidos: this.apellidos,
-                    documento: this.documento1,
-                    direccion: this.direccion,
-                    ciudad: this.seleccionadoCiudad,
-                    celular: this.celular,
-                    email: this.email.toUpperCase(),
-                    password: this.documento,
-                    
-                }, header)
-                    .then((response) => {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: response.data.msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                        this.selecionadoTipo = ""
-                        this.selecionadoRol = ""
-                        this.nombre = ""
-                        this.apellidos = ""
-                        this.documento = ""
-                        this.direccion = ""
-                        this.seleccionadoCiudad = ""
-                        this.celular = ""
-                        this.email = ""
-                        this.dialog2 = false
-                    })
-                    .catch((error) => {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: error.response.data.errores.errors[0].msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    });
-            }
-        },
-        activar(id) {
-            let header = { headers: { token: this.$store.state.token } };
-            axios
-                .put(`/usuarios/activar/${id}`, {}, header)
-                .then((response) => {
-                    console.log(response);
-                    this.$swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: response.data.msg,
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    this.usuarios();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        customFilter(item, queryText) {
-            const textOne = item.ciudad.toUpperCase();
-            const searchText = queryText.toUpperCase();
-
-            return textOne.indexOf(searchText) > -1;
-        },
-
-        customFilter2(item, queryText) {
-            const textOne = item.nombre
-            const searchText = queryText
-            return textOne.indexOf(searchText) > -1
-        },
-
         Guardar() {
             let header = { headers: { token: this.$store.state.token } };
             if (this.selecionadoTipo === "Juridica") {
@@ -681,6 +565,128 @@ export default {
                     });
             }
         },
+
+        editar() {
+            let header = { headers: { "token": this.$store.state.token } }
+            if (this.selecionadoTipo === "Juridica") {
+                axios.put(`/usuarios/datos/${this.id}`, {
+                    tipoPersona: this.selecionadoTipo,
+                    cargo: this.cargo,
+                    telefono: this.telefono,
+                    rol: this.selecionadoRol,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento,
+                    contacto:this.contacto,
+                    direccion: this.direccion,
+                    ciudad: this.seleccionadoCiudad,
+                    celular: this.celular,
+                    email: this.email.toUpperCase(),
+                    password: this.documento,
+                }, header)
+                    .then((response) => {
+                        console.log(response);
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Datos Del Usuario actualizados correctamente",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.selecionadoTipo = ""
+                        this.cargo = ""
+                        this.telefono = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.dialog2 = false
+                        this.usuarios()
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                let header = { headers: { "token": this.$store.state.token } }
+                axios.put(`/usuarios/datos/${this.id}`, {
+                    tipoPersona: this.selecionadoTipo,
+                    rol: this.selecionadoRol,
+                    nombre: this.nombre,
+                    apellidos: this.apellidos,
+                    documento: this.documento1,
+                    contacto:this.contacto,
+                    direccion: this.direccion,
+                    ciudad: this.seleccionadoCiudad,
+                    celular: this.celular,
+                    email: this.email.toUpperCase(),
+                    password: this.documento,
+                    
+                }, header)
+                    .then((response) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        this.selecionadoTipo = ""
+                        this.selecionadoRol = ""
+                        this.nombre = ""
+                        this.apellidos = ""
+                        this.documento = ""
+                        this.direccion = ""
+                        this.seleccionadoCiudad = ""
+                        this.celular = ""
+                        this.email = ""
+                        this.dialog2 = false
+                    })
+                    .catch((error) => {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    });
+            }
+        },
+        activar(id) {
+            let header = { headers: { token: this.$store.state.token } };
+            axios
+                .put(`/usuarios/activar/${id}`, {}, header)
+                .then((response) => {
+                    console.log(response);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    this.usuarios();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        customFilter(item, queryText) {
+            const textOne = item.ciudad.toUpperCase();
+            const searchText = queryText.toUpperCase();
+
+            return textOne.indexOf(searchText) > -1;
+        },
+
+        customFilter2(item, queryText) {
+            const textOne = item.nombre
+            const searchText = queryText
+            return textOne.indexOf(searchText) > -1
+        },
         sacarid(usuario) {
             console.log(usuario);
             this.id = usuario._id
@@ -691,6 +697,12 @@ export default {
             this.direccion = usuario.direccion
             this.celular = usuario.celular
             this.email = usuario.email
+            this.cargo=usuario.cargo
+            this.telefono=usuario.telefono
+            this.selecionadoTipo= usuario.tipoPersona
+            this.selecionadoRol = usuario.rol
+            this.contacto = usuario.contacto
+            this.seleccionadoCiudad= usuario.ciudad
         },
 
         listarContactos() {
