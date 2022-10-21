@@ -490,7 +490,8 @@
           <v-card-text>
             <div class="text-subtitle-1 ml-4">Nombre: {{datos.nombre}} {{datos.apellidos}}</div>
             <div class="text-subtitle-1 ml-4">Ciudad: {{datos.ciudad.ciudad}}</div>          
-            <div class="text-subtitle-1 ml-4">Correo: {{datos.email}}</div>            
+            <div class="text-subtitle-1 ml-4">Correo: {{datos.email}}</div>       
+            <div class="text-subtitle-1 ml-4">Estado: {{datos.estado}}</div>           
           </v-card-text>
           <v-card-actions>
             <v-row>
@@ -500,7 +501,7 @@
               <v-col class="text-right">
                 <v-tooltip bottom>
                           <template v-slot:activator="{ on, attrs }">
-                            <v-btn color="white" class="ma-2" dark @click="dialog5 = true">
+                            <v-btn color="white" class="ma-2">
                               <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
                                 mdi-pencil
                               </v-icon>
@@ -1003,7 +1004,6 @@ export default {
       dialog2: false,
       dialog3: false,
       dialog4: false,
-      dialog5: false,
       infoMuestras: [],
       Municipio: [],
       NombreContacto1: "",
@@ -1051,6 +1051,8 @@ export default {
       }
     },
     cliente() {
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      console.log(this.datos._id);
       console.log(this.datos);
     },
     Volver() {
@@ -1064,7 +1066,6 @@ export default {
         .get(`/DMuestra/listarMuestras`)
         .then((response) => {
           this.infoMuestras = response.data.muestras;
-          console.log(response);
           this.mostrasDatoss=response.data.muestras
         })
         .catch((error) => {
@@ -1075,11 +1076,9 @@ export default {
     listarCiudad() {
       axios.get("/ciudad/CiudadDepartamento")
         .then(response => {
-          console.log(response);
           response.data.ciudad.forEach(city => {
             this.Municipio.push(city)
           })
-          console.log(this.Municipio);
 
         })
         .catch(error => {
@@ -1109,7 +1108,6 @@ export default {
 
       }, header)
         .then((response) => {
-          console.log(response);
           this.$swal.fire({
             position: "top-end",
             icon: "success",
@@ -1149,7 +1147,6 @@ export default {
         tipos: this.agregaTipoM,
       })
         .then((response) => {
-          console.log(this.tipos);
           this.$swal.fire({
             position: "top-end",
             icon: "success",
@@ -1182,7 +1179,7 @@ export default {
           this.cotizacion2 = response.data.coti[0]
           this.idCoti = this.cotizacion2._id
           this.infoItem();
-
+          this.listarItems();
         })
         .catch(error => {
           console.log(error);
@@ -1214,7 +1211,6 @@ export default {
       axios.get(`/cotizacion/listarporIdCoti/${this.idCoti}`, header)
         .then((response) => {
           this.itemsCoti.push(response.data.items)
-          console.log(this.itemsCoti);
         })
         .catch((error) => {
           console.log(error);
@@ -1224,7 +1220,6 @@ export default {
       let header = { headers: { "token": this.$store.state.token } }
       axios.get(`/cotizacion/listarporIdCoti/${this.idCoti}`, header)
         .then((response) => {
-          console.log(response);
           this.seleccionarItem=response.data.items
         })
         .catch((error) => {
@@ -1235,7 +1230,6 @@ export default {
     listarTiposs(){      
       axios.get(`/Tipo_muestra/`)
         .then((response) => {
-          console.log(response);
             this.listarTipos=response.data.tipo
         })
         .catch((error) => {
@@ -1252,7 +1246,6 @@ export default {
     this.NombreContacto();
     this.traerCotizacion();
     this.info();
-    this.listarItems();
     this.listarTiposs();
 
   },

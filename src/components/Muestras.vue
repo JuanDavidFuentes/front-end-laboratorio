@@ -18,14 +18,14 @@
                         </v-card-title>
                         <v-data-table :headers="headers" :items="clientes" :search="search">
                             <template v-slot:[`item.muestras`]="{item}">
-                                <v-btn @click="pagmuestras(item)">Muestras</v-btn>
+                                <v-btn @click="pagmuestras(item.idCliente)">Muestras</v-btn>
                             </template>
                         </v-data-table>
                     </v-card>
                 </template>
             </v-col>
         </v-row>
-    </v-container>
+    </v-container> 
 </template>
     
 <script>

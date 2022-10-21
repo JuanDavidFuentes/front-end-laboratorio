@@ -26,23 +26,23 @@
                             <v-toolbar dark>
                                 <div v-if="get===0">
                                     <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-btn icon dark @click="cancelar()" v-bind="attrs" v-on="on">
-                                            <v-icon>mdi-close</v-icon>
-                                        </v-btn>
-                                    </template>
-                                    <span>Cancelar</span>
-                                </v-tooltip>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn icon dark @click="cancelar()" v-bind="attrs" v-on="on">
+                                                <v-icon>mdi-close</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>Cancelar</span>
+                                    </v-tooltip>
                                 </div>
                                 <div v-if="get===1">
                                     <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-btn icon dark @click="cancelar2()" v-bind="attrs" v-on="on">
-                                            <v-icon>mdi-close</v-icon>
-                                        </v-btn>
-                                    </template>
-                                    <span>Cerrar</span>
-                                </v-tooltip>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn icon dark @click="cancelar2()" v-bind="attrs" v-on="on">
+                                                <v-icon>mdi-close</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>Cerrar</span>
+                                    </v-tooltip>
                                 </div>
                                 <v-toolbar-title v-if="BtnEditar===0 && get===0">Crear Cotización</v-toolbar-title>
                                 <v-toolbar-title v-if="BtnEditar===1">Editar Cotización</v-toolbar-title>
@@ -1559,11 +1559,11 @@
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                            <template v-slot:[`item.agregar`]="{item}">
+                            <template slot="item.agregar" slot-scope="props">
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos(item)">
+                                            @click="seleccionarEnsayos(props.item,props.index)">
                                             mdi-plus-circle
                                         </v-icon>
                                     </template>
@@ -1601,11 +1601,11 @@
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                            <template v-slot:[`item.agregar`]="{item}">
+                            <template slot="item.agregar" slot-scope="props">
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos2(item)">
+                                            @click="seleccionarEnsayos2(props.item,props.index)">
                                             mdi-plus-circle
                                         </v-icon>
                                     </template>
@@ -1644,11 +1644,11 @@
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                            <template v-slot:[`item.agregar`]="{item}">
+                            <template slot="item.agregar" slot-scope="props">
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos3(item)">
+                                            @click="seleccionarEnsayos3(props.item,props.index)">
                                             mdi-plus-circle
                                         </v-icon>
                                     </template>
@@ -2548,30 +2548,35 @@ export default {
                     console.log(error);
                 });
         },
-        seleccionarEnsayos(ensayo) {
+        seleccionarEnsayos(ensayo, index) {
             this.ensayosSeleccionados.push(ensayo)
             this.costo += ensayo.costo
-            console.log(this.ensayosSeleccionados);
+            this.ensayos.splice(index, 1)
         },
-        seleccionarEnsayos2(ensayo) {
+        seleccionarEnsayos2(ensayo, index) {
             this.ensayosSeleccionados2.push(ensayo)
             this.costo2 += ensayo.costo
+            this.ensayos.splice(index, 1)
         },
-        seleccionarEnsayos3(ensayo) {
+        seleccionarEnsayos3(ensayo, index) {
             this.ensayosSeleccionados3.push(ensayo)
             this.costo3 += ensayo.costo
+            this.ensayos.splice(index, 1)
         },
         eliminarEnsayos(index, ensayo) {
             this.ensayosSeleccionados.splice(index, 1)
             this.costo -= ensayo.costo
+            this.ensayos.push(ensayo)
         },
         eliminarEnsayos2(index, ensayo) {
             this.ensayosSeleccionados2.splice(index, 1)
             this.costo2 -= ensayo.costo
+            this.ensayos.push(ensayo)
         },
         eliminarEnsayos3(index, ensayo) {
             this.ensayosSeleccionados3.splice(index, 1)
             this.costo3 -= ensayo.costo
+            this.ensayos.push(ensayo)
         },
         crearEnsayo() {
             let header = { headers: { "token": this.$store.state.token } };
@@ -2682,6 +2687,7 @@ export default {
                     this.botones = 1
                     this.BtnEditar = 0
                     this.dialog = false
+                    this.listarEnsayos()
                 }
             })
         },
@@ -2721,6 +2727,7 @@ export default {
             this.botones = 1
             this.BtnEditar = 0
             this.dialog = false
+            this.listarEnsayos()
         },
         crearcotizacion() {
             if (this.ensayosSeleccionados.length !== 0) {
@@ -2983,6 +2990,23 @@ export default {
                         this.ensayosSeleccionados3.push(ensayo.ensayo)
                     })
                 }
+                // for (let i = 0; i < this.ensayosSeleccionados.length; i++) {
+                //     for (let i = 0; i < this.ensayos.length; i++) {
+                //         const element = this.ensayos[i];
+                //         console.log(element);
+                //         if (this.ensayosSeleccionados[i].ensayo === this.ensayos[i].ensayo) {
+                //             this.ensayos.splice(i, 1)
+                //         }
+                //     }
+
+
+                //     // if (this.ensayosSeleccionados.length === 1) {
+                //     //     if (this.ensayos[i].ensayo === this.ensayosSeleccionados[i].ensayo) {
+                //     //         console.log("a1");
+                //     //         this.ensayos.splice(i, 1)
+                //     //     }
+                //     // }
+                // }
                 this.dialog = true;
             } else {
                 console.log("sin");
@@ -3026,6 +3050,12 @@ export default {
                         this.ensayosSeleccionados3.push(ensayo.ensayo)
                     })
                 }
+                // for (let i = 0; i < this.ensayos.length; i++) {
+                //     const element = this.ensayos[i];
+                //     console.log(element);
+                //     console.log(this.ensayosSeleccionados);
+
+                // }
                 this.dialog = true;
             }
         },

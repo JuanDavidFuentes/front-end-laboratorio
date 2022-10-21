@@ -23,12 +23,14 @@
                                         <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded 
                                             label="Tipo Persona"></v-select>
                                     </v-col>
+
                                     <v-col cols="6" class="mt-n7">
                                         <div v-if="selecionadoTipo === 'Juridica'">
                                             <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
                                             </v-text-field>
                                         </div>
                                     </v-col>
+
                                     <v-col cols="6" class="mt-n7">
                                         <div v-if="selecionadoTipo === 'Juridica'">
                                             <v-text-field v-model="telefono" label="Telefono" filled rounded dense>
@@ -207,7 +209,6 @@
                                 </template>
                                 <span>Editar</span>
                             </v-tooltip>
-
                         </span>
                     </template>
                 </v-data-table>
@@ -712,6 +713,7 @@ export default {
             console.log(usuario);
             this.id = usuario._id
             this.dialog2 = true
+
             this.nombre = usuario.nombre
             this.apellidos = usuario.apellidos
             this.documento = usuario.documento
@@ -737,7 +739,6 @@ export default {
                     console.log(error);
                 });
         },
-
         listarCiudad() {
             axios
                 .get("/ciudad/CiudadDepartamento")
@@ -781,7 +782,7 @@ export default {
     },
     created() {
         this.usuarios(),
-            this.listarCiudad();
+        this.listarCiudad();
     },
 };
 </script>
