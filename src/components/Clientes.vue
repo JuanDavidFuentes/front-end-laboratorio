@@ -101,70 +101,6 @@
                 </v-dialog>
             </v-col>
         </v-row>
-
-        <template>
-            <v-col cols="12">
-                <v-card>
-                    <v-card-title>
-                        Clientes
-                        <v-spacer></v-spacer>
-                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                            hide-details></v-text-field>
-                    </v-card-title>
-
-                    <v-data-table :headers="headers" :items="clientes" :search="search">
-                        <template v-slot:[`item.estado`]="{ item }">
-                            <span class="green--text" v-if="item.estado === 1"> Activo</span>
-                            <span class="red--text" v-else>Inactivo</span>
-                        </template>
-                        <template v-slot:[`item.opciones`]="{ item }">
-                            <span v-if="item.estado === 1">
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="error" rounded v-bind="attrs" v-on="on"
-                                            @click="desactivar(item._id)">
-                                            mdi-shield-off
-                                        </v-icon>
-                                    </template>
-                                    <span>Inactivar</span>
-                                </v-tooltip>
-
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
-                                            mdi-pencil
-                                        </v-icon>
-                                    </template>
-                                    <span>Editar</span>
-                                </v-tooltip>
-
-                            </span>
-                            <span v-else>
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="success" rounded v-bind="attrs" v-on="on"
-                                            @click="activar(item._id)">
-                                            mdi-shield-check-outline
-                                        </v-icon>
-                                    </template>
-                                    <span>Activar</span>
-                                </v-tooltip>
-
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
-                                            mdi-pencil
-                                        </v-icon>
-                                    </template>
-                                    <span>Editar</span>
-                                </v-tooltip>
-                            </span>
-                        </template>
-                    </v-data-table>
-                </v-card>
-            </v-col>
-
-        </template>
         <div>
             <v-dialog v-model="dialog2" persistent max-width="1000px">
                 <v-card>
@@ -254,6 +190,69 @@
                 </v-card>
             </v-dialog>
         </div>
+        <template>
+            <v-col cols="12">
+                <v-card>
+                    <v-card-title>
+                        Clientes
+                        <v-spacer></v-spacer>
+                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                            hide-details></v-text-field>
+                    </v-card-title>
+
+                    <v-data-table :headers="headers" :items="clientes" :search="search">
+                        <template v-slot:[`item.estado`]="{ item }">
+                            <span class="green--text" v-if="item.estado === 1"> Activo</span>
+                            <span class="red--text" v-else>Inactivo</span>
+                        </template>
+                        <template v-slot:[`item.opciones`]="{ item }">
+                            <span v-if="item.estado === 1">
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="error" rounded v-bind="attrs" v-on="on"
+                                            @click="desactivar(item._id)">
+                                            mdi-shield-off
+                                        </v-icon>
+                                    </template>
+                                    <span>Inactivar</span>
+                                </v-tooltip>
+
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
+                                            mdi-pencil
+                                        </v-icon>
+                                    </template>
+                                    <span>Editar</span>
+                                </v-tooltip>
+
+                            </span>
+                            <span v-else>
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="success" rounded v-bind="attrs" v-on="on"
+                                            @click="activar(item._id)">
+                                            mdi-shield-check-outline
+                                        </v-icon>
+                                    </template>
+                                    <span>Activar</span>
+                                </v-tooltip>
+
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
+                                            mdi-pencil
+                                        </v-icon>
+                                    </template>
+                                    <span>Editar</span>
+                                </v-tooltip>
+                            </span>
+                        </template>
+                    </v-data-table>
+                </v-card>
+            </v-col>
+
+        </template>
 
     </v-container>
 </template>
@@ -377,9 +376,7 @@ export default {
         ],
     }),
     methods: {
-        Volver1() {
-            this.$router.push("/")
-        },
+        
         cerrar(){
             this.dialog = false;
             this.dialog2 = false
@@ -715,6 +712,9 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        Volver1() {
+            this.$router.push("/Home")
         },
     },
     created() {

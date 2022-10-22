@@ -1076,6 +1076,8 @@
                         <v-card-title>
                             Buscar cotización
                             <v-spacer></v-spacer>
+                            <v-switch v-model="switch1" :label="`Switch 1: ${switch1.toString()}`"></v-switch>
+                            <v-spacer></v-spacer>
                             <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
                                 hide-details></v-text-field>
                         </v-card-title>
@@ -1139,10 +1141,10 @@
             </v-col>
             <v-col cols="1"></v-col>
         </v-row>
-        <v-row style="margin:0px">
-            <v-col cols="1"></v-col>
-            <v-col cols="10">
-                <v-row style="margin:0px">
+        <!-- <v-row style="margin:0px"> -->
+        <!-- <v-col cols="1"></v-col>
+            <v-col cols="10"> -->
+        <!-- <v-row style="margin:0px">
                     <v-col cols="1"></v-col>
                     <v-col class="text-center" cols="10">
                         <h1>Cotizaciónes Inactivas</h1>
@@ -1213,10 +1215,10 @@
                             </template>
                         </v-data-table>
                     </v-card>
-                </template>
-            </v-col>
-            <v-col cols="1"></v-col>
-        </v-row>
+                </template> -->
+        <!-- </v-col>
+            <v-col cols="1"></v-col> -->
+        <!-- </v-row> -->
         <v-row style="margin:0px">
             <v-col class="text-left" cols="12">
                 <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
@@ -1563,7 +1565,7 @@
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos(props.item,props.index)">
+                                            @click="seleccionarEnsayos(props.item)">
                                             mdi-plus-circle
                                         </v-icon>
                                     </template>
@@ -1605,7 +1607,7 @@
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos2(props.item,props.index)">
+                                            @click="seleccionarEnsayos2(props.item)">
                                             mdi-plus-circle
                                         </v-icon>
                                     </template>
@@ -1648,7 +1650,7 @@
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos3(props.item,props.index)">
+                                            @click="seleccionarEnsayos3(props.item)">
                                             mdi-plus-circle
                                         </v-icon>
                                     </template>
@@ -1828,7 +1830,6 @@
 <script>
 import axios from "axios";
 export default {
-    // https://laboratorio-jjai-2.herokuapp.com/api
     name: "PageCoti",
 
     data() {
@@ -1845,6 +1846,7 @@ export default {
             dialog6: false,
             dialog7: false,
             notifications: false,
+            switch1: true,
             sound: true,
             widgets: false,
             calidadOferta: [],
@@ -1913,6 +1915,7 @@ export default {
             search3: '',
             TodasCotis: [],
             get: 0,
+            column: null,
             //la computada "suma" es el total
             //headers
             tipos: ["Natural", "Juridica"],
@@ -1986,7 +1989,7 @@ export default {
                 {
                     text: 'Estado',
                     align: 'start',
-                    sortable: false,
+
                     value: 'estado',
                 },
                 {
@@ -2036,12 +2039,16 @@ export default {
         };
     },
     methods: {
+        a() {
+            console.log(this.column);
+            console.log("a");
+        },
         fechaSalida(r) {
             let d = new Date(r);
             return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
         },
         Volver() {
-            this.$router.push("/");
+            this.$router.push("/Home");
         },
         seleccionarclientes(cliente) {
             console.log(cliente);
@@ -2548,35 +2555,89 @@ export default {
                     console.log(error);
                 });
         },
-        seleccionarEnsayos(ensayo, index) {
-            this.ensayosSeleccionados.push(ensayo)
-            this.costo += ensayo.costo
-            this.ensayos.splice(index, 1)
+        seleccionarEnsayos(ensayo) {
+            let ensayo1 = null
+            let ensayo2 = null
+            let ensayo3 = null
+            ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+            ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+            ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+
+            if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                this.ensayosSeleccionados.push(ensayo)
+                this.costo += ensayo.costo
+            } else {
+                this.$swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "El ensayo ya esta agregado",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+            // this.ensayos.splice(index, 1)
         },
-        seleccionarEnsayos2(ensayo, index) {
-            this.ensayosSeleccionados2.push(ensayo)
-            this.costo2 += ensayo.costo
-            this.ensayos.splice(index, 1)
+        seleccionarEnsayos2(ensayo) {
+            let ensayo1 = null
+            let ensayo2 = null
+            let ensayo3 = null
+            ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+            ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+            ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+
+
+            if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                this.ensayosSeleccionados2.push(ensayo)
+                this.costo2 += ensayo.costo
+            } else {
+                this.$swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "El ensayo ya esta agregado",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+
+            // this.ensayos.splice(index, 1)
         },
-        seleccionarEnsayos3(ensayo, index) {
-            this.ensayosSeleccionados3.push(ensayo)
-            this.costo3 += ensayo.costo
-            this.ensayos.splice(index, 1)
+        seleccionarEnsayos3(ensayo) {
+            let ensayo1 = null
+            let ensayo2 = null
+            let ensayo3 = null
+            ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+            ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+            ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+
+
+            if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                this.ensayosSeleccionados3.push(ensayo)
+                this.costo3 += ensayo.costo
+            } else {
+                this.$swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "El ensayo ya esta agregado",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+            // this.ensayos.splice(index, 1)
         },
         eliminarEnsayos(index, ensayo) {
             this.ensayosSeleccionados.splice(index, 1)
             this.costo -= ensayo.costo
-            this.ensayos.push(ensayo)
+            // this.ensayos.push(ensayo)
         },
         eliminarEnsayos2(index, ensayo) {
             this.ensayosSeleccionados2.splice(index, 1)
             this.costo2 -= ensayo.costo
-            this.ensayos.push(ensayo)
+            // this.ensayos.push(ensayo)
         },
         eliminarEnsayos3(index, ensayo) {
             this.ensayosSeleccionados3.splice(index, 1)
             this.costo3 -= ensayo.costo
-            this.ensayos.push(ensayo)
+            // this.ensayos.push(ensayo)
         },
         crearEnsayo() {
             let header = { headers: { "token": this.$store.state.token } };

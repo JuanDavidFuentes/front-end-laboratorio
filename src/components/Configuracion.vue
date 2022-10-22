@@ -86,14 +86,14 @@
             <div>
               <v-card-title class="text-h5">Calidad</v-card-title>
               <v-card-actions>
-                <v-btn class="ml-2 mt-5" outlined rounded>
+                <v-btn class="ml-2 mt-5" outlined rounded @click="Calidad()">
                   <v-icon>mdi-pencil-box-outline</v-icon>
                   Editar versiones
                 </v-btn>
               </v-card-actions>
             </div>
             <v-avatar class="ml-n7 mr-5 mt-4 mb-3" size="120">
-              <img src="https://es.dreamstime.com/icono-de-la-cinta-del-control-calidad-opci-n-certificada-o-mejor-producto-vector-recomend-marca-aprobada-certificado-premio-y-image142671070" alt="John">
+              <img src="" alt="John">
             </v-avatar>
           </div>
         </v-card>
@@ -109,11 +109,8 @@ export default {
     show: false,
   }),
   methods: {
-    Cotizaciones() {
-      this.$router.push("/");
-    },
     Volver1() {
-      this.$router.push("/");
+      this.$router.push("/Home");
     },
     Setup() {
       this.$router.push("/setup");
@@ -126,6 +123,9 @@ export default {
     },
     ensayo() {
       this.$router.push("/EnsayoLab")
+    },
+    Calidad() {
+      this.$router.push("/Calidad")
     }
 
   },

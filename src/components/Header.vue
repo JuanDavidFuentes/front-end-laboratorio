@@ -3,14 +3,13 @@
   <div class="mt-5">
     <v-app-bar app flex  dark>
       <img height="100" width="100 " src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" >
-      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token == ''"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''"></v-app-bar-nav-icon>
       <img src="" alt="">
 
       <v-toolbar-title class="font-weight-black"> Lab </v-toolbar-title>
       <v-toolbar-title class="deep-orange--text font-weight-black"> Ficat</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
       <v-btn @click="salir()" class="white blue--text" v-if="$store.state.token !== ''">
         salir
         <v-icon>mdi-door-open</v-icon>
@@ -35,21 +34,66 @@
 
         <!-- //Pagina inicio -->
 
-        <v-list-item to="/login">
-          <v-list-item-icon class="white--text">
-          
-            <v-icon color="white">mdi-home</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-title class="white--text">Login</v-list-item-title>
-        </v-list-item>
+       
 
         <!-- //grupo holders -->
+        
+        <v-list-item  v-if="this.configuracion===0" @click="Configuracion()" absolute color="deep-orange">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-settings-box</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Configuración</v-list-item-title>
+        </v-list-item>
+
+        <div v-if="this.configuracion===1">
+          <v-list-item @click="Configuracion1()" >
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-settings</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Configuración</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item to="/setup">
+          <v-list-item-icon class="white--text " >
+            <v-icon color="white">mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Setup</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="Configuracion()">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Ciudades</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="Configuracion()">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Ensayo</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item @click="Configuracion()">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Bitacora</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item @click="Configuracion()">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Calidad</v-list-item-title>
+        </v-list-item>
+       </div>
+          
+        
+
+
         <v-list-item to="/cotizacion">
           <v-list-item-icon class="white--text">
             <v-icon color="white">mdi-account</v-icon>
           </v-list-item-icon>
-
           <v-list-item-title class="white--text">Cotizacion</v-list-item-title>
         </v-list-item>
 
@@ -60,7 +104,7 @@
           <v-list-item-title class="white--text">Detalles Cotizacion</v-list-item-title>
         </v-list-item>
 
-        <v-list-item to="/">
+        <v-list-item to="/Home">
           <v-list-item-icon class="white--text">
             <v-icon color="white">mdi-sword</v-icon>
           </v-list-item-icon>
@@ -76,25 +120,23 @@
 <script>
 export default {
   name: "InicioHeader",
-  data() {
-    return {
+  data:()=> ({
       drawer: false,
-      group: null
-    }
-  },
+      group: null,
+      configuracion:0
+  }),
   methods: {
     salir() {
       this.$router.replace("/")
       this.$store.commit("setToken", "")
+    },
+    Configuracion(){
+      this.configuracion=1
+    },
+    Configuracion1(){
+      this.configuracion=0
     }
 
   }
 }  
 </script>
-
-
-        <!-- <v-btn @click="insertarActor()">insertar Actor</v-btn>
-,
-        insertarActor(){
-            this.$router.push("/actores")
-        } -->  

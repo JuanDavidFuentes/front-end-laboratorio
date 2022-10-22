@@ -158,7 +158,7 @@
         <div>
             <v-card>
                 <v-card-title>
-                    Usuarios
+                    <h3>Usuarios</h3>                    
                     <v-spacer></v-spacer>
                     <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
                     </v-text-field>
@@ -777,7 +777,7 @@ export default {
                 });
         },
         Volver1() {
-            this.$router.push("/");
+            this.$router.push("/Home");
         },
     },
     created() {

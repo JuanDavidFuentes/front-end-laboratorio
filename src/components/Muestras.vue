@@ -71,7 +71,7 @@ export default {
     }),
     methods: {
         Volver() {
-            this.$router.push("/");
+            this.$router.push("/Home");
         },
         usuarios() {
             axios.get(`/cotizacion/listarTodasLasCotizaciones`)

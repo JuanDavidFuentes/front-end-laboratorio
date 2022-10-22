@@ -88,7 +88,7 @@ export default {
           console.log(response.data);
           this.$store.dispatch("setToken", response.data.token);
           this.$store.dispatch("setDatos", response.data.usuario);
-          this.$router.push("/")
+          this.$router.push("/Home")
         })
         .catch(error => {
           if (error.response.data.errores) {
