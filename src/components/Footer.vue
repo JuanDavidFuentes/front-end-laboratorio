@@ -1,10 +1,9 @@
 
 <template>
-  <v-footer app color="deep-orange darken-1" padless>
+  <v-footer app color="dark" padless>
     <v-row justify="center" no-gutters>
-      
-      <v-col class="deep-orange ligthken-4 py-4 text-center white--text" cols="12">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+      <v-col class="black py-4 text-center deep-orange--text" cols="12">
+        {{ new Date().getFullYear() }} — <strong>LabFicat</strong>
       </v-col>
     </v-row>
   </v-footer>

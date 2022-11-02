@@ -2538,7 +2538,7 @@ export default {
                 axios.get(`/cotizacion/listarTodasLasCotizaciones`)
                     .then((response) => {
                         console.log(response);
-                        this.cotizaciones = response.data.coti;
+                        this.cotizaciones = response.data.coti.reverse();
                     })
                     .catch((error) => {
                         console.log(error);
@@ -2553,7 +2553,7 @@ export default {
             axios.get(`/cotizacion/listarLasCotizacionesAD`)
                 .then((response) => {
                     console.log(response);
-                    this.cotizaciones = response.data.coti;
+                    this.cotizaciones = response.data.coti.reverse();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2638,7 +2638,7 @@ export default {
             let header = { headers: { "token": this.$store.state.token } };
             axios.get(`/usuarios/listarClientes`, header)
                 .then((response) => {
-                    this.clientes = response.data.usuarios
+                    this.clientes = response.data.usuarios.reverse() 
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2791,7 +2791,7 @@ export default {
             let header = { headers: { "token": this.$store.state.token } };
             axios.get(`/usuarios/listarContactos`, header)
                 .then((response) => {
-                    this.contactos = response.data.usuarios
+                    this.contactos = response.data.usuarios.reverse() 
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2996,7 +2996,7 @@ export default {
         listarEnsayos() {
             axios.get(`/ensayo`)
                 .then((response) => {
-                    this.ensayos = response.data.ensayo
+                    this.ensayos = response.data.ensayo.reverse() 
                     console.log("a", this.ensayos);
                 })
                 .catch((error) => {
@@ -3279,7 +3279,7 @@ export default {
             axios.get(`/usuarios/ListarSoloUsuarios`)
                 .then((response) => {
                     console.log(response);
-                    this.soloUsuarios = response.data.usuarios
+                    this.soloUsuarios = response.data.usuarios.reverse()
                 })
                 .catch((error) => {
                     console.log(error);
@@ -3602,7 +3602,7 @@ export default {
         },
         editar(datos) {
             console.log(datos);
-            if (datos.idCliente.contacto) { // aun no lleva la informacion
+            if (datos.idCliente.contacto) { 
                 console.log("contacto");
                 this.idCotizacion = datos._id
                 this.fechaEmision = datos.fecha_emision.slice(0, 10)

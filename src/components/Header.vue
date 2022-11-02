@@ -2,7 +2,7 @@
 <template>
   <div class="mt-5">
     <v-app-bar app flex dark>
-      <img height="100" width="100 "
+      <img height="100" width="100"
         src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png">
       <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''"></v-app-bar-nav-icon>
       <img src="" alt="">
@@ -11,19 +11,19 @@
       <v-toolbar-title class="deep-orange--text font-weight-black"> Ficat</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn @click="salir()" class="white blue--text" v-if="$store.state.token !== ''">
+      <v-btn @click="salir()" class="deep-orange--text" v-if="$store.state.token !== ''" rounded>
         salir 
         <v-icon>mdi-door-open</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer temporary v-model="drawer" absolute color="deep-orange">
+    <v-navigation-drawer temporary v-model="drawer" absolute color="deep-orange" width="280">
       <v-list>
         <v-list-item>
           <h1></h1>
         </v-list-item>
 
-        <v-list-item class="d-flex justify-center" to="/perfil">
+        <v-list-item class="d-flex justify-center" to="/perfil" rounded>
           <v-avatar color="white" size="62">
             <v-img :src="$store.state.datos.foto">
             </v-img>
@@ -45,45 +45,14 @@
           <v-list-item-title class="white--text">Home</v-list-item-title>
         </v-list-item>
 
-       
-        <v-list-item to="/agregarusuario">
-          <v-list-item-icon class="white--text">
-            <v-icon color="white">mdi-account-plus</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title class="white--text">Agregar Usuario</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item to="/Muestras" v-if="$store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'ADMIN' || $store.state.datos.rol == 'CIENTIFICO'">
-          <v-list-item-icon >
-            <v-icon color="white">mdi-beaker-outline</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title class="white--text">Muestras</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item to="/Clientes" v-if="$store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'ADMIN'">
-          <v-list-item-icon class="white--text">
-            <v-icon color="white">mdi-account-multiple-plus</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title class="white--text">Clientes</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item to="/cotizacion">
-          <v-list-item-icon class="white--text">
-            <v-icon color="white">mdi-account</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title class="white--text">Cotizacion</v-list-item-title>
-        </v-list-item>
-
-        
-
-        
+         
         <div v-if="$store.state.datos.rol == 'ADMIN'">
           <v-list-item v-if="this.configuracion === 0" @click="Configuracion()" absolute color="deep-orange">
             <v-list-item-icon class="white--text">
               <v-icon color="white">mdi-wrench</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="white--text">Configuración
-              <v-icon class="ml-9">mdi-chevron-down
+              <v-icon class="ml-13">mdi-chevron-down
               </v-icon>
             </v-list-item-title>
           </v-list-item>
@@ -95,7 +64,7 @@
               <v-icon color="white">mdi-wrench</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="white--text">Configuración
-              <v-icon class="ml-9">mdi-chevron-up
+              <v-icon class="ml-12">mdi-chevron-up
               </v-icon>
             </v-list-item-title>          
           </v-list-item>
@@ -135,6 +104,34 @@
             <v-list-item-title class="white--text">Calidad</v-list-item-title>
           </v-list-item>
         </div>
+
+        <v-list-item to="/agregarusuario">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-account-plus</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Agregar Usuario</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item to="/Muestras" v-if="$store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'ADMIN' || $store.state.datos.rol == 'CIENTIFICO'">
+          <v-list-item-icon >
+            <v-icon color="white">mdi-beaker-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Muestras</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item to="/Clientes" v-if="$store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'ADMIN'">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-account-multiple-plus</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Clientes</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item to="/cotizacion">
+          <v-list-item-icon class="white--text">
+            <v-icon color="white">mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title class="white--text">Cotizacion</v-list-item-title>
+        </v-list-item>
 
       </v-list>
     </v-navigation-drawer>

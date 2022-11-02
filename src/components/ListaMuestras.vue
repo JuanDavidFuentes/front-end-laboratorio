@@ -1040,9 +1040,8 @@ export default {
       this.infoMuestraa.push()
     },
     eliminarMuestra(index) {
-            this.mostrasDatos.splice(index, 1)
-        },
-
+      this.mostrasDatos.splice(index, 1)
+    },
     NombreContacto() {
       if (this.datos.contacto) {
         this.NombreContacto1 = this.datos.contacto.nombre

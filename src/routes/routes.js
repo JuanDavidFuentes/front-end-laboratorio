@@ -11,6 +11,7 @@ import Ensayo from '../components/Ensayo.vue';
 import ListaMuestras from '../components/ListaMuestras.vue';
 import Clientes from '../components/Clientes.vue'
 import Calidad  from "../components/Calidad.vue";
+import Perfil from "../components/Perfil.vue";
 
 export const routes = [
     {path: '/', component: login},
@@ -25,5 +26,6 @@ export const routes = [
     {path: '/EnsayoLab', component: Ensayo},
     {path: '/ListaMuestras', component: ListaMuestras},
     {path: '/Clientes', component: Clientes},
-    {path: '/Calidad', component: Calidad}
+    {path: '/Calidad', component: Calidad}, 
+    {path: '/perfil', component: Perfil},
 ]
