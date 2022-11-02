@@ -399,7 +399,7 @@ export default {
                     console.log(error);
                 });
         },
-        editarCalidad(){
+        editarC(){
             axios.put(`/cotizacion/activar/{}`, {
                 ListadoMuestras:[
                     {

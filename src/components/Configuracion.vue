@@ -8,8 +8,9 @@
       </v-col>
     </v-row>
     <v-row style="margin-top:3px">
+
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="amber darken-4" dark>
+        <v-card color="blue-grey lighten-1" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Setup</v-card-title>
@@ -21,13 +22,14 @@
               </v-card-actions>
             </div>
             <v-avatar class="ml-n7 mr-5 mt-4 mb-3" size="120">
-              <img src="https://definicion.de/wp-content/uploads/2010/02/setup-1.png" alt="John">
+              <img height=90% src="https://i.postimg.cc/mDVXxrd2/png-clipart-material-design-skin-gray-setting-icon-thumbnail.png" alt="John">
             </v-avatar>
           </div>
         </v-card>
       </v-col>
+
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="amber darken-4" dark>
+        <v-card color="blue-grey lighten-1" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Ciudades</v-card-title>
@@ -44,8 +46,9 @@
           </div>
         </v-card>
       </v-col>
+
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="amber darken-4" dark>
+        <v-card color="blue-grey lighten-1" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Ensayo</v-card-title>
@@ -57,13 +60,14 @@
               </v-card-actions>
             </div>
             <v-avatar class="ml-n7 mr-5 mt-4 mb-3" size="120">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUv3qtlvC8AE41rrfyFlkfKn8KfWCOxrW8LA&usqp=CAU" alt="John">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUv3qtlvC8AE41rrfyFlkfKn8KfWCOxrW8LA&usqp=CAU" alt="...">
             </v-avatar>
           </div>
         </v-card>
       </v-col>
+
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="amber darken-4" dark>
+        <v-card color="blue-grey lighten-1" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Bitacora</v-card-title>
@@ -80,8 +84,9 @@
           </div>
         </v-card>
       </v-col>
+
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="amber darken-4" dark>
+        <v-card color="blue-grey lighten-1" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Calidad</v-card-title>
@@ -98,6 +103,7 @@
           </div>
         </v-card>
       </v-col>
+
     </v-row>
   </v-container>
 </template>

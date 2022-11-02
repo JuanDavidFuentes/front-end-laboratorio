@@ -24,7 +24,7 @@
 
                         <v-card>
                             <v-toolbar dark>
-                                <div v-if="get===0">
+                                <div v-if="get === 0">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-btn icon dark @click="cancelar()" v-bind="attrs" v-on="on">
@@ -34,7 +34,7 @@
                                         <span>Cancelar</span>
                                     </v-tooltip>
                                 </div>
-                                <div v-if="get===1">
+                                <div v-if="get === 1">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-btn icon dark @click="cancelar2()" v-bind="attrs" v-on="on">
@@ -44,16 +44,16 @@
                                         <span>Cerrar</span>
                                     </v-tooltip>
                                 </div>
-                                <v-toolbar-title v-if="BtnEditar===0 && get===0">Crear Cotización</v-toolbar-title>
-                                <v-toolbar-title v-if="BtnEditar===1">Editar Cotización</v-toolbar-title>
-                                <v-toolbar-title v-if="get===1">Información Cotización</v-toolbar-title>
+                                <v-toolbar-title v-if="BtnEditar === 0 && get === 0">Crear Cotización</v-toolbar-title>
+                                <v-toolbar-title v-if="BtnEditar === 1">Editar Cotización</v-toolbar-title>
+                                <v-toolbar-title v-if="get === 1">Información Cotización</v-toolbar-title>
                                 <v-spacer></v-spacer>
-                                <div v-if="get===0">
+                                <div v-if="get === 0">
                                     <v-toolbar-items>
-                                        <v-btn v-if="BtnEditar===0" dark text @click="crearcotizacion()">
+                                        <v-btn v-if="BtnEditar === 0" dark text @click="crearcotizacion()">
                                             <v-icon> mdi-plus-circle-outline </v-icon>Guardar
                                         </v-btn>
-                                        <v-btn v-if="BtnEditar===1" dark text @click="editarCoti()">
+                                        <v-btn v-if="BtnEditar === 1" dark text @click="editarCoti()">
                                             <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
                                         </v-btn>
                                     </v-toolbar-items>
@@ -72,19 +72,19 @@
                                             <h1>Oferta de servicios</h1>
                                         </div>
                                         <div class=" text-center black--text mt-2">
-                                            <h3>{{datos[0].descripcion}}</h3>
+                                            <h3>{{ cotiDescripcion }}</h3>
                                         </div>
                                         <div class=" text-center black--text mt-2">
-                                            <h3>NIT: {{datos[0].nit}}</h3>
+                                            <h3>NIT: {{ cotiNit }}</h3>
                                         </div>
                                         <div class=" text-center black--text mt-2">
-                                            <h3>Dirección: {{datos[0].direccion}}</h3>
+                                            <h3>Dirección: {{ cotiDireccion }}</h3>
                                         </div>
                                         <div class=" text-center black--text mt-2">
-                                            <h3>Teléfono: {{datos[0].telefono}}</h3>
+                                            <h3>Teléfono: {{ cotiTelefono }}</h3>
                                         </div>
                                         <div class=" text-center black--text mt-2">
-                                            <h3>Correo electrónico: {{datos[0].correo}}</h3>
+                                            <h3>Correo electrónico: {{ cotiCorreo }}</h3>
                                         </div>
                                     </v-col>
 
@@ -92,19 +92,20 @@
                                         <div class="text-center black--text headline">
                                             <h4>Cotización No.</h4>
                                         </div>
-                                        <div v-if="BtnEditar===0" class="text-center red--text font-italic headline">
-                                            {{numeroactual}}
+                                        <div v-if="BtnEditar === 0" class="text-center red--text font-italic headline">
+                                            {{ numeroactual }}
                                         </div>
-                                        <div v-if="BtnEditar===1" class="text-center red--text font-italic headline">
-                                            {{numeroCoti}}
+                                        <div v-if="BtnEditar === 1" class="text-center red--text font-italic headline">
+                                            {{ numeroCoti }}
                                         </div>
                                         <div class="text-center black--text headline mt-10">
                                             <h4>Fecha de emisión:</h4>
                                         </div>
-                                        <v-text-field v-if="get===0" v-model="fechaEmision" type="date" outlined dense>
+                                        <v-text-field v-if="get === 0" v-model="fechaEmision" type="date" outlined
+                                            dense>
                                         </v-text-field>
-                                        <div v-if="get===1" class=" text-center black--text mt-2">
-                                            <h3>{{fechaEmision.slice(0, 10)}}</h3>
+                                        <div v-if="get === 1" class=" text-center black--text mt-2">
+                                            <h3>{{ fechaEmision.slice(0, 10) }}</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
@@ -112,26 +113,26 @@
                                             <h3>Código</h3>
                                         </div>
                                         <div class="text-center black--text">
-                                            <h3>{{calidadOferta[0].codigo}}</h3>
+                                            <h3>{{ caliCodigo }}</h3>
                                         </div>
                                         <div class="text-center black--text mt-10">
                                             <h3>Aprobación</h3>
                                         </div>
                                         <div class="text-center black--text">
-                                            <h3>{{calidadOferta[0].aprobacion}}</h3>
+                                            <h3>{{ caliaprobacion }}</h3>
                                         </div>
                                         <div class="text-center black--text mt-10">
                                             <h3>Versión</h3>
                                         </div>
                                         <div class="text-center black--text">
-                                            <h3>{{calidadOferta[0].version}}</h3>
+                                            <h3>{{ caliVersion }}</h3>
                                         </div>
                                     </v-col>
                                 </v-row>
                             </v-list>
                             <v-divider></v-divider>
 
-                            <v-container-fluid class="mx-5 mt-n15">
+                            <v-container fluid >
                                 <v-row
                                     style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; "
                                     class="mx-5">
@@ -154,22 +155,22 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0 text-center">
-                                        <v-btn v-if="botones==1" color="deep-orange" dark class="my-3"
+                                        <v-btn v-if="botones == 1" color="deep-orange" dark class="my-3"
                                             @click="Elegircliente()">
                                             Elegir cliente
                                         </v-btn>
                                         <v-row style="margin:0">
                                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"></v-col>
                                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                                <div v-if="botones==0"
+                                                <div v-if="botones == 0"
                                                     class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                                     hide-details>
-                                                    {{nombre}}
+                                                    {{ nombre }}
                                                 </div>
                                             </v-col>
                                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                                <div v-if="get===0">
-                                                    <v-tooltip v-if="botones===0" bottom>
+                                                <div v-if="get === 0">
+                                                    <v-tooltip v-if="botones === 0" bottom>
                                                         <template v-slot:activator="{ on, attrs }">
                                                             <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
                                                                 v-on="on" @click="borrarclientes()">
@@ -194,7 +195,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{documento}}
+                                            {{ documento }}
                                         </div>
                                     </v-col>
                                 </v-row>
@@ -213,7 +214,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{direccion}}
+                                            {{ direccion }}
                                         </div>
                                     </v-col>
                                     <v-col
@@ -228,7 +229,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{ciudad.ciudad}}
+                                            {{ ciudad.ciudad }}
                                         </div>
                                     </v-col>
                                 </v-row>
@@ -247,7 +248,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{ciudad.departamento}}
+                                            {{ ciudad.departamento }}
                                         </div>
                                     </v-col>
                                     <v-col
@@ -262,7 +263,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{telefono}}
+                                            {{ telefono }}
                                         </div>
                                     </v-col>
                                 </v-row>
@@ -280,7 +281,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{nombrecontacto}}
+                                            {{ nombrecontacto }}
                                         </div>
                                     </v-col>
                                     <v-col
@@ -295,7 +296,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{cargo}}
+                                            {{ cargo }}
                                         </div>
                                     </v-col>
                                 </v-row>
@@ -313,7 +314,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{celular}}
+                                            {{ celular }}
                                         </div>
                                     </v-col>
                                     <v-col
@@ -328,7 +329,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{email}}
+                                            {{ email }}
                                         </div>
                                     </v-col>
                                 </v-row>
@@ -344,12 +345,12 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field v-if="get===0" class="mt-5" v-model="validezOferta" type="date"
+                                        <v-text-field v-if="get === 0" class="mt-5" v-model="validezOferta" type="date"
                                             outlined dense>
                                         </v-text-field>
-                                        <div v-if="get===1" class="pa-0 ma-0 font-weight-black text-center my-3"
+                                        <div v-if="get === 1" class="pa-0 ma-0 font-weight-black text-center my-3"
                                             full-width hide-details>
-                                            {{validezOferta.slice(0, 10)}}
+                                            {{ validezOferta.slice(0, 10) }}
                                         </div>
                                     </v-col>
                                     <v-col
@@ -362,11 +363,11 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         class="pa-0 ma-0">
-                                        <v-text-field v-if="get===0" class="mt-5" v-model="entregaResultados"
+                                        <v-text-field v-if="get === 0" class="mt-5" v-model="entregaResultados"
                                             type="date" outlined dense> </v-text-field>
-                                        <div v-if="get===1" class="pa-0 ma-0 font-weight-black text-center my-3"
+                                        <div v-if="get === 1" class="pa-0 ma-0 font-weight-black text-center my-3"
                                             full-width hide-details>
-                                            {{entregaResultados.slice(0, 10)}}
+                                            {{ entregaResultados.slice(0, 10) }}
                                         </div>
                                     </v-col>
                                 </v-row>
@@ -384,7 +385,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{recep.nombre}} {{recep.apellidos}}
+                                            {{ recep.nombre }} {{ recep.apellidos }}
                                         </div>
                                     </v-col>
                                     <v-col
@@ -399,7 +400,7 @@
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
-                                            {{recep.rol}}
+                                            {{ recep.rol }}
                                         </div>
                                     </v-col>
                                 </v-row>
@@ -414,7 +415,7 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <div v-if="get===0">
+                                        <div v-if="get === 0">
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white black--text" dark @click="dialog7 = true">
@@ -451,7 +452,7 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <div v-if="get===0">
+                                        <div v-if="get === 0">
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white" dark @click="dialog4 = true">
@@ -501,43 +502,44 @@
                                                         </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+
+                                                <tbody v-if="MostrarEditar === 0">
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados"
                                                         :key="i">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                            {{ensayo.ensayo}}
+                                                            {{ ensayo.ensayo }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.descripcion}}
+                                                            {{ ensayo.descripcion }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.unidades}}
+                                                            {{ ensayo.unidades }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.tecnica}}
+                                                            {{ ensayo.tecnica }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.metodo}}
+                                                            {{ ensayo.metodo }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.limiteCuantificacion}}
+                                                            {{ ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
-                                                            <v-icon v-if="get===0" dark class="ml-9" color="red" rounded
-                                                                @click="eliminarEnsayos(i,ensayo)">
+                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
+                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                rounded @click="eliminarEnsayos(i, ensayo)">
                                                                 mdi-close-circle
                                                             </v-icon>
                                                         </td>
                                                     </tr>
-                                                    <tr v-if="ensayosSeleccionados.length <=0">
+                                                    <tr v-if="ensayosSeleccionados.length <= 0">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
 
@@ -589,7 +591,101 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="pa-0 ma-0">
-                                                            ${{Intl.NumberFormat("de-DE").format(costo)}}
+                                                            ${{ Intl.NumberFormat("de-DE").format(costo) }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+
+
+                                                <tbody v-if="MostrarEditar === 1">
+                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados"
+                                                        :key="i">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            {{ ensayo.ensayo.ensayo }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.descripcion }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.unidades }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.tecnica }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.metodo }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.limiteCuantificacion }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
+                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                rounded @click="eliminarEnsayos(i, ensayo)">
+                                                                mdi-close-circle
+                                                            </v-icon>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="ensayosSeleccionados.length <= 0">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Costo del ítem 1 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(costo) }}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -608,7 +704,7 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <div v-if="get===0">
+                                        <div v-if="get === 0">
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white" dark @click="dialog5 = true">
@@ -658,43 +754,43 @@
                                                         </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody v-if="MostrarEditar2 === 0">
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2"
                                                         :key="i">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                            {{ensayo.ensayo}}
+                                                            {{ ensayo.ensayo }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.descripcion}}
+                                                            {{ ensayo.descripcion }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.unidades}}
+                                                            {{ ensayo.unidades }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.tecnica}}
+                                                            {{ ensayo.tecnica }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.metodo}}
+                                                            {{ ensayo.metodo }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.limiteCuantificacion}}
+                                                            {{ ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
-                                                            <v-icon v-if="get===0" dark class="ml-9" color="red" rounded
-                                                                @click="eliminarEnsayos2(i,ensayo)">
+                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
+                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                rounded @click="eliminarEnsayos2(i, ensayo)">
                                                                 mdi-close-circle
                                                             </v-icon>
                                                         </td>
                                                     </tr>
-                                                    <tr v-if="ensayosSeleccionados2.length <=0">
+                                                    <tr v-if="ensayosSeleccionados2.length <= 0">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
 
@@ -746,7 +842,100 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="pa-0 ma-0">
-                                                            ${{Intl.NumberFormat("de-DE").format(costo2)}}
+                                                            ${{ Intl.NumberFormat("de-DE").format(costo2) }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+
+                                                <tbody v-if="MostrarEditar2 === 1">
+                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2"
+                                                        :key="i">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            {{ ensayo.ensayo.ensayo }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.descripcion }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.unidades }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.tecnica }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.metodo }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.limiteCuantificacion }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
+                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                rounded @click="eliminarEnsayos2(i, ensayo)">
+                                                                mdi-close-circle
+                                                            </v-icon>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="ensayosSeleccionados2.length <= 0">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Costo del ítem 2 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(costo2) }}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -765,7 +954,7 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <div v-if="get===0">
+                                        <div v-if="get === 0">
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white" dark @click="dialog6 = true">
@@ -815,43 +1004,43 @@
                                                         </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody v-if="MostrarEditar3 === 0">
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3"
                                                         :key="i">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                            {{ensayo.ensayo}}
+                                                            {{ ensayo.ensayo }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.descripcion}}
+                                                            {{ ensayo.descripcion }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.unidades}}
+                                                            {{ ensayo.unidades }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.tecnica}}
+                                                            {{ ensayo.tecnica }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.metodo}}
+                                                            {{ ensayo.metodo }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            {{ensayo.limiteCuantificacion}}
+                                                            {{ ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                            ${{Intl.NumberFormat("de-DE").format(ensayo.costo)}}
-                                                            <v-icon v-if="get===0" dark class="ml-9" color="red" rounded
-                                                                @click="eliminarEnsayos3(i,ensayo)">
+                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
+                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                rounded @click="eliminarEnsayos3(i, ensayo)">
                                                                 mdi-close-circle
                                                             </v-icon>
                                                         </td>
                                                     </tr>
-                                                    <tr v-if="ensayosSeleccionados3.length <=0">
+                                                    <tr v-if="ensayosSeleccionados3.length <= 0">
                                                         <td
                                                             style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
 
@@ -903,7 +1092,7 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="pa-0 ma-0">
-                                                            ${{Intl.NumberFormat("de-DE").format(costo3)}}
+                                                            ${{ Intl.NumberFormat("de-DE").format(costo3) }}
                                                         </td>
                                                     </tr>
 
@@ -933,7 +1122,7 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            ${{Intl.NumberFormat("de-DE").format(sumar)}}
+                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
                                                         </td>
                                                     </tr>
 
@@ -962,16 +1151,16 @@
                                                             class="text-right white--text">
                                                             <h2> Descuento </h2>
                                                         </td>
-                                                        <td v-if="get===0"
+                                                        <td v-if="get === 0"
                                                             style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
                                                             <v-text-field v-model="descuento" type="number">
                                                             </v-text-field>
                                                         </td>
-                                                        <td v-if="get===1"
+                                                        <td v-if="get === 1"
                                                             style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            ${{Intl.NumberFormat("de-DE").format(descuento)}}
+                                                            ${{ Intl.NumberFormat("de-DE").format(descuento) }}
                                                         </td>
                                                     </tr>
 
@@ -1002,7 +1191,7 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            <div>{{iva}}%</div>
+                                                            <div>{{ iva }}%</div>
                                                         </td>
                                                     </tr>
 
@@ -1032,7 +1221,229 @@
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            ${{Intl.NumberFormat("de-DE").format(resultIva)}}
+                                                            ${{ Intl.NumberFormat("de-DE").format(resultIva) }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+
+                                                <tbody v-if="MostrarEditar3 === 1">
+                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3"
+                                                        :key="i">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            {{ ensayo.ensayo.ensayo }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.descripcion }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.unidades }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.tecnica }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.metodo }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            {{ ensayo.ensayo.limiteCuantificacion }}
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
+                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                rounded @click="eliminarEnsayos3(i, ensayo)">
+                                                                mdi-close-circle
+                                                            </v-icon>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="ensayosSeleccionados3.length <= 0">
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Costo del ítem 3 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(costo3) }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Subtotal - Descuento </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
+                                                            class="text-center white--text">
+                                                            <h2>Observaciones de la propuesta</h2>
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Descuento </h2>
+                                                        </td>
+                                                        <td v-if="get === 0"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            <v-text-field v-model="descuento" type="number">
+                                                            </v-text-field>
+                                                        </td>
+                                                        <td v-if="get === 1"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(descuento) }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
+                                                            class="text-center white--text">
+                                                            <h2>técnica y económica</h2>
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-right white--text">
+                                                            <h2> IVA </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            <div>{{ iva }}%</div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="text-right white--text">
+                                                            <h2> Total </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(resultIva) }}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -1042,26 +1453,26 @@
                                 </v-row>
                                 <v-row style=" margin: 0;" class="mx-5">
                                     <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <v-btn div v-if="get===0" color="red" dark @click="cancelar()">
+                                        <v-btn div v-if="get === 0" color="red" dark @click="cancelar()">
                                             <v-icon>mdi-close</v-icon> Cancelar
                                         </v-btn>
-                                        <v-btn div v-if="get===1" color="red" dark @click="cancelar2()">
+                                        <v-btn div v-if="get === 1" color="red" dark @click="cancelar2()">
                                             <v-icon>mdi-close</v-icon> Cerrar
                                         </v-btn>
                                     </v-col>
                                     <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
                                     <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4" class="text-right">
-                                        <div v-if="get===0">
-                                            <v-btn v-if="BtnEditar===0" dark color="green" @click="crearcotizacion()">
+                                        <div v-if="get === 0">
+                                            <v-btn v-if="BtnEditar === 0" dark color="green" @click="crearcotizacion()">
                                                 <v-icon> mdi-plus-circle-outline </v-icon>Guardar
                                             </v-btn>
-                                            <v-btn v-if="BtnEditar===1" dark color="green" @click="editarCoti()">
+                                            <v-btn v-if="BtnEditar === 1" dark color="green" @click="editarCoti()">
                                                 <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
                                             </v-btn>
                                         </div>
                                     </v-col>
                                 </v-row>
-                            </v-container-fluid>
+                            </v-container>
                         </v-card>
                     </v-dialog>
                 </v-row>
@@ -1076,17 +1487,17 @@
                         <v-card-title>
                             Buscar cotización
                             <v-spacer></v-spacer>
-                            <v-switch v-model="switch1" :label="`Switch 1: ${switch1.toString()}`"></v-switch>
+                            <v-switch @click="listar()" color="red" v-model="switch1" :label="switch2"></v-switch>
                             <v-spacer></v-spacer>
                             <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers2" :items="cotizaciones" :search="search">
-                            <template v-slot:[`item.fecha`]="{item}">
-                                {{fechaSalida(item.fecha_emision)}}
+                            <template v-slot:[`item.fecha`]="{ item }">
+                                {{ fechaSalida(item.fecha_emision) }}
                             </template>
-                            <template v-slot:[`item.opciones`]="{item}">
-                                <template v-if="item.estado===1">
+                            <template v-slot:[`item.opciones`]="{ item }">
+                                <template v-if="item.estado === 1">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-icon color="error" rounded v-bind="attrs" v-on="on"
@@ -1131,8 +1542,8 @@
                                     </v-tooltip>
                                 </template>
                             </template>
-                            <template v-slot:[`item.estado`]="{item}">
-                                <span class="green--text" v-if="item.estado===1">Activo</span>
+                            <template v-slot:[`item.estado`]="{ item }">
+                                <span class="green--text" v-if="item.estado === 1">Activo</span>
                                 <span class="red--text" v-else>Inactivo</span>
                             </template>
                         </v-data-table>
@@ -1237,7 +1648,7 @@
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers" :items="clientes" :search="search">
-                            <template v-slot:[`item.agregar`]="{item}">
+                            <template v-slot:[`item.agregar`]="{ item }">
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon color="green" rounded v-bind="attrs" v-on="on"
@@ -1282,19 +1693,19 @@
                     </v-btn>
                     <v-toolbar-title>Crear nuevo cliente</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-toolbar-items v-if="si===2">
+                    <v-toolbar-items v-if="si === 2">
                         <v-btn dark text @click="crearContacto()">
                             <v-icon> mdi-plus-circle-outline </v-icon>Guardar
                         </v-btn>
                     </v-toolbar-items>
-                    <v-toolbar-items v-if="si===0">
+                    <v-toolbar-items v-if="si === 0">
                         <v-btn dark text @click="crearCliente()">
                             <v-icon> mdi-plus-circle-outline </v-icon>Guardar
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
 
-                <div v-if="si===2">
+                <div v-if="si === 2">
                     <v-row style="margin:0">
                         <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
                         <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
@@ -1378,7 +1789,7 @@
                                     </v-text-field>
                                 </span>
                             </div>
-                            <div v-if="tipoPersona==='Juridica'">
+                            <div v-if="tipoPersona === 'Juridica'">
                                 <span class="text-center display-1 black--text font-weight-Normal">
                                     Cargo:
                                 </span>
@@ -1387,7 +1798,7 @@
                                     </v-text-field>
                                 </span>
                             </div>
-                            <div v-if="tipoPersona==='Juridica'">
+                            <div v-if="tipoPersona === 'Juridica'">
                                 <span class="text-center display-1 black--text font-weight-Normal">
                                     Telefono:
                                 </span>
@@ -1417,7 +1828,7 @@
                     </v-card-actions>
                 </div>
 
-                <div v-if="si===0">
+                <div v-if="si === 0">
                     <v-row style="margin:0">
                         <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
                         <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
@@ -1509,7 +1920,7 @@
                                     </v-text-field>
                                 </span>
                             </div>
-                            <div v-if="tipoPersona==='Juridica'">
+                            <div v-if="tipoPersona === 'Juridica'">
                                 <span class="text-center display-1 black--text font-weight-Normal">
                                     Cargo:
                                 </span>
@@ -1518,7 +1929,7 @@
                                     </v-text-field>
                                 </span>
                             </div>
-                            <div v-if="tipoPersona==='Juridica'">
+                            <div v-if="tipoPersona === 'Juridica'">
                                 <span class="text-center display-1 black--text font-weight-Normal">
                                     Telefono:
                                 </span>
@@ -1572,9 +1983,9 @@
                                     <span>Añadir ensayo</span>
                                 </v-tooltip>
                             </template>
-                            <template v-slot:[`item.ensayocosto`]="{item}">
+                            <template v-slot:[`item.ensayocosto`]="{ item }">
                                 <template>
-                                    ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                    ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
                                 </template>
                             </template>
                         </v-data-table>
@@ -1614,9 +2025,9 @@
                                     <span>Añadir ensayo</span>
                                 </v-tooltip>
                             </template>
-                            <template v-slot:[`item.ensayocosto`]="{item}">
+                            <template v-slot:[`item.ensayocosto`]="{ item }">
                                 <template>
-                                    ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                    ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
                                 </template>
                             </template>
                         </v-data-table>
@@ -1657,9 +2068,9 @@
                                     <span>Añadir ensayo</span>
                                 </v-tooltip>
                             </template>
-                            <template v-slot:[`item.ensayocosto`]="{item}">
+                            <template v-slot:[`item.ensayocosto`]="{ item }">
                                 <template>
-                                    ${{Intl.NumberFormat("de-DE").format(item.costo)}}
+                                    ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
                                 </template>
                             </template>
                         </v-data-table>
@@ -1916,7 +2327,21 @@ export default {
             TodasCotis: [],
             get: 0,
             column: null,
-            //la computada "suma" es el total
+            switch2: "",
+            MostrarEditar: 0,
+            MostrarEditar2: 0,
+            MostrarEditar3: 0,
+            ConstoEnsayo: 0,
+            //datos de la cotizacion
+            cotiDescripcion:"",
+            cotiNit:"",
+            cotiDireccion:"",
+            cotiTelefono:"",
+            cotiCorreo:"",
+            //calidad
+            caliCodigo:"",
+            caliaprobacion:"",
+            caliVersion:"",
             //headers
             tipos: ["Natural", "Juridica"],
             headers: [
@@ -2107,7 +2532,25 @@ export default {
             this.botones = 1
         },
         listar() {
-            axios.get(`/cotizacion/listarTodasLasCotizaciones`)
+            console.log(this.switch1);
+            if (this.switch1 === true) {
+                this.switch2 = "Activos"
+                axios.get(`/cotizacion/listarTodasLasCotizaciones`)
+                    .then((response) => {
+                        console.log(response);
+                        this.cotizaciones = response.data.coti;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                this.listarTodasLasCotis()
+            }
+
+        },
+        listarTodasLasCotis() {
+            this.switch2 = "Inactivos"
+            axios.get(`/cotizacion/listarLasCotizacionesAD`)
                 .then((response) => {
                     console.log(response);
                     this.cotizaciones = response.data.coti;
@@ -2115,10 +2558,6 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-        },
-        detalles(cotizacion) {
-            this.$store.dispatch("", cotizacion);
-            this.$router.push("/DetallesCotizacion");
         },
         desactivar(id) {
             let header = { headers: { "token": this.$store.state.token } };
@@ -2160,6 +2599,9 @@ export default {
             axios.get("/calidad/listar")
                 .then((response) => {
                     this.calidadOferta = response.data.listado[0].OfertaServicios
+                    this.caliCodigo=this.calidadOferta[0].codigo
+                    this.caliaprobacion=this.calidadOferta[0].aprobacion
+                    this.caliVersion=this.calidadOferta[0].version
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2169,6 +2611,11 @@ export default {
             axios.get("/cotizacion/traerInfo")
                 .then((response) => {
                     this.datos = response.data.info
+                    this.cotiDescripcion=this.datos[0].descripcion
+                    this.cotiNit=this.datos[0].nit
+                    this.cotiDireccion=this.datos[0].direccion
+                    this.cotiTelefono=this.datos[0].telefono
+                    this.cotiCorreo=this.datos[0].correo
                     this.iva = this.datos[0].iva
                     this.numerocoti = this.datos[0].numero_cotizacion
                     let date = new Date();
@@ -2550,94 +2997,235 @@ export default {
             axios.get(`/ensayo`)
                 .then((response) => {
                     this.ensayos = response.data.ensayo
+                    console.log("a", this.ensayos);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
         seleccionarEnsayos(ensayo) {
-            let ensayo1 = null
-            let ensayo2 = null
-            let ensayo3 = null
-            ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
-            ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
-            ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+            if (this.MostrarEditar === 1) {
+                let ensayo1 = null
+                let ensayo2 = null
+                let ensayo3 = null
+                ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
+                ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
+                ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
 
-            if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
-                this.ensayosSeleccionados.push(ensayo)
-                this.costo += ensayo.costo
+                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                    this.ensayosSeleccionados.push({
+                        costoEnsayo: ensayo.costo,
+                        ensayo: ensayo
+                    })
+                    this.costo += ensayo.costo
+                } else {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "El ensayo ya esta agregado",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
             } else {
-                this.$swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: "El ensayo ya esta agregado",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
+                let ensayo1 = null
+                let ensayo2 = null
+                let ensayo3 = null
+                ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+                ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+                ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+
+                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                    this.ensayosSeleccionados.push(ensayo)
+                    this.costo += ensayo.costo
+                } else {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "El ensayo ya esta agregado",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
             }
             // this.ensayos.splice(index, 1)
         },
         seleccionarEnsayos2(ensayo) {
-            let ensayo1 = null
-            let ensayo2 = null
-            let ensayo3 = null
-            ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
-            ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
-            ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+            // let ensayo1 = null
+            // let ensayo2 = null
+            // let ensayo3 = null
+            // ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+            // ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+            // ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
 
 
-            if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
-                this.ensayosSeleccionados2.push(ensayo)
-                this.costo2 += ensayo.costo
+            // if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+            //     this.ensayosSeleccionados2.push(ensayo)
+            //     this.costo2 += ensayo.costo
+            // } else {
+            //     this.$swal.fire({
+            //         position: "top-end",
+            //         icon: "error",
+            //         title: "El ensayo ya esta agregado",
+            //         showConfirmButton: false,
+            //         timer: 1500,
+            //     });
+            // }
+            if (this.MostrarEditar2 === 1) {
+                let ensayo1 = null
+                let ensayo2 = null
+                let ensayo3 = null
+                ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
+                ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
+                ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
+
+                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                    this.ensayosSeleccionados2.push({
+                        costoEnsayo: ensayo.costo,
+                        ensayo: ensayo
+                    })
+                    this.costo2 += ensayo.costo
+                } else {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "El ensayo ya esta agregado",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
             } else {
-                this.$swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: "El ensayo ya esta agregado",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-            }
+                let ensayo1 = null
+                let ensayo2 = null
+                let ensayo3 = null
+                ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+                ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+                ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
 
-            // this.ensayos.splice(index, 1)
+                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                    this.ensayosSeleccionados2.push(ensayo)
+                    this.costo2 += ensayo.costo
+                } else {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "El ensayo ya esta agregado",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            }
+            
         },
         seleccionarEnsayos3(ensayo) {
-            let ensayo1 = null
-            let ensayo2 = null
-            let ensayo3 = null
-            ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
-            ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
-            ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+            if (this.MostrarEditar3 === 1) {
+                let ensayo1 = null
+                let ensayo2 = null
+                let ensayo3 = null
+                ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
+                ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
+                ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
 
-
-            if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
-                this.ensayosSeleccionados3.push(ensayo)
-                this.costo3 += ensayo.costo
+                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                    this.ensayosSeleccionados3.push({
+                        costoEnsayo: ensayo.costo,
+                        ensayo: ensayo
+                    })
+                    this.costo3 += ensayo.costo
+                } else {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "El ensayo ya esta agregado",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
             } else {
-                this.$swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: "El ensayo ya esta agregado",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
+                let ensayo1 = null
+                let ensayo2 = null
+                let ensayo3 = null
+                ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+                ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+                ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+
+                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                    this.ensayosSeleccionados2.push(ensayo)
+                    this.costo2 += ensayo.costo
+                } else {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "El ensayo ya esta agregado",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
             }
-            // this.ensayos.splice(index, 1)
+            // let ensayo1 = null
+            // let ensayo2 = null
+            // let ensayo3 = null
+            // ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+            // ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+            // ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+
+
+            // if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+            //     this.ensayosSeleccionados3.push(ensayo)
+            //     this.costo3 += ensayo.costo
+            // } else {
+            //     this.$swal.fire({
+            //         position: "top-end",
+            //         icon: "error",
+            //         title: "El ensayo ya esta agregado",
+            //         showConfirmButton: false,
+            //         timer: 1500,
+            //     });
+            // }
         },
         eliminarEnsayos(index, ensayo) {
-            this.ensayosSeleccionados.splice(index, 1)
-            this.costo -= ensayo.costo
-            // this.ensayos.push(ensayo)
+            if (this.MostrarEditar === 1) {
+                this.ensayosSeleccionados.splice(index, 1)
+                this.costo -= ensayo.costoEnsayo
+
+            } else {
+                this.ensayosSeleccionados.splice(index, 1)
+                this.costo -= ensayo.costo
+            }
         },
         eliminarEnsayos2(index, ensayo) {
-            this.ensayosSeleccionados2.splice(index, 1)
-            this.costo2 -= ensayo.costo
-            // this.ensayos.push(ensayo)
+            if (this.MostrarEditar === 1) {
+                this.ensayosSeleccionados2.splice(index, 1)
+                this.costo2 -= ensayo.costoEnsayo
+
+            } else {
+                this.ensayosSeleccionados2.splice(index, 1)
+                this.costo2 -= ensayo.costo
+            }
+            // if (this.MostrarEditar === 1) {
+            //     this.ensayosSeleccionados2.splice(index, 1)
+            //     this.costo2 -= ensayo.costoEnsayo
+            // } else {
+            //     this.ensayosSeleccionados2.splice(index, 1)
+            //     this.costo2 -= ensayo.costo
+            // }
         },
         eliminarEnsayos3(index, ensayo) {
-            this.ensayosSeleccionados3.splice(index, 1)
-            this.costo3 -= ensayo.costo
-            // this.ensayos.push(ensayo)
+            if (this.MostrarEditar === 1) {
+                this.ensayosSeleccionados3.splice(index, 1)
+                this.costo3 -= ensayo.costoEnsayo
+
+            } else {
+                this.ensayosSeleccionados3.splice(index, 1)
+                this.costo3 -= ensayo.costo
+            }
+            // if (this.MostrarEditar === 1) {
+            //     this.ensayosSeleccionados3.splice(index, 1)
+            //     this.costo3 -= ensayo.costoEnsayo
+            // } else {
+            //     this.ensayosSeleccionados3.splice(index, 1)
+            //     this.costo3 -= ensayo.costo
+            // }
         },
         crearEnsayo() {
             let header = { headers: { "token": this.$store.state.token } };
@@ -2748,6 +3336,9 @@ export default {
                     this.botones = 1
                     this.BtnEditar = 0
                     this.dialog = false
+                    this.MostrarEditar = 0
+                    this.MostrarEditar2 = 0
+                    this.MostrarEditar3 = 0
                     this.listarEnsayos()
                 }
             })
@@ -2788,6 +3379,9 @@ export default {
             this.botones = 1
             this.BtnEditar = 0
             this.dialog = false
+            this.MostrarEditar = 0
+            this.MostrarEditar2 = 0
+            this.MostrarEditar3 = 0
             this.listarEnsayos()
         },
         crearcotizacion() {
@@ -3033,41 +3627,50 @@ export default {
                 this.descuento = datos.descuento
                 this.BtnEditar = 1
                 this.botones = 0
-                if (datos.items.item1.itemsEnsayo) {
-                    this.costo = datos.items.item1.costo
-                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados.push(ensayo.ensayo)
-                    });
+                this.MostrarEditar = 1
+                this.MostrarEditar2 = 1
+                this.MostrarEditar3 = 1
+                if (this.MostrarEditar === 1) {
+                    if (datos.items.item1.itemsEnsayo) {
+                        this.costo = datos.items.item1.costo
+                        datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados.push(ensayo)
+                        });
+                    }
+                    if (datos.items.item2.itemsEnsayo) {
+                        this.costo2 = datos.items.item2.costo
+                        datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados2.push(ensayo)
+                        })
+                    }
+                    if (datos.items.item3.itemsEnsayo) {
+                        this.costo3 = datos.items.item3.costo
+                        datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados3.push(ensayo)
+                        })
+                    }
+                } else {
+                    if (datos.items.item1.itemsEnsayo) {
+                        this.costo = datos.items.item1.costo
+                        datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                            console.log(ensayo.costoEnsayo);
+                            this.ensayosSeleccionados.push(ensayo.ensayo)
+                        });
+                    }
+                    if (datos.items.item2.itemsEnsayo) {
+                        this.costo2 = datos.items.item2.costo
+                        datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados2.push(ensayo.ensayo)
+                        })
+                    }
+                    if (datos.items.item3.itemsEnsayo) {
+                        this.costo3 = datos.items.item3.costo
+                        datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados3.push(ensayo.ensayo)
+                        })
+                    }
                 }
-                if (datos.items.item2.itemsEnsayo) {
-                    this.costo2 = datos.items.item2.costo
-                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados2.push(ensayo.ensayo)
-                    })
-                }
-                if (datos.items.item3.itemsEnsayo) {
-                    this.costo3 = datos.items.item3.costo
-                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados3.push(ensayo.ensayo)
-                    })
-                }
-                // for (let i = 0; i < this.ensayosSeleccionados.length; i++) {
-                //     for (let i = 0; i < this.ensayos.length; i++) {
-                //         const element = this.ensayos[i];
-                //         console.log(element);
-                //         if (this.ensayosSeleccionados[i].ensayo === this.ensayos[i].ensayo) {
-                //             this.ensayos.splice(i, 1)
-                //         }
-                //     }
 
-
-                //     // if (this.ensayosSeleccionados.length === 1) {
-                //     //     if (this.ensayos[i].ensayo === this.ensayosSeleccionados[i].ensayo) {
-                //     //         console.log("a1");
-                //     //         this.ensayos.splice(i, 1)
-                //     //     }
-                //     // }
-                // }
                 this.dialog = true;
             } else {
                 console.log("sin");
@@ -3093,30 +3696,49 @@ export default {
                 this.descuento = datos.descuento
                 this.BtnEditar = 1
                 this.botones = 0
-                if (datos.items.item1.itemsEnsayo) {
-                    this.costo = datos.items.item1.costo
-                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados.push(ensayo.ensayo)
-                    });
+                this.MostrarEditar = 1
+                this.MostrarEditar2 = 1
+                this.MostrarEditar3 = 1
+                if (this.MostrarEditar === 1) {
+                    if (datos.items.item1.itemsEnsayo) {
+                        this.costo = datos.items.item1.costo
+                        datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados.push(ensayo)
+                        });
+                    }
+                    if (datos.items.item2.itemsEnsayo) {
+                        this.costo2 = datos.items.item2.costo
+                        datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados2.push(ensayo)
+                        })
+                    }
+                    if (datos.items.item3.itemsEnsayo) {
+                        this.costo3 = datos.items.item3.costo
+                        datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados3.push(ensayo)
+                        })
+                    }
+                } else {
+                    if (datos.items.item1.itemsEnsayo) {
+                        this.costo = datos.items.item1.costo
+                        datos.items.item1.itemsEnsayo.forEach(ensayo => {
+                            console.log(ensayo.costoEnsayo);
+                            this.ensayosSeleccionados.push(ensayo.ensayo)
+                        });
+                    }
+                    if (datos.items.item2.itemsEnsayo) {
+                        this.costo2 = datos.items.item2.costo
+                        datos.items.item2.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados2.push(ensayo.ensayo)
+                        })
+                    }
+                    if (datos.items.item3.itemsEnsayo) {
+                        this.costo3 = datos.items.item3.costo
+                        datos.items.item3.itemsEnsayo.forEach(ensayo => {
+                            this.ensayosSeleccionados3.push(ensayo.ensayo)
+                        })
+                    }
                 }
-                if (datos.items.item2.itemsEnsayo) {
-                    this.costo2 = datos.items.item2.costo
-                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados2.push(ensayo.ensayo)
-                    })
-                }
-                if (datos.items.item3.itemsEnsayo) {
-                    this.costo3 = datos.items.item3.costo
-                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados3.push(ensayo.ensayo)
-                    })
-                }
-                // for (let i = 0; i < this.ensayos.length; i++) {
-                //     const element = this.ensayos[i];
-                //     console.log(element);
-                //     console.log(this.ensayosSeleccionados);
-
-                // }
                 this.dialog = true;
             }
         },
@@ -3315,16 +3937,9 @@ export default {
                     });
             }
         },
-        listarTodasLasCotis() {
-            axios.get(`/cotizacion/listarLasCotizacionesAD`)
-                .then((response) => {
-                    console.log(response);
-                    this.TodasCotis = response.data.coti;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
+
+
+        // si en caso no me trae la informacion con la que se guardo el ensayo aplicar lo de la edicion
         traerDatos(datos) {
             console.log(datos);
             if (datos.idCliente.contacto) { // aun no lleva la informacion
@@ -3441,7 +4056,6 @@ export default {
         this.listarContactos();
         this.listarEnsayos();
         this.listarUsuarios();
-        this.listarTodasLasCotis();
     },
 };
 </script>

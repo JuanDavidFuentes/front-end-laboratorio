@@ -1,76 +1,64 @@
-
-
 <template>
-  <v-container-fluid>
+  <v-container fluid>
 
-    <v-row class="mt-11" style="height:90vh">
-      <v-col cols="1" xs="6" md="6" lg="6" xl="6" class="na-0 pa-0" align="center" style="background-color:#F5F5F5;">
+    <v-row class="mt-6" style="height:90vh">
+
+      <v-col cols="6" xs="6" md="6" lg="6" xl="6" class="na-0 pa-0" align="center" style="background-color:#F5F5F5;">
         <v-img height="850px" width="1070px" src="https://i.ibb.co/Lxsh2Lw/Sin-t-tulo-5.png"></v-img>
       </v-col>
 
-      <v-col cols="11" xs="6" md="6" lg="6" xl="6" style="background-color:#F5F5F5;">
-        <v-row class="ma-3">
-          <v-col class="text-right" cols="12">
-
-            <!-- <v-btn class="pa-4 text-center text-no-wrap rounded-l-xl" color="deep-orange" dark @click="registro()">
-              Registrate
-            </v-btn>
-
-            <v-btn class="pa-4 text-center text-no-wrap rounded-r-xl" color="deep-orange" dark @click="inicio()">
-              Inicia sesión
-            </v-btn> -->
-          </v-col>
-        </v-row>
+      <v-col cols="6" xs="6" md="6" lg="6" xl="6" style="background-color:#F5F5F5;">
         <v-row class="ma-10">
-
-          <!-- inicio de sesión -->
           <v-col cols="12">
             <div class="deep-orange--text display-2 font-weight-bold">
               Inicia sesión
+              <br>
+              <br>
             </div>
-            <br>
-            <br>
-            <div>
-              <span class="text-center title black--text font-weight-Normal" autocomplete="email" label="Email">
+            
+            <div >
+              <span class="text-center title black--text font-weight-Normal mr-n4" autocomplete="email" label="Email">
                 Correo:
               </span>
               <span>
-                <v-text-field color="black" v-model="correo" label="Correo" type="email" filled rounded dense>
+                <v-text-field  color="black"  v-model="correo" type="email" filled rounded dense>
                 </v-text-field>
               </span>
             </div>
+
             <div>
-              <span class="text-center title black--text font-weight-Normal">
+              <span class="text-center title black--text font-weight-Normal mr-n10">
                 Contraseña:
               </span>
               <span>
-                <v-text-field v-model="password" :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]"
-                  :type="show3 ? 'text' : 'password'" name="input-10-2" hint="At least 8 characters"
-                  value="wqfasds" class="input-group--focused" @click:append="show3 = !show3" rounded dense filled></v-text-field>
+                <v-text-field v-model="password" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]"
+                  :type="show ? 'text' : 'password'" hint="At least 8 characters"
+                   @click:append="show = !show" rounded dense filled></v-text-field>
               </span>
             </div>
+
             <br>
             <v-btn color="deep-orange" rounded dark @click="login()">Iniciar Sesión</v-btn>
           </v-col>
         </v-row>
       </v-col>
+
     </v-row>
-  </v-container-fluid>
+  </v-container>
 </template>
 
 <script>
+
+
 import axios from "axios";
 export default {
-  name: "PageLogin",
-
+  
+  name: "PaginaLogin",
   data: () => ({
     correo: "",
     valido: "",
-    show1: false,
-    show2: true,
-    show3: false,
-    show4: false,
-    password2: 'Password2',
+    show: false,
+    password:'',
     rules: {
       required: value => !!value || 'Required.',
       min: v => v.length >= 8 || 'Min 8 characters',
@@ -111,19 +99,6 @@ export default {
           console.log(error);
         })
     },
-    registro() {
-      this.ocultar = 0
-    },
-    inicio() {
-      this.ocultar = 1
-    }
   }
 };
 </script>
-<style>
-.logo {
-  height: 800px;
-  width: 500px;
-  background-position: center;
-}
-</style>
