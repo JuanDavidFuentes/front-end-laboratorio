@@ -132,7 +132,7 @@
                             </v-list>
                             <v-divider></v-divider>
 
-                            <v-container fluid >
+                            <v-container fluid>
                                 <v-row
                                     style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; "
                                     class="mx-5">
@@ -415,7 +415,7 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <div v-if="get === 0">
+                                        <!-- <div v-if="get === 0">
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white black--text" dark @click="dialog7 = true">
@@ -427,7 +427,7 @@
                                                 </template>
                                                 <span>Crear nuevo ensayo</span>
                                             </v-tooltip>
-                                        </div>
+                                        </div> -->
                                         <!-- <v-tooltip bottom>
                                             <template v-slot:activator="{ on, attrs }">
                                                 <v-btn @click="dialog7=true" v-bind="attrs" v-on="on">
@@ -1099,11 +1099,11 @@
                                                     <tr>
                                                         <td
                                                             style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-
+                                                            
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
+                                                            
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
@@ -1135,13 +1135,11 @@
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
-                                                            class="text-center white--text">
-                                                            <h2>Observaciones de la propuesta</h2>
+                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;" class="text-center white--text">
+                                                            <h2>Observaciones de la propuesta técnica y económica</h2>
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
@@ -1173,13 +1171,12 @@
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
-                                                            class="text-center white--text">
-                                                            <h2>técnica y económica</h2>
+                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                            <v-textarea hight="20"  outlined name="input-7-4" label="Descripcion">
+                                                            </v-textarea>
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
@@ -2089,7 +2086,7 @@
         </v-dialog>
         <!-- ensayos -->
 
-        <v-dialog v-model="dialog7" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <!-- <v-dialog v-model="dialog7" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
                 <v-toolbar dark>
                     <v-btn icon dark @click="dialog7 = false">
@@ -2234,7 +2231,7 @@
                     </v-card-actions>
                 </div>
             </v-card>
-        </v-dialog>
+        </v-dialog> -->
     </v-container>
 </template>
 
@@ -2333,15 +2330,15 @@ export default {
             MostrarEditar3: 0,
             ConstoEnsayo: 0,
             //datos de la cotizacion
-            cotiDescripcion:"",
-            cotiNit:"",
-            cotiDireccion:"",
-            cotiTelefono:"",
-            cotiCorreo:"",
+            cotiDescripcion: "",
+            cotiNit: "",
+            cotiDireccion: "",
+            cotiTelefono: "",
+            cotiCorreo: "",
             //calidad
-            caliCodigo:"",
-            caliaprobacion:"",
-            caliVersion:"",
+            caliCodigo: "",
+            caliaprobacion: "",
+            caliVersion: "",
             //headers
             tipos: ["Natural", "Juridica"],
             headers: [
@@ -2414,7 +2411,7 @@ export default {
                 {
                     text: 'Estado',
                     align: 'start',
-
+                    sortable: false,
                     value: 'estado',
                 },
                 {
@@ -2599,9 +2596,9 @@ export default {
             axios.get("/calidad/listar")
                 .then((response) => {
                     this.calidadOferta = response.data.listado[0].OfertaServicios
-                    this.caliCodigo=this.calidadOferta[0].codigo
-                    this.caliaprobacion=this.calidadOferta[0].aprobacion
-                    this.caliVersion=this.calidadOferta[0].version
+                    this.caliCodigo = this.calidadOferta[0].codigo
+                    this.caliaprobacion = this.calidadOferta[0].aprobacion
+                    this.caliVersion = this.calidadOferta[0].version
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2611,11 +2608,11 @@ export default {
             axios.get("/cotizacion/traerInfo")
                 .then((response) => {
                     this.datos = response.data.info
-                    this.cotiDescripcion=this.datos[0].descripcion
-                    this.cotiNit=this.datos[0].nit
-                    this.cotiDireccion=this.datos[0].direccion
-                    this.cotiTelefono=this.datos[0].telefono
-                    this.cotiCorreo=this.datos[0].correo
+                    this.cotiDescripcion = this.datos[0].descripcion
+                    this.cotiNit = this.datos[0].nit
+                    this.cotiDireccion = this.datos[0].direccion
+                    this.cotiTelefono = this.datos[0].telefono
+                    this.cotiCorreo = this.datos[0].correo
                     this.iva = this.datos[0].iva
                     this.numerocoti = this.datos[0].numero_cotizacion
                     let date = new Date();
@@ -2638,7 +2635,7 @@ export default {
             let header = { headers: { "token": this.$store.state.token } };
             axios.get(`/usuarios/listarClientes`, header)
                 .then((response) => {
-                    this.clientes = response.data.usuarios.reverse() 
+                    this.clientes = response.data.usuarios.reverse()
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2791,7 +2788,7 @@ export default {
             let header = { headers: { "token": this.$store.state.token } };
             axios.get(`/usuarios/listarContactos`, header)
                 .then((response) => {
-                    this.contactos = response.data.usuarios.reverse() 
+                    this.contactos = response.data.usuarios.reverse()
                 })
                 .catch((error) => {
                     console.log(error);
@@ -2996,7 +2993,7 @@ export default {
         listarEnsayos() {
             axios.get(`/ensayo`)
                 .then((response) => {
-                    this.ensayos = response.data.ensayo.reverse() 
+                    this.ensayos = response.data.ensayo.reverse()
                     console.log("a", this.ensayos);
                 })
                 .catch((error) => {
@@ -3006,13 +3003,13 @@ export default {
         seleccionarEnsayos(ensayo) {
             if (this.MostrarEditar === 1) {
                 let ensayo1 = null
-                let ensayo2 = null
-                let ensayo3 = null
+                // let ensayo2 = null
+                // let ensayo3 = null
                 ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
-                ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
-                ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
+                // ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
+                // ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
 
-                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                if (ensayo1 === undefined) {//&& ensayo2 === undefined && ensayo3 === undefined
                     this.ensayosSeleccionados.push({
                         costoEnsayo: ensayo.costo,
                         ensayo: ensayo
@@ -3029,13 +3026,13 @@ export default {
                 }
             } else {
                 let ensayo1 = null
-                let ensayo2 = null
-                let ensayo3 = null
+                // let ensayo2 = null
+                // let ensayo3 = null
                 ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
-                ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
-                ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+                // ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+                // ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
 
-                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                if (ensayo1 === undefined) {//&& ensayo2 === undefined && ensayo3 === undefined
                     this.ensayosSeleccionados.push(ensayo)
                     this.costo += ensayo.costo
                 } else {
@@ -3072,14 +3069,14 @@ export default {
             //     });
             // }
             if (this.MostrarEditar2 === 1) {
-                let ensayo1 = null
+                // let ensayo1 = null
                 let ensayo2 = null
-                let ensayo3 = null
-                ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
+                // let ensayo3 = null
+                // ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
                 ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
-                ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
+                // ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
 
-                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                if (ensayo2 === undefined) { //ensayo1 === undefined && && ensayo3 === undefined
                     this.ensayosSeleccionados2.push({
                         costoEnsayo: ensayo.costo,
                         ensayo: ensayo
@@ -3095,14 +3092,14 @@ export default {
                     });
                 }
             } else {
-                let ensayo1 = null
+                // let ensayo1 = null
                 let ensayo2 = null
-                let ensayo3 = null
-                ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+                // let ensayo3 = null
+                // ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
                 ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
-                ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
+                // ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
 
-                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                if (ensayo2 === undefined) {//ensayo1 === undefined && && ensayo3 === undefined
                     this.ensayosSeleccionados2.push(ensayo)
                     this.costo2 += ensayo.costo
                 } else {
@@ -3115,18 +3112,18 @@ export default {
                     });
                 }
             }
-            
+
         },
         seleccionarEnsayos3(ensayo) {
             if (this.MostrarEditar3 === 1) {
-                let ensayo1 = null
-                let ensayo2 = null
+                // let ensayo1 = null
+                // let ensayo2 = null
                 let ensayo3 = null
-                ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
-                ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
+                // ensayo1 = this.ensayosSeleccionados.find(element => element.ensayo._id === ensayo._id)
+                // ensayo2 = this.ensayosSeleccionados2.find(element => element.ensayo._id === ensayo._id)
                 ensayo3 = this.ensayosSeleccionados3.find(element => element.ensayo._id === ensayo._id)
 
-                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
+                if (ensayo3 === undefined) {//ensayo1 === undefined && ensayo2 === undefined && 
                     this.ensayosSeleccionados3.push({
                         costoEnsayo: ensayo.costo,
                         ensayo: ensayo
@@ -3142,16 +3139,16 @@ export default {
                     });
                 }
             } else {
-                let ensayo1 = null
-                let ensayo2 = null
+                // let ensayo1 = null
+                // let ensayo2 = null
                 let ensayo3 = null
-                ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
-                ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
+                // ensayo1 = this.ensayosSeleccionados.find(element => element._id === ensayo._id)
+                // ensayo2 = this.ensayosSeleccionados2.find(element => element._id === ensayo._id)
                 ensayo3 = this.ensayosSeleccionados3.find(element => element._id === ensayo._id)
 
-                if (ensayo1 === undefined && ensayo2 === undefined && ensayo3 === undefined) {
-                    this.ensayosSeleccionados2.push(ensayo)
-                    this.costo2 += ensayo.costo
+                if (ensayo3 === undefined) {//ensayo1 === undefined && ensayo2 === undefined &&
+                    this.ensayosSeleccionados3.push(ensayo)
+                    this.costo3 += ensayo.costo
                 } else {
                     this.$swal.fire({
                         position: "top-end",
@@ -3602,7 +3599,7 @@ export default {
         },
         editar(datos) {
             console.log(datos);
-            if (datos.idCliente.contacto) { 
+            if (datos.idCliente.contacto) {
                 console.log("contacto");
                 this.idCotizacion = datos._id
                 this.fechaEmision = datos.fecha_emision.slice(0, 10)
@@ -3743,26 +3740,51 @@ export default {
             }
         },
         editarCoti() {
-            if (this.ensayosSeleccionados.length !== 0) {
-                this.ensayosSeleccionados.forEach(ensayos => {
-                    let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
-                    this.itemsEnsayo.push(ensayo)
-                });
+            console.log(this.ensayosSeleccionados);
+            if (this.MostrarEditar === 1) {
+                if (this.ensayosSeleccionados.length !== 0) {
+                    this.ensayosSeleccionados.forEach(ensayos => {
+                        let ensayo = { ensayo: ensayos.ensayo._id, costoEnsayo: ensayos.ensayo.costo }
+                        this.itemsEnsayo.push(ensayo)
+                    });
+                } else {
+                    this.itemsEnsayo = [{ ensayo: "", costoEnsayo: 0 }]
+                }
+                if (this.ensayosSeleccionados2.length !== 0) {
+                    this.ensayosSeleccionados2.forEach(ensayos => {
+                        let ensayo = { ensayo: ensayos.ensayo._id, costoEnsayo: ensayos.ensayo.costo }
+                        this.itemsEnsayo2.push(ensayo)
+                    });
+                }
+                if (this.ensayosSeleccionados3.length !== 0) {
+                    this.ensayosSeleccionados3.forEach(ensayos => {
+                        let ensayo = { ensayo: ensayos.ensayo._id, costoEnsayo: ensayos.ensayo.costo }
+                        this.itemsEnsayo3.push(ensayo)
+                    });
+                }
             } else {
-                this.itemsEnsayo = [{ ensayo: "", costoEnsayo: 0 }]
+                if (this.ensayosSeleccionados.length !== 0) {
+                    this.ensayosSeleccionados.forEach(ensayos => {
+                        let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
+                        this.itemsEnsayo.push(ensayo)
+                    });
+                } else {
+                    this.itemsEnsayo = [{ ensayo: "", costoEnsayo: 0 }]
+                }
+                if (this.ensayosSeleccionados2.length !== 0) {
+                    this.ensayosSeleccionados2.forEach(ensayos => {
+                        let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
+                        this.itemsEnsayo2.push(ensayo)
+                    });
+                }
+                if (this.ensayosSeleccionados3.length !== 0) {
+                    this.ensayosSeleccionados3.forEach(ensayos => {
+                        let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
+                        this.itemsEnsayo3.push(ensayo)
+                    });
+                }
             }
-            if (this.ensayosSeleccionados2.length !== 0) {
-                this.ensayosSeleccionados2.forEach(ensayos => {
-                    let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
-                    this.itemsEnsayo2.push(ensayo)
-                });
-            }
-            if (this.ensayosSeleccionados3.length !== 0) {
-                this.ensayosSeleccionados3.forEach(ensayos => {
-                    let ensayo = { ensayo: ensayos._id, costoEnsayo: ensayos.costo }
-                    this.itemsEnsayo3.push(ensayo)
-                });
-            }
+
             if (this.contacto === "") {
                 let header = { headers: { "token": this.$store.state.token } };
                 axios.put(`/cotizacion/${this.idCotizacion}`, {

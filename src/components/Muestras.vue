@@ -1,11 +1,17 @@
 <template>
     <v-container style="margin-top: 100px">
         <v-row style="margin:0">
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
+            <v-col cols="12" xs="12" sm="12" md="4" lg="10" xl="10">
                 <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
                     Volver
                 </v-btn>
             </v-col>
+            <v-col class="text-left" cols="12" xs="12" sm="12" md="4" lg="2" xl="2">
+                <v-btn class="mt-n3" color="deep-orange" dark >
+                    Crear Muestra
+                </v-btn>
+            </v-col>
+
 
             <v-col cols="12">
                 <template>
