@@ -7,9 +7,10 @@
                 </v-btn>
             </v-col>
             <v-col class="text-left" cols="12" xs="12" sm="12" md="4" lg="2" xl="2">
-                <v-btn class="mt-n3" color="deep-orange" dark >
+                <v-btn class="mt-n3" color="deep-orange" dark @click="pagmuestras()">
                     Crear Muestra
                 </v-btn>
+
             </v-col>
 
 
@@ -19,7 +20,7 @@
                         <v-card-title>
                             Clientes
                             <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar" single-line
                                 hide-details></v-text-field>
                         </v-card-title>
                         <v-data-table :headers="headers" :items="clientes" :search="search">
@@ -119,7 +120,9 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">{{ soliNombre }} {{ soliApellido }}</h3>
+                                <h3 class="mt-1">
+                                    <v-btn color="deep-orange" dark class="ma-2">Elegir solicitante</v-btn>
+                                </h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -212,6 +215,37 @@
                                 <h3 class="mt-3">{{ soliEmail }}</h3>
                             </v-col>
                         </v-row>
+                        <v-row style="margin: 0" class="mx-5">
+                            <v-col
+                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                <div class="text-center white--text text-no-wrap deep-orange mt-4">
+                                    <h3>Cotización</h3>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                class="pa-0 ma-0 text-center">
+                                <h3 class="mt-3">
+                                <v-autocomplete v-model="idCoti" :items="cotizaciones" :filter="customFilter2" filled rounded dense
+                                    item-text="numero_cotizacion" item-value="_id" label="Seleccione cotización">
+                                </v-autocomplete>
+                                </h3>
+                            </v-col>
+                            <v-col
+                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                <div class="text-center white--text text-no-wrap deep-orange mt-4">
+                                    <h3>Items</h3>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                class="pa-0 ma-0 text-center">
+                                <h3 class="mt-3"><v-select v-model="item" filled rounded dense label="Items" :items="seleccionarItem" item-text="items"></v-select></h3>
+                            </v-col>
+                        </v-row>
+
                         <v-row class="mx-5"
                             style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
                             <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
@@ -312,54 +346,53 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-if="mostrasDatos<=0">
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                    
+                                            <tr v-if="mostrasDatos <= 0">
+                                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    
+
                                                 </td>
                                             </tr>
                                             <tr v-for="(datosss, i ) in mostrasDatos" :key="i">
@@ -446,7 +479,7 @@
                 </v-card-title>
                 <v-col cols="12">
                     <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad" item-value="_id"
-                        filled rounded dense label="Municipio de recolección" @click="listarCiudad()"></v-autocomplete>
+                        filled rounded dense label="Municipio de recolección"></v-autocomplete>
                     <v-text-field v-model="direccionM" label="Dirección de toma de muestra*" filled rounded dense>
                     </v-text-field>
                     <v-text-field v-model="lugarM" label="Lugar de toma de muestra*" filled rounded dense>
@@ -461,11 +494,7 @@
                     </v-text-field>
                     <v-text-field v-model="fecha" type="date" label="Fecha y hora de recolección*" filled rounded dense>
                     </v-text-field>
-                    <v-text-field v-model="cotizacion" value="aa" :label="cotizacion2.numero_cotizacion" disabled filled
-                        rounded dense></v-text-field>
 
-                    <v-select v-model="item" filled rounded dense label="Items" :items="seleccionarItem"
-                        item-text="items" @click="listarItems()"></v-select>
                     <!-- <v-text-field v-model="observacion" label="Observaciones" filled rounded dense></v-text-field> -->
                 </v-col>
                 <v-card-actions class="mt-n7">
@@ -525,6 +554,7 @@ export default {
         seleccionadoCiudad: "",
         infoMuestras: [],
         Municipio: [],
+        cotizaciones: [],
         headers: [
             {
                 text: 'Nombres',
@@ -560,6 +590,11 @@ export default {
 
     }),
     methods: {
+        customFilter2(item, queryText) {
+            const textOne = item.numero_cotizacion
+            const searchText = queryText
+            return textOne.indexOf(searchText) > -1
+        },
         Volver() {
             this.$router.push("/Home");
         },
@@ -573,33 +608,45 @@ export default {
                     console.log(error);
                 });
         },
-        pagmuestras(datos) {
-            console.log(datos);
-            this.datos = datos
-            if (datos.contacto) {
-                this.soliNombre = datos.nombre
-                this.soliApellido = datos.apellidos
-                this.soliDepartamento = datos.ciudad.departamento
-                this.soliDocumento = datos.documento
-                this.soliNombreContacto = datos.contacto.nombre
-                this.soliDireccion = datos.direccion
-                this.soliTelefono = datos.celular
-                this.soliCiudad = datos.ciudad.ciudad
-                this.soliEmail = datos.email
-                this.traerCotizacion()
-                this.info()
-            } else {
-                this.soliNombre = datos.nombre
-                this.soliApellido = datos.apellidos
-                this.soliDepartamento = datos.ciudad.departamento
-                this.soliDocumento = datos.documento
-                this.soliDireccion = datos.direccion
-                this.soliTelefono = datos.celular
-                this.soliCiudad = datos.ciudad.ciudad
-                this.soliEmail = datos.email
-                this.traerCotizacion()
-                this.info()
-            }
+        listarCotizacioness() {
+            let header = { headers: { "token": this.$store.state.token } }
+            axios.get(`/cotizacion/listarTodasLasCotizaciones`, header)
+                .then((response) => {
+                    this.cotizaciones = response.data.coti
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+        },
+
+        pagmuestras() {
+            // console.log(datos);
+            // this.datos = datos
+            // if (datos.contacto) {
+            //     this.soliNombre = datos.nombre
+            //     this.soliApellido = datos.apellidos
+            //     this.soliDepartamento = datos.ciudad.departamento
+            //     this.soliDocumento = datos.documento
+            //     this.soliNombreContacto = datos.contacto.nombre
+            //     this.soliDireccion = datos.direccion
+            //     this.soliTelefono = datos.celular
+            //     this.soliCiudad = datos.ciudad.ciudad
+            //     this.soliEmail = datos.email
+            //     this.traerCotizacion()
+            //     this.info()
+            // } else {
+            //     this.soliNombre = datos.nombre
+            //     this.soliApellido = datos.apellidos
+            //     this.soliDepartamento = datos.ciudad.departamento
+            //     this.soliDocumento = datos.documento
+            //     this.soliDireccion = datos.direccion
+            //     this.soliTelefono = datos.celular
+            //     this.soliCiudad = datos.ciudad.ciudad
+            //     this.soliEmail = datos.email
+            //     this.traerCotizacion()
+            //     this.info()
+            // }
             this.dialog = true
         },
         traerCotizacion() {
@@ -609,7 +656,6 @@ export default {
                 .then(response => {
                     this.cotizacion2 = response.data.coti[0]
                     this.idCoti = this.cotizacion2._id
-                    this.infoItem();
                     this.listarItems();
                 })
                 .catch(error => {
@@ -647,6 +693,7 @@ export default {
                     console.log(error);
                 })
         },
+
         customFilter(item, queryText) {
             const textOne = item.ciudad.toUpperCase()
             const searchText = queryText.toUpperCase()
@@ -749,16 +796,6 @@ export default {
                     console.log(error);
                 });
         },
-        infoItem() {
-            let header = { headers: { "token": this.$store.state.token } }
-            axios.get(`/cotizacion/listarporIdCoti/${this.idCoti}`, header)
-                .then((response) => {
-                    this.itemsCoti.push(response.data.items)
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
         listarItems() {
             let header = { headers: { "token": this.$store.state.token } }
             axios.get(`/cotizacion/listarporIdCoti/${this.idCoti}`, header)
@@ -784,6 +821,8 @@ export default {
         this.usuarios();
         this.listarCiudad();
         this.listarTiposs();
+        this.listarCotizacioness();
+
     },
 }
 </script>

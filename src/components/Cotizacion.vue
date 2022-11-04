@@ -1099,11 +1099,11 @@
                                                     <tr>
                                                         <td
                                                             style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-                                                            
+
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-                                                            
+
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
@@ -1135,8 +1135,10 @@
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;" class="text-center white--text">
-                                                            <h2>Observaciones de la propuesta técnica y económica</h2>
+                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
+                                                            class="text-center white--text">
+                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
+                                                                económica</h2>
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
@@ -1152,7 +1154,8 @@
                                                         <td v-if="get === 0"
                                                             style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
                                                             class="pa-0 ma-0">
-                                                            <v-text-field v-model="descuento" type="number">
+                                                            <v-text-field hide-details v-model="descuento"
+                                                                type="number">
                                                             </v-text-field>
                                                         </td>
                                                         <td v-if="get === 1"
@@ -1164,29 +1167,26 @@
 
                                                     <tr>
                                                         <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-
+                                                            style="background-color: #ff5722; border: solid 1px;  border-right: 0px;  border-top: 0px;">
                                                         </td>
                                                         <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
+                                                            style="background-color: #ff5722; border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
                                                         </td>
-                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-                                                            <v-textarea hight="20"  outlined name="input-7-4" label="Descripcion">
-                                                            </v-textarea>
+                                                        <td class="text-center"
+                                                            style="background-color: #ff5722; border: solid 1px; width: 500px; border-left: 0px; border-right: 0px;  border-top: 0px;">
                                                         </td>
                                                         <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                            style="background-color: #ff5722; border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
                                                         </td>
                                                         <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                            style="background-color: #ff5722; border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;  border-top: 0px;"
                                                             class="text-right white--text">
                                                             <h2> IVA </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;  border-top: 0px;"
                                                             class="pa-0 ma-0">
                                                             <div>{{ iva }}%</div>
                                                         </td>
@@ -1194,7 +1194,7 @@
 
                                                     <tr>
                                                         <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px; ">
 
                                                         </td>
                                                         <td
@@ -1203,6 +1203,10 @@
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                            <v-textarea hide-details style="background-color: white;"
+                                                                v-model="cotiObservacion" auto-grow filled
+                                                                color="deep-orange" label="Observacion" rows="1">
+                                                            </v-textarea>
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
@@ -1356,7 +1360,8 @@
                                                         </td>
                                                         <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
                                                             class="text-center white--text">
-                                                            <h2>Observaciones de la propuesta</h2>
+                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
+                                                                económica</h2>
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
@@ -1385,23 +1390,22 @@
 
                                                     <tr>
                                                         <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
 
                                                         </td>
                                                         <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
-                                                            class="text-center white--text">
-                                                            <h2>técnica y económica</h2>
+                                                        <td style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;"
+                                                            >
                                                         </td>
                                                         <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
 
                                                         </td>
                                                         <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
 
                                                         </td>
                                                         <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
@@ -1425,6 +1429,10 @@
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                            <v-textarea hide-details style="background-color: white;"
+                                                                v-model="cotiObservacion" auto-grow filled
+                                                                color="deep-orange" label="Observacion" rows="1">
+                                                            </v-textarea>
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
@@ -2329,6 +2337,7 @@ export default {
             MostrarEditar2: 0,
             MostrarEditar3: 0,
             ConstoEnsayo: 0,
+            cotiObservacion:"",
             //datos de la cotizacion
             cotiDescripcion: "",
             cotiNit: "",
@@ -3327,6 +3336,7 @@ export default {
                     this.telefono = ""
                     this.celular = ""
                     this.cargo = ""
+                    this.cotiObservacion=""
                     this.email = ""
                     this.BtnEditar = 0
                     this.get = 0
@@ -3372,6 +3382,7 @@ export default {
             this.cargo = ""
             this.email = ""
             this.BtnEditar = 0
+            this.cotiObservacion=""
             this.get = 0
             this.botones = 1
             this.BtnEditar = 0
@@ -3425,6 +3436,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
+                    observaciones:this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -3459,6 +3471,7 @@ export default {
                         this.resultIva = 0
                         this.BtnEditar = 0
                         this.get = 0
+                        this.cotiObservacion=""
                         this.dialog = false
                         this.listarTodasLasCotis();
                     })
@@ -3472,6 +3485,7 @@ export default {
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
+                            this.$router.push("/");
                             console.log();
                         } else {
                             if (error.response.data.errores.errors[0].msg === 'Invalid value') {
@@ -3521,6 +3535,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
+                    observaciones:this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -3556,6 +3571,7 @@ export default {
                         this.resultIva = 0
                         this.BtnEditar = 0
                         this.get = 0
+                        this.cotiObservacion=""
                         this.dialog = false
                         this.listarTodasLasCotis();
                     })
@@ -3569,6 +3585,7 @@ export default {
                                 timer: 1500,
                             });
                             console.log();
+                            this.$router.push("/");
                         } else {
                             if (error.response.data.errores.errors[0].msg === 'Invalid value') {
                                 console.log(error.response.data.errores.errors[0]);
@@ -3622,6 +3639,7 @@ export default {
                 this.cargo = datos.idCliente.cargo
                 this.email = datos.idCliente.email
                 this.descuento = datos.descuento
+                this.cotiObservacion=datos.observaciones
                 this.BtnEditar = 1
                 this.botones = 0
                 this.MostrarEditar = 1
@@ -3691,6 +3709,7 @@ export default {
                 this.cargo = datos.idCliente.cargo
                 this.email = datos.idCliente.email
                 this.descuento = datos.descuento
+                this.cotiObservacion=datos.observaciones
                 this.BtnEditar = 1
                 this.botones = 0
                 this.MostrarEditar = 1
@@ -3807,6 +3826,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
+                    observaciones:this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -3846,6 +3866,7 @@ export default {
                                 timer: 1500,
                             });
                             console.log();
+                            this.$router.push("/");
                         } else {
                             if (error.response.data.errores.errors[0].msg === 'Invalid value') {
                                 console.log(error.response.data.errores.errors[0]);
@@ -3893,6 +3914,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
+                    observaciones:this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -3931,6 +3953,7 @@ export default {
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
+                            this.$router.push("/");
                             console.log();
                         } else {
                             if (error.response.data.errores.errors[0].msg === 'Invalid value') {
