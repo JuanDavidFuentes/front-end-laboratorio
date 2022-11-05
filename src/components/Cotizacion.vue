@@ -4078,7 +4078,12 @@ export default {
                 }
                 this.dialog = true;
             }
-        },
+        },recuperarToken(){
+            localStorage.getItem("datos")
+            localStorage.getItem("token")
+            console.log(localStorage.getItem("datos"));
+            console.log(localStorage.getItem("token"));
+        }
     },
     computed: {
         sumar() {
@@ -4092,6 +4097,7 @@ export default {
         }
     },
     created() {
+        this.recuperarToken();
         this.listar();
         this.calidad();
         this.info();

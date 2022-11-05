@@ -114,5 +114,17 @@ export default {
     name: 'PageHome',
     data: () => ({
     }),
+    methods:{
+        recuperarToken(){
+            localStorage.getItem("datos")
+            localStorage.getItem("token")
+            console.log(localStorage.getItem("datos"));
+            console.log(localStorage.getItem("token"));
+            console.log(this.$store.state.datos);
+        }
+    },
+    created(){
+        this.recuperarToken();
+    }
 }
 </script>

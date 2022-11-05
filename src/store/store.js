@@ -6,14 +6,14 @@ Vue.use(Vuex);
 
 export const store =new Vuex.Store({
     state: {
-        token:"",
+        token:localStorage.token,
         datos:{},
         cotizaciones:{},
         muestras:{},
     },
     mutations:{
         setToken(state,value){
-            state.token = value
+                state.token = value
         },
         setDatos(state, value){
             state.datos = value

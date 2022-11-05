@@ -151,6 +151,7 @@ export default {
     salir() {
       this.$router.replace("/")
       this.$store.commit("setToken", "")
+      this.$store.commit("setDatos", {})
     },
     Configuracion() {
       this.configuracion = 1

@@ -18,14 +18,17 @@
                 <template>
                     <v-card>
                         <v-card-title>
-                            Clientes
+                            Muestras
                             <v-spacer></v-spacer>
                             <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar" single-line
                                 hide-details></v-text-field>
                         </v-card-title>
-                        <v-data-table :headers="headers" :items="clientes" :search="search">
-                            <template v-slot:[`item.muestras`]="{ item }">
-                                <v-btn @click="pagmuestras(item.idCliente)">Muestras</v-btn>
+                        <v-data-table :headers="headers" :items="muestras" :search="search">
+                            <!-- <template v-slot:[`item.muestras`]="{ item }">
+                                <v-btn>Muestras</v-btn>
+                            </template> -->
+                            <template v-slot:[`item.fecha`]="{ item }">
+                                {{ fechaSalida(item.fechaRecoleccion) }}
                             </template>
                         </v-data-table>
                     </v-card>
@@ -121,8 +124,32 @@
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-1">
-                                    <v-btn color="deep-orange" dark class="ma-2">Elegir solicitante</v-btn>
+                                    <v-btn color="deep-orange" v-if="botones == 1" dark class="ma-2"
+                                        @click="dialog4 = true">Elegir
+                                        solicitante</v-btn>
                                 </h3>
+                                <v-row style="margin:0">
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"></v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                        <div v-if="botones == 0" class="pa-0 ma-0 font-weight-black text-center my-3"
+                                            full-width hide-details>
+                                            {{soliNombre}}
+                                        </div>
+                                    </v-col>
+                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                        <div>
+                                            <v-tooltip v-if="botones === 0" bottom>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
+                                                        v-on="on" @click="borrarclientes()">
+                                                        mdi-close-circle
+                                                    </v-icon>
+                                                </template>
+                                                <span>Eliminar los datos del cliente</span>
+                                            </v-tooltip>
+                                        </div>
+                                    </v-col>
+                                </v-row>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -227,9 +254,10 @@
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">
-                                <v-autocomplete v-model="idCoti" :items="cotizaciones" :filter="customFilter2" filled rounded dense
-                                    item-text="numero_cotizacion" item-value="_id" label="Seleccione cotización">
-                                </v-autocomplete>
+                                    <v-autocomplete v-model="idCotiSeli" :items="cotizaciones" :filter="customFilter2"
+                                        filled rounded dense item-text="numero_cotizacion" item-value="_id"
+                                        label="Seleccione cotización" @change="listarItems()">
+                                    </v-autocomplete>
                                 </h3>
                             </v-col>
                             <v-col
@@ -242,7 +270,10 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3"><v-select v-model="item" filled rounded dense label="Items" :items="seleccionarItem" item-text="items"></v-select></h3>
+                                <h3 class="mt-3">
+                                    <v-select v-model="item" filled rounded dense label="Items" :items="seleccionarItem"
+                                        item-text="items"></v-select>
+                                </h3>
                             </v-col>
                         </v-row>
 
@@ -307,18 +338,6 @@
                                                 <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Tipo de muestra</h2>
-                                                    <v-tooltip bottom>
-                                                        <template v-slot:activator="{ on, attrs }">
-                                                            <v-btn color="white" class="ma-2" dark
-                                                                @click="dialog3 = true">
-                                                                <v-icon color="deep-orange" rounded v-bind="attrs"
-                                                                    v-on="on">
-                                                                    mdi-plus-circle
-                                                                </v-icon>
-                                                            </v-btn>
-                                                        </template>
-                                                        <span>Añadir tipo de la muestra</span>
-                                                    </v-tooltip>
                                                 </th>
                                                 <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                                     class="text-center white--text">
@@ -489,7 +508,7 @@
                     <v-text-field v-model="procedimiento" label="Procedimiento de*" filled rounded dense>
                     </v-text-field>
                     <v-autocomplete v-model="tipoM" :items="listarTipos" item-text="tipos" item-value="_id" filled
-                        rounded dense label="Tipo de muestra" @click="listarTiposs()"></v-autocomplete>
+                        rounded dense label="Tipo de muestra" ></v-autocomplete>
                     <v-text-field v-model="matrizM" label="Matriz de la muestra*" filled rounded dense>
                     </v-text-field>
                     <v-text-field v-model="fecha" type="date" label="Fecha y hora de recolección*" filled rounded dense>
@@ -501,6 +520,43 @@
                     <v-btn color="success" @click="Guardar()">
                         Añadir datos
                     </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="dialog4" max-width="1000px">
+            <v-card>
+                <template>
+                    <v-card>
+                        <v-card-title>
+                            Seleccione un Solicitante
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
+                                hide-details></v-text-field>
+                        </v-card-title>
+                        <v-data-table :headers="headers2" :items="clientes" :search="search">
+                            <template v-slot:[`item.agregar`]="{ item }">
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                            @click="seleccionarclientes(item)">
+                                            mdi-plus-circle
+                                        </v-icon>
+                                    </template>
+                                    <span>Añadir cliente</span>
+                                </v-tooltip>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </template>
+                <v-card-actions>
+                    <v-row style="margin:0">
+                        <v-col cols="12" class="text-center">
+                            <v-btn color="red" @click="dialog4 = false" rounded dark>
+                                Cerrar
+                            </v-btn>
+                        </v-col>
+                    </v-row>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -544,7 +600,10 @@ export default {
         numerocoti: 0,
         cotizacion2: [],
         infoItem2: [],
+        muestras: [],
         idCoti: "",
+        idSoli:"",
+        idCotiSeli:"",
         itemsCoti: [],
         infoMuestraa: [],
         seleccionarItem: [],
@@ -555,7 +614,39 @@ export default {
         infoMuestras: [],
         Municipio: [],
         cotizaciones: [],
+        botones: 1,
+        get: 0,
         headers: [
+            {
+                text: 'Codigo de la muestra',
+                align: 'start',
+                value: "codMuestra",
+            },
+            {
+                text: 'Numero de cotización',
+                align: 'start',
+                value: 'cotizacion.numero_cotizacion',
+            },
+            {
+                text: 'Solicitante',
+                align: 'start',
+                sortable: false,
+                value: 'solicitante.nombre',
+            },
+            {
+                text: 'Lugar de recolección',
+                align: 'start',
+                sortable: false,
+                value: 'munRecoleccion.ciudad',
+            },
+            {
+                text: 'Fecha de recolección',
+                align: 'start',
+                sortable: false,
+                value: 'fecha',
+            },
+        ],
+        headers2: [
             {
                 text: 'Nombres',
                 align: 'start',
@@ -569,27 +660,35 @@ export default {
                 value: 'idCliente.apellidos',
             },
             {
+                text: 'C.C.',
+                align: 'start',
+                value: 'idCliente.documento',
+            },
+            {
+                text: 'Tipo persona',
+                align: 'start',
+                value: 'idCliente.tipoPersona',
+            },
+            {
                 text: 'Correo',
                 align: 'start',
                 sortable: false,
                 value: 'idCliente.email',
             },
             {
-                text: 'C.C. / NIT',
+                text: 'Añadir',
                 align: 'start',
                 sortable: false,
-                value: 'idCliente.documento',
-            },
-            {
-                text: 'Muestras',
-                align: 'start',
-                sortable: false,
-                value: 'muestras',
+                value: 'agregar',
             },
         ],
 
     }),
     methods: {
+        fechaSalida(r) {
+            let d = new Date(r);
+            return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
+        },
         customFilter2(item, queryText) {
             const textOne = item.numero_cotizacion
             const searchText = queryText
@@ -612,7 +711,7 @@ export default {
             let header = { headers: { "token": this.$store.state.token } }
             axios.get(`/cotizacion/listarTodasLasCotizaciones`, header)
                 .then((response) => {
-                    this.cotizaciones = response.data.coti
+                    console.log(response);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -650,13 +749,14 @@ export default {
             this.dialog = true
         },
         traerCotizacion() {
-            console.log(this.datos);
             let header = { headers: { "token": this.$store.state.token } }
-            axios.get(`cotizacion/buscarNombre/${this.datos._id}`, header)
+            axios.get(`cotizacion/buscarNombre/${this.idSoli}`, header)
                 .then(response => {
-                    this.cotizacion2 = response.data.coti[0]
-                    this.idCoti = this.cotizacion2._id
-                    this.listarItems();
+                    console.log(response);
+                    this.cotizaciones = response.data.coti
+                    // this.cotizacion2 = response.data.coti[0]
+                    // this.idCoti = this.cotizacion2._id
+                    // this.listarItems();
                 })
                 .catch(error => {
                     console.log(error);
@@ -703,7 +803,7 @@ export default {
         Guardar() {
             let header = { headers: { "token": this.$store.state.token } }
             axios.post(`/DMuestra/insertar`, {
-                solicitante: this.datos._id,
+                solicitante: this.idSoli,
                 munRecoleccion: this.seleccionadoCiudad,
                 direccionTomaMuestra: this.direccionM,
                 lugarTomaMuestra: this.lugarM,
@@ -712,11 +812,12 @@ export default {
                 tipoMuestra: this.tipoM,
                 matrizMuestra: this.matrizM,
                 fechaRecoleccion: this.fecha,
-                cotizacion: this.idCoti,
+                cotizacion: this.idCotiSeli,
                 item: this.item,
 
             }, header)
                 .then((response) => {
+                    console.log(response);
                     this.$swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -724,7 +825,8 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.mostrasDatos.push(response.data.coti)
+                    this.idCotiSeli=""
+                    this.idSoli=""
                     this.seleccionadoCiudad = ""
                     this.direccionM = ""
                     this.lugarM = ""
@@ -734,19 +836,31 @@ export default {
                     this.matrizM = ""
                     this.cotizacion = ""
                     this.item = ""
-                    this.dialog2 = false
+                    this.fecha=""
+                    this.listarMuestras();
+                    this.dialog = false
 
 
                 })
                 .catch((error) => {
                     console.log(error);
-                    this.$swal.fire({
+                    if(error.response.data.errores.errors[0].msg==="Invalid value"){
+                        this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "No has seleccionado un solicitante!!!",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    }else{
+                        this.$swal.fire({
                         position: "top-end",
                         icon: "error",
                         title: error.response.data.errores.errors[0].msg,
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    }
                 });
 
         },
@@ -798,7 +912,7 @@ export default {
         },
         listarItems() {
             let header = { headers: { "token": this.$store.state.token } }
-            axios.get(`/cotizacion/listarporIdCoti/${this.idCoti}`, header)
+            axios.get(`/cotizacion/listarporIdCoti/${this.idCotiSeli}`, header)
                 .then((response) => {
                     this.seleccionarItem = response.data.items
                 })
@@ -816,13 +930,81 @@ export default {
                 });
 
         },
+        listarMuestras() {
+            axios.get(`/DMuestra/listarMuestras`)
+                .then((response) => {
+                    this.muestras = response.data.muestras
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        seleccionarclientes(info) {
+            console.log(info);
+            if (info.idCliente.contacto) {
+                this.idSoli=info.idCliente._id
+                this.soliNombre = info.idCliente.nombre
+                this.soliApellido = info.idCliente.apellidos
+                this.soliDepartamento = info.idCliente.ciudad.departamento
+                this.soliDocumento = info.idCliente.documento
+                this.soliNombreContacto = info.idCliente.contacto.nombre
+                this.soliDireccion = info.idCliente.direccion
+                this.soliTelefono = info.idCliente.celular
+                this.soliCiudad = info.idCliente.ciudad.ciudad
+                this.soliEmail = info.idCliente.email
+                this.dialog4 = false
+                this.botones = 0
+                this.traerCotizacion()
+            } else {
+                this.idSoli=info.idCliente._id
+                this.soliNombre = info.idCliente.nombre
+                this.soliApellido = info.idCliente.apellidos
+                this.soliDepartamento = info.idCliente.ciudad.departamento
+                this.soliDocumento = info.idCliente.documento
+                this.soliDireccion = info.idCliente.direccion
+                this.soliTelefono = info.idCliente.celular
+                this.soliCiudad = info.idCliente.ciudad.ciudad
+                this.soliEmail = info.idCliente.email
+                this.dialog4 = false
+                this.botones = 0
+                this.traerCotizacion()
+            }
+
+        },
+            // if (datos.contacto) {
+
+            //     this.info()
+            // } else {
+            //     this.traerCotizacion()
+            //     this.info()
+            // }
+        borrarclientes() {
+            this.soliNombre = ""
+            this.soliApellido = ""
+            this.soliDepartamento = ""
+            this.soliDocumento = ""
+            this.soliNombreContacto = ""
+            this.soliDireccion = ""
+            this.soliTelefono = ""
+            this.soliCiudad = ""
+            this.soliEmail = ""
+            this.idCoti=""
+            this.idSoli=""
+            this.idCotiSeli=""
+            this.seleccionarItem=[]
+            this.cotizaciones=[]
+            this.dialog4 = false
+            this.botones = 1
+        },
     },
     created() {
+        this.listarMuestras();
         this.usuarios();
         this.listarCiudad();
         this.listarTiposs();
         this.listarCotizacioness();
 
     },
+    // la idea es que al mometo de guardar la muestra saca el id y con otra peticion listarla con los populates para que de esta forma se vea la informacion el la tabla
 }
 </script>

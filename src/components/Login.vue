@@ -77,6 +77,8 @@ export default {
           this.$store.dispatch("setToken", response.data.token);
           this.$store.dispatch("setDatos", response.data.usuario);
           this.$router.push("/Home")
+          localStorage.setItem("token",response.data.token)
+          localStorage.setItem("datos",JSON.stringify(response.data.usuario))
         })
         .catch(error => {
           if (error.response.data.errores) {
