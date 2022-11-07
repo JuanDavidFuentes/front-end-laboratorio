@@ -2,14 +2,24 @@ import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 
 
-Vue.use(Vuetify, {
-    theme: {
-      primary: '#FF5722',
-      secondary: '#b0bec5',
-      accent: '#8c9eff',
-      error: '#b71c1c'
-    }
-});
+Vue.use(Vuetify);
+
+
+let color = localStorage.getItem('color');
+if(color===undefined){
+color = "#000000"
+}
+
 
 export default new Vuetify({
+  theme: {
+    themes: {
+      light: {
+        primary: color,
+        secondary: '#b0bec5',
+        accent: '#8c9eff',
+        error: '#b71c1c',
+      },
+    },
+  },
 });

@@ -101,6 +101,17 @@ export default {
           console.log(error);
         })
     },
+    color(){
+      let color="#000000" // negro
+      //Una llamada a la base de datos al modelo de colores para traer los colores mientras solo voy a utilizar un color para las pruebas
+      this.$store.dispatch("setColor", color);
+      localStorage.setItem("color",color) // ya funciona todo solo hace falata que en la base de datos este el color
+    }
+  },
+  created(){
+    this.color();
   }
 };
+// this.$store.dispatch("setToken", response.data.token);
+//           localStorage.setItem("token",response.data.token)
 </script>

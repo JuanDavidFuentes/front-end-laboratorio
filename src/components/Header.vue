@@ -152,6 +152,8 @@ export default {
       this.$router.replace("/")
       this.$store.commit("setToken", "")
       this.$store.commit("setDatos", {})
+      localStorage.setItem("token","")
+      localStorage.setItem("datos",{})
     },
     Configuracion() {
       this.configuracion = 1
