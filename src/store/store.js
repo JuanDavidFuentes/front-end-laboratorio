@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const store =new Vuex.Store({
     state: {
         token:localStorage.token,
-        datos:localStorage.datos,
+        datos:{},
         cotizaciones:{},
         muestras:{},
         color:localStorage.color,

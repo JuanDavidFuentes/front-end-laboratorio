@@ -27,6 +27,11 @@
                             <!-- <template v-slot:[`item.muestras`]="{ item }">
                                 <v-btn>Muestras</v-btn>
                             </template> -->
+                            <template v-slot:[`item.ver`]="{ item }">                                
+                                <v-icon  @click="a(item)">
+                                    mdi-file-eye-outline
+                                </v-icon>
+                            </template>
                             <template v-slot:[`item.fecha`]="{ item }">
                                 {{ fechaSalida(item.fechaRecoleccion) }}
                             </template>
@@ -49,7 +54,7 @@
                     <v-toolbar-title>Crear Muestra</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn dark text @click="dialog = false"> Guardar </v-btn>
+                        <v-btn dark text @click="Guardar()"> Guardar </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
                 <v-list three-line subheader>
@@ -133,7 +138,7 @@
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
                                         <div v-if="botones == 0" class="pa-0 ma-0 font-weight-black text-center my-3"
                                             full-width hide-details>
-                                            {{soliNombre}}
+                                            {{ soliNombre }}
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
@@ -286,18 +291,6 @@
                                     <h3>Datos de la muestra</h3>
                                 </div>
                             </v-col>
-                            <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-btn color="white" class="ma-2" dark @click="dialog2 = true">
-                                            <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
-                                                mdi-plus-circle
-                                            </v-icon>
-                                        </v-btn>
-                                    </template>
-                                    <span>Añadir ítem</span>
-                                </v-tooltip>
-                            </v-col>
                         </v-row>
                         <v-row style=" margin: 0;" class="mx-5">
                             <v-col cols="12" class="ma-0 pa-0">
@@ -349,15 +342,7 @@
                                                     <h2> Fecha y hora de </h2>
                                                     <h2> recolección </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Cotización </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Ítem de </h2>
-                                                    <h2> la </h2>
-                                                </th>
+
                                                 <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Observaciones </h2>
@@ -371,43 +356,48 @@
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-autocomplete hide-details v-model="seleccionadoCiudad" :items="Municipio"
+                                                        item-text="ciudad" item-value="_id"
+                                                        label="Municipio de recolección"></v-autocomplete>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-text-field hide-details v-model="direccionM"
+                                                        label="Dirección de toma de muestra*">
+                                                    </v-text-field>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-text-field hide-details v-model="lugarM" label="Lugar de toma de muestra*">
+                                                    </v-text-field>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-text-field hide-details v-model="recolectadaPor"
+                                                        label="Muestra recolectada por*">
+                                                    </v-text-field>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-text-field hide-details v-model="procedimiento" label="Procedimiento de*">
+                                                    </v-text-field>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-autocomplete hide-details v-model="tipoM" :items="listarTipos"
+                                                        item-text="tipos" item-value="_id" label="Tipo de muestra">
+                                                    </v-autocomplete>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-text-field hide-details v-model="matrizM" label="Matriz de la muestra*">
+                                                    </v-text-field>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
+                                                    <v-text-field hide-details v-model="fecha" type="date"
+                                                        label="Fecha y hora de recolección*">
+                                                    </v-text-field>
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
@@ -476,54 +466,6 @@
                 </v-list>
             </v-card>
         </v-dialog>
-        <v-dialog v-model="dialog3" max-width="500px">
-            <v-card>
-                <v-card-title class="text-h5">
-                    <span>Añadir tipo muestra</span>
-                </v-card-title>
-                <v-col cols="12">
-                    <v-text-field v-model="agregaTipoM" label="Tipo muestra" filled rounded dense></v-text-field>
-                </v-col>
-                <v-card-actions>
-                    <v-btn color="primary" text @click="guardar2()">
-                        Agregar
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialog2" max-width="500px">
-            <v-card class="">
-                <v-card-title class="text-h5">
-                    Datos de la muestra
-                </v-card-title>
-                <v-col cols="12">
-                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" item-text="ciudad" item-value="_id"
-                        filled rounded dense label="Municipio de recolección"></v-autocomplete>
-                    <v-text-field v-model="direccionM" label="Dirección de toma de muestra*" filled rounded dense>
-                    </v-text-field>
-                    <v-text-field v-model="lugarM" label="Lugar de toma de muestra*" filled rounded dense>
-                    </v-text-field>
-                    <v-text-field v-model="recolectadaPor" label="Muestra recolectada por*" filled rounded dense>
-                    </v-text-field>
-                    <v-text-field v-model="procedimiento" label="Procedimiento de*" filled rounded dense>
-                    </v-text-field>
-                    <v-autocomplete v-model="tipoM" :items="listarTipos" item-text="tipos" item-value="_id" filled
-                        rounded dense label="Tipo de muestra" ></v-autocomplete>
-                    <v-text-field v-model="matrizM" label="Matriz de la muestra*" filled rounded dense>
-                    </v-text-field>
-                    <v-text-field v-model="fecha" type="date" label="Fecha y hora de recolección*" filled rounded dense>
-                    </v-text-field>
-
-                    <!-- <v-text-field v-model="observacion" label="Observaciones" filled rounded dense></v-text-field> -->
-                </v-col>
-                <v-card-actions class="mt-n7">
-                    <v-btn color="success" @click="Guardar()">
-                        Añadir datos
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-
         <v-dialog v-model="dialog4" max-width="1000px">
             <v-card>
                 <template>
@@ -570,7 +512,6 @@ export default {
     data: () => ({
         search: '',
         dialog: false,
-        dialog2: false,
         dialog3: false,
         dialog4: false,
         soliNombre: '',
@@ -602,8 +543,8 @@ export default {
         infoItem2: [],
         muestras: [],
         idCoti: "",
-        idSoli:"",
-        idCotiSeli:"",
+        idSoli: "",
+        idCotiSeli: "",
         itemsCoti: [],
         infoMuestraa: [],
         seleccionarItem: [],
@@ -645,6 +586,12 @@ export default {
                 sortable: false,
                 value: 'fecha',
             },
+            {
+                text: '',
+                align: 'start',
+                sortable: false,
+                value: 'ver',
+            },
         ],
         headers2: [
             {
@@ -681,6 +628,7 @@ export default {
                 sortable: false,
                 value: 'agregar',
             },
+            
         ],
 
     }),
@@ -709,7 +657,7 @@ export default {
         },
         listarCotizacioness() {
             let header = { headers: { "token": this.$store.state.token } }
-            axios.get(`/cotizacion/listarTodasLasCotizaciones`, header)
+            axios.get(`/cotizacion/cotisEnProceso`, header)
                 .then((response) => {
                     console.log(response);
                 })
@@ -825,8 +773,8 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.idCotiSeli=""
-                    this.idSoli=""
+                    this.idCotiSeli = ""
+                    this.idSoli = ""
                     this.seleccionadoCiudad = ""
                     this.direccionM = ""
                     this.lugarM = ""
@@ -836,7 +784,7 @@ export default {
                     this.matrizM = ""
                     this.cotizacion = ""
                     this.item = ""
-                    this.fecha=""
+                    this.fecha = ""
                     this.listarMuestras();
                     this.dialog = false
 
@@ -844,22 +792,22 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    if(error.response.data.errores.errors[0].msg==="Invalid value"){
+                    if (error.response.data.errores.errors[0].msg === "Invalid value") {
                         this.$swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: "No has seleccionado un solicitante!!!",
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    }else{
+                            position: "top-end",
+                            icon: "error",
+                            title: "No has seleccionado un solicitante!!!",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    } else {
                         this.$swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: error.response.data.errores.errors[0].msg,
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
+                            position: "top-end",
+                            icon: "error",
+                            title: error.response.data.errores.errors[0].msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
                     }
                 });
 
@@ -942,7 +890,7 @@ export default {
         seleccionarclientes(info) {
             console.log(info);
             if (info.idCliente.contacto) {
-                this.idSoli=info.idCliente._id
+                this.idSoli = info.idCliente._id
                 this.soliNombre = info.idCliente.nombre
                 this.soliApellido = info.idCliente.apellidos
                 this.soliDepartamento = info.idCliente.ciudad.departamento
@@ -956,7 +904,7 @@ export default {
                 this.botones = 0
                 this.traerCotizacion()
             } else {
-                this.idSoli=info.idCliente._id
+                this.idSoli = info.idCliente._id
                 this.soliNombre = info.idCliente.nombre
                 this.soliApellido = info.idCliente.apellidos
                 this.soliDepartamento = info.idCliente.ciudad.departamento
@@ -971,13 +919,13 @@ export default {
             }
 
         },
-            // if (datos.contacto) {
+        // if (datos.contacto) {
 
-            //     this.info()
-            // } else {
-            //     this.traerCotizacion()
-            //     this.info()
-            // }
+        //     this.info()
+        // } else {
+        //     this.traerCotizacion()
+        //     this.info()
+        // }
         borrarclientes() {
             this.soliNombre = ""
             this.soliApellido = ""
@@ -988,11 +936,11 @@ export default {
             this.soliTelefono = ""
             this.soliCiudad = ""
             this.soliEmail = ""
-            this.idCoti=""
-            this.idSoli=""
-            this.idCotiSeli=""
-            this.seleccionarItem=[]
-            this.cotizaciones=[]
+            this.idCoti = ""
+            this.idSoli = ""
+            this.idCotiSeli = ""
+            this.seleccionarItem = []
+            this.cotizaciones = []
             this.dialog4 = false
             this.botones = 1
         },

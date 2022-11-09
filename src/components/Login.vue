@@ -78,7 +78,7 @@ export default {
           this.$store.dispatch("setDatos", response.data.usuario);
           this.$router.push("/Home")
           localStorage.setItem("token",response.data.token)
-          localStorage.setItem("datos",JSON.stringify(response.data.usuario))
+          // localStorage.setItem("datos",JSON.stringify(response.data.usuario))
         })
         .catch(error => {
           if (error.response.data.errores) {
@@ -101,16 +101,16 @@ export default {
           console.log(error);
         })
     },
-    color(){
-      let color="#000000" // negro
-      //Una llamada a la base de datos al modelo de colores para traer los colores mientras solo voy a utilizar un color para las pruebas
-      this.$store.dispatch("setColor", color);
-      localStorage.setItem("color",color) // ya funciona todo solo hace falata que en la base de datos este el color
-    }
+    // color(){
+    //   let color="#795548" // negro
+    //   //Una llamada a la base de datos al modelo de colores para traer los colores mientras solo voy a utilizar un color para las pruebas
+    //   this.$store.dispatch("setColor", color); 
+    //   localStorage.setItem("color",color) // ya funciona todo solo hace falata que en la base de datos este el color 
+    // }
   },
-  created(){
-    this.color();
-  }
+  // created(){
+  //   this.color();
+  // }
 };
 // this.$store.dispatch("setToken", response.data.token);
 //           localStorage.setItem("token",response.data.token)

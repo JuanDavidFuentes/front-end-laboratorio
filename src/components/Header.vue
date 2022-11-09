@@ -1,13 +1,13 @@
 
 <template>
   <div class="mt-5">
-    <v-app-bar app flex dark>
+    <v-app-bar app flex class="primary">
       <img height="100" width="100"
         src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png">
-      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''" color="deep-orange"></v-app-bar-nav-icon>
       <img src="" alt="">
 
-      <v-toolbar-title class="font-weight-black"> Lab </v-toolbar-title>
+      <v-toolbar-title class="font-weight-black white--text"> Lab </v-toolbar-title>
       <v-toolbar-title class="deep-orange--text font-weight-black"> Ficat</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -97,12 +97,21 @@
             <v-list-item-title class="white--text">Bitacora</v-list-item-title>
           </v-list-item>
 
+          <v-list-item to="/color">
+            <v-list-item-icon class="white--text ">
+              <v-icon color="white">mdi-invert-colors</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="white--text">Color</v-list-item-title>
+          </v-list-item>
+
           <v-list-item to="/Calidad" style=" border: solid 1px; border-color: white; border-left:0px; border-right: 0px; border-top: 0px;">
             <v-list-item-icon class="white--text">
               <v-icon color="white">mdi-pencil-box-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="white--text">Calidad</v-list-item-title>
           </v-list-item>
+
+          
         </div>
 
         <v-list-item to="/agregarusuario">
@@ -152,8 +161,10 @@ export default {
       this.$router.replace("/")
       this.$store.commit("setToken", "")
       this.$store.commit("setDatos", {})
+      this.$store.commit("setColor", "")
       localStorage.setItem("token","")
-      localStorage.setItem("datos",{})
+      // localStorage.setItem("datos",{})
+      // localStorage.setItem("color","")
     },
     Configuracion() {
       this.configuracion = 1

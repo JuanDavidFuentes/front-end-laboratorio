@@ -104,6 +104,24 @@
         </v-card>
       </v-col>
 
+      <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
+        <v-card color="blue-grey lighten-1" dark>
+          <div class="d-flex flex-no-wrap justify-space-between">
+            <div>
+              <v-card-title class="text-h5">Color</v-card-title>
+              <v-card-actions>
+                <v-btn class="ml-2 mt-5" outlined rounded @click="Color1()">
+                  <v-icon>mdi-pencil-box-outline</v-icon>
+                  Editar versiones
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <v-avatar class="ml-n7 mr-5 mt-4 mb-3" size="120">
+              <img src="" alt="John">
+            </v-avatar>
+          </div>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -132,8 +150,10 @@ export default {
     },
     Calidad() {
       this.$router.push("/Calidad")
-    }
-
+    },
+    Color1() {
+      this.$router.push("/color");
+    },
   },
 };
 </script>

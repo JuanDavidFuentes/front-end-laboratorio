@@ -1397,8 +1397,8 @@
                                                             style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;"
-                                                            >
+                                                        <td
+                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
                                                         </td>
                                                         <td
                                                             style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
@@ -1492,7 +1492,11 @@
                         <v-card-title>
                             Buscar cotización
                             <v-spacer></v-spacer>
-                            <v-switch @click="listar()" color="red" v-model="switch1" :label="switch2"></v-switch>
+                            <v-radio-group v-model="cotis" row>
+                                <v-radio @click="listar()" color="orange" label="En proceso" value="2"></v-radio>
+                                <v-radio @click="listar()" color="green" label="Confirmadas" value="1"></v-radio>
+                                <v-radio @click="listar()" color="red" label="Rechazadas" value="0"></v-radio>
+                            </v-radio-group>
                             <v-spacer></v-spacer>
                             <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
                                 hide-details></v-text-field>
@@ -1502,26 +1506,27 @@
                                 {{ fechaSalida(item.fecha_emision) }}
                             </template>
                             <template v-slot:[`item.opciones`]="{ item }">
-                                <template v-if="item.estado === 1">
+                                <template v-if="item.estado === 2">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
-                                            <v-icon color="error" rounded v-bind="attrs" v-on="on"
+                                            <v-icon color="green" rounded v-bind="attrs" v-on="on"
                                                 @click="activar(item._id)">
-                                                mdi-calendar-remove
+                                                mdi-check-circle
                                             </v-icon>
                                         </template>
-                                        <span>Desactivar</span>
+                                        <span>Comfirmar</span>
                                     </v-tooltip>
                                 </template>
-                                <template v-else>
+                                <template v-if="item.estado === 0">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-icon color="success" rounded v-bind="attrs" v-on="on"
                                                 @click="desactivar(item._id)">
-                                                mdi-calendar-plus
+                                                <!-- Esto pone en estado 1 -->
+                                                mdi-checkbox-marked-circle-outline
                                             </v-icon>
                                         </template>
-                                        <span>Activar</span>
+                                        <span>Cambiar estado</span>
                                     </v-tooltip>
                                 </template>
                                 <template>
@@ -1548,8 +1553,9 @@
                                 </template>
                             </template>
                             <template v-slot:[`item.estado`]="{ item }">
+                                <span class="orange--text" v-if="item.estado === 2">En proceso...</span>
                                 <span class="green--text" v-if="item.estado === 1">Activo</span>
-                                <span class="red--text" v-else>Inactivo</span>
+                                <span class="red--text" v-if="item.estado === 0">Inactivo</span>
                             </template>
                         </v-data-table>
                     </v-card>
@@ -2240,6 +2246,35 @@
                 </div>
             </v-card>
         </v-dialog> -->
+        <template>
+            <v-row justify="center">
+                <v-dialog v-model="dialog8" persistent max-width="600px">
+                    <v-card>
+                        <v-card-title>
+                            <span class="text-h5">Digite el motivo del rechazo</span>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <v-text-field v-model="motivo" label="Motivo*" required></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="dialog8 = false">
+                                Close
+                            </v-btn>
+                            <v-btn color="blue darken-1" text @click="confirmar()">
+                                Save
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </v-row>
+        </template>
     </v-container>
 </template>
 
@@ -2261,8 +2296,8 @@ export default {
             dialog5: false,
             dialog6: false,
             dialog7: false,
+            dialog8: false,
             notifications: false,
-            switch1: true,
             sound: true,
             widgets: false,
             calidadOferta: [],
@@ -2289,7 +2324,7 @@ export default {
             contactos: [],
             recep: {},
             Municipio: [],
-
+            row: null,
             //esanyos
             costoEnsayo: 0,
             ensayos: [],
@@ -2314,6 +2349,7 @@ export default {
             soloUsuarios: [],
             //cotizacion
             fechaEmision: "",
+            motivo: "",
             idCliente: "",
             idcontacto: "",
             validezOferta: "",
@@ -2337,7 +2373,8 @@ export default {
             MostrarEditar2: 0,
             MostrarEditar3: 0,
             ConstoEnsayo: 0,
-            cotiObservacion:"",
+            cotiObservacion: "",
+            cotis: "2",
             //datos de la cotizacion
             cotiDescripcion: "",
             cotiNit: "",
@@ -2350,6 +2387,7 @@ export default {
             caliVersion: "",
             //headers
             tipos: ["Natural", "Juridica"],
+            idMomentaneo: "",
             headers: [
                 {
                     text: 'Nombres',
@@ -2470,6 +2508,27 @@ export default {
         };
     },
     methods: {
+        confirmar() {
+            let header = { headers: { "token": this.$store.state.token } };
+            axios.put(`/cotizacion/desactivar/${this.idMomentaneo}`, {
+                motivo: this.motivo
+            }, header)
+                .then((response) => {
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    this.dialog8 = false
+                    this.listar();
+                    this.listarTodasLasCotis();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         a() {
             console.log(this.column);
             console.log("a");
@@ -2538,10 +2597,8 @@ export default {
             this.botones = 1
         },
         listar() {
-            console.log(this.switch1);
-            if (this.switch1 === true) {
-                this.switch2 = "Activos"
-                axios.get(`/cotizacion/listarTodasLasCotizaciones`)
+            if (this.cotis === "2") {
+                axios.get(`/cotizacion/cotisEnProceso`)
                     .then((response) => {
                         console.log(response);
                         this.cotizaciones = response.data.coti.reverse();
@@ -2549,13 +2606,24 @@ export default {
                     .catch((error) => {
                         console.log(error);
                     });
+            } else if (this.cotis === "1") {
+                this.listarConfirmadas()
             } else {
                 this.listarTodasLasCotis()
             }
+        },
+        listarConfirmadas() {
+            axios.get(`/cotizacion/listarTodasLasCotizaciones`)
+                .then((response) => {
+                    console.log(response);
+                    this.cotizaciones = response.data.coti.reverse();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
 
         },
         listarTodasLasCotis() {
-            this.switch2 = "Inactivos"
             axios.get(`/cotizacion/listarLasCotizacionesAD`)
                 .then((response) => {
                     console.log(response);
@@ -2569,13 +2637,24 @@ export default {
             let header = { headers: { "token": this.$store.state.token } };
             axios.put(`/cotizacion/activar/${id}`, {}, header)
                 .then((response) => {
-                    this.$swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: response.data.msg,
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
+                    console.log(response);
+                    if (response.data.msg === "La cotizacion esta en estado confirmad0") {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "La contización esta en estado de proceso",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    } else {
+                        this.$swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: response.data.msg,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    }
                     this.listar();
                     this.listarTodasLasCotis();
                 })
@@ -2584,22 +2663,37 @@ export default {
                 });
         },
         activar(id) {
-            let header = { headers: { "token": this.$store.state.token } };
-            axios.put(`/cotizacion/desactivar/${id}`, {}, header)
-                .then((response) => {
-                    this.$swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: response.data.msg,
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    this.listar();
-                    this.listarTodasLasCotis();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            this.$swal.fire({
+                title: '¿ La cotización fue confirmana ?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Si',
+                denyButtonText: `No`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    let header = { headers: { "token": this.$store.state.token } };
+                    axios.put(`/cotizacion/activar/${id}`, {}, header)
+                        .then((response) => {
+                            this.$swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: response.data.msg,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            this.listar();
+                            this.listarTodasLasCotis();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                } else if (result.isDenied) {
+                    this.dialog8 = true
+                    this.idMomentaneo = id
+                }
+            })
+
         },
         calidad() {
             axios.get("/calidad/listar")
@@ -3336,7 +3430,7 @@ export default {
                     this.telefono = ""
                     this.celular = ""
                     this.cargo = ""
-                    this.cotiObservacion=""
+                    this.cotiObservacion = ""
                     this.email = ""
                     this.BtnEditar = 0
                     this.get = 0
@@ -3382,7 +3476,7 @@ export default {
             this.cargo = ""
             this.email = ""
             this.BtnEditar = 0
-            this.cotiObservacion=""
+            this.cotiObservacion = ""
             this.get = 0
             this.botones = 1
             this.BtnEditar = 0
@@ -3436,7 +3530,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
-                    observaciones:this.cotiObservacion,
+                    observaciones: this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -3471,7 +3565,7 @@ export default {
                         this.resultIva = 0
                         this.BtnEditar = 0
                         this.get = 0
-                        this.cotiObservacion=""
+                        this.cotiObservacion = ""
                         this.dialog = false
                         this.listarTodasLasCotis();
                     })
@@ -3535,7 +3629,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
-                    observaciones:this.cotiObservacion,
+                    observaciones: this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -3571,7 +3665,7 @@ export default {
                         this.resultIva = 0
                         this.BtnEditar = 0
                         this.get = 0
-                        this.cotiObservacion=""
+                        this.cotiObservacion = ""
                         this.dialog = false
                         this.listarTodasLasCotis();
                     })
@@ -3639,7 +3733,7 @@ export default {
                 this.cargo = datos.idCliente.cargo
                 this.email = datos.idCliente.email
                 this.descuento = datos.descuento
-                this.cotiObservacion=datos.observaciones
+                this.cotiObservacion = datos.observaciones
                 this.BtnEditar = 1
                 this.botones = 0
                 this.MostrarEditar = 1
@@ -3709,7 +3803,7 @@ export default {
                 this.cargo = datos.idCliente.cargo
                 this.email = datos.idCliente.email
                 this.descuento = datos.descuento
-                this.cotiObservacion=datos.observaciones
+                this.cotiObservacion = datos.observaciones
                 this.BtnEditar = 1
                 this.botones = 0
                 this.MostrarEditar = 1
@@ -3826,7 +3920,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
-                    observaciones:this.cotiObservacion,
+                    observaciones: this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -3914,7 +4008,7 @@ export default {
                             costo: this.costo3,
                         },
                     },
-                    observaciones:this.cotiObservacion,
+                    observaciones: this.cotiObservacion,
                     subtotal: this.sumar,
                     descuento: this.descuento,
                     iva: this.iva,
@@ -4078,7 +4172,7 @@ export default {
                 }
                 this.dialog = true;
             }
-        },recuperarToken(){
+        }, recuperarToken() {
             localStorage.getItem("datos")
             localStorage.getItem("token")
             console.log(localStorage.getItem("datos"));

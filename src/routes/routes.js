@@ -13,6 +13,7 @@ import Clientes from '../components/Clientes.vue'
 import Calidad  from "../components/Calidad.vue";
 import Perfil from "../components/Perfil.vue";
 import Orden from "../components/OrdenesServicio.vue"
+import Color from "../components/Color.vue"
 
 export const routes = [
     {path: '/', component: login},
@@ -30,4 +31,5 @@ export const routes = [
     {path: '/Calidad', component: Calidad}, 
     {path: '/perfil', component: Perfil},
     {path: '/orden', component: Orden},
+    {path: '/color', component: Color},
 ]

@@ -47,6 +47,8 @@ export default {
         return {
             search: '',
             idUsuario: '',
+            ordenes:[],
+            ensayosOrdenes:[],
             headers: [
                 {
                     text: 'Codigo Departamento',
@@ -80,6 +82,11 @@ export default {
             axios.get(`/Orden_servicio/realizado/${this.idUsuario}`, header)
                 .then((response) => {
                     console.log(response);
+                    this.ordenes=response.data.realizadopor
+                    this.ordenes.forEach(data=>{
+                        this.ensayosOrdenes.push({ensayo:data.ensayo, id:data._id})
+                    })
+                    console.log(this.ensayosOrdenes);
                 })
                 .catch((error) => {
                     console.log(error);
