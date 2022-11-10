@@ -15,13 +15,13 @@
               <br>
               <br>
             </div>
-            
-            <div >
+
+            <div>
               <span class="text-center title black--text font-weight-Normal mr-n4" autocomplete="email" label="Email">
                 Correo:
               </span>
               <span>
-                <v-text-field  color="black"  v-model="correo" type="email" filled rounded dense>
+                <v-text-field color="black" v-model="correo" type="email" filled rounded dense>
                 </v-text-field>
               </span>
             </div>
@@ -31,9 +31,9 @@
                 Contraseña:
               </span>
               <span>
-                <v-text-field v-model="password" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]"
-                  :type="show ? 'text' : 'password'" hint="At least 8 characters"
-                   @click:append="show = !show" rounded dense filled></v-text-field>
+                <v-text-field v-model="password" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required, rules.min]" :type="show ? 'text' : 'password'" hint="At least 8 characters"
+                  @click:append="show = !show" rounded dense filled></v-text-field>
               </span>
             </div>
 
@@ -52,13 +52,13 @@
 
 import axios from "axios";
 export default {
-  
+
   name: "PaginaLogin",
   data: () => ({
     correo: "",
     valido: "",
     show: false,
-    password:'',
+    password: '',
     rules: {
       required: value => !!value || 'Required.',
       min: v => v.length >= 8 || 'Min 8 characters',
@@ -77,7 +77,7 @@ export default {
           this.$store.dispatch("setToken", response.data.token);
           this.$store.dispatch("setDatos", response.data.usuario);
           this.$router.push("/Home")
-          localStorage.setItem("token",response.data.token)
+          localStorage.setItem("token", response.data.token)
           // localStorage.setItem("datos",JSON.stringify(response.data.usuario))
         })
         .catch(error => {
@@ -101,17 +101,20 @@ export default {
           console.log(error);
         })
     },
-    // color(){
-    //   let color="#795548" // negro
-    //   //Una llamada a la base de datos al modelo de colores para traer los colores mientras solo voy a utilizar un color para las pruebas
-    //   this.$store.dispatch("setColor", color); 
-    //   localStorage.setItem("color",color) // ya funciona todo solo hace falata que en la base de datos este el color 
-    // }
+    color() {
+      axios.get("/colores/")
+        .then((response) => {
+          console.log(response);
+          this.$store.dispatch("setColor", response.data.color); 
+          localStorage.setItem("color",JSON.stringify(response.data.color))
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   },
-  // created(){
-  //   this.color();
-  // }
+  created(){
+    this.color();
+  }
 };
-// this.$store.dispatch("setToken", response.data.token);
-//           localStorage.setItem("token",response.data.token)
 </script>

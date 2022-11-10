@@ -10,7 +10,8 @@ export const store =new Vuex.Store({
         datos:{},
         cotizaciones:{},
         muestras:{},
-        color:localStorage.color,
+        color:{},
+        cotiImprimir:{},
     },
     mutations:{
         setToken(state,value){
@@ -22,12 +23,15 @@ export const store =new Vuex.Store({
         setCotizacion(state, value){
             state.cotizaciones = value
         },
+        setCotiImprimir(state, value){
+            state.cotiImprimir = value
+        },
         setMuestras(state, value){
             state.muestras = value
         },
         setColor(state,value){
             state.color = value
-    },
+        },
     },
     actions:{
         setToken(context,value){
@@ -38,6 +42,9 @@ export const store =new Vuex.Store({
         },
         setCotizacion(context,value){
             context.commit('setCotizacion',value)
+        },
+        setCotiImprimir(context,value){
+            context.commit('setCotiImprimir',value)
         },
         setMuestras(context,value){
             context.commit('setMuestras',value)

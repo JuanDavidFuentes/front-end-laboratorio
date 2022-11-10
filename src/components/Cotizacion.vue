@@ -133,8 +133,7 @@
                             <v-divider></v-divider>
 
                             <v-container fluid>
-                                <v-row
-                                    style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; "
+                                <v-row style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; "
                                     class="mx-5">
                                     <v-col cols="12">
                                         <div class="text-center white--text text-no-wrap deep-orange">
@@ -1484,9 +1483,7 @@
             </v-col>
         </v-row>
         <v-row style="margin: 0">
-            <v-col cols="1"></v-col>
-            <v-col cols="10">
-
+            <v-col cols="12">
                 <template>
                     <v-card>
                         <v-card-title>
@@ -1517,16 +1514,27 @@
                                         <span>Comfirmar</span>
                                     </v-tooltip>
                                 </template>
+                                <!--activarRe()-->
+                                <template v-if="item.estado === 1">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="orange" rounded v-bind="attrs" v-on="on"
+                                                @click="activarRe(item._id)">
+                                                mdi-minus-circle
+                                            </v-icon>
+                                        </template>
+                                        <span>Cambiar a estado "En proceso..."</span>
+                                    </v-tooltip> 
+                                 </template>
                                 <template v-if="item.estado === 0">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
-                                            <v-icon color="success" rounded v-bind="attrs" v-on="on"
+                                            <v-icon color="orange" rounded v-bind="attrs" v-on="on"
                                                 @click="desactivar(item._id)">
-                                                <!-- Esto pone en estado 1 -->
-                                                mdi-checkbox-marked-circle-outline
+                                                mdi-minus-circle
                                             </v-icon>
                                         </template>
-                                        <span>Cambiar estado</span>
+                                        <span>Cambiar a estado "En proceso..."</span>
                                     </v-tooltip>
                                 </template>
                                 <template>
@@ -1545,23 +1553,22 @@
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-icon class="ml-3" color="black" @click="traerDatos(item)" rounded
                                                 v-bind="attrs" v-on="on">
-                                                mdi-eye
+                                                mdi-printer
                                             </v-icon>
                                         </template>
-                                        <span>Ver Cotización</span>
+                                        <span>Imprimir cotización</span>
                                     </v-tooltip>
                                 </template>
                             </template>
                             <template v-slot:[`item.estado`]="{ item }">
                                 <span class="orange--text" v-if="item.estado === 2">En proceso...</span>
-                                <span class="green--text" v-if="item.estado === 1">Activo</span>
-                                <span class="red--text" v-if="item.estado === 0">Inactivo</span>
+                                <span class="green--text" v-if="item.estado === 1">Comfirmada</span>
+                                <span class="red--text" v-if="item.estado === 0">Rechazada</span>
                             </template>
                         </v-data-table>
                     </v-card>
                 </template>
             </v-col>
-            <v-col cols="1"></v-col>
         </v-row>
         <!-- <v-row style="margin:0px"> -->
         <!-- <v-col cols="1"></v-col>
@@ -2521,6 +2528,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    this.motivo=""
                     this.dialog8 = false
                     this.listar();
                     this.listarTodasLasCotis();
@@ -2621,7 +2629,6 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-
         },
         listarTodasLasCotis() {
             axios.get(`/cotizacion/listarLasCotizacionesAD`)
@@ -2638,23 +2645,32 @@ export default {
             axios.put(`/cotizacion/activar/${id}`, {}, header)
                 .then((response) => {
                     console.log(response);
-                    if (response.data.msg === "La cotizacion esta en estado confirmad0") {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "La contización esta en estado de proceso",
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    } else {
-                        this.$swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: response.data.msg,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    }
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    this.listar();
+                    this.listarTodasLasCotis();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        activarRe(id) {
+            let header = { headers: { "token": this.$store.state.token } };
+            axios.put(`/cotizacion/activar/${id}`, {}, header)
+                .then((response) => {
+                    console.log(response);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
                     this.listar();
                     this.listarTodasLasCotis();
                 })
@@ -2664,7 +2680,7 @@ export default {
         },
         activar(id) {
             this.$swal.fire({
-                title: '¿ La cotización fue confirmana ?',
+                title: '¿ La cotización fue confirmada ?',
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: 'Si',
@@ -2673,7 +2689,7 @@ export default {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     let header = { headers: { "token": this.$store.state.token } };
-                    axios.put(`/cotizacion/activar/${id}`, {}, header)
+                    axios.put(`/cotizacion/activar2/${id}`, {}, header)
                         .then((response) => {
                             this.$swal.fire({
                                 position: "top-end",
@@ -4076,103 +4092,13 @@ export default {
                     });
             }
         },
-
-
-        // si en caso no me trae la informacion con la que se guardo el ensayo aplicar lo de la edicion
         traerDatos(datos) {
+            this.$store.dispatch("setCotiImprimir", datos);
+            this.$router.push("/CotiImprimir")
             console.log(datos);
-            if (datos.idCliente.contacto) { // aun no lleva la informacion
-                console.log("contacto");
-                this.idCotizacion = datos._id
-                this.fechaEmision = datos.fecha_emision.slice(0, 10)
-                this.entregaResultados = datos.entrega_resultados.slice(0, 10)
-                this.validezOferta = datos.validez_oferta.slice(0, 10)
-                this.descuento = datos.descuento
-                this.elaborado = this.recep._id
-                this.numeroCoti = datos.numero_cotizacion
-                this.idCliente = datos.idCliente._id
-                this.idcontacto = datos.idCliente.contacto._id
-                this.tipoPersona = datos.idCliente.tipoPersona
-                this.nombre = datos.idCliente.nombre
-                this.apellidos = datos.idCliente.apellidos
-                this.contacto = datos.idCliente.contacto
-                this.nombrecontacto = datos.idCliente.contacto.nombre
-                this.documento = datos.idCliente.documento
-                this.direccion = datos.idCliente.direccion
-                this.ciudad = datos.idCliente.ciudad
-                this.telefono = datos.idCliente.telefono
-                this.celular = datos.idCliente.celular
-                this.cargo = datos.idCliente.cargo
-                this.email = datos.idCliente.email
-                this.descuento = datos.descuento
-                this.get = 1
-                this.botones = 0
-                if (datos.items.item1.itemsEnsayo) {
-                    this.costo = datos.items.item1.costo
-                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados.push(ensayo.ensayo)
-                    });
-                }
-                if (datos.items.item2.itemsEnsayo) {
-                    this.costo2 = datos.items.item2.costo
-                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados2.push(ensayo.ensayo)
-                    })
-                }
-                if (datos.items.item3.itemsEnsayo) {
-                    this.costo3 = datos.items.item3.costo
-                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados3.push(ensayo.ensayo)
-                    })
-                }
-                this.dialog = true;
-            } else {
-                console.log("sin");
-                this.idCotizacion = datos._id
-                this.fechaEmision = datos.fecha_emision.slice(0, 10)
-                this.entregaResultados = datos.entrega_resultados.slice(0, 10)
-                this.validezOferta = datos.validez_oferta.slice(0, 10)
-                this.validezOferta = datos.validez_oferta
-                this.numeroCoti = datos.numero_cotizacion
-                this.descuento = datos.descuento
-                this.idCliente = datos.idCliente._id
-                this.tipoPersona = datos.idCliente.tipoPersona
-                this.elaborado = this.recep._id
-                this.nombre = datos.idCliente.nombre
-                this.apellidos = datos.idCliente.apellidos
-                this.contacto = ""
-                this.nombrecontacto = ""
-                this.documento = datos.idCliente.documento
-                this.direccion = datos.idCliente.direccion
-                this.ciudad = datos.idCliente.ciudad
-                this.telefono = datos.idCliente.telefono
-                this.celular = datos.idCliente.celular
-                this.cargo = datos.idCliente.cargo
-                this.email = datos.idCliente.email
-                this.descuento = datos.descuento
-                this.get = 1
-                this.botones = 0
-                if (datos.items.item1.itemsEnsayo) {
-                    this.costo = datos.items.item1.costo
-                    datos.items.item1.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados.push(ensayo.ensayo)
-                    });
-                }
-                if (datos.items.item2.itemsEnsayo) {
-                    this.costo2 = datos.items.item2.costo
-                    datos.items.item2.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados2.push(ensayo.ensayo)
-                    })
-                }
-                if (datos.items.item3.itemsEnsayo) {
-                    this.costo3 = datos.items.item3.costo
-                    datos.items.item3.itemsEnsayo.forEach(ensayo => {
-                        this.ensayosSeleccionados3.push(ensayo.ensayo)
-                    })
-                }
-                this.dialog = true;
-            }
-        }, recuperarToken() {
+
+        }, 
+        recuperarToken() {
             localStorage.getItem("datos")
             localStorage.getItem("token")
             console.log(localStorage.getItem("datos"));

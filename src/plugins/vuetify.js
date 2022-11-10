@@ -5,20 +5,23 @@ import Vuetify from 'vuetify/lib/framework';
 Vue.use(Vuetify);
 
 
-// let color = localStorage.getItem('color');
-// if(color===undefined){
-// color = "#000000"
-// }
+let color = JSON.parse(localStorage.getItem("color"))
+let a={}
+a = color
+let formato=a[0].formato
+let interfaz=a[0].interfaz
+let logo=a[0].logo
+let temporal=a[0].temporal
 
 
 export default new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: "#000000",
-        secondary: '#b0bec5',
-        accent: '#8c9eff',
-        error: '#b71c1c',
+        primary: interfaz,
+        secondary: formato,
+        accent: logo,
+        error: temporal,
       },
     },
   },

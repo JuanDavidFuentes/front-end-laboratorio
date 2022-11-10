@@ -164,7 +164,7 @@ export default {
       this.$store.commit("setColor", "")
       localStorage.setItem("token","")
       // localStorage.setItem("datos",{})
-      // localStorage.setItem("color","")
+      localStorage.setItem("color",{})
     },
     Configuracion() {
       this.configuracion = 1
