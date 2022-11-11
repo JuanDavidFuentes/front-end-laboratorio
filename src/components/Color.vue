@@ -29,7 +29,7 @@
                 </v-row>
                 <v-row>
                     <v-col class="text-center" cols="12">
-                        <v-btn class="mt-n3" v-bind:style='{ background: `${color}` }' @click="Guardar()">
+                        <v-btn class="mt-n3" dark v-bind:style='{ background: `${color}` }' @click="Guardar()">
                             Guardar
                         </v-btn>
                     </v-col>
@@ -130,7 +130,7 @@ export default {
                     this.$router.replace("/")
                     this.$store.commit("setToken", "")
                     this.$store.commit("setDatos", {})
-                    this.$store.commit("setColor", "")
+                    this.$store.commit("setColor", {})
                     localStorage.setItem("token", "")
                     localStorage.setItem("color", {})
                 })

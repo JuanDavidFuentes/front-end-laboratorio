@@ -3,14 +3,14 @@
   <div class="mt-5">
     <v-app-bar app flex class="primary">
       <div class="accent" id="header"></div>
-      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''" color="deep-orange"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''" color="accent"></v-app-bar-nav-icon>
 
       <v-toolbar-title v-if="$store.state.token == ''" class="font-weight-black white--text ml-3"> Lab </v-toolbar-title>
       <v-toolbar-title v-if="$store.state.token !== ''" class="font-weight-black white--text"> Lab </v-toolbar-title>
-      <v-toolbar-title class="deep-orange--text font-weight-black"> Ficat</v-toolbar-title>
+      <v-toolbar-title class="accent--text font-weight-black"> Ficat</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn @click="salir()" class="deep-orange--text" v-if="$store.state.token !== ''" rounded>
+      <v-btn @click="salir()" class="accent--text" v-if="$store.state.token !== ''" rounded>
         salir 
         <v-icon>mdi-door-open</v-icon>
       </v-btn>
@@ -164,7 +164,7 @@ export default {
       this.$router.replace("/")
       this.$store.commit("setToken", "")
       this.$store.commit("setDatos", {})
-      this.$store.commit("setColor", "")
+      this.$store.commit("setColor", {})
       localStorage.setItem("token","")
       // localStorage.setItem("datos",{})
       localStorage.setItem("color",{})

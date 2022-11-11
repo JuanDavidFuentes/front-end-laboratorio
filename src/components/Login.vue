@@ -10,7 +10,7 @@
       <v-col cols="6" xs="6" md="6" lg="6" xl="6" style="background-color:#F5F5F5;">
         <v-row class="ma-10">
           <v-col cols="12">
-            <div class="deep-orange--text display-2 font-weight-bold">
+            <div class="accent--text display-2 font-weight-bold">
               Inicia sesión
               <br>
               <br>
@@ -38,7 +38,7 @@
             </div>
 
             <br>
-            <v-btn color="deep-orange" rounded dark @click="login()">Iniciar Sesión</v-btn>
+            <v-btn color="accent" rounded dark @click="login()">Iniciar Sesión</v-btn>
           </v-col>
         </v-row>
       </v-col>

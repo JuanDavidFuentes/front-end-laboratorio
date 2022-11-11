@@ -3,13 +3,13 @@
         <v-row class="my-13">
 
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4" v-if="$store.state.datos.rol == 'ADMIN'|| $store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'SUPERVISOR'">
-                <v-card color="dark" dark >
+                <v-card class="primary" dark >
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
                             <v-card-title class="text-h5 ">Configuracion <br> Parametrización</v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5 deep-orange--text" outlined rounded to="/Configuracion" >
+                                <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/Configuracion" >
                                     <v-icon>mdi-wrench</v-icon>
                                     Configurar
                                 </v-btn>
@@ -23,13 +23,13 @@
             </v-col>
 
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4" v-if="$store.state.datos.rol == 'ADMIN'|| $store.state.datos.rol == 'SUPERVISOR'">
-                <v-card color="dark" dark > 
+                <v-card class="primary" dark > 
                     <div class="d-flex flex-no-wrap justify-space-between"> 
                         <div>
                             <v-card-title class="text-h5">Nuevo <br> Usuario </v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5 deep-orange--text" outlined rounded to="/agregarusuario">
+                                <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/agregarusuario">
                                     <v-icon class="mr-1">mdi-account-multiple-plus</v-icon>
                                     Agregar Usuario
                                 </v-btn>
@@ -43,13 +43,13 @@
             </v-col>
 
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4" v-if="$store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'ADMIN' || $store.state.datos.rol == 'CIENTIFICO'">
-                <v-card color="dark" dark>
+                <v-card class="primary" dark>
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
                             <v-card-title class="text-h5">Recepcion <br> Muestras </v-card-title>
                             <v-card-subtitle>Listar</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5 deep-orange--text" outlined rounded @click="Listar()" to="/Muestras">
+                                <v-btn class="ml-2 mt-5 accent--text" outlined rounded @click="Listar()" to="/Muestras">
                                     <v-icon>mdi-beaker-outline</v-icon>
                                     Muestras
                                 </v-btn>
@@ -63,13 +63,13 @@
             </v-col>
 
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4" v-if="$store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'ADMIN'">
-                <v-card color="dark" dark>
+                <v-card class="primary" dark>
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
                             <v-card-title class="text-h5">Clientes</v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
-                                <v-btn class="ml-2 mt-5 deep-orange--text" outlined rounded to="/Clientes">
+                                <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/Clientes">
                                     <v-icon>mdi-clipboard-alert-outline</v-icon>
                                     Clientes
                                 </v-btn>
@@ -85,7 +85,7 @@
 
             
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4" v-if="$store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'ADMIN'">
-                <v-card color="dark" dark >
+                <v-card class="primary" dark >
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
 
@@ -93,7 +93,7 @@
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
 
-                                <v-btn class="ml-2 mt-5 deep-orange--text" outlined rounded to="/cotizacion">
+                                <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/cotizacion">
                                     <v-icon>mdi-plus-circle-outline</v-icon>
                                     Agregar Cotizacion
                                 </v-btn>

@@ -10,12 +10,12 @@
     <v-row style="margin-top:3px">
 
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="blue-grey lighten-1" dark>
+        <v-card class="primary" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Setup</v-card-title>
               <v-card-actions>
-                <v-btn class="ml-2 mt-5" outlined rounded @click="Setup()">
+                <v-btn class="accent--text ml-2 mt-5" outlined rounded @click="Setup()">
                   <v-icon>mdi-server</v-icon>
                   Ver informacion
                 </v-btn>
@@ -29,12 +29,12 @@
       </v-col>
 
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="blue-grey lighten-1" dark>
+        <v-card class="primary" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Ciudades</v-card-title>
               <v-card-actions>
-                <v-btn class="ml-2 mt-5" outlined rounded @click="AggCiudades()">
+                <v-btn class="accent--text ml-2 mt-5" outlined rounded @click="AggCiudades()">
                   <v-icon>mdi-city</v-icon>
                   Ver informacion
                 </v-btn>
@@ -48,12 +48,12 @@
       </v-col>
 
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="blue-grey lighten-1" dark>
+        <v-card class="primary" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Ensayo</v-card-title>
               <v-card-actions>
-                <v-btn class="ml-2 mt-5" outlined rounded @click="ensayo()">
+                <v-btn class="accent--text ml-2 mt-5" outlined rounded @click="ensayo()">
                   <v-icon>mdi-beaker-outline</v-icon>
                   Agregar Ensayos
                 </v-btn>
@@ -67,12 +67,12 @@
       </v-col>
 
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="blue-grey lighten-1" dark>
+        <v-card class="primary" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Bitacora</v-card-title>
               <v-card-actions>
-                <v-btn class="ml-2 mt-5" outlined rounded @click="Log()">
+                <v-btn class="accent--text ml-2 mt-5" outlined rounded @click="Log()">
                   <v-icon>mdi-book</v-icon>
                   Ver movimientos
                 </v-btn>
@@ -86,12 +86,12 @@
       </v-col>
 
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="blue-grey lighten-1" dark>
+        <v-card class="primary" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Calidad</v-card-title>
               <v-card-actions>
-                <v-btn class="ml-2 mt-5" outlined rounded @click="Calidad()">
+                <v-btn class="accent--text ml-2 mt-5" outlined rounded @click="Calidad()">
                   <v-icon>mdi-pencil-box-outline</v-icon>
                   Editar versiones
                 </v-btn>
@@ -105,12 +105,12 @@
       </v-col>
 
       <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4">
-        <v-card color="blue-grey lighten-1" dark>
+        <v-card class="primary" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title class="text-h5">Color</v-card-title>
               <v-card-actions>
-                <v-btn class="ml-2 mt-5" outlined rounded @click="Color1()">
+                <v-btn class="accent--text ml-2 mt-5" outlined rounded @click="Color1()">
                   <v-icon>mdi-pencil-box-outline</v-icon>
                   Editar versiones
                 </v-btn>

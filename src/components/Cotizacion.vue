@@ -17,13 +17,13 @@
                 <v-row justify="center">
                     <v-dialog v-model="dialog" fullscreen persistent hide-overlay transition="dialog-bottom-transition">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn color="deep-orange" dark v-bind="attrs" v-on="on">
+                            <v-btn color="secondary" dark v-bind="attrs" v-on="on">
                                 <v-icon> mdi-plus-circle-outline </v-icon>Crear cotización
                             </v-btn>
                         </template>
 
                         <v-card>
-                            <v-toolbar dark>
+                            <v-toolbar class="primary">
                                 <div v-if="get === 0">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
@@ -44,9 +44,12 @@
                                         <span>Cerrar</span>
                                     </v-tooltip>
                                 </div>
-                                <v-toolbar-title v-if="BtnEditar === 0 && get === 0">Crear Cotización</v-toolbar-title>
-                                <v-toolbar-title v-if="BtnEditar === 1">Editar Cotización</v-toolbar-title>
-                                <v-toolbar-title v-if="get === 1">Información Cotización</v-toolbar-title>
+                                <v-toolbar-title class="white--text" v-if="BtnEditar === 0 && get === 0">Crear
+                                    Cotización</v-toolbar-title>
+                                <v-toolbar-title class="white--text" v-if="BtnEditar === 1">Editar Cotización
+                                </v-toolbar-title>
+                                <v-toolbar-title class="white--text" v-if="get === 1">Información Cotización
+                                </v-toolbar-title>
                                 <v-spacer></v-spacer>
                                 <div v-if="get === 0">
                                     <v-toolbar-items>
@@ -504,31 +507,31 @@
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados"
                                                         :key="i">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
                                                             {{ ensayo.ensayo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.descripcion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.unidades }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.tecnica }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.metodo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
                                                             <v-icon v-if="get === 0" dark class="ml-9" color="red"
                                                                 rounded @click="eliminarEnsayos(i, ensayo)">
@@ -538,31 +541,31 @@
                                                     </tr>
                                                     <tr v-if="ensayosSeleccionados.length <= 0">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; ">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
 
                                                         </td>
                                                     </tr>
@@ -582,11 +585,11 @@
                                                         <td class="secondary"
                                                             style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td  style="border: solid 1px; border-color: black; border-left:0px;"
+                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
                                                             class="secondary text-right white--text">
                                                             <h2> Costo del ítem 1 </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                                             class="pa-0 ma-0">
                                                             ${{ Intl.NumberFormat("de-DE").format(costo) }}
                                                         </td>
@@ -598,31 +601,31 @@
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados"
                                                         :key="i">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
                                                             {{ ensayo.ensayo.ensayo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.descripcion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.unidades }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.tecnica }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.metodo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
                                                             <v-icon v-if="get === 0" dark class="ml-9" color="red"
                                                                 rounded @click="eliminarEnsayos(i, ensayo)">
@@ -632,55 +635,55 @@
                                                     </tr>
                                                     <tr v-if="ensayosSeleccionados.length <= 0">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Costo del ítem 1 </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                                             class="pa-0 ma-0">
                                                             ${{ Intl.NumberFormat("de-DE").format(costo) }}
                                                         </td>
@@ -691,12 +694,12 @@
                                     </v-col>
                                 </v-row>
                                 <!-- item 2 -->
-                                <v-row class="mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                                <v-row class="secondary mx-5"
+                                    style=" margin: 0; border: solid 1px; border-color: black;">
                                     <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text">
                                             <h3>Ítem 2</h3>
                                         </div>
                                     </v-col>
@@ -705,7 +708,7 @@
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white" dark @click="dialog5 = true">
-                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                        <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
                                                             mdi-plus-circle
                                                         </v-icon>
                                                     </v-btn>
@@ -719,33 +722,33 @@
                                     <v-col cols="12" class="ma-0 pa-0">
                                         <v-simple-table>
                                             <template v-slot:default>
-                                                <thead style="  background-color: #ff5722; border-top: 0px;">
+                                                <thead class="secondary" style="">
                                                     <tr>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                                        <th style=" border: solid 1px; border-color: black;"
                                                             class="text-center white--text">
                                                             <h2> Código de referencia </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Descripción del ensayo </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Unidades </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Técnica analítica </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Método analítico </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Limite de cuantificación </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Costo del ensayo </h2>
                                                         </th>
@@ -755,31 +758,31 @@
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2"
                                                         :key="i">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
                                                             {{ ensayo.ensayo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.descripcion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.unidades }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.tecnica }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.metodo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
                                                             <v-icon v-if="get === 0" dark class="ml-9" color="red"
                                                                 rounded @click="eliminarEnsayos2(i, ensayo)">
@@ -789,55 +792,55 @@
                                                     </tr>
                                                     <tr v-if="ensayosSeleccionados2.length <= 0">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        <td class="secondary "
+                                                            style=" border: solid 1px; border-color: black; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary "
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary "
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary "
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-right white--text">
-                                                            <h2> Costo del ítem 2 </h2>
+                                                        <td class="secondary "
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="secondary text-right white--text">
+                                                            <h2> Costo del ítem 2 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                                             class="pa-0 ma-0">
                                                             ${{ Intl.NumberFormat("de-DE").format(costo2) }}
                                                         </td>
@@ -848,31 +851,31 @@
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2"
                                                         :key="i">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
                                                             {{ ensayo.ensayo.ensayo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.descripcion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.unidades }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.tecnica }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.metodo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
                                                             <v-icon v-if="get === 0" dark class="ml-9" color="red"
                                                                 rounded @click="eliminarEnsayos2(i, ensayo)">
@@ -882,56 +885,56 @@
                                                     </tr>
                                                     <tr v-if="ensayosSeleccionados2.length <= 0">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Costo del ítem 2 </h2>
                                                         </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="pa-0 ma-0">
+                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            class="-0 ma-0">
                                                             ${{ Intl.NumberFormat("de-DE").format(costo2) }}
                                                         </td>
                                                     </tr>
@@ -941,12 +944,12 @@
                                     </v-col>
                                 </v-row>
                                 <!-- item 3 -->
-                                <v-row class="mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                                <v-row class="secondary mx-5"
+                                    style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
                                     <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text ">
                                             <h3>Ítem 3</h3>
                                         </div>
                                     </v-col>
@@ -955,7 +958,7 @@
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white" dark @click="dialog6 = true">
-                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                        <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
                                                             mdi-plus-circle
                                                         </v-icon>
                                                     </v-btn>
@@ -969,33 +972,33 @@
                                     <v-col cols="12" class="ma-0 pa-0">
                                         <v-simple-table>
                                             <template v-slot:default>
-                                                <thead style="  background-color: #ff5722; border-top: 0px;">
+                                                <thead class="secondary">
                                                     <tr>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                                        <th style=" border: solid 1px; border-color: black;"
                                                             class="text-center white--text">
                                                             <h2> Código de referencia </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Descripción del ensayo </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Unidades </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Técnica analítica </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Método analítico </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Limite de cuantificación </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Costo del ensayo </h2>
                                                         </th>
@@ -1005,31 +1008,31 @@
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3"
                                                         :key="i">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
                                                             {{ ensayo.ensayo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.descripcion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.unidades }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.tecnica }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.metodo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
                                                             <v-icon v-if="get === 0" dark class="ml-9" color="red"
                                                                 rounded @click="eliminarEnsayos3(i, ensayo)">
@@ -1039,113 +1042,77 @@
                                                     </tr>
                                                     <tr v-if="ensayosSeleccionados3.length <= 0">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style=" border: solid 1px; border-color: black; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-right white--text">
-                                                            <h2> Costo del ítem 3 </h2>
+                                                        <td class="secondary"
+                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="secondary text-right white--text">
+                                                            <h2> Costo del ítem 3 </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
                                                             class="pa-0 ma-0">
                                                             ${{ Intl.NumberFormat("de-DE").format(costo3) }}
                                                         </td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right:0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary" style="border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary" style="border-top: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary" style="border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
+                                                        <td class="secondary" style="border-top: 0px;">
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="text-right white--text">
-                                                            <h2> Subtotal - Descuento </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
-                                                            class="text-center white--text">
-                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
-                                                                económica</h2>
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Descuento </h2>
                                                         </td>
                                                         <td v-if="get === 0"
@@ -1160,27 +1127,59 @@
                                                             class="pa-0 ma-0">
                                                             ${{ Intl.NumberFormat("de-DE").format(descuento) }}
                                                         </td>
+
                                                     </tr>
 
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px;  border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td class="text-center"
-                                                            style="background-color: #ff5722; border: solid 1px; width: 500px; border-left: 0px; border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;  border-top: 0px;"
-                                                            class="text-right white--text">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="border-bottom: 0px; border-top: 0px;"
+                                                            class="secondary text-center white--text">
+                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
+                                                                económica</h2>
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="secondary text-right white--text">
+                                                            <h2> Subtotal - Descuento </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px;  border-right: 0px;  border-top: 0px;">
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                        </td>
+                                                        <td class="secondary text-center"
+                                                            style="border: solid 1px; width: 500px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;  border-top: 0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> IVA </h2>
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;  border-top: 0px;"
@@ -1190,31 +1189,31 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px; ">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right: 0px; ">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
                                                             <v-textarea hide-details style="background-color: white;"
                                                                 v-model="cotiObservacion" auto-grow filled
-                                                                color="deep-orange" label="Observacion" rows="1">
+                                                                color="secondary" label="Observacion" rows="1">
                                                             </v-textarea>
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Total </h2>
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
@@ -1228,31 +1227,31 @@
                                                     <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3"
                                                         :key="i">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
                                                             {{ ensayo.ensayo.ensayo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.descripcion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.unidades }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.tecnica }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.metodo }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             {{ ensayo.ensayo.limiteCuantificacion }}
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                             ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
                                                             <v-icon v-if="get === 0" dark class="ml-9" color="red"
                                                                 rounded @click="eliminarEnsayos3(i, ensayo)">
@@ -1262,52 +1261,52 @@
                                                     </tr>
                                                     <tr v-if="ensayosSeleccionados3.length <= 0">
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                         <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
+                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Costo del ítem 3 </h2>
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
@@ -1317,59 +1316,27 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="text-right white--text">
-                                                            <h2> Subtotal - Descuento </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;"
-                                                            class="text-center white--text">
-                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
-                                                                económica</h2>
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Descuento </h2>
                                                         </td>
                                                         <td v-if="get === 0"
@@ -1386,27 +1353,59 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                        <td style="border-bottom: 0px; border-top: 0px;"
+                                                            class="secondary text-center white--text">
+                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
+                                                                económica</h2>
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border-bottom: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="secondary text-right white--text">
+                                                            <h2> Subtotal - Descuento </h2>
+                                                        </td>
+                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                            class="pa-0 ma-0">
+                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
+
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                                        </td>
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> IVA </h2>
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
@@ -1416,31 +1415,31 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
                                                             <v-textarea hide-details style="background-color: white;"
                                                                 v-model="cotiObservacion" auto-grow filled
-                                                                color="deep-orange" label="Observacion" rows="1">
+                                                                color="secondary" label="Observacion" rows="1">
                                                             </v-textarea>
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="text-right white--text">
+                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Total </h2>
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
@@ -1648,7 +1647,7 @@
         <!-- </v-row> -->
         <v-row style="margin:0px">
             <v-col class="text-left" cols="12">
-                <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+                <v-btn class="mb-16" outlined color="red darken-3" @click="Volver()">
                     Volver
                 </v-btn>
             </v-col>
@@ -1703,11 +1702,11 @@
 
         <v-dialog v-model="dialog3" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
-                <v-toolbar dark>
+                <v-toolbar class="primary">
                     <v-btn icon dark @click="dialog3 = false">
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
-                    <v-toolbar-title>Crear nuevo cliente</v-toolbar-title>
+                    <v-toolbar-title class="white--text">Crear nuevo cliente</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items v-if="si === 2">
                         <v-btn dark text @click="crearContacto()">
@@ -2262,7 +2261,9 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="12">
-                                        <v-text-field v-model="motivo" label="Motivo*" required></v-text-field>
+                                        <v-textarea v-model="motivo" color="secondary" filled auto-grow label="Motivo*"
+                                            rows="2" row-height="20" required>
+                                        </v-textarea>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -2270,10 +2271,10 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn color="blue darken-1" text @click="dialog8 = false">
-                                Close
+                                Cerrar
                             </v-btn>
                             <v-btn color="blue darken-1" text @click="confirmar()">
-                                Save
+                                Guardar
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -3185,7 +3186,7 @@ export default {
             //         timer: 1500,
             //     });
             // }
-            if (this.MostrarEditar2 === 1) {
+            if (this.MostrarEditar1 === 1) {
                 // let ensayo1 = null
                 let ensayo2 = null
                 // let ensayo3 = null
@@ -3232,7 +3233,7 @@ export default {
 
         },
         seleccionarEnsayos3(ensayo) {
-            if (this.MostrarEditar3 === 1) {
+            if (this.MostrarEditar1 === 1) {
                 // let ensayo1 = null
                 // let ensayo2 = null
                 let ensayo3 = null
@@ -3618,6 +3619,8 @@ export default {
                         }
                         console.log(error);
                         this.itemsEnsayo = []
+                        this.itemsEnsayo2 = []
+                        this.itemsEnsayo3 = []
                     });
             } else {
                 this.elaborado = this.recep._id
@@ -3717,7 +3720,8 @@ export default {
                         }
                         console.log(error);
                         this.itemsEnsayo = []
-
+                        this.itemsEnsayo2 = []
+                        this.itemsEnsayo3 = []
                     });
             }
 
@@ -3998,6 +4002,8 @@ export default {
                         }
                         console.log(error);
                         this.itemsEnsayo = []
+                        this.itemsEnsayo2 = []
+                        this.itemsEnsayo3 = []
                     });
             } else {
                 let header = { headers: { "token": this.$store.state.token } };
@@ -4086,7 +4092,8 @@ export default {
                         }
                         console.log(error);
                         this.itemsEnsayo = []
-
+                        this.itemsEnsayo2 = []
+                        this.itemsEnsayo3 = []
                     });
             }
         },
