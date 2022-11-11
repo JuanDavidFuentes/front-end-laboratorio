@@ -28,7 +28,7 @@
                                 <v-btn>Muestras</v-btn>
                             </template> -->
                             <template v-slot:[`item.ver`]="{ item }">                                
-                                <v-icon  @click="a(item)">
+                                <v-icon  @click="Imprimir(item)">
                                     mdi-file-eye-outline
                                 </v-icon>
                             </template>
@@ -61,8 +61,7 @@
                     <v-container fluid>
                         <v-row style="margin: 0">
                             <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="2" class="text-left">
-                                <img height="200" width="200"
-                                    src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" />
+                                <div class="accent mt-10" id="muestra"></div>
                             </v-col>
                             <v-col cols="12" xs="12" sm="12" md="10" lg="10" xl="10">
                                 <v-row>
@@ -645,6 +644,9 @@ export default {
         Volver() {
             this.$router.push("/Home");
         },
+        Imprimir() {
+            this.$router.push("/ImprimirMuestra");
+        },
         usuarios() {
             axios.get(`/cotizacion/listarTodasLasCotizaciones`)
                 .then((response) => {
@@ -956,3 +958,18 @@ export default {
     // la idea es que al mometo de guardar la muestra saca el id y con otra peticion listarla con los populates para que de esta forma se vea la informacion el la tabla
 }
 </script>
+<style>
+#muestra {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+@supports (-webkit-mask: url("")) or (mask: url("")) {
+    #muestra {
+        -webkit-mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask-size: cover; 
+    }
+}
+</style>

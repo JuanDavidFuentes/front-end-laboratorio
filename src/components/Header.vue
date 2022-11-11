@@ -2,12 +2,11 @@
 <template>
   <div class="mt-5">
     <v-app-bar app flex class="primary">
-      <img height="100" width="100"
-        src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png">
+      <div class="accent" id="header"></div>
       <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''" color="deep-orange"></v-app-bar-nav-icon>
-      <img src="" alt="">
 
-      <v-toolbar-title class="font-weight-black white--text"> Lab </v-toolbar-title>
+      <v-toolbar-title v-if="$store.state.token == ''" class="font-weight-black white--text ml-3"> Lab </v-toolbar-title>
+      <v-toolbar-title v-if="$store.state.token !== ''" class="font-weight-black white--text"> Lab </v-toolbar-title>
       <v-toolbar-title class="deep-orange--text font-weight-black"> Ficat</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -154,9 +153,13 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-    configuracion: 0
+    configuracion: 0,
+    colores:"",
   }),
   methods: {
+    color(){
+
+    },
     salir() {
       this.$router.replace("/")
       this.$store.commit("setToken", "")
@@ -176,8 +179,19 @@ export default {
   }
 }  
 </script>
+
 <style>
-.Config{
-  background-color: rgb(245, 68, 3);
+#header {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+@supports (-webkit-mask: url("")) or (mask: url("")) {
+    #header {
+        -webkit-mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask-size: cover; 
+    }
 }
 </style>

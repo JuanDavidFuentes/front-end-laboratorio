@@ -105,8 +105,10 @@ export default {
       axios.get("/colores/")
         .then((response) => {
           console.log(response);
+          console.log(response.data.color[0]._id);
           this.$store.dispatch("setColor", response.data.color); 
           localStorage.setItem("color",JSON.stringify(response.data.color))
+          // localStorage.setItem("IdColor", response.data.color[0]._id)
         })
         .catch((error) => {
           console.log(error);

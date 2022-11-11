@@ -1,9 +1,8 @@
 <template>
-    <v-container fluid class="mt-10">
+    <v-container class="mt-10">
         <v-row>
             <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="text-center">
-                <img height="300" width="300 "
-                    src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" />
+                <div class="accent mt-10" id="coti2"></div>
             </v-col>
             <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="3">
                 <div class=" text-center black--text font-italic text-decoration-underline ">
@@ -272,3 +271,19 @@ export default {
     }
 }
 </script>
+
+<style>
+#coti2 {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+@supports (-webkit-mask: url("")) or (mask: url("")) {
+    #coti2 {
+        -webkit-mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask-size: cover; 
+    }
+}
+</style>

@@ -63,8 +63,9 @@
                             <v-list three-line subheader>
                                 <v-row style="margin: 0">
                                     <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="text-center">
-                                        <img height="300" width="300 "
-                                            src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" />
+                                        <div class="accent mt-10" id="coti"></div>
+                                        <!-- <img height="300" width="300 "
+                                            src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" /> -->
                                     </v-col>
 
                                     <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="3">
@@ -133,29 +134,27 @@
                             <v-divider></v-divider>
 
                             <v-container fluid>
-                                <v-row style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; "
-                                    class="mx-5">
+                                <v-row style=" margin: 0; border: solid 2px; border-color: white;  "
+                                    class="secondary mx-5">
                                     <v-col cols="12">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text ">
                                             <h3>1. Datos del cliente</h3>
                                         </div>
                                     </v-col>
                                 </v-row>
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text ">
                                             <h3>Cliente</h3>
                                         </div>
                                     </v-col>
 
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        class="pa-0 ma-0 text-center">
-                                        <v-btn v-if="botones == 1" color="deep-orange" dark class="my-3"
-                                            @click="Elegircliente()">
+                                        style="border: solid 1px; border-color: black;" class="pa-0 ma-0 text-center">
+                                        <v-btn v-if="botones == 1" dark class="secondary my-3" @click="Elegircliente()">
                                             Elegir cliente
                                         </v-btn>
                                         <v-row style="margin:0">
@@ -182,16 +181,15 @@
                                             </v-col>
                                         </v-row>
                                     </v-col>
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text">
                                             <h3>NIT/ C.C.</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        class="pa-0 ma-0">
+                                        style="border: solid 1px; border-color: black;" class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
                                             {{ documento }}
@@ -201,30 +199,30 @@
 
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange ">
+                                    <v-col class="secondary"
+                                        style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text ">
                                             <h3>Dirección</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
                                             {{ direccion }}
                                         </div>
                                     </v-col>
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text">
                                             <h3>Ciudad</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
@@ -235,30 +233,30 @@
 
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text">
                                             <h3>Departamento</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
                                             {{ ciudad.departamento }}
                                         </div>
                                     </v-col>
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;" cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text">
                                             <h3>Teléfono</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
@@ -268,30 +266,30 @@
                                 </v-row>
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text">
                                             <h3>Contacto</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
                                             {{ nombrecontacto }}
                                         </div>
                                     </v-col>
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px;" cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text">
                                             <h3>Cargo</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
@@ -301,30 +299,30 @@
                                 </v-row>
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text">
                                             <h3>Celular</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
                                             {{ celular }}
                                         </div>
                                     </v-col>
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    <v-col class="secondary"
+                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text">
                                             <h3>Correo electrónico</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
@@ -334,15 +332,15 @@
                                 </v-row>
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text">
                                             <h3>Validez de la oferta</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <v-text-field v-if="get === 0" class="mt-5" v-model="validezOferta" type="date"
                                             outlined dense>
@@ -352,15 +350,15 @@
                                             {{ validezOferta.slice(0, 10) }}
                                         </div>
                                     </v-col>
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    <v-col class="secondary"
+                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                         cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text">
                                             <h3>Entrega de resultados</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px; "
                                         class="pa-0 ma-0">
                                         <v-text-field v-if="get === 0" class="mt-5" v-model="entregaResultados"
                                             type="date" outlined dense> </v-text-field>
@@ -372,30 +370,30 @@
                                 </v-row>
 
                                 <v-row style="margin: 0" class="mx-5">
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text">
                                             <h3>Elaborador por</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
                                             {{ recep.nombre }} {{ recep.apellidos }}
                                         </div>
                                     </v-col>
-                                    <v-col
-                                        style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                    <v-col class="secondary"
+                                        style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                        xs="4" sm="4" md="2" lg="2" xl="2">
+                                        <div class="text-center white--text ">
                                             <h3>Cargo</h3>
                                         </div>
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                        style="border: solid 1px; border-color: black; border-top: 0px;"
                                         class="pa-0 ma-0">
                                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                             hide-details>
@@ -404,12 +402,12 @@
                                     </v-col>
                                 </v-row>
 
-                                <v-row class="mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                                <v-row class="secondary mx-5"
+                                    style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
                                     <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4">
                                     </v-col>
                                     <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text">
                                             <h3>2. Propuesta técnica y económica</h3>
                                         </div>
                                     </v-col>
@@ -441,12 +439,12 @@
                                 </v-row>
 
                                 <!-- item 1 -->
-                                <v-row class="mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                                <v-row class="secondary mx-5"
+                                    style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
                                     <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                                     </v-col>
                                     <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text text-no-wrap deep-orange">
+                                        <div class="text-center white--text">
                                             <h3>Ítem 1</h3>
                                         </div>
                                     </v-col>
@@ -455,7 +453,7 @@
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn color="white" dark @click="dialog4 = true">
-                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
+                                                        <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
                                                             mdi-plus-circle
                                                         </v-icon>
                                                     </v-btn>
@@ -469,33 +467,33 @@
                                     <v-col cols="12" class="ma-0 pa-0">
                                         <v-simple-table>
                                             <template v-slot:default>
-                                                <thead style="  background-color: #ff5722; border-top: 0px;">
+                                                <thead class="secondary">
                                                     <tr>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                                        <th style=" border: solid 1px; border-color: black; "
                                                             class="text-center white--text">
                                                             <h2> Código de referencia </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Descripción del ensayo </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Unidades </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Técnica analítica </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Método analítico </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Limite de cuantificación </h2>
                                                         </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                             class="text-center white--text">
                                                             <h2> Costo del ensayo </h2>
                                                         </th>
@@ -569,23 +567,23 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td
-                                                            style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                        <td class="secondary"
+                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
                                                         </td>
-                                                        <td style="background-color: #ff5722; border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-right white--text">
+                                                        <td  style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            class="secondary text-right white--text">
                                                             <h2> Costo del ítem 1 </h2>
                                                         </td>
                                                         <td style=" border: solid 1px; border-color: black; border-left:0px;"
@@ -1524,8 +1522,8 @@
                                             </v-icon>
                                         </template>
                                         <span>Cambiar a estado "En proceso..."</span>
-                                    </v-tooltip> 
-                                 </template>
+                                    </v-tooltip>
+                                </template>
                                 <template v-if="item.estado === 0">
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
@@ -2528,7 +2526,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.motivo=""
+                    this.motivo = ""
                     this.dialog8 = false
                     this.listar();
                     this.listarTodasLasCotis();
@@ -4097,7 +4095,7 @@ export default {
             this.$router.push("/CotiImprimir")
             console.log(datos);
 
-        }, 
+        },
         recuperarToken() {
             localStorage.getItem("datos")
             localStorage.getItem("token")
@@ -4130,3 +4128,19 @@ export default {
     },
 };
 </script>
+
+<style>
+#coti {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+@supports (-webkit-mask: url("")) or (mask: url("")) {
+    #coti {
+        -webkit-mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
+        mask-size: cover;
+    }
+}
+</style>
