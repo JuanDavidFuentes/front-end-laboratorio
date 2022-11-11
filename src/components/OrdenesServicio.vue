@@ -23,18 +23,13 @@
                                         single-line hide-details>
                                     </v-text-field>
                                 </v-card-title>
-                                <!-- <v-data-table :headers="headers" :items="" :search="search"></v-data-table> -->
+                                <v-data-table :headers="headers" :items="ensayosOrdenes" :search="search"></v-data-table>
                             </v-card>
                         </template>
                     </v-card>
                 </template>
             </v-col>
             <v-col cols="1"></v-col>
-        </v-row>
-        <v-row style="margin: 0px;">
-            <v-btn class="primary">
-                a
-            </v-btn>
         </v-row>
     </v-container>
 </template>
@@ -51,26 +46,37 @@ export default {
             ensayosOrdenes:[],
             headers: [
                 {
-                    text: 'Codigo Departamento',
+                    text: 'Ensayo',
                     align: 'start',
-                    value: "coddepartamento",
+                    value: "ensayo",
                 },
                 {
-                    text: 'Departamento',
+                    text: 'Descripción',
                     align: 'start',
                     sortable: false,
-                    value: 'departamento',
+                    value: 'ensayo.idensayo.descripcion',
                 },
                 {
-                    text: 'Codigo Ciudad',
+                    text: 'Metodo',
                     align: 'start',
-                    value: 'codciudad',
+                    value: 'ensayo.idensayo.metodo',
                 },
                 {
-                    text: 'Ciudad',
+                    text: 'Tecnica',
+                    align: 'start',
+                    value: 'ensayo.idensayo.tecnica',
+                },
+                {
+                    text: 'Unidades',
                     align: 'start',
                     sortable: false,
-                    value: 'ciudad',
+                    value: 'ensayo.idensayo.unidades',
+                },
+                {
+                    text: 'Limite de cuantificación',
+                    align: 'start',
+                    sortable: false,
+                    value: 'ensayo.idensayo.limiteCuantificacion',
                 },
             ],
         }

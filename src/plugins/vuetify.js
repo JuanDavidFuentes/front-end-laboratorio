@@ -15,7 +15,7 @@ let temporal=""
 if(a===null || a===undefined || a===0 || localStorage.getItem("color")===[] || a.length===0){
   formato="#9E9E9E"
   interfaz="#000000"
-  logo="#8BC34A"
+  logo="#43A047"
   temporal="#FFFFFF"
 }else{
   formato=a[0].formato
