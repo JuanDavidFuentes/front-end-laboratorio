@@ -415,29 +415,6 @@
                                         </div>
                                     </v-col>
                                     <v-col class="text-right" cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <!-- <div v-if="get === 0">
-                                            <v-tooltip bottom>
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn color="white black--text" dark @click="dialog7 = true">
-                                                        Agregar ensayo
-                                                        <v-icon color="deep-orange" rounded v-bind="attrs" v-on="on">
-                                                            mdi-beaker
-                                                        </v-icon>
-                                                    </v-btn>
-                                                </template>
-                                                <span>Crear nuevo ensayo</span>
-                                            </v-tooltip>
-                                        </div> -->
-                                        <!-- <v-tooltip bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-btn @click="dialog7=true" v-bind="attrs" v-on="on">
-                                                    <v-icon dark class="my-3" color="red" rounded>
-                                                        mdi-beaker
-                                                    </v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Crear nuevo ensayo</span>
-                                        </v-tooltip> -->
                                     </v-col>
                                 </v-row>
 
@@ -4098,15 +4075,15 @@ export default {
             }
         },
         traerDatos(datos) {
-            this.$store.dispatch("setCotiImprimir", datos);
-            this.$router.push("/CotiImprimir")
+            // this.$store.dispatch("setCotiImprimir", datos);
+            localStorage.setItem("datos",JSON.stringify(datos))
+
+            window.open("http://localhost:8080/#/CotiImprimir")
             console.log(datos);
 
         },
         recuperarToken() {
-            localStorage.getItem("datos")
             localStorage.getItem("token")
-            console.log(localStorage.getItem("datos"));
             console.log(localStorage.getItem("token"));
         }
     },

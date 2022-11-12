@@ -1,18 +1,31 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
-
-
+import axios from 'axios'
 Vue.use(Vuetify);
 
-let color = JSON.parse(localStorage.getItem("color"))
+
+
+async function color() {
+  await axios.get("https://laboratorio-jjai-2.herokuapp.com/api/colores/")
+    .then((response) => {
+      console.log(response);
+      localStorage.setItem("color",JSON.stringify(response.data.color))
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+color()
+
+
 let a=[]
+a = JSON.parse(localStorage.getItem("color"))
 console.log(a);
-a = color
 let formato=""
 let interfaz=""
 let logo=""
 let temporal=""
-if(a===null || a===undefined || a===0 || localStorage.getItem("color")===[] || a.length===0){
+if(a===null){
   formato="#9E9E9E"
   interfaz="#000000"
   logo="#43A047"

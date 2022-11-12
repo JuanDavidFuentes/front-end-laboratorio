@@ -1,6 +1,6 @@
 
 <template>
-  <div class="mt-5">
+  <div class="mt-5" v-if="this.$router.history.current['path'] !=='/CotiImprimir'">
     <v-app-bar app flex class="primary">
       <div class="accent" id="header"></div>
       <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''" color="accent"></v-app-bar-nav-icon>
@@ -157,17 +157,12 @@ export default {
     colores:"",
   }),
   methods: {
-    color(){
-
-    },
     salir() {
       this.$router.replace("/")
       this.$store.commit("setToken", "")
       this.$store.commit("setDatos", {})
-      this.$store.commit("setColor", {})
       localStorage.setItem("token","")
       // localStorage.setItem("datos",{})
-      localStorage.setItem("color",{})
     },
     Configuracion() {
       this.configuracion = 1

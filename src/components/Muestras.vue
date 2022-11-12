@@ -636,6 +636,12 @@ export default {
             let d = new Date(r);
             return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
         },
+        // traerItemm(item) {
+        //     this.$store.dispatch("setImprimirM", item);
+        //     this.$router.push("/ImprimirMuestra")
+        //     console.log(item);
+
+        // },
         customFilter2(item, queryText) {
             const textOne = item.numero_cotizacion
             const searchText = queryText
@@ -644,8 +650,11 @@ export default {
         Volver() {
             this.$router.push("/Home");
         },
-        Imprimir() {
-            this.$router.push("/ImprimirMuestra");
+        Imprimir(item) {
+            this.$store.dispatch("setImprimirM", item);
+            this.$router.push("/ImprimirMuestra")
+            console.log(item);
+
         },
         usuarios() {
             axios.get(`/cotizacion/listarTodasLasCotizaciones`)

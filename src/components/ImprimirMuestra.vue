@@ -79,7 +79,7 @@
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
 
-                                <h3 class="mt-1">ala1</h3>
+                                <h3 class="mt-1">{{soliNombre}}</h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -91,7 +91,7 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">ala2</h3>
+                                <h3 class="mt-3">{{soliDepartamento}}</h3>
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
@@ -105,7 +105,7 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">ala3</h3>
+                                <h3 class="mt-3">{{soliDocumento}}</h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -117,7 +117,7 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">ala4</h3>
+                                <h3 class="mt-3">{{soliNombreContacto}}</h3>
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
@@ -131,7 +131,7 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">ala5</h3>
+                                <h3 class="mt-3">{{soliDireccion}}</h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -143,7 +143,7 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">ala6</h3>
+                                <h3 class="mt-3">{{soliTelefono}}</h3>
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
@@ -157,7 +157,7 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">ala7</h3>
+                                <h3 class="mt-3">{{soliCiudad}}</h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
@@ -169,7 +169,7 @@
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
-                                <h3 class="mt-3">ala8</h3>
+                                <h3 class="mt-3">{{soliEmail}}</h3>
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
@@ -418,11 +418,35 @@ export default {
         cotizaciones: [],
         botones: 1,
         get: 0,
+        datos: {},
     }),
     methods: {
         fechaSalida(r) {
             let d = new Date(r);
             return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
+        },
+        itemInf(){
+            this.datos=this.$store.state.imprimirM
+            console.log(this.datos);
+            if (this.datos.cotizacion.idContacto) {
+                this.soliNombre = this.datos.cotizacion.idCliente.nombre
+                this.soliDepartamento = this.datos.munRecoleccion.departamento
+                this.soliDocumento = this.datos.cotizacion.idCliente.documento
+                this.soliNombreContacto = this.datos.cotizacion.idCliente.contacto.nombre
+                this.soliDireccion = this.datos.cotizacion.idCliente.direccion
+                // this.soliTfono = this.datos.cotizacion.idCliente.nombreiente.            this.soliCiudad = this.datos.munRecoleccion.ciudad
+                this.soliEmail = this.datos.cotizacion.idCliente.email
+                this.soliCoti = this.datos.cotizacion._id
+            } else {
+                // this.soliNombre = this.datos.nombre
+                // this.soliApellido = this.datos.apellidos
+                // this.soliDepartamento = this.datos.ciudad.departamento
+                // this.soliDocumento = this.datos.documento
+                // this.soliDireccion = this.datos.direccion
+                // this.soliTelefono = this.datos.celular
+                // this.soliCiudad = this.datos.ciudad.ciudad
+                // this.soliEmail = this.datos.email
+            }
         },
         customFilter2(item, queryText) {
             const textOne = item.numero_cotizacion
@@ -458,33 +482,26 @@ export default {
         },
 
         pagmuestras() {
-            // console.log(datos);
-            // this.datos = datos
-            // if (datos.contacto) {
-            //     this.soliNombre = datos.nombre
-            //     this.soliApellido = datos.apellidos
-            //     this.soliDepartamento = datos.ciudad.departamento
-            //     this.soliDocumento = datos.documento
-            //     this.soliNombreContacto = datos.contacto.nombre
-            //     this.soliDireccion = datos.direccion
-            //     this.soliTelefono = datos.celular
-            //     this.soliCiudad = datos.ciudad.ciudad
-            //     this.soliEmail = datos.email
-            //     this.traerCotizacion()
-            //     this.info()
-            // } else {
-            //     this.soliNombre = datos.nombre
-            //     this.soliApellido = datos.apellidos
-            //     this.soliDepartamento = datos.ciudad.departamento
-            //     this.soliDocumento = datos.documento
-            //     this.soliDireccion = datos.direccion
-            //     this.soliTelefono = datos.celular
-            //     this.soliCiudad = datos.ciudad.ciudad
-            //     this.soliEmail = datos.email
-            //     this.traerCotizacion()
-            //     this.info()
-            // }
-            this.dialog = true
+            if (this.datos.contacto) {
+                this.soliNombre = this.datos.nombre
+                this.soliApellido = this.datos.apellidos
+                this.soliDepartamento = this.datos.ciudad.departamento
+                this.soliDocumento = this.datos.documento
+                this.soliNombreContacto = this.datos.contacto.nombre
+                this.soliDireccion = this.datos.direccion
+                this.soliTelefono = this.datos.celular
+                this.soliCiudad = this.datos.ciudad.ciudad
+                this.soliEmail = this.datos.email
+            } else {
+                this.soliNombre = this.datos.nombre
+                this.soliApellido = this.datos.apellidos
+                this.soliDepartamento = this.datos.ciudad.departamento
+                this.soliDocumento = this.datos.documento
+                this.soliDireccion = this.datos.direccion
+                this.soliTelefono = this.datos.celular
+                this.soliCiudad = this.datos.ciudad.ciudad
+                this.soliEmail = this.datos.email
+            }
         },
         traerCotizacion() {
             let header = { headers: { "token": this.$store.state.token } }
@@ -691,31 +708,15 @@ export default {
         //     this.traerCotizacion()
         //     this.info()
         // }
-        borrarclientes() {
-            this.soliNombre = ""
-            this.soliApellido = ""
-            this.soliDepartamento = ""
-            this.soliDocumento = ""
-            this.soliNombreContacto = ""
-            this.soliDireccion = ""
-            this.soliTelefono = ""
-            this.soliCiudad = ""
-            this.soliEmail = ""
-            this.idCoti = ""
-            this.idSoli = ""
-            this.idCotiSeli = ""
-            this.seleccionarItem = []
-            this.cotizaciones = []
-            this.dialog4 = false
-            this.botones = 1
-        },
+
     },
     created() {
-        this.listarMuestras();
-        this.usuarios();
-        this.listarCiudad();
-        this.listarTiposs();
-        this.listarCotizacioness();
+        // this.listarMuestras();
+        // this.usuarios();
+        // this.listarCiudad();
+        // this.listarTiposs();
+        // this.listarCotizacioness();
+        this.itemInf();
 
     },
     // la idea es que al mometo de guardar la muestra saca el id y con otra peticion listarla con los populates para que de esta forma se vea la informacion el la tabla

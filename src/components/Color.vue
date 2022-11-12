@@ -6,93 +6,52 @@
                     Volver
                 </v-btn>
             </v-col>
+
         </v-row>
         <v-row>
-
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
-                <v-row>
-                    <v-col cols="12">
-                        <div class="text-center black--text font-weight-Normal">
+            <v-col cols="12" sm="12">
+                <v-select
+                v-model="selecionadoColor"
+                :items="Colores"
+                label="Seleccione un color" 
+                ></v-select>
+            </v-col>
+        </v-row>
+        <v-row align="center" justify="center">
+            <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
+                        <div class="text-center black--text font-weight-Normal" >
                             <h1>Color del logo "SENA"</h1>
                         </div>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="text-center" cols="12">
-                        <div id="mascara" v-bind:style='{ background: `${color}` }'></div>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="ml-16 pl-16" cols="12">
-                        <v-color-picker v-model="color" hide-inputs></v-color-picker>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="text-center" cols="12">
-                        <v-btn class="mt-n3" dark v-bind:style='{ background: `${color}` }' @click="Guardar()">
-                            Guardar
-                        </v-btn>
-                    </v-col>
-                </v-row>
             </v-col>
-            <!-- 
-
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
-                <v-row>
-                    <v-col cols="12">
-                        <div class="text-center black--text font-weight-Normal">
-                            <h1>Color de la interfaz</h1>
+            <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" 
+            class="text-center  flex-column align-center justify-center">
+                <div id="mascara" v-bind:style='{ background: `${color}` }'>
                         </div>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="text-center" cols="12">
-                        <v-avatar v-bind:style='{ background: `${color2}` }' size="200">
-                        </v-avatar>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="ml-16 pl-16" cols="12">
-                        <v-color-picker v-model="color2" hide-inputs></v-color-picker>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="text-center" cols="12">
-                        <v-btn class="mt-n3" v-bind:style='{ background: `${color2}` }' @click="Guardar()">
-                            Guardar
-                        </v-btn>
-                    </v-col>
-                </v-row>
+            </v-col>
+            <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" >
             </v-col>
 
+            <v-col cols="7" xs="7" sm="7" md="7" lg="7" xl="7" >
+                <v-color-picker class="ml-n3" v-model="color" hide-inputs></v-color-picker>
+            </v-col> 
 
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
-                <v-row>
-                    <v-col cols="12">
-                        <div class="text-center black--text font-weight-Normal">
-                            <h1>Color de los formatos</h1>
-                        </div>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="text-center" cols="12">
-                        <v-avatar v-bind:style='{ background: `${color3}` }' size="200">
-                        </v-avatar>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="ml-16 pl-16" cols="12">
-                        <v-color-picker v-model="color3" hide-inputs></v-color-picker>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col class="text-center" cols="12">
-                        <v-btn class="mt-n3" v-bind:style='{ background: `${color3}` }' @click="Guardar()">
-                            Guardar
-                        </v-btn>
-                    </v-col>
-                </v-row>
-            </v-col> -->
+        <div v-if="selecionadoColor==='Color Logo'">
+            <v-btn dark v-bind:style='{ background: `${color}` }' @click="Guardar()">
+                        Guardar Color Logo
+            </v-btn>
+        </div>
+            
+        <div v-if="selecionadoColor==='Color Interfaz'">
+            <v-btn dark v-bind:style='{ background: `${color}` }' @click="Guardar()">
+                        Guardar Color Interfaz
+            </v-btn>
+        </div>
+
+        <div v-if="selecionadoColor==='Color Formatos'">
+            <v-btn dark v-bind:style='{ background: `${color}` }' @click="Guardar()">
+                        Guardar Color Formatos
+            </v-btn>
+        </div>
 
         </v-row>
     </v-container>
@@ -105,7 +64,10 @@ export default {
         type: 'hex',
         hex: '#FF00FF',
         colores: {},
-        idcolor: ""
+        idcolor: "",
+        Colores: ["Color Logo", "Color Interfaz","Color Formatos"],
+        isEditing: false,
+        selecionadoColor:""
     }),
     methods: {
         traercolor() {
@@ -130,9 +92,7 @@ export default {
                     this.$router.replace("/")
                     this.$store.commit("setToken", "")
                     this.$store.commit("setDatos", {})
-                    this.$store.commit("setColor", {})
                     localStorage.setItem("token", "")
-                    localStorage.setItem("color", {})
                 })
                 .catch((error) => {
                     console.log(error);
@@ -209,4 +169,7 @@ export default {
         mask-size: cover;
     }
 }
+.centered-input >>>  label {
+        text-align: center;
+    }
 </style>

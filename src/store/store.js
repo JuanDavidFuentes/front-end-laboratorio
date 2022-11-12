@@ -6,12 +6,12 @@ Vue.use(Vuex);
 
 export const store =new Vuex.Store({
     state: {
-        token:localStorage.token,
+        token:"",
         datos:{},
         cotizaciones:{},
         muestras:{},
-        color:{},
         cotiImprimir:{},
+        imprimirM:{},
     },
     mutations:{
         setToken(state,value){
@@ -26,11 +26,11 @@ export const store =new Vuex.Store({
         setCotiImprimir(state, value){
             state.cotiImprimir = value
         },
+        setImprimirM(state, value){
+            state.imprimirM = value
+        },
         setMuestras(state, value){
             state.muestras = value
-        },
-        setColor(state,value){
-            state.color = value
         },
     },
     actions:{
@@ -49,8 +49,8 @@ export const store =new Vuex.Store({
         setMuestras(context,value){
             context.commit('setMuestras',value)
         },
-        setColor(context,value){
-            context.commit('setColor',value)
-        },
+        setImprimirM(context,value){
+            context.commit('setImprimirM',value)
+        }, 
     }
 }); 

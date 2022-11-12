@@ -1,10 +1,10 @@
 <template>
-    <v-container class="mt-10">
+    <v-container fluid class="mt-10">
         <v-row>
-            <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="text-center">
+            <v-col cols="2" class="text-center">
                 <div class="accent mt-10" id="coti2"></div>
             </v-col>
-            <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="3">
+            <v-col cols="6">
                 <div class=" text-center black--text font-italic text-decoration-underline ">
                     <h1>Oferta de servicios</h1>
                 </div>
@@ -25,7 +25,7 @@
                 </div>
             </v-col>
 
-            <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
+            <v-col cols="2" class="mt-3">
                 <div class="text-center black--text headline">
                     <h4>Cotización No.</h4>
                 </div>
@@ -39,7 +39,7 @@
                     <h3>{{ fechaEmision.slice(0, 10) }}</h3>
                 </div>
             </v-col>
-            <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
+            <v-col cols="2" class="mt-3">
                 <div class="text-center black--text">
                     <h3>Código</h3>
                 </div>
@@ -61,49 +61,415 @@
             </v-col>
         </v-row>
 
-        <v-row style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; " class="mx-5">
+        <v-row style=" margin: 0; border: solid 1px; border-color: black;" class="secondary mx-5">
             <v-col cols="12">
-                <div class="text-center white--text text-no-wrap deep-orange">
+                <div class="text-center white--text">
                     <h3>1. Datos del cliente</h3>
                 </div>
             </v-col>
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                <div class="text-center white--text text-no-wrap deep-orange">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text ">
                     <h3>Cliente</h3>
                 </div>
             </v-col>
 
-            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                class="pa-0 ma-0 text-center">
+            <v-col cols="4" style="border: solid 1px; border-color: black;" class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
-                    <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                    <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
-                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                            hide-details>
+                    <v-col cols="2"></v-col>
+                    <v-col cols="8">
+                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
                             {{ nombre }}
                         </div>
                     </v-col>
-                    <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2">
+                    <v-col cols="2">
                     </v-col>
                 </v-row>
             </v-col>
-            <v-col
-                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                <div class="text-center white--text text-no-wrap deep-orange">
+            <v-col class="secondary" style="border: solid 1px; border-color: black;" cols="2">
+                <div class="text-center white--text ">
                     <h3>NIT/ C.C.</h3>
                 </div>
             </v-col>
-            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;" class="pa-0 ma-0">
+            <v-col cols="4" style="border: solid 1px; border-color: black;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
                     {{ documento }}
                 </div>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text ">
+                    <h3>Dirección</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ direccion }}
+                </div>
+            </v-col>
+            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                cols="2">
+                <div class="text-center white--text">
+                    <h3>Ciudad</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ ciudad.ciudad }}
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text">
+                    <h3>Departamento</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ ciudad.departamento }}
+                </div>
+            </v-col>
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px;" cols="2">
+                <div class="text-center white--text">
+                    <h3>Teléfono</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ telefono }}
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text">
+                    <h3>Contacto</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ nombrecontacto }}
+                </div>
+            </v-col>
+            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px;" cols="2">
+                <div class="text-center white--text">
+                    <h3>Cargo</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ cargo }}
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text">
+                    <h3>Celular</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ celular }}
+                </div>
+            </v-col>
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                cols="2">
+                <div class="text-center white--text">
+                    <h3>Correo electrónico</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" xs="8" sm="8" md="4" lg="4" xl="4"
+                style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ email }}
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2" xs="4">
+                <div class="text-center white--text">
+                    <h3>Validez de la oferta</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ validezOferta.slice(0, 10) }}
+                </div>
+            </v-col>
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                cols="2">
+                <div class="text-center white--text">
+                    <h3>Entrega de resultados</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px; " class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ entregaResultados.slice(0, 10) }}
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text">
+                    <h3>Elaborador por</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ elaboradoN }} {{ elaboradoA }}
+                </div>
+            </v-col>
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text ">
+                    <h3>Cargo</h3>
+                </div>
+            </v-col>
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                    {{ elaboradoR }}
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="4">
+            </v-col>
+            <v-col cols="4">
+                <div class="text-center white--text">
+                    <h3>2. Propuesta técnica y económica</h3>
+                </div>
+            </v-col>
+            <v-col class="text-right" cols="4">
+            </v-col>
+        </v-row>
+
+        <!-- item 1 -->
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="4">
+            </v-col>
+            <v-col cols="4">
+                <div class="text-center white--text">
+                    <h3>Ítem 1</h3>
+                </div>
+            </v-col>
+            <v-col class="text-right">
+            </v-col>
+        </v-row>
+
+        <v-row style=" margin: 0;" class="mx-5">
+            <v-col cols="12" class="ma-0 pa-0">
+                <v-simple-table>
+                    <template v-slot:default>
+                        <thead class="secondary">
+                            <tr>
+                                <th style=" border: solid 1px; border-color: black; " class="text-center white--text">
+                                    <h2> Código de referencia </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Descripción del ensayo </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Unidades </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Técnica analítica </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Método analítico </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Limite de cuantificación </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Costo del ensayo </h2>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados" :key="i">
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
+                                    {{ ensayo.ensayo.ensayo }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.descripcion }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.unidades }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.tecnica }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.metodo }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.limiteCuantificacion }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> Costo del ítem 1 </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                    class="pa-0 ma-0">
+                                    ${{ Intl.NumberFormat("de-DE").format(costo) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-simple-table>
+            </v-col>
+        </v-row>
+        <!-- item 2 -->
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
+            <v-col cols="4">
+            </v-col>
+            <v-col cols="4">
+                <div class="text-center white--text">
+                    <h3>Ítem 2</h3>
+                </div>
+            </v-col>
+            <v-col class="text-right" cols="4">
+            </v-col>
+        </v-row>
+
+        <v-row style=" margin: 0;" class="mx-5">
+            <v-col cols="12" class="ma-0 pa-0">
+                <v-simple-table>
+                    <template v-slot:default>
+                        <thead class="secondary" style="">
+                            <tr>
+                                <th style=" border: solid 1px; border-color: black;" class="text-center white--text">
+                                    <h2> Código de referencia </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Descripción del ensayo </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Unidades </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Técnica analítica </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Método analítico </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Limite de cuantificación </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Costo del ensayo </h2>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2" :key="i">
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
+                                    {{ ensayo.ensayo.ensayo }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.descripcion }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.unidades }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.tecnica }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.metodo }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.limiteCuantificacion }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> Costo del ítem 2 </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                    class="pa-0 ma-0">
+                                    ${{ Intl.NumberFormat("de-DE").format(costo2) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-simple-table>
+            </v-col>
+        </v-row>
+
+        <!-- item 3 -->
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="4">
+            </v-col>
+            <v-col cols="4">
+                <div class="text-center white--text ">
+                    <h3>Ítem 3</h3>
+                </div>
+            </v-col>
+            <v-col class="text-right" cols="4">
             </v-col>
         </v-row>
     </v-container>
@@ -130,7 +496,9 @@ export default {
         entregaResultados: "",
         validezOferta: "",
         descuento: "",
-        elaborado: "",
+        elaboradoN: "",
+        elaboradoA: "",
+        elaboradoR: "",
         numeroCoti: "",
         idCliente: "",
         idcontacto: "",
@@ -152,14 +520,17 @@ export default {
     }),
     methods: {
         info() {
-            this.datos = this.$store.state.cotiImprimir
+            this.datos = JSON.parse(localStorage.getItem("datos"))
+            console.log(this.datos);
             if (this.datos.idCliente.contacto) {
                 console.log("contacto");
                 this.idCotizacion = this.datos._id
                 this.fechaEmision = this.datos.fecha_emision.slice(0, 10)
                 this.entregaResultados = this.datos.entrega_resultados.slice(0, 10)
                 this.validezOferta = this.datos.validez_oferta.slice(0, 10)
-                this.elaborado = this.datos.elabordo_por.nombre
+                this.elaboradoN = this.datos.elabordo_por.nombre
+                this.elaboradoA = this.datos.elabordo_por.apellidos
+                this.elaboradoR = this.datos.elabordo_por.rol
                 this.numeroCoti = this.datos.numero_cotizacion
                 this.idCliente = this.datos.idCliente._id
                 this.idcontacto = this.datos.idCliente.contacto._id
@@ -268,6 +639,10 @@ export default {
         this.info();
         this.calidad();
         this.info2();
+    },
+    destroyed() {
+        alert("Si funciona")
+        localStorage.setItem("datos", JSON.stringify({}))
     }
 }
 </script>
@@ -283,7 +658,7 @@ export default {
     #coti2 {
         -webkit-mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
         mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
-        mask-size: cover; 
+        mask-size: cover;
     }
 }
 </style>
