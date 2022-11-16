@@ -1,62 +1,62 @@
 <template>
-    <v-container fluid class="mt-10">
+    <v-container fluid>
         <v-row>
-            <v-col cols="2" class="text-center">
-                <div class="accent mt-10" id="coti2"></div>
+            <v-col cols="2" class="text-center mt-3">
+                <div class="accent" id="coti2"></div>
             </v-col>
             <v-col cols="6">
                 <div class=" text-center black--text font-italic text-decoration-underline ">
-                    <h1>Oferta de servicios</h1>
+                    <h2>Oferta de servicios</h2>
+                </div>
+                <div class=" text-center black--text mt-5">
+                    <h5>{{ cotiDescripcion }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h3>{{ cotiDescripcion }}</h3>
+                    <h5>NIT: {{ cotiNit }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h3>NIT: {{ cotiNit }}</h3>
+                    <h5>Dirección: {{ cotiDireccion }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h3>Dirección: {{ cotiDireccion }}</h3>
+                    <h5>Teléfono: {{ cotiTelefono }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h3>Teléfono: {{ cotiTelefono }}</h3>
-                </div>
-                <div class=" text-center black--text mt-2">
-                    <h3>Correo electrónico: {{ cotiCorreo }}</h3>
+                    <h5>Correo electrónico: {{ cotiCorreo }}</h5>
                 </div>
             </v-col>
 
             <v-col cols="2" class="mt-3">
-                <div class="text-center black--text headline">
-                    <h4>Cotización No.</h4>
+                <div class="text-center black--text ">
+                    <h3>Cotización No.</h3>
                 </div>
-                <div class="text-center red--text font-italic headline">
+                <div class="text-center red--text font-italic title mt-3">
                     {{ numeroCoti }}
                 </div>
-                <div class="text-center black--text headline mt-10">
-                    <h4>Fecha de emisión:</h4>
+                <div class="text-center black--text mt-3">
+                    <h3>Fecha de emisión:</h3>
                 </div>
-                <div class=" text-center black--text mt-2">
-                    <h3>{{ fechaEmision.slice(0, 10) }}</h3>
+                <div class="text-center black--text title mt-3">
+                    <div>{{ fechaEmision.slice(0, 10) }}</div>
                 </div>
             </v-col>
-            <v-col cols="2" class="mt-3">
+            <v-col cols="2" class="mt-5">
                 <div class="text-center black--text">
-                    <h3>Código</h3>
-                </div>
-                <div class="text-center black--text">
-                    <h3>{{ caliCodigo }}</h3>
-                </div>
-                <div class="text-center black--text mt-10">
-                    <h3>Aprobación</h3>
+                    <h5>Código</h5>
                 </div>
                 <div class="text-center black--text">
-                    <h3>{{ caliaprobacion }}</h3>
+                    <h5>{{ caliCodigo }}</h5>
                 </div>
-                <div class="text-center black--text mt-10">
-                    <h3>Versión</h3>
+                <div class="text-center black--text mt-3">
+                    <h5>Aprobación</h5>
                 </div>
                 <div class="text-center black--text">
-                    <h3>{{ caliVersion }}</h3>
+                    <h5>{{ caliaprobacion }}</h5>
+                </div>
+                <div class="text-center black--text mt-3">
+                    <h5>Versión</h5>
+                </div>
+                <div class="text-center black--text">
+                    <h5>{{ caliVersion }}</h5>
                 </div>
             </v-col>
         </v-row>
@@ -187,8 +187,7 @@
                     <h3>Correo electrónico</h3>
                 </div>
             </v-col>
-            <v-col cols="4" xs="8" sm="8" md="4" lg="4" xl="4"
-                style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
                     {{ email }}
                 </div>
@@ -196,7 +195,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2" xs="4">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
                 <div class="text-center white--text">
                     <h3>Validez de la oferta</h3>
                 </div>
@@ -327,6 +326,29 @@
                                     ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
                                 </td>
                             </tr>
+                            <tr v-if="ensayosSeleccionados.length <= 0">
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="secondary"
                                     style="border: solid 1px; border-color: black; border-right: 0px;">
@@ -429,6 +451,29 @@
                                     ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
                                 </td>
                             </tr>
+                            <tr v-if="ensayosSeleccionados2.length <= 0">
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="secondary"
                                     style="border: solid 1px; border-color: black; border-right: 0px;">
@@ -470,6 +515,445 @@
                 </div>
             </v-col>
             <v-col class="text-right" cols="4">
+            </v-col>
+        </v-row>
+
+        <v-row style=" margin: 0;" class="mx-5">
+            <v-col cols="12" class="ma-0 pa-0">
+                <v-simple-table>
+                    <template v-slot:default>
+                        <thead class="secondary">
+                            <tr>
+                                <th style=" border: solid 1px; border-color: black;" class="text-center white--text">
+                                    <h2> Código de referencia </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Descripción del ensayo </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Unidades </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Técnica analítica </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Método analítico </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Limite de cuantificación </h2>
+                                </th>
+                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                    class="text-center white--text">
+                                    <h2> Costo del ensayo </h2>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3" :key="i">
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
+                                    {{ ensayo.ensayo.ensayo }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.descripcion }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.unidades }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.tecnica }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.metodo }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    {{ ensayo.ensayo.limiteCuantificacion }}
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                    ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
+                                </td>
+                            </tr>
+                            <tr v-if="ensayosSeleccionados3.length <= 0">
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> Costo del ítem 3 </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-left:0px; border-top: 0px; "
+                                    class="pa-0 ma-0">
+                                    ${{ Intl.NumberFormat("de-DE").format(costo3) }}
+                                </td>
+                            </tr>
+
+                            <tr v-if="descuento > 0">
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> Descuento </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                    class="pa-0 ma-0">
+                                    ${{ Intl.NumberFormat("de-DE").format(descuento) }}
+                                </td>
+                            </tr>
+
+                            <tr v-if="descuento > 0">
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td style="border-bottom: 0px; border-top: 0px;"
+                                    class="secondary text-center white--text">
+                                    <h2 class="mb-10">Observaciones de la propuesta técnica y
+                                        económica</h2>
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> Subtotal - Descuento </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                    class="pa-0 ma-0">
+                                    ${{ Intl.NumberFormat("de-DE").format(subtotal) }}
+                                </td>
+                            </tr>
+
+
+                            <tr v-if="descuento >= 0">
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td style="border-bottom: 0px; border-top: 0px;"
+                                    class="secondary text-center white--text">
+                                    <h2 class="mb-10">Observaciones de la propuesta técnica y
+                                        económica</h2>
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> Subtotal </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                    class="pa-0 ma-0">
+                                    ${{ Intl.NumberFormat("de-DE").format(subtotal) }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
+
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                </td>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> IVA </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                    class="pa-0 ma-0">
+                                    <div>{{ iva }}%</div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="secondary"
+                                    style="border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
+
+                                </td>
+                                <td 
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                </td>
+                                <td
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                    <h4 class="text-center black--text">{{ cotiObservacion }}</h4>
+                                </td>
+                                <td 
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                </td>
+                                <td 
+                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                </td>
+                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                    class="secondary text-right white--text">
+                                    <h2> Total </h2>
+                                </td>
+                                <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px; border-bottom: 1px;"
+                                    class="pa-0 ma-0">
+                                    ${{ Intl.NumberFormat("de-DE").format(total) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-simple-table>
+                <v-row class="secondary" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                    <v-col cols="12">
+                        <div class="text-center white--text">
+                            <h3>Observaciones del servicio</h3>
+                        </div>
+                    </v-col>
+                </v-row>
+                <v-row style=" margin: 0; border: solid 1px; border-color: black; ">
+                    <v-col cols="12">
+                        <div class="text-left black--text">
+                            <h4>Observaciones del servicio</h4>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="12">
+                <div class="text-center white--text">
+                    <h3>Acepto las condiciones del servicio descritas en la presente oferta incluidos sus anexos</h3>
+                </div>
+            </v-col>
+        </v-row>
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text ">
+                    <h3>Nombre</h3>
+                </div>
+            </v-col>
+
+            <v-col cols="10" style="border: solid 1px; border-color: black;" class="pa-0 ma-0 text-center">
+                <v-row style="margin:0">
+                    <v-col cols="12">
+                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                            
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text ">
+                    <h3>Cargo</h3>
+                </div>
+            </v-col>
+
+            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+                <v-row style="margin:0">
+                    <v-col cols="12">
+                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                            
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text ">
+                    <h3>Firma de aceptación</h3>
+                </div>
+            </v-col>
+
+            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+                <v-row style="margin:0">
+                    <v-col cols="12">
+                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                            
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin: 0" class="mx-5">
+            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+                <div class="text-center white--text ">
+                    <h3>C.C.</h3>
+                </div>
+            </v-col>
+
+            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+                <v-row style="margin:0">
+                    <v-col cols="12">
+                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                            
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="12">
+                <div class="text-center white--text">
+                    <h3>3. Anexo de cotizaciones</h3>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="12">
+                <div class="text-center white--text">
+                    <h3>Aceptación del servicio</h3>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
+            <v-col cols="12">
+                <div class="text-left black--text">
+                    <h4>Aceptación del servicio</h4>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="12">
+                <div class="text-center white--text">
+                    <h3>Condiciones comerciales</h3>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
+            <v-col cols="12">
+                <div class="text-left black--text">
+                    <h4>Condiciones comerciales</h4>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="12">
+                <div class="text-center white--text">
+                    <h3>Condiciones técnicas</h3>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
+            <v-col cols="12">
+                <div class="text-left black--text">
+                    <h4>Condiciones técnicas</h4>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="12">
+                <div class="text-center white--text">
+                    <h3>Garantía del servicio</h3>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
+            <v-col cols="12">
+                <div class="text-left black--text">
+                    <h4>Garantía del servicio</h4>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+            <v-col cols="12">
+                <div class="text-center white--text">
+                    <h3>Calidad del servicio</h3>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
+            <v-col cols="12">
+                <div class="text-left black--text">
+                    <h4>Calidad del servicio</h4>
+                </div>
             </v-col>
         </v-row>
     </v-container>
@@ -514,6 +998,11 @@ export default {
         celular: "",
         cargo: "",
         email: "",
+        cotiObservacion: "",
+
+        subtotal: 0,
+        total: 0,
+        iva: 0,
         ensayosSeleccionados: [],
         ensayosSeleccionados2: [],
         ensayosSeleccionados3: [],
@@ -546,7 +1035,11 @@ export default {
                 this.celular = this.datos.idCliente.celular
                 this.cargo = this.datos.idCliente.cargo
                 this.email = this.datos.idCliente.email
+                this.cotiObservacion = this.datos.observaciones
                 this.descuento = this.datos.descuento
+                this.subtotal = this.datos.subtotal
+                this.total = this.datos.total
+                this.iva = this.datos.iva
                 if (this.datos.items.item1.itemsEnsayo) {
                     this.costo = this.datos.items.item1.costo
                     this.datos.items.item1.itemsEnsayo.forEach(ensayo => {
@@ -588,6 +1081,10 @@ export default {
                 this.cargo = this.datos.idCliente.cargo
                 this.email = this.datos.idCliente.email
                 this.descuento = this.datos.descuento
+                this.cotiObservacion = this.datos.observaciones
+                this.subtotal = this.datos.subtotal
+                this.total = this.datos.total
+                this.iva = this.datos.iva
                 if (this.datos.items.item1.itemsEnsayo) {
                     this.costo = this.datos.items.item1.costo
                     this.datos.items.item1.itemsEnsayo.forEach(ensayo => {
@@ -641,8 +1138,8 @@ export default {
         this.info2();
     },
     destroyed() {
-        alert("Si funciona")
-        localStorage.setItem("datos", JSON.stringify({}))
+        // alert("Si funciona")
+        // localStorage.setItem("datos", JSON.stringify({}))
     }
 }
 </script>
@@ -650,8 +1147,8 @@ export default {
 <style>
 #coti2 {
     display: inline-block;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
 }
 
 @supports (-webkit-mask: url("")) or (mask: url("")) {

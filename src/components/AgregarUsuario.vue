@@ -10,7 +10,7 @@
             <v-col cols="5" xs="7" sm="4" md="2" lg="2" xl="2">
                 <v-dialog v-model="dialog" persistent>
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn class="mt-n4" color="secondary" dark v-bind="attrs" v-on="on">
+                        <v-btn class="mt-n4" color="accent" dark v-bind="attrs" v-on="on">
                             Nuevo usuario
                         </v-btn>
                     </template>

@@ -16,7 +16,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer temporary v-model="drawer" absolute color="deep-orange" width="280">
+    <v-navigation-drawer temporary v-model="drawer" absolute color="primary" width="280">
       <v-list>
         <v-list-item>
           <h1></h1>
@@ -28,7 +28,7 @@
             </v-img>
           </v-avatar>
         </v-list-item>
-        <v-list-item class="d-flex justify-center white--text mt-4 mb-4">
+        <v-list-item class="d-flex justify-center accent--text mt-4 mb-4">
           <h3 align="center" justify="center">{{ $store.state.datos.nombre }}</h3>
         </v-list-item>
 
@@ -46,24 +46,24 @@
 
          
         <div v-if="$store.state.datos.rol == 'ADMIN'">
-          <v-list-item v-if="this.configuracion === 0" @click="Configuracion()" absolute color="deep-orange">
+          <v-list-item v-if="this.configuracion === 0" @click="Configuracion()" absolute color="primary">
             <v-list-item-icon class="white--text">
               <v-icon color="white">mdi-wrench</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="white--text">Configuración
-              <v-icon class="ml-13">mdi-chevron-down
+              <v-icon color="accent" class="ml-13">mdi-chevron-down
               </v-icon>
             </v-list-item-title>
           </v-list-item>
         </div>
 
         <div v-if="this.configuracion === 1" class="Config">
-          <v-list-item @click="Configuracion1()" style="background-color: #ff5722; border: solid 1px; border-color: white; border-left:0px; border-right: 0px; border-top: 1px;">
+          <v-list-item class="primary" @click="Configuracion1()">
             <v-list-item-icon class="white--text">
               <v-icon color="white">mdi-wrench</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="white--text">Configuración
-              <v-icon class="ml-12">mdi-chevron-up
+              <v-icon class="accent ml-12">mdi-chevron-up
               </v-icon>
             </v-list-item-title>          
           </v-list-item>

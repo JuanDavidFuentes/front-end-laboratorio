@@ -17,7 +17,7 @@
                 <v-row justify="center">
                     <v-dialog v-model="dialog" fullscreen persistent hide-overlay transition="dialog-bottom-transition">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn color="secondary" dark v-bind="attrs" v-on="on">
+                            <v-btn color="accent" dark v-bind="attrs" v-on="on">
                                 <v-icon> mdi-plus-circle-outline </v-icon>Crear cotización
                             </v-btn>
                         </template>
@@ -2685,7 +2685,6 @@ export default {
                     this.idMomentaneo = id
                 }
             })
-
         },
         calidad() {
             axios.get("/calidad/listar")

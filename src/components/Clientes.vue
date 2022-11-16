@@ -10,7 +10,7 @@
             <v-col cols="5" xs="7" sm="4" md="2" lg="2" xl="2">
                 <v-dialog v-model="dialog">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="secondary" dark v-bind="attrs" v-on="on">
+                        <v-btn color="accent" dark v-bind="attrs" v-on="on">
                             Nuevo Cliente
                         </v-btn>
                     </template>
@@ -209,7 +209,7 @@
                             <span v-if="item.estado === 1">
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="error" rounded v-bind="attrs" v-on="on"
+                                        <v-icon color="red" rounded v-bind="attrs" v-on="on"
                                             @click="desactivar(item._id)">
                                             mdi-shield-off
                                         </v-icon>

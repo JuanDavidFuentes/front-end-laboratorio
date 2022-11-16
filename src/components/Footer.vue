@@ -1,6 +1,6 @@
 
 <template>
-  <v-footer v-if="this.$router.history.current['path'] !=='/CotiImprimir'" app color="dark" padless>
+  <v-footer v-if="this.$router.history.current['path'] !=='/CotiImprimir'" app color="primary" padless>
     <v-row justify="center" no-gutters>
       <v-col class="black py-4 text-center accent--text" cols="12">
         {{ new Date().getFullYear() }} — <strong>LabFicat</strong>

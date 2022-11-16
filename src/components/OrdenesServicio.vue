@@ -23,7 +23,8 @@
                                         single-line hide-details>
                                     </v-text-field>
                                 </v-card-title>
-                                <v-data-table :headers="headers" :items="ensayosOrdenes" :search="search"></v-data-table>
+                                <v-data-table :headers="headers" :items="ensayosOrdenes" :search="search">
+                                </v-data-table>
                             </v-card>
                         </template>
                     </v-card>
@@ -42,8 +43,8 @@ export default {
         return {
             search: '',
             idUsuario: '',
-            ordenes:[],
-            ensayosOrdenes:[],
+            ordenes: [],
+            ensayosOrdenes: [],
             headers: [
                 {
                     text: 'Ensayo',
@@ -82,15 +83,15 @@ export default {
         }
     }, methods: {
         listarordens() {
-            this.idUsuario=this.$store.state.datos._id
+            this.idUsuario = this.$store.state.datos._id
             console.log(this.idUsuario);
             let header = { headers: { "token": this.$store.state.token } };
             axios.get(`/Orden_servicio/realizado/${this.idUsuario}`, header)
                 .then((response) => {
                     console.log(response);
-                    this.ordenes=response.data.realizadopor
-                    this.ordenes.forEach(data=>{
-                        this.ensayosOrdenes.push({ensayo:data.ensayo, id:data._id})
+                    this.ordenes = response.data.realizadopor
+                    this.ordenes.forEach(data => {
+                        this.ensayosOrdenes.push({ ensayo: data.ensayo[0], id: data._id })
                     })
                     console.log(this.ensayosOrdenes);
                 })

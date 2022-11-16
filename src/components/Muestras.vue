@@ -7,7 +7,7 @@
                 </v-btn>
             </v-col>
             <v-col class="text-left" cols="12" xs="12" sm="12" md="4" lg="2" xl="2">
-                <v-btn class="mt-n3" color="deep-orange" dark @click="pagmuestras()">
+                <v-btn class="mt-n3" color="accent" dark @click="pagmuestras()">
                     Crear Muestra
                 </v-btn>
 
@@ -108,19 +108,19 @@
                 <v-divider></v-divider>
                 <v-list three-line subheader>
                     <v-container fluid>
-                        <v-row style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722"
-                            class="mx-5">
+                        <v-row style=" margin: 0; border: solid 1px; border-color: black;"
+                            class="mx-5 secondary">
                             <v-col>
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text ">
                                     <h3>Datos del solicitante</h3>
                                 </div>
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style="  border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
+                                <div class="text-center white--text">
                                     <h3>Solicitante</h3>
                                 </div>
                             </v-col>
@@ -128,12 +128,13 @@
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-1">
-                                    <v-btn color="deep-orange" v-if="botones == 1" dark class="ma-2"
+                                    <v-btn color="secondary" v-if="botones == 1" dark class="ma-2"
                                         @click="dialog4 = true">Elegir
                                         solicitante</v-btn>
                                 </h3>
                                 <v-row style="margin:0">
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"></v-col>
+
                                     <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
                                         <div v-if="botones == 0" class="pa-0 ma-0 font-weight-black text-center my-3"
                                             full-width hide-details>
@@ -144,7 +145,7 @@
                                         <div>
                                             <v-tooltip v-if="botones === 0" bottom>
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
+                                                    <v-icon dark class="my-3" color="secondary" rounded v-bind="attrs"
                                                         v-on="on" @click="borrarclientes()">
                                                         mdi-close-circle
                                                     </v-icon>
@@ -156,9 +157,9 @@
                                 </v-row>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
+                                <div class="text-center white--text ">
                                     <h3>Departamento</h3>
                                 </div>
                             </v-col>
@@ -170,9 +171,9 @@
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style="border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
+                                <div class="text-center white--text">
                                     <h3>NIT/C.C.</h3>
                                 </div>
                             </v-col>
@@ -182,9 +183,9 @@
                                 <h3 class="mt-3">{{ soliDocumento }}</h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
+                                <div class="text-center white--text">
                                     <h3>Contacto</h3>
                                 </div>
                             </v-col>
@@ -195,10 +196,10 @@
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
-                            <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                            <v-col class="secondary"
+                                style=" border: solid 1px; border-color: black; border-top: 0px; "
                                 cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text">
                                     <h3>Dirección</h3>
                                 </div>
                             </v-col>
@@ -207,10 +208,10 @@
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{ soliDireccion }}</h3>
                             </v-col>
-                            <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                            <v-col class="secondary"
+                                style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text">
                                     <h3>Teléfono</h3>
                                 </div>
                             </v-col>
@@ -221,10 +222,10 @@
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
-                            <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                            <v-col class="secondary"
+                                style=" border: solid 1px; border-color: black; border-top: 0px; "
                                 cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text">
                                     <h3>Ciudad</h3>
                                 </div>
                             </v-col>
@@ -234,9 +235,9 @@
                                 <h3 class="mt-3">{{ soliCiudad }}</h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                class="secondary" style="; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text">
                                     <h3>Correo electrónico</h3>
                                 </div>
                             </v-col>
@@ -248,9 +249,9 @@
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                                class="secondary" style="; border: solid 1px; border-color: black; border-top: 0px; "
                                 cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange mt-4">
+                                <div class="text-center white--text mt-4">
                                     <h3>Cotización</h3>
                                 </div>
                             </v-col>
@@ -265,9 +266,9 @@
                                 </h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                class="secondary" style="; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                <div class="text-center white--text text-no-wrap deep-orange mt-4">
+                                <div class="text-center white--text mt-4">
                                     <h3>Items</h3>
                                 </div>
                             </v-col>
@@ -281,68 +282,69 @@
                             </v-col>
                         </v-row>
 
-                        <v-row class="mx-5"
-                            style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                        <v-row class="mx-5 secondary"
+                            style=" margin: 0; border: solid 1px; border-color: black; border-top: 1px;">
                             <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                             </v-col>
                             <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text">
                                     <h3>Datos de la muestra</h3>
                                 </div>
                             </v-col>
                         </v-row>
+
                         <v-row style=" margin: 0;" class="mx-5">
                             <v-col cols="12" class="ma-0 pa-0">
                                 <v-simple-table>
                                     <template v-slot:default>
-                                        <thead style="  background-color: #ff5722; border-top: 0px;">
+                                        <thead class="secondary" >
                                             <tr>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px;"
+                                                <th style=" border: solid 1px; border-color: black; "
                                                     class="text-center white--text">
                                                     <h2> Código de </h2>
                                                     <h2> muestra </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Municipio de </h2>
                                                     <h2> recolección </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Dirección de toma </h2>
                                                     <h2> de muestra </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Lugar de toma de </h2>
                                                     <h2> muestra </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Muestra </h2>
                                                     <h2> recolectada por </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Procedimiento </h2>
                                                     <h2> de </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Tipo de muestra</h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Matriz de la </h2>
                                                     <h2> muestra </h2>
                                                 </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Fecha y hora de </h2>
                                                     <h2> recolección </h2>
                                                 </th>
 
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                <th style=" border: solid 1px; border-color: black; border-left:0px;"
                                                     class="text-center white--text">
                                                     <h2> Observaciones </h2>
                                                 </th>
@@ -351,7 +353,7 @@
                                         <tbody>
                                             <tr v-if="mostrasDatos <= 0">
                                                 <td style="border: solid 1px; border-color: black; border-top: 0px;">
-
+                                                    ala1
                                                 </td>
                                                 <td
                                                     style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
@@ -465,6 +467,7 @@
                 </v-list>
             </v-card>
         </v-dialog>
+
         <v-dialog v-model="dialog4" max-width="1000px">
             <v-card>
                 <template>
@@ -493,7 +496,7 @@
                 <v-card-actions>
                     <v-row style="margin:0">
                         <v-col cols="12" class="text-center">
-                            <v-btn color="red" @click="dialog4 = false" rounded dark>
+                            <v-btn color="secondary" @click="dialog4 = false" rounded dark>
                                 Cerrar
                             </v-btn>
                         </v-col>

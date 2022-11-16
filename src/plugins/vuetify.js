@@ -15,7 +15,7 @@ async function color() {
       console.log(error);
     });
 }
-color()
+color() 
 
 
 let a=[]

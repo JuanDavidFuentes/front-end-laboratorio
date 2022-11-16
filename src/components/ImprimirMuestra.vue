@@ -9,12 +9,12 @@
                 <v-list three-line subheader>
                     <v-container fluid>
                         <v-row style="margin: 0">
-                            <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="2" class="text-left">
+                            <v-col cols="2" class="text-left">
                                 <div class="accent mt-10" id="muestra2"></div>
                                 <!-- <img height="200" width="200"
                                     src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" /> -->
                             </v-col>
-                            <v-col cols="12" xs="12" sm="12" md="10" lg="10" xl="10">
+                            <v-col cols="10">
                                 <v-row>
                                     <v-col cols="10">
                                         <div class="text-center black--text">
@@ -70,12 +70,12 @@
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Solicitante</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
 
@@ -83,12 +83,12 @@
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Departamento</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{soliDepartamento}}</h3>
@@ -97,24 +97,24 @@
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>NIT/C.C.</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{soliDocumento}}</h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Contacto</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{soliNombreContacto}}</h3>
@@ -123,24 +123,24 @@
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Dirección</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{soliDireccion}}</h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Teléfono</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{soliTelefono}}</h3>
@@ -149,24 +149,24 @@
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Ciudad</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{soliCiudad}}</h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Correo electrónico</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">{{soliEmail}}</h3>
@@ -175,194 +175,97 @@
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange mt-4">
                                     <h3>Cotización</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">
-                                    ala9
+                                    {{soliCoti}}
                                 </h3>
                             </v-col>
                             <v-col
                                 style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                cols="2">
                                 <div class="text-center white--text text-no-wrap deep-orange mt-4">
                                     <h3>Items</h3>
                                 </div>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                            <v-col cols="4"
                                 style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
                                 class="pa-0 ma-0 text-center">
                                 <h3 class="mt-3">
-                                    ala10
+                                    {{soliItem}}
                                 </h3>
                             </v-col>
                         </v-row>
 
                         <v-row class="mx-5"
                             style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
-                            <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                            <v-col cols="4">
                             </v-col>
-                            <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
+                            <v-col cols="4">
                                 <div class="text-center white--text text-no-wrap deep-orange">
                                     <h3>Datos de la muestra</h3>
                                 </div>
                             </v-col>
                         </v-row>
-                        <v-row style=" margin: 0;" class="mx-5">
-                            <v-col cols="12" class="ma-0 pa-0">
-                                <v-simple-table>
-                                    <template v-slot:default>
-                                        <thead style="  background-color: #ff5722; border-top: 0px;">
-                                            <tr>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Código de </h2>
-                                                    <h2> muestra </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Municipio de </h2>
-                                                    <h2> recolección </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Dirección de toma </h2>
-                                                    <h2> de muestra </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Lugar de toma de </h2>
-                                                    <h2> muestra </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Muestra </h2>
-                                                    <h2> recolectada por </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Procedimiento </h2>
-                                                    <h2> de </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Tipo de muestra</h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Matriz de la </h2>
-                                                    <h2> muestra </h2>
-                                                </th>
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Fecha y hora de </h2>
-                                                    <h2> recolección </h2>
-                                                </th>
-
-                                                <th style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                    class="text-center white--text">
-                                                    <h2> Observaciones </h2>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-if="mostrasDatos <= 0">
-                                                <td style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                    <h3>123456</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    <h3>12345</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    <h3>1234</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    <h3>0</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    <h3>1</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    <h3>12</h3>
-                                                </td>
-                                                <td style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                <h3>123</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    <h3>122</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                    <h3>1102</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                </td>
-                                            </tr>
-                                            <tr v-for="(datosss, i ) in mostrasDatos" :key="i">
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                    <h3>{{ datosss.codMuestra }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.munRecoleccion }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.direccionTomaMuestra }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.lugarTomaMuestra }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.muestraRecolectadaPor }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.procedimientoMuestreo }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.tipoMuestra }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.matrizMuestra }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.fechaRecoleccion }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.cotizacion }}</h3>
-                                                </td>
-                                                <td
-                                                    style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                    <h3>{{ datosss.item }}</h3>
-                                                </td>
-
-                                            </tr>
-                                        </tbody>
-                                    </template>
-                                </v-simple-table>
-                            </v-col>
+                        <v-row style="margin: 0" class="mx-5">
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="1"><h3> Código de </h3>
+                                         <h3> muestra </h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1"><h3> Municipio de </h3>
+                                                    <h3> recolección </h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="2"><h3> Dirección de toma </h3>
+                                                    <h3> de muestra </h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1"><h3> Lugar de toma de </h3>
+                                                    <h3> muestra </h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1"> <h3> Muestra </h3>
+                                                    <h3> recolectada por </h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="2"><h3> Procedimiento </h3>
+                                                    <h3> de muestreo</h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1"><h3> Tipo de muestra</h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1"><h3> Matriz de la </h3>
+                                                    <h3> muestra </h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1"><h3> Fecha y hora de </h3>
+                                                    <h3> recolección </h3></v-col>
+                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1"><h3> Observaciones </h3></v-col>                    
                         </v-row>
+                        <v-row style="margin: 0" class="mx-5">
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px"
+                            cols="1"><h3>{{soliCodM}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="1"><h3>{{soliMunR}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="2"><h3>{{soliDirM}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="1"><h3>{{soliLugarM}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="1"><h3>{{soliRecolectadaPor}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="2"><h3>{{soliProcedimiento}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="1"><h3>{{soliTipoM}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="1"><h3>{{soliMatrizM}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="1"><h3>{{soliFechaHora.slice(0, 10)}}</h3></v-col>
+                            <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                            cols="1"></v-col>
+                        </v-row>
+
                     </v-container>
                 </v-list>
             </v-card>
@@ -384,6 +287,17 @@ export default {
         soliTelefono: '',
         soliCiudad: '',
         soliEmail: '',
+        soliCoti: '',
+        soliItem: '',
+        soliCodM: '',
+        soliMunR: '', 
+        soliDirM: '',
+        soliLugarM:'',
+        soliRecolectadaPor:'',
+        soliProcedimiento: '',
+        soliTipoM:'',
+        soliMatrizM:'',
+        soliFechaHora: '',
         clientes: [],
         datos2: [],
         loading: false,
@@ -434,18 +348,39 @@ export default {
                 this.soliDocumento = this.datos.cotizacion.idCliente.documento
                 this.soliNombreContacto = this.datos.cotizacion.idCliente.contacto.nombre
                 this.soliDireccion = this.datos.cotizacion.idCliente.direccion
-                // this.soliTfono = this.datos.cotizacion.idCliente.nombreiente.            this.soliCiudad = this.datos.munRecoleccion.ciudad
+                this.soliCiudad = this.datos.cotizacion.idCliente.ciudad.ciudad
                 this.soliEmail = this.datos.cotizacion.idCliente.email
-                this.soliCoti = this.datos.cotizacion._id
+                this.soliTelefono= this.datos.cotizacion.idCliente.celular
+                this.soliCoti = this.datos.cotizacion.numero_cotizacion
+                this.soliItem = this.datos.item
+                this.soliCodM = this.datos.codMuestra
+                this.soliMunR = this.datos.munRecoleccion.ciudad
+                this.soliDirM = this.datos.direccionTomaMuestra
+                this.soliLugarM = this.datos.lugarTomaMuestra
+                this.soliRecolectadaPor = this.datos.muestraRecolectadaPor
+                this.soliProcedimiento = this.datos.procedimientoMuestreo
+                this.soliTipoM = this.datos.tipoMuestra.tipos
+                this.soliMatrizM = this.datos.matrizMuestra
+                this.soliFechaHora = this.datos.fechaRecoleccion
             } else {
-                // this.soliNombre = this.datos.nombre
-                // this.soliApellido = this.datos.apellidos
-                // this.soliDepartamento = this.datos.ciudad.departamento
-                // this.soliDocumento = this.datos.documento
-                // this.soliDireccion = this.datos.direccion
-                // this.soliTelefono = this.datos.celular
-                // this.soliCiudad = this.datos.ciudad.ciudad
-                // this.soliEmail = this.datos.email
+                this.soliNombre = this.datos.cotizacion.idCliente.nombre
+                this.soliDepartamento = this.datos.munRecoleccion.departamento
+                this.soliDocumento = this.datos.cotizacion.idCliente.documento
+                this.soliDireccion = this.datos.cotizacion.idCliente.direccion
+                this.soliCiudad = this.datos.cotizacion.idCliente.ciudad.ciudad
+                this.soliEmail = this.datos.cotizacion.idCliente.email
+                this.soliTelefono= this.datos.cotizacion.idCliente.celular
+                this.soliCoti = this.datos.cotizacion.numero_cotizacion
+                this.soliItem = this.datos.item
+                this.soliCodM = this.datos.codMuestra
+                this.soliMunR = this.datos.munRecoleccion.ciudad
+                this.soliDirM = this.datos.direccionTomaMuestra
+                this.soliLugarM = this.datos.lugarTomaMuestra
+                this.soliRecolectadaPor = this.datos.muestraRecolectadaPor
+                this.soliProcedimiento = this.datos.procedimientoMuestreo
+                this.soliTipoM = this.datos.tipoMuestra.tipos
+                this.soliMatrizM = this.datos.matrizMuestra
+                this.soliFechaHora = this.datos.fechaRecoleccion
             }
         },
         customFilter2(item, queryText) {
