@@ -49,7 +49,7 @@ export default {
                 {
                     text: 'Ensayo',
                     align: 'start',
-                    value: "ensayo",
+                    value: "ensayo.idensayo.ensayo",
                 },
                 {
                     text: 'Descripción',
@@ -79,6 +79,24 @@ export default {
                     sortable: false,
                     value: 'ensayo.idensayo.limiteCuantificacion',
                 },
+                {
+                    text: 'Estado',
+                    align: 'start',
+                    sortable: false,
+                    value: 'ensayo.estado',
+                },
+                {
+                    text: 'Incertidumbre',
+                    align: 'start',
+                    sortable: false,
+                    value: '',
+                },
+                {
+                    text: 'Resultado',
+                    align: 'start',
+                    sortable: false,
+                    value: '',
+                },
             ],
         }
     }, methods: {
@@ -91,6 +109,7 @@ export default {
                     console.log(response);
                     this.ordenes = response.data.realizadopor
                     this.ordenes.forEach(data => {
+                        console.log(data);
                         this.ensayosOrdenes.push({ ensayo: data.ensayo[0], id: data._id })
                     })
                     console.log(this.ensayosOrdenes);
