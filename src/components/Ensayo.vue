@@ -301,7 +301,22 @@ export default {
           });
           console.log(response);
           this.ListarEnsayos()
-          this.dialog=false
+          this.dialog = false
+          this.id= ""
+          this.search= ""
+          this.ensayo= ""
+          this.metodo= ""
+          this.tecnica= ""
+          this.valorMaximo= ""
+          this.valorMinimo= ""
+          this.unidades= ""
+          this.costo= ""
+          this.titular= ""
+          this.suplente= ""
+          this.descripcion= ""
+          this.limiteCuantificacion= ""
+          this.seleccionadoSuplente= ""
+          this.seleccionadoTitular= ""
         })
         .catch((error) => {
           this.$swal.fire({
@@ -346,6 +361,21 @@ export default {
             timer: 1500,
           });
           this.dialog2 = false;
+          this.id= ""
+          this.search= ""
+          this.ensayo= ""
+          this.metodo= ""
+          this.tecnica= ""
+          this.valorMaximo= ""
+          this.valorMinimo= ""
+          this.unidades= ""
+          this.costo= ""
+          this.titular= ""
+          this.suplente= ""
+          this.descripcion= ""
+          this.limiteCuantificacion= ""
+          this.seleccionadoSuplente= ""
+          this.seleccionadoTitular= ""
           this.ListarEnsayos();
         })
         .catch((error) => {

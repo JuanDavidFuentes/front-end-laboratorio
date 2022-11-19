@@ -9,8 +9,7 @@
       </v-col>
     </v-row>
     <v-row style="margin: 0">
-      <v-col cols="1"></v-col>
-      <v-col cols="10">
+      <v-col class="text-center" cols="12">
         <template>
           <v-card>
             <template>
@@ -34,7 +33,6 @@
           </v-card>
         </template>
       </v-col>
-      <v-col cols="1"></v-col>
     </v-row>
 
   </v-container>
@@ -49,22 +47,10 @@ export default {
     search: '',
     headers: [
       {
-        text: 'Nombre del usuario',
+        text: 'Movimientos',
         align: 'start',
         sortable: false,
-        value: "idUsuario.nombre",
-      },
-      {
-        text: 'Inserción de datos',
-        align: 'start',
-        sortable: false,
-        value: 'idPost',
-      },
-      {
-        text: 'Edición de datos',
-        align: 'start',
-        sortable: false,
-        value: 'idPut',
+        value: 'texto',
       },
       {
         text: 'Navegador',
