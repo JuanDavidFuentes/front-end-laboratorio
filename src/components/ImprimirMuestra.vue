@@ -31,6 +31,7 @@
                                         </div>
                                     </v-col>
                                 </v-row>
+
                                 <v-row>
                                     <v-col cols="3">
                                         <div class="text-center black--text mt-2">
@@ -54,24 +55,23 @@
                             </v-col>
                         </v-row>
                     </v-container>
-                    <v-subheader></v-subheader>
                 </v-list>
                 <v-divider></v-divider>
-                <v-list three-line subheader>
+                <v-list >
                     <v-container fluid>
-                        <v-row style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722"
-                            class="mx-5">
+                        <v-row style=" margin: 0; border: solid 1px; border-color: black;"
+                            class="mx-5 secondary">
                             <v-col>
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text ">
                                     <h3>Datos del solicitante</h3>
                                 </div>
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style=" border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="2 secondary">
+                                <div class="text-center white--text">
                                     <h3>Solicitante</h3>
                                 </div>
                             </v-col>
@@ -82,9 +82,9 @@
                                 <h3 class="mt-1">{{soliNombre}}</h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="2 secondary">
+                                <div class="text-center white--text">
                                     <h3>Departamento</h3>
                                 </div>
                             </v-col>
@@ -96,9 +96,9 @@
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style="border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="2 secondary">
+                                <div class="text-center white--text ">
                                     <h3>NIT/C.C.</h3>
                                 </div>
                             </v-col>
@@ -108,9 +108,9 @@
                                 <h3 class="mt-3">{{soliDocumento}}</h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="2 secondary">
+                                <div class="text-center white--text">
                                     <h3>Contacto</h3>
                                 </div>
                             </v-col>
@@ -122,9 +122,9 @@
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style=" border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="2 secondary">
+                                <div class="text-center white--text">
                                     <h3>Dirección</h3>
                                 </div>
                             </v-col>
@@ -134,9 +134,9 @@
                                 <h3 class="mt-3">{{soliDireccion}}</h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="2 secondary">
+                                <div class="text-center white--text ">
                                     <h3>Teléfono</h3>
                                 </div>
                             </v-col>
@@ -148,9 +148,9 @@
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style=" border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="2 secondary">
+                                <div class="text-center white--text ">
                                     <h3>Ciudad</h3>
                                 </div>
                             </v-col>
@@ -160,9 +160,9 @@
                                 <h3 class="mt-3">{{soliCiudad}}</h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="2 secondary">
+                                <div class="text-center white--text ">
                                     <h3>Correo electrónico</h3>
                                 </div>
                             </v-col>
@@ -174,9 +174,9 @@
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange mt-4">
+                                style=" border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="2 secondary">
+                                <div class="text-center white--text  mt-4">
                                     <h3>Cotización</h3>
                                 </div>
                             </v-col>
@@ -188,9 +188,9 @@
                                 </h3>
                             </v-col>
                             <v-col
-                                style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                cols="2">
-                                <div class="text-center white--text text-no-wrap deep-orange mt-4">
+                                style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                cols="2 secondary">
+                                <div class="text-center white--text mt-4">
                                     <h3>Items</h3>
                                 </div>
                             </v-col>
@@ -203,49 +203,49 @@
                             </v-col>
                         </v-row>
 
-                        <v-row class="mx-5"
-                            style=" margin: 0; border: solid 1px; border-color: black; background-color: #ff5722; border-top: 0px;">
+                        <v-row class="mx-5 secondary"
+                            style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
                             <v-col cols="4">
                             </v-col>
                             <v-col cols="4">
-                                <div class="text-center white--text text-no-wrap deep-orange">
+                                <div class="text-center white--text ">
                                     <h3>Datos de la muestra</h3>
                                 </div>
                             </v-col>
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; "
-                                cols="1"><h3> Código de </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; "
+                                cols="1 secondary"><h3> Código de </h3>
                                          <h3> muestra </h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="1"><h3> Municipio de </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1 secondary"><h3> Municipio de </h3>
                                                     <h3> recolección </h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="2"><h3> Dirección de toma </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="2 secondary"><h3> Dirección de toma </h3>
                                                     <h3> de muestra </h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="1"><h3> Lugar de toma de </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1 secondary"><h3> Lugar de toma de </h3>
                                                     <h3> muestra </h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="1"> <h3> Muestra </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1 secondary"> <h3> Muestra </h3>
                                                     <h3> recolectada por </h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="2"><h3> Procedimiento </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="2 secondary"><h3> Procedimiento </h3>
                                                     <h3> de muestreo</h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="1"><h3> Tipo de muestra</h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="1"><h3> Matriz de la </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1 secondary"><h3> Tipo de muestra</h3></v-col>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1 secondary"><h3> Matriz de la </h3>
                                                     <h3> muestra </h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="1"><h3> Fecha y hora de </h3>
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1 secondary"><h3> Fecha y hora de </h3>
                                                     <h3> recolección </h3></v-col>
-                            <v-col class="text-center white--text" style=" background-color: #ff5722; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
-                                cols="1"><h3> Observaciones </h3></v-col>                    
+                            <v-col class="text-center white--text" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
+                                cols="1 secondary"><h3> Observaciones </h3></v-col>                    
                         </v-row>
                         <v-row style="margin: 0" class="mx-5">
                             <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px"
-                            cols="1"><h3>{{soliCodM}}</h3></v-col>
+                            cols="1 "><h3>{{soliCodM}}</h3></v-col>
                             <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
                             cols="1"><h3>{{soliMunR}}</h3></v-col>
                             <v-col class="text-center" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px"
@@ -387,9 +387,6 @@ export default {
             const textOne = item.numero_cotizacion
             const searchText = queryText
             return textOne.indexOf(searchText) > -1
-        },
-        Volver() {
-            this.$router.push("/Home");
         },
         Imprimir() {
             this.$router.push("/ImprimirMuestra");
@@ -593,7 +590,6 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-
         },
         listarMuestras() {
             axios.get(`/DMuestra/listarMuestras`)

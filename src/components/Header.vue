@@ -1,6 +1,5 @@
-
 <template>
-  <div class="mt-5" v-if="this.$router.history.current['path'] !=='/CotiImprimir'">
+  <div class="mt-5" v-if="this.$router.history.current['path'] !=='/CotiImprimir' && this.$router.history.current['path'] !=='/ImprimirMuestra'" >
     <v-app-bar app flex class="primary">
       <div class="accent" id="header"></div>
       <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''" color="accent"></v-app-bar-nav-icon>
@@ -10,6 +9,11 @@
       <v-toolbar-title class="accent--text font-weight-black"> Ficat</v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-btn @click="Login()" class="accent--text" v-if="$store.state.token == '' && this.$router.history.current['path'] !='/' && this.mostrar==0 " rounded>
+        <v-icon>mdi-monitor-lock</v-icon>
+        inicia Sesion 
+      </v-btn>
+
       <v-btn @click="salir()" class="accent--text" v-if="$store.state.token !== ''" rounded>
         salir 
         <v-icon>mdi-door-open</v-icon>
@@ -146,7 +150,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "InicioHeader",
@@ -155,6 +158,7 @@ export default {
     group: null,
     configuracion: 0,
     colores:"",
+    mostrar:0,
   }),
   methods: {
     salir() {
@@ -163,6 +167,10 @@ export default {
       this.$store.commit("setDatos", {})
       localStorage.setItem("token","")
       // localStorage.setItem("datos",{})
+    },
+    Login(){
+      this.$router.replace("/")
+      this.mostrar=1
     },
     Configuracion() {
       this.configuracion = 1

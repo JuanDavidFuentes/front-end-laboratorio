@@ -21,10 +21,6 @@
               <v-row>
                 <v-card-text> </v-card-text>
                 <v-col cols="5" md="6">
-                  <v-text-field class="mt-n7" v-model="ensayo" label="ensayo" required dense filled rounded>
-                  </v-text-field>
-                </v-col>
-                <v-col cols="5" md="6">
                   <v-text-field class="mt-n7" v-model="metodo" label="metodo" required dense filled rounded>
                   </v-text-field>
                 </v-col>
@@ -86,10 +82,6 @@
             <v-container>
               <v-row>
                 <v-card-text> </v-card-text>
-                <v-col cols="5" md="6">
-                  <v-text-field class="mt-n7" v-model="ensayo" label="ensayo" required dense filled rounded>
-                  </v-text-field>
-                </v-col>
                 <v-col cols="5" md="6">
                   <v-text-field class="mt-n7" v-model="metodo" label="metodo" required dense filled rounded>
                   </v-text-field>
@@ -171,7 +163,7 @@
                 <span v-if="item.estado === 1">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
-                      <v-icon color="error" rounded v-bind="attrs" v-on="on" @click="desactivar(item._id)">
+                      <v-icon color="red" rounded v-bind="attrs" v-on="on" @click="desactivar(item._id)">
                         mdi-shield-off
                       </v-icon>
                     </template>
@@ -303,13 +295,22 @@ export default {
           this.$swal.fire({
             position: "top-end",
             icon: "success",
-            title: response.data.msg,
+            title: "Ensayo creado correctamente",
             showConfirmButton: false,
             timer: 1500,
           });
-          this.ListarEnsayos();
+          console.log(response);
+          this.ListarEnsayos()
+          this.dialog=false
         })
         .catch((error) => {
+          this.$swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: error.response.data.errores.errors[0].msg,
+            showConfirmButton: false,
+            timer: 1500,
+          });
           console.log(error);
         });
     },

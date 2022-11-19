@@ -10,9 +10,7 @@
                 <v-btn class="mt-n3" color="accent" dark @click="pagmuestras()">
                     Crear Muestra
                 </v-btn>
-
             </v-col>
-
 
             <v-col cols="12">
                 <template>
@@ -40,6 +38,7 @@
                 </template>
             </v-col>
         </v-row>
+
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
             <!-- <template v-slot:activator="{ on, attrs }">
                 <v-btn color="deep-orange" dark v-bind="attrs" v-on="on" class="center">
@@ -653,11 +652,16 @@ export default {
         Volver() {
             this.$router.push("/Home");
         },
+        // Imprimir(item) {
+        //     this.$store.dispatch("setImprimirM", item);
+        //     this.$router.push("/ImprimirMuestra")
+        //     console.log(item);
+        // },
         Imprimir(item) {
-            this.$store.dispatch("setImprimirM", item);
-            this.$router.push("/ImprimirMuestra")
+            // this.$store.dispatch("setCotiImprimir", datos);
+            localStorage.setItem("datos",JSON.stringify(item))
+            window.open("http://localhost:8080/#/ImprimirMuestra")
             console.log(item);
-
         },
         usuarios() {
             axios.get(`/cotizacion/listarTodasLasCotizaciones`)

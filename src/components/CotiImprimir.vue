@@ -682,7 +682,7 @@
                             </tr>
 
 
-                            <tr v-if="descuento >= 0">
+                            <tr v-if="descuento <= 0">
                                 <td class="secondary"
                                     style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
 
@@ -1060,6 +1060,9 @@ export default {
                 }
             } else {
                 console.log("sin");
+                this.elaboradoN = this.datos.elabordo_por.nombre
+                this.elaboradoA = this.datos.elabordo_por.apellidos
+                this.elaboradoR = this.datos.elabordo_por.rol
                 this.idCotizacion = this.datos._id
                 this.fechaEmision = this.datos.fecha_emision.slice(0, 10)
                 this.entregaResultados = this.datos.entrega_resultados.slice(0, 10)

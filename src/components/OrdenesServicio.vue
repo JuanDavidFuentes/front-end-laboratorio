@@ -24,6 +24,17 @@
                                     </v-text-field>
                                 </v-card-title>
                                 <v-data-table :headers="headers" :items="ensayosOrdenes" :search="search">
+                                    <template v-slot:[`item.completar`]="{ item }">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                    @click="editar(item)">
+                                                    mdi-briefcase-check
+                                                </v-icon>
+                                            </template>
+                                            <span>Termina tu tarea!!!!</span>
+                                        </v-tooltip>
+                                    </template>
                                 </v-data-table>
                             </v-card>
                         </template>
@@ -32,6 +43,36 @@
             </v-col>
             <v-col cols="1"></v-col>
         </v-row>
+        <template>
+            <v-row justify="center">
+                <v-dialog v-model="dialog" persistent max-width="800px">
+                    <v-card>
+                        <v-card-title>
+                            <span class="text-h5">Porfavor complete los campos</span>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <v-text-field color="secondary" v-model="resultado" type="number"
+                                            label="Resultado*" filled dense></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="dialog = false">
+                                Cerrar
+                            </v-btn>
+                            <v-btn color="blue darken-1" text @click="editar2()">
+                                Guardar
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </v-row>
+        </template>
     </v-container>
 </template>
 <script>
@@ -43,8 +84,11 @@ export default {
         return {
             search: '',
             idUsuario: '',
+            dialog: false,
             ordenes: [],
             ensayosOrdenes: [],
+            incertidumbre: null,
+            resultado: null,
             headers: [
                 {
                     text: 'Ensayo',
@@ -86,16 +130,10 @@ export default {
                     value: 'ensayo.estado',
                 },
                 {
-                    text: 'Incertidumbre',
+                    text: 'Tareas',
                     align: 'start',
                     sortable: false,
-                    value: '',
-                },
-                {
-                    text: 'Resultado',
-                    align: 'start',
-                    sortable: false,
-                    value: '',
+                    value: 'completar',
                 },
             ],
         }
@@ -117,10 +155,33 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        editar(item) {
+            console.log(item);
+            this.dialog = true
+        },
+        editar2(item) {
+            let header = { headers: { "token": this.$store.state.token } };
+            axios.put(`/cotizacion/activar/${item._id}`, {}, header)
+                .then((response) => {
+                    console.log(response);
+                    this.$swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: response.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    this.listar();
+                    this.listarTodasLasCotis();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     },
     created() {
-        this.listarordens(); 
+        this.listarordens();
     }
 };
 </script>
