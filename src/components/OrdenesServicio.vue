@@ -1,13 +1,18 @@
 <template>
     <v-container fluid class="mt-15">
         <v-row>
-            <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
+            <v-col cols="12">
+                <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+                    Volver
+                </v-btn>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="12">
                 <div class="text-center black--text font-weight-Normal">
                     <h1>Ordenes</h1>
                 </div>
             </v-col>
-            <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
         </v-row>
         <v-row>
             <v-col cols="1"></v-col>
@@ -57,6 +62,10 @@
                                         <v-text-field color="secondary" v-model="resultado" type="number"
                                             label="Resultado*" filled dense></v-text-field>
                                     </v-col>
+                                    <v-col cols="12">
+                                        <v-text-field color="secondary" v-model="incertidumbre" type="number"
+                                            label="Incertidumbre*" filled dense></v-text-field>
+                                    </v-col>
                                 </v-row>
                             </v-container>
                         </v-card-text>
@@ -89,6 +98,7 @@ export default {
             ensayosOrdenes: [],
             incertidumbre: null,
             resultado: null,
+            ensayo:{},
             headers: [
                 {
                     text: 'Ensayo',
@@ -158,11 +168,16 @@ export default {
         },
         editar(item) {
             console.log(item);
+            this.ensayo=item
             this.dialog = true
         },
-        editar2(item) {
+        editar2() {
             let header = { headers: { "token": this.$store.state.token } };
-            axios.put(`/cotizacion/activar/${item._id}`, {}, header)
+            axios.put(`/cotizacion/activar/${this.ensayo.id}`, {
+                idensayo:this.ensayo.ensayo.idensayo._id,
+                resultado:this.resultado,
+                incertidumbre:this.incertidumbre
+            }, header)
                 .then((response) => {
                     console.log(response);
                     this.$swal.fire({
@@ -178,7 +193,10 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-        }
+        },
+        Volver() {
+            this.$router.push("/Home");
+        },
     },
     created() {
         this.listarordens();

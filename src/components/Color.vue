@@ -54,12 +54,12 @@
                         </div>
             </v-col>
         
-            <v-col v-if="selecionadoColor==='Color Temporal'"
+            <!-- <v-col v-if="selecionadoColor==='Color Temporal'"
             cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
                         <div class="text-center black--text font-weight-Normal" >
                             <h1>Color Temporal</h1>
                         </div>
-            </v-col>
+            </v-col> -->
 
             <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" >
             </v-col>
@@ -84,11 +84,11 @@
                         Guardar Color de los Formatos
             </v-btn>
         </div>
-        <div v-if="selecionadoColor==='Color Temporal'">
+        <!-- <div v-if="selecionadoColor==='Color Temporal'">
             <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
                         Guardar Color Temporal
             </v-btn>
-        </div>
+        </div> -->
         </v-row>
     </v-container>
 </template>
@@ -101,7 +101,7 @@ export default {
         hex: '#FF00FF',
         colores: {},
         idcolor: "",
-        Colores: ["Color Logo", "Color Interfaz","Color Formatos","Color Temporal"],
+        Colores: ["Color Logo", "Color Interfaz","Color Formatos"],//,"Color Temporal"
         isEditing: false,
         selecionadoColor:""
     }),
