@@ -199,7 +199,7 @@ export default {
         },
     },
     created() {
-        this.listarordens();
+        this.listarordens(); 
     }
 };
 </script>
