@@ -30,7 +30,7 @@
                                 </v-card-title>
                                 <v-data-table :headers="headers" :items="ensayosOrdenes" :search="search">
                                     <template v-slot:[`item.completar`]="{ item }">
-                                        <v-tooltip bottom>
+                                        <v-tooltip v-if="item.ensayo.estado === 'En proceso'" bottom>
                                             <template v-slot:activator="{ on, attrs }">
                                                 <v-icon color="green" rounded v-bind="attrs" v-on="on"
                                                     @click="editar(item)">
@@ -39,6 +39,19 @@
                                             </template>
                                             <span>Termina tu tarea!!!!</span>
                                         </v-tooltip>
+                                        <v-tooltip v-if="item.ensayo.estado === 'Realizado'" bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="blue" rounded v-bind="attrs" v-on="on"
+                                                    @click="editar(item)">
+                                                    mdi-pencil
+                                                </v-icon>
+                                            </template>
+                                            <span>Editar</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-slot:[`item.estado`]="{ item }">
+                                        <span class="orange--text" v-if="item.ensayo.estado === 'En proceso'">En proceso...</span>
+                                        <span class="green--text" v-if="item.ensayo.estado === 'Realizado'">Realizada!!</span>
                                     </template>
                                 </v-data-table>
                             </v-card>
@@ -98,7 +111,7 @@ export default {
             ensayosOrdenes: [],
             incertidumbre: null,
             resultado: null,
-            ensayo:{},
+            ensayo: {},
             headers: [
                 {
                     text: 'Ensayo',
@@ -134,10 +147,22 @@ export default {
                     value: 'ensayo.idensayo.limiteCuantificacion',
                 },
                 {
+                    text: 'Incertidumbre',
+                    align: 'start',
+                    sortable: false,
+                    value: 'ensayo.incertidumbre',
+                },
+                {
+                    text: 'Resultado',
+                    align: 'start',
+                    sortable: false,
+                    value: 'ensayo.resultado',
+                },
+                {
                     text: 'Estado',
                     align: 'start',
                     sortable: false,
-                    value: 'ensayo.estado',
+                    value: 'estado',
                 },
                 {
                     text: 'Tareas',
@@ -155,7 +180,7 @@ export default {
             axios.get(`/Orden_servicio/realizado/${this.idUsuario}`, header)
                 .then((response) => {
                     console.log(response);
-                    this.ordenes = response.data.realizadopor
+                    this.ordenes = response.data.realizadopor.reverse()
                     this.ordenes.forEach(data => {
                         console.log(data);
                         this.ensayosOrdenes.push({ ensayo: data.ensayo[0], id: data._id })
@@ -168,15 +193,16 @@ export default {
         },
         editar(item) {
             console.log(item);
-            this.ensayo=item
+            this.ensayo = item
             this.dialog = true
+            console.log(this.ensayo);
         },
         editar2() {
             let header = { headers: { "token": this.$store.state.token } };
-            axios.put(`/cotizacion/activar/${this.ensayo.id}`, {
-                idensayo:this.ensayo.ensayo.idensayo._id,
-                resultado:this.resultado,
-                incertidumbre:this.incertidumbre
+            axios.put(`/Orden_servicio/editar_orden/${this.ensayo.id}`, {
+                idensayo: this.ensayo.ensayo.idensayo._id,
+                resultado: this.resultado,
+                incertidumbre: this.incertidumbre
             }, header)
                 .then((response) => {
                     console.log(response);
@@ -187,8 +213,13 @@ export default {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.listar();
-                    this.listarTodasLasCotis();
+                    this.listarordens();
+                    this.dialog = false
+                    this.ordenes = []
+                    this.ensayosOrdenes = []
+                    this.incertidumbre = null
+                    this.resultado = null
+                    this.ensayo = {}
                 })
                 .catch((error) => {
                     console.log(error);
@@ -199,7 +230,7 @@ export default {
         },
     },
     created() {
-        this.listarordens(); 
+        this.listarordens();
     }
 };
 </script>
