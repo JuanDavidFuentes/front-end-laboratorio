@@ -112,8 +112,8 @@
               <v-card-title class="text-h5">Color</v-card-title>
               <v-card-actions>
                 <v-btn class="accent--text ml-2 mt-5" outlined rounded @click="Color1()">
-                  <v-icon>mdi-pencil-box-outline</v-icon>
-                  Editar versiones
+                  <v-icon>mdi-invert-colors</v-icon>
+                  Editar colores
                 </v-btn>
               </v-card-actions>
             </div>
