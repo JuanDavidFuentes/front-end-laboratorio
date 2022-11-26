@@ -28,12 +28,10 @@
                         </template>
                         <span>Editar informacion</span>
                       </v-tooltip>
-                    </template>
-                    <template>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
-                          <v-icon color="blue" @click="editar2(item)" rounded v-bind="attrs" v-on="on">
-                            mdi-pencil
+                          <v-icon color="green" @click="editar2(item)" rounded v-bind="attrs" v-on="on">
+                            mdi-reload
                           </v-icon>
                         </template>
                         <span>Editar consecutivos</span>

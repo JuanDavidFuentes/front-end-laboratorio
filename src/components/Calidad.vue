@@ -400,7 +400,8 @@ export default {
                 });
         },
         editarC(){
-            axios.put(`/cotizacion/activar/{}`, {
+            
+            axios.put(`/calidad/calidadPut/{}`, {
                 ListadoMuestras:[
                     {
 
@@ -431,8 +432,6 @@ export default {
 
                     }
                 ],
-                
-
             })
                 .then((response) => {
                     this.$swal.fire({
