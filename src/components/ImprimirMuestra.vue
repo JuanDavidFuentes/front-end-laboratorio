@@ -1,12 +1,5 @@
 <template>
-    <v-container class="ma-10">
-            <!-- <template v-slot:activator="{ on, attrs }">
-                <v-btn color="deep-orange" dark v-bind="attrs" v-on="on" class="center">
-                  Crear Muestra
-                </v-btn> 
-              </template> -->
-            <v-card>
-                <v-list three-line subheader>
+    <v-container fluid>
                     <v-container fluid>
                         <v-row style="margin: 0">
                             <v-col cols="2" class="text-left">
@@ -55,9 +48,7 @@
                             </v-col>
                         </v-row>
                     </v-container>
-                </v-list>
-                <v-divider></v-divider>
-                <v-list >
+
                     <v-container fluid>
                         <v-row style=" margin: 0; border: solid 1px; border-color: black;"
                             class="mx-5 secondary">
@@ -267,8 +258,7 @@
                         </v-row>
 
                     </v-container>
-                </v-list>
-            </v-card>
+
     </v-container>
 </template>
     
@@ -340,7 +330,7 @@ export default {
             return d.toLocaleDateString() + " - " + d.toLocaleTimeString();
         },
         itemInf(){
-            this.datos=this.$store.state.imprimirM
+            this.datos=JSON.parse(localStorage.getItem("datos"))
             console.log(this.datos);
             if (this.datos.cotizacion.idContacto) {
                 this.soliNombre = this.datos.cotizacion.idCliente.nombre

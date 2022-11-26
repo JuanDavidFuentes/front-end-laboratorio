@@ -16,6 +16,7 @@ import Orden from "../components/OrdenesServicio.vue";
 import Color from "../components/Color.vue";
 import CotiImprimir from "../components/CotiImprimir.vue";
 import ImprimirMuestra from "../components/ImprimirMuestra.vue";
+import Excel from '../components/Excel.vue';
 
 export const routes = [
     {path: '/', component: login},
@@ -36,4 +37,5 @@ export const routes = [
     {path: '/color', component: Color},
     {path: '/CotiImprimir', component: CotiImprimir},
     {path: '/ImprimirMuestra', component: ImprimirMuestra},
+    {path: '/Excel', component: Excel},
 ]

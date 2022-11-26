@@ -708,12 +708,10 @@ export default {
             this.dialog = false;
             this.dialog2 = false;
         },
-
         sacarid(usuario) {
             console.log(usuario);
             this.id = usuario._id
             this.dialog2 = true
-
             this.nombre = usuario.nombre
             this.apellidos = usuario.apellidos
             this.documento = usuario.documento
