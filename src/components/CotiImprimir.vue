@@ -891,7 +891,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    {{ aceptacion }}
+                    <v-textarea class="text-dark" v-model="aceptacion" hide-details auto-grow flat solo row-height="15"  disabled></v-textarea>
                 </div>
             </v-col>
         </v-row>
@@ -907,7 +907,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    {{ condicionesC }}
+                    <v-textarea class="text-dark" v-model="condicionesC" hide-details auto-grow flat solo row-height="15" disabled></v-textarea>
                 </div>
             </v-col>
         </v-row>
@@ -923,7 +923,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    {{ condicionesT }}
+                    <v-textarea class="text-dark" v-model="condicionesT" hide-details auto-grow flat solo row-height="15" disabled></v-textarea>
                 </div>
             </v-col>
         </v-row>
@@ -939,7 +939,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    {{ garantiaS }}
+                    <v-textarea class="text-dark" v-model="garantiaS" hide-details auto-grow flat solo row-height="15" disabled></v-textarea>
                 </div>
             </v-col>
         </v-row>
@@ -955,7 +955,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    {{ calidadS }}
+                    <v-textarea class="text-dark" v-model="calidadS" hide-details auto-grow flat solo row-height="15" disabled></v-textarea>
                 </div>
             </v-col>
         </v-row>
