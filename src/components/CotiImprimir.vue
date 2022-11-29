@@ -746,7 +746,7 @@
                                     style="border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
 
                                 </td>
-                                <td 
+                                <td
                                     style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                 </td>
@@ -754,11 +754,11 @@
                                     style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
                                     <h4 class="text-center black--text">{{ cotiObservacion }}</h4>
                                 </td>
-                                <td 
+                                <td
                                     style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                 </td>
-                                <td 
+                                <td
                                     style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
 
                                 </td>
@@ -784,7 +784,7 @@
                 <v-row style=" margin: 0; border: solid 1px; border-color: black; ">
                     <v-col cols="12">
                         <div class="text-left black--text">
-                            <h4>Observaciones del servicio</h4>
+                            <v-textarea class="text-dark" v-model="observacionesS" hide-details auto-grow flat solo row-height="15"  disabled></v-textarea>
                         </div>
                     </v-col>
                 </v-row>
@@ -808,7 +808,7 @@
                 <v-row style="margin:0">
                     <v-col cols="12">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            
+
                         </div>
                     </v-col>
                 </v-row>
@@ -822,11 +822,12 @@
                 </div>
             </v-col>
 
-            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="12">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            
+
                         </div>
                     </v-col>
                 </v-row>
@@ -840,11 +841,12 @@
                 </div>
             </v-col>
 
-            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="12">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            
+
                         </div>
                     </v-col>
                 </v-row>
@@ -858,11 +860,12 @@
                 </div>
             </v-col>
 
-            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="10" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="12">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            
+
                         </div>
                     </v-col>
                 </v-row>
@@ -888,7 +891,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    <h4>Aceptación del servicio</h4>
+                    {{ aceptacion }}
                 </div>
             </v-col>
         </v-row>
@@ -904,7 +907,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    <h4>Condiciones comerciales</h4>
+                    {{ condicionesC }}
                 </div>
             </v-col>
         </v-row>
@@ -920,7 +923,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    <h4>Condiciones técnicas</h4>
+                    {{ condicionesT }}
                 </div>
             </v-col>
         </v-row>
@@ -936,7 +939,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    <h4>Garantía del servicio</h4>
+                    {{ garantiaS }}
                 </div>
             </v-col>
         </v-row>
@@ -952,7 +955,7 @@
         <v-row class="mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
             <v-col cols="12">
                 <div class="text-left black--text">
-                    <h4>Calidad del servicio</h4>
+                    {{ calidadS }}
                 </div>
             </v-col>
         </v-row>
@@ -999,6 +1002,13 @@ export default {
         cargo: "",
         email: "",
         cotiObservacion: "",
+
+        observacionesS: "",
+        aceptacion: "",
+        condicionesC: "",
+        condicionesT: "",
+        garantiaS: "",
+        calidadS: "",
 
         subtotal: 0,
         total: 0,
@@ -1115,6 +1125,12 @@ export default {
                     this.caliCodigo = this.calidadOferta[0].codigo
                     this.caliaprobacion = this.calidadOferta[0].aprobacion
                     this.caliVersion = this.calidadOferta[0].version
+                    this.observacionesS = this.calidadOferta[0].observacionesdelservicio
+                    this.aceptacion = this.calidadOferta[0].anexodecotizaciones.aceptaciondelservicio
+                    this.condicionesC = this.calidadOferta[0].anexodecotizaciones.condicionescomerciales
+                    this.condicionesT = this.calidadOferta[0].anexodecotizaciones.condicionestecnicas
+                    this.garantiaS = this.calidadOferta[0].anexodecotizaciones.garantiadelservicio
+                    this.calidadS = this.calidadOferta[0].anexodecotizaciones.calidaddelservicio
                 })
                 .catch((error) => {
                     console.log(error);
@@ -1161,4 +1177,8 @@ export default {
         mask-size: cover;
     }
 }
+
+#text-dark {
+    color: black !important;
+  }
 </style>

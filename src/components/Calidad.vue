@@ -266,22 +266,22 @@
                             </v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea class="mt-n7" rounded v-model="observacionesdelservicio" filled auto-grow label="Observaciones del servicio" rows="1" row-height="20"></v-textarea>
+                            <v-textarea class="mt-n7" rounded v-model="observacionesdelservicio" filled auto-grow label="Observaciones del servicio" row-height="20"></v-textarea>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea class="mt-n7" rounded v-model="aceptaciondelservicio" filled auto-grow label="Aceptación del servicio" rows="1" row-height="20"></v-textarea>
+                            <v-textarea class="mt-n7" rounded v-model="aceptaciondelservicio" filled auto-grow label="Aceptación del servicio" row-height="20"></v-textarea>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea class="mt-n7" rounded v-model="condicionescomerciales" filled auto-grow label="Condiciones comerciales" rows="1" row-height="20"></v-textarea>
+                            <v-textarea class="mt-n7" rounded v-model="condicionescomerciales" filled auto-grow label="Condiciones comerciales" row-height="20"></v-textarea>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea class="mt-n7" rounded v-model="condicionestecnicas" filled auto-grow label="Condiciones tecnicas" rows="1" row-height="20"></v-textarea>
+                            <v-textarea class="mt-n7" rounded v-model="condicionestecnicas" filled auto-grow label="Condiciones tecnicas" row-height="20"></v-textarea>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea class="mt-n7" rounded v-model="garantiadelservicio" filled auto-grow label="Garantia del servicio" rows="1" row-height="20"></v-textarea>
+                            <v-textarea class="mt-n7" rounded v-model="garantiadelservicio" filled auto-grow label="Garantia del servicio" row-height="20"></v-textarea>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea class="mt-n7" rounded v-model="calidaddelservicio" filled auto-grow label="Calidad del servicio" rows="1" row-height="20"></v-textarea>
+                            <v-textarea class="mt-n7" rounded v-model="calidaddelservicio" filled auto-grow label="Calidad del servicio" row-height="20"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
