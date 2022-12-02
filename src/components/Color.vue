@@ -1,95 +1,108 @@
 <template>
     <v-container>
-        <v-row style="margin: 0px;">
-            <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10" class="mt-15">
-                <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
-                    Volver
-                </v-btn>
-            </v-col>
+        <div v-if="this.$store.state.token">
+            <v-row style="margin: 0px;">
+                <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10" class="mt-15">
+                    <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
+                        Volver
+                    </v-btn>
+                </v-col>
 
-        </v-row>
-        <v-row>
-            <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12"> 
-                <v-select
-                v-model="selecionadoColor"
-                :items="Colores"
-                label="Seleccione un color" 
-                ></v-select>
-            </v-col>
-        </v-row>
+            </v-row>
+            <v-row>
+                <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+                    <v-select v-model="selecionadoColor" :items="Colores" label="Seleccione un color"></v-select>
+                </v-col>
+            </v-row>
 
-        <v-row align="center" justify="center">
-            <v-col v-if="selecionadoColor===''"
-            cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
-                        <div class="text-center black--text font-weight-Normal" >
-                            <h1>Por favor selecciona una opción</h1>
-                        </div>
-            </v-col>
+            <v-row align="center" justify="center">
+                <v-col v-if="selecionadoColor === ''" cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+                    <div class="text-center black--text font-weight-Normal">
+                        <h1>Por favor selecciona una opción</h1>
+                    </div>
+                </v-col>
 
-            <v-col v-if="selecionadoColor==='Color Logo'"
-            cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
-                        <div class="text-center black--text font-weight-Normal" >
-                            <h1>Color del logo "SENA"</h1>
-                        </div>
-            </v-col>
+                <v-col v-if="selecionadoColor === 'Color Logo'" cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+                    <div class="text-center black--text font-weight-Normal">
+                        <h1>Color del logo "SENA"</h1>
+                    </div>
+                </v-col>
 
-            <v-col v-if="selecionadoColor==='Color Logo'" 
-            cols="12" xs="12" sm="12" md="12" lg="12" xl="12" 
-            class="text-center  flex-column align-center justify-center">
-                <div id="mascara" v-bind:style='{ background: `${color}` }'>
-                </div>
-            </v-col>  
+                <v-col v-if="selecionadoColor === 'Color Logo'" cols="12" xs="12" sm="12" md="12" lg="12" xl="12"
+                    class="text-center  flex-column align-center justify-center">
+                    <div id="mascara" v-bind:style='{ background: `${color}` }'>
+                    </div>
+                </v-col>
 
-            <v-col v-if="selecionadoColor==='Color Interfaz'"
-            cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
-                        <div class="text-center black--text font-weight-Normal" >
-                            <h1>Color del interfaz</h1>
-                        </div>
-            </v-col>
+                <v-col v-if="selecionadoColor === 'Color Interfaz'" cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+                    <div class="text-center black--text font-weight-Normal">
+                        <h1>Color del interfaz</h1>
+                    </div>
+                </v-col>
 
-            <v-col v-if="selecionadoColor==='Color Formatos'"
-            cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
-                        <div class="text-center black--text font-weight-Normal" >
-                            <h1>Color de los formatos</h1>
-                        </div>
-            </v-col>
-        
-            <!-- <v-col v-if="selecionadoColor==='Color Temporal'"
+                <v-col v-if="selecionadoColor === 'Color Formatos'" cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+                    <div class="text-center black--text font-weight-Normal">
+                        <h1>Color de los formatos</h1>
+                    </div>
+                </v-col>
+
+                <!-- <v-col v-if="selecionadoColor==='Color Temporal'"
             cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
                         <div class="text-center black--text font-weight-Normal" >
                             <h1>Color Temporal</h1>
                         </div>
             </v-col> -->
 
-            <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" >
-            </v-col>
-            <v-col cols="7" xs="7" sm="7" md="7" lg="7" xl="7" >
-                <v-color-picker class="ml-n3" v-model="color" hide-inputs ></v-color-picker>
-            </v-col> 
- 
-        <div v-if="selecionadoColor==='Color Logo'">
-            <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarL()">
+                <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5">
+                </v-col>
+                <v-col cols="7" xs="7" sm="7" md="7" lg="7" xl="7">
+                    <v-color-picker class="ml-n3" v-model="color" hide-inputs></v-color-picker>
+                </v-col>
+
+                <div v-if="selecionadoColor === 'Color Logo'">
+                    <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarL()">
                         Guardar Color del Logo
-            </v-btn>
-        </div>
+                    </v-btn>
+                </div>
 
-        <div v-if="selecionadoColor==='Color Interfaz'">
-            <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarI()">
+                <div v-if="selecionadoColor === 'Color Interfaz'">
+                    <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarI()">
                         Guardar Color del Interfaz
-            </v-btn>
-        </div>
+                    </v-btn>
+                </div>
 
-        <div v-if="selecionadoColor==='Color Formatos'">
-            <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
+                <div v-if="selecionadoColor === 'Color Formatos'">
+                    <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
                         Guardar Color de los Formatos
-            </v-btn>
-        </div>
-        <!-- <div v-if="selecionadoColor==='Color Temporal'">
+                    </v-btn>
+                </div>
+                <!-- <div v-if="selecionadoColor==='Color Temporal'">
             <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
                         Guardar Color Temporal
             </v-btn>
         </div> -->
-        </v-row>
+            </v-row>
+        </div>
+        <div v-if="this.$store.state.token === ''">
+            <v-row>
+                <v-col cols="12" class="mb-16 box2">
+                    <v-row>
+                        <v-col cols="12" class="d-flex justify-center">
+                            <img height="450"
+                                src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
+                        </v-col>
+                    </v-row>
+                    <center style="margin: 5vw;">
+                        <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie
+                            sesión nuevamente!</h1>
+                        <p>
+                            <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
+                        </p>
+                    </center>
+                </v-col>
+            </v-row>
+
+        </div>
     </v-container>
 </template>
 <script>
@@ -101,9 +114,9 @@ export default {
         hex: '#FF00FF',
         colores: {},
         idcolor: "",
-        Colores: ["Color Logo", "Color Interfaz","Color Formatos"],//,"Color Temporal"
+        Colores: ["Color Logo", "Color Interfaz", "Color Formatos"],//,"Color Temporal"
         isEditing: false,
-        selecionadoColor:""
+        selecionadoColor: ""
     }),
     methods: {
         traercolor() {
@@ -111,7 +124,7 @@ export default {
             this.idcolor = this.colores[0]._id
             console.log(this.idcolor);
         },
-        Volver1(){
+        Volver1() {
             this.$router.push("/Configuracion")
         },
         GuardarL() {
@@ -121,12 +134,12 @@ export default {
                 showCancelButton: true,
                 confirmButtonText: 'Si',
                 denyButtonText: `No`,
-            }).then((result) => {   
+            }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios.put(`/colores/${this.idcolor}`, {
-                    logo: this.color
-            })
+                        logo: this.color
+                    })
                         .then((response) => {
                             this.$swal.fire({
                                 position: "top-end",
@@ -143,7 +156,7 @@ export default {
                         .catch((error) => {
                             console.log(error);
                         });
-               } 
+                }
             })
         },
         GuardarI() {
@@ -153,12 +166,12 @@ export default {
                 showCancelButton: true,
                 confirmButtonText: 'Si',
                 denyButtonText: `No`,
-            }).then((result) => {   
+            }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios.put(`/colores/${this.idcolor}`, {
-                    interfaz: this.color
-            })
+                        interfaz: this.color
+                    })
                         .then((response) => {
                             this.$swal.fire({
                                 position: "top-end",
@@ -175,7 +188,7 @@ export default {
                         .catch((error) => {
                             console.log(error);
                         });
-               } 
+                }
             })
         },
         GuardarF() {
@@ -185,12 +198,12 @@ export default {
                 showCancelButton: true,
                 confirmButtonText: 'Si',
                 denyButtonText: `No`,
-            }).then((result) => {   
+            }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios.put(`/colores/${this.idcolor}`, {
-                formato: this.color
-            })
+                        formato: this.color
+                    })
                         .then((response) => {
                             this.$swal.fire({
                                 position: "top-end",
@@ -207,7 +220,7 @@ export default {
                         .catch((error) => {
                             console.log(error);
                         });
-               } 
+                }
             })
         },
         GuardarT() {
@@ -217,12 +230,12 @@ export default {
                 showCancelButton: true,
                 confirmButtonText: 'Si',
                 denyButtonText: `No`,
-            }).then((result) => {   
+            }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios.put(`/colores/${this.idcolor}`, {
-                    temporal: this.color
-            })
+                        temporal: this.color
+                    })
                         .then((response) => {
                             this.$swal.fire({
                                 position: "top-end",
@@ -239,7 +252,7 @@ export default {
                         .catch((error) => {
                             console.log(error);
                         });
-               } 
+                }
             })
         },
     },
@@ -310,7 +323,8 @@ export default {
         mask-size: cover;
     }
 }
-.centered-input >>>  label {
-        text-align: center;
-    }
+
+.centered-input>>>label {
+    text-align: center;
+}
 </style>

@@ -1,259 +1,289 @@
 <template>
 
     <v-container class="mt-13">
-        <v-row>
-            <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
-                <v-btn class="ml-4" outlined color="red darken-3" @click="Volver1()">
-                    Volver
-                </v-btn>
-            </v-col>
-            <v-col cols="5" xs="7" sm="4" md="2" lg="2" xl="2">
-                <v-dialog v-model="dialog">
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="accent" dark v-bind="attrs" v-on="on">
-                            Nuevo Cliente
-                        </v-btn>
-                    </template>
-                    <v-card>
-                        <v-row>
-                            <v-col cols="5"></v-col>
-                            <v-col cols="6">
-                                <h1 class="ml-10 mb-n9 mt-1"> Datos Cliente </h1>
-                            </v-col>
-                            <v-card-text>
-                                <v-container>
-                                    <v-row>
-                                        <v-col cols="12">
-                                            <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled
-                                                rounded label="Tipo Persona"></v-select>
-                                        </v-col>
-                                        <v-col cols="6" class="mt-n7">
-                                            <div v-if="selecionadoTipo === 'Juridica'">
-                                                <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
-                                                </v-text-field>
-                                            </div>
-                                        </v-col>
-                                        <v-col cols="6" class="mt-n7">
-                                            <div v-if="selecionadoTipo === 'Juridica'">
-                                                <v-text-field v-model="telefono" label="Telefono" filled rounded dense>
-                                                </v-text-field>
-                                            </div>
-                                        </v-col>
-
-                                        <v-col cols="12" class="mt-n7">
-                                            <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded
-                                                label="Rol">
-                                            </v-select>
-                                        </v-col>
-
-                                        <v-col cols="6" sm="6" class="mt-n7">
-                                            <v-text-field v-model="nombre" label="Nombre*" filled rounded dense>
-                                            </v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="6" sm="6" class="mt-n7">
-                                            <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint
-                                                required filled rounded dense></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" v-if="selecionadoRol === 'CLIENTE'" >
-                                            <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos" :filter="customFilter2"
-                                            item-text="nombre" item-value="_id" label="Contacto" filled rounded dense>
-                                            </v-autocomplete>
-                                        </v-col>
-
-                                        <v-col cols="12" class="mt-n7">
-                                            <v-text-field v-model="documento" label="Documento*" filled rounded dense>
-                                            </v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="6" sm="6" class="mt-n7">
-                                            <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio"
-                                                item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad"
-                                                @click="listarCiudad()">
-                                            </v-autocomplete>
-                                        </v-col>
-                                        <v-col cols="6" sm="6" class="mt-n7">
-                                            <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
-                                            </v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="6" sm="6" class="mt-n7">
-                                            <v-text-field v-model="email" label="Email*" filled rounded dense>
-                                            </v-text-field>
-                                        </v-col>
-                                        <v-col cols="6" class="mt-n7">
-                                            <v-text-field v-model="celular" label="Celular*" filled rounded dense>
-                                            </v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-
-                            </v-card-text>
-                        </v-row>
-                        <v-card-actions class="mt-n7">
-                            <v-spacer></v-spacer>
-                            <v-btn class="mr-15" outlined color="red darken-3" @click="Volver()">
-                                Cancelar
+        <div v-if="this.$store.state.token">
+            <v-row>
+                <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
+                    <v-btn class="ml-4" outlined color="red darken-3" @click="Volver1()">
+                        Volver
+                    </v-btn>
+                </v-col>
+                <v-col cols="5" xs="7" sm="4" md="2" lg="2" xl="2">
+                    <v-dialog v-model="dialog">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn color="accent" dark v-bind="attrs" v-on="on">
+                                Nuevo Cliente
                             </v-btn>
-                            <v-btn color="success" @click="Guardar()"> Guardar Datos </v-btn>
+                        </template>
+                        <v-card>
+                            <v-row>
+                                <v-col cols="5"></v-col>
+                                <v-col cols="6">
+                                    <h1 class="ml-10 mb-n9 mt-1"> Datos Cliente </h1>
+                                </v-col>
+                                <v-card-text>
+                                    <v-container>
+                                        <v-row>
+                                            <v-col cols="12">
+                                                <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled
+                                                    rounded label="Tipo Persona"></v-select>
+                                            </v-col>
+                                            <v-col cols="6" class="mt-n7">
+                                                <div v-if="selecionadoTipo === 'Juridica'">
+                                                    <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
+                                                    </v-text-field>
+                                                </div>
+                                            </v-col>
+                                            <v-col cols="6" class="mt-n7">
+                                                <div v-if="selecionadoTipo === 'Juridica'">
+                                                    <v-text-field v-model="telefono" label="Telefono" filled rounded
+                                                        dense>
+                                                    </v-text-field>
+                                                </div>
+                                            </v-col>
+
+                                            <v-col cols="12" class="mt-n7">
+                                                <v-select v-model="selecionadoRol" :items="rolPersona" dense filled
+                                                    rounded label="Rol">
+                                                </v-select>
+                                            </v-col>
+
+                                            <v-col cols="6" sm="6" class="mt-n7">
+                                                <v-text-field v-model="nombre" label="Nombre*" filled rounded dense>
+                                                </v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="6" sm="6" class="mt-n7">
+                                                <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint
+                                                    required filled rounded dense></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" v-if="selecionadoRol === 'CLIENTE'">
+                                                <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos"
+                                                    :filter="customFilter2" item-text="nombre" item-value="_id"
+                                                    label="Contacto" filled rounded dense>
+                                                </v-autocomplete>
+                                            </v-col>
+
+                                            <v-col cols="12" class="mt-n7">
+                                                <v-text-field v-model="documento" label="Documento*" filled rounded
+                                                    dense>
+                                                </v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="6" sm="6" class="mt-n7">
+                                                <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio"
+                                                    item-text="ciudad" item-value="_id" filled rounded dense
+                                                    label="Ciudad" @click="listarCiudad()">
+                                                </v-autocomplete>
+                                            </v-col>
+                                            <v-col cols="6" sm="6" class="mt-n7">
+                                                <v-text-field v-model="direccion" label="Dirección*" filled rounded
+                                                    dense>
+                                                </v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="6" sm="6" class="mt-n7">
+                                                <v-text-field v-model="email" label="Email*" filled rounded dense>
+                                                </v-text-field>
+                                            </v-col>
+                                            <v-col cols="6" class="mt-n7">
+                                                <v-text-field v-model="celular" label="Celular*" filled rounded dense>
+                                                </v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+
+                                </v-card-text>
+                            </v-row>
+                            <v-card-actions class="mt-n7">
+                                <v-spacer></v-spacer>
+                                <v-btn class="mr-15" outlined color="red darken-3" @click="Volver()">
+                                    Cancelar
+                                </v-btn>
+                                <v-btn color="success" @click="Guardar()"> Guardar Datos </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-col>
+            </v-row>
+            <div>
+                <v-dialog v-model="dialog2" persistent max-width="1000px">
+                    <v-card>
+                        <v-card-title>
+                            <span class="text-h5 mb-n2">Editar Datos Del Usuario</span>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded
+                                            label="Tipo Persona"></v-select>
+                                    </v-col>
+                                    <v-col cols="6" class="mt-n7">
+                                        <div v-if="selecionadoTipo === 'Juridica'">
+                                            <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
+                                            </v-text-field>
+                                        </div>
+                                    </v-col>
+                                    <v-col cols="6" class="mt-n7">
+                                        <div v-if="selecionadoTipo === 'Juridica'">
+                                            <v-text-field v-model="telefono" label="Telefono" filled rounded dense>
+                                            </v-text-field>
+                                        </div>
+                                    </v-col>
+
+                                    <v-col cols="12" class="mt-n7">
+                                        <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded
+                                            label="Rol">
+                                        </v-select>
+                                    </v-col>
+
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="nombre" label="Nombre*" filled rounded
+                                            dense></v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint required
+                                            filled rounded dense></v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="12" v-if="selecionadoRol === 'CLIENTE'">
+                                        <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos"
+                                            :filter="customFilter2" item-text="nombre" item-value="_id" label="Contacto"
+                                            filled rounded dense>
+                                        </v-autocomplete>
+                                    </v-col>
+
+                                    <v-col cols="12" sm="12" class="mt-n7">
+                                        <v-text-field v-model="documento" label="Documento*" disabled filled rounded
+                                            dense>
+                                        </v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio"
+                                            item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad"
+                                            @click="listarCiudad()">
+                                        </v-autocomplete>
+                                    </v-col>
+
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="6" sm="6" class="mt-n7">
+                                        <v-text-field v-model="email" label="Email*" filled rounded
+                                            dense></v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="6" class="mt-n7">
+                                        <v-text-field v-model="celular" label="Celular*" filled rounded dense>
+                                        </v-text-field>
+                                    </v-col>
+
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions class="mt-n11">
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="cerrar()">
+                                Close
+                            </v-btn>
+                            <v-btn color="blue darken-1" text @click="editar()">
+                                Save
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-            </v-col>
-        </v-row>
-        <div>
-            <v-dialog v-model="dialog2" persistent max-width="1000px">
-                <v-card>
-                    <v-card-title>
-                        <span class="text-h5 mb-n2">Editar Datos Del Usuario</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container>
-                            <v-row>
-                                <v-col cols="12">
-                                    <v-select v-model="selecionadoTipo" :items="tipoPersona" dense filled rounded
-                                        label="Tipo Persona"></v-select>
-                                </v-col>
-                                <v-col cols="6" class="mt-n7">
-                                    <div v-if="selecionadoTipo === 'Juridica'">
-                                        <v-text-field v-model="cargo" label="Cargo" filled rounded dense>
-                                        </v-text-field>
-                                    </div>
-                                </v-col>
-                                <v-col cols="6" class="mt-n7">
-                                    <div v-if="selecionadoTipo === 'Juridica'">
-                                        <v-text-field v-model="telefono" label="Telefono" filled rounded dense>
-                                        </v-text-field>
-                                    </div>
-                                </v-col>
+            </div>
+            <template>
+                <v-col cols="12">
+                    <v-card>
+                        <v-card-title>
+                            Clientes
+                            <v-spacer></v-spacer>
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                hide-details></v-text-field>
+                        </v-card-title>
 
-                                <v-col cols="12" class="mt-n7">
-                                    <v-select v-model="selecionadoRol" :items="rolPersona" dense filled rounded
-                                        label="Rol">
-                                    </v-select>
-                                </v-col>
+                        <v-data-table :headers="headers" :items="clientes" :search="search">
+                            <template v-slot:[`item.estado`]="{ item }">
+                                <span class="green--text" v-if="item.estado === 1"> Activo</span>
+                                <span class="red--text" v-else>Inactivo</span>
+                            </template>
+                            <template v-slot:[`item.opciones`]="{ item }">
+                                <span v-if="item.estado === 1">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="red" rounded v-bind="attrs" v-on="on"
+                                                @click="desactivar(item._id)">
+                                                mdi-shield-off
+                                            </v-icon>
+                                        </template>
+                                        <span>Inactivar</span>
+                                    </v-tooltip>
 
-                                <v-col cols="6" sm="6" class="mt-n7">
-                                    <v-text-field v-model="nombre" label="Nombre*" filled rounded dense></v-text-field>
-                                </v-col>
-                                
-                                <v-col cols="6" sm="6" class="mt-n7">
-                                    <v-text-field v-model="apellidos" label="Apellidos*" persistent-hint required filled
-                                        rounded dense></v-text-field>
-                                </v-col>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="blue" rounded v-bind="attrs" v-on="on"
+                                                @click="sacarid(item)">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar</span>
+                                    </v-tooltip>
 
-                                <v-col cols="12" v-if="selecionadoRol === 'CLIENTE'" >
-                                    <v-autocomplete class="mt-n7" v-model="contacto" :items="contactos" 
-                                    :filter="customFilter2"
-                                    item-text="nombre" item-value="_id" label="Contacto" filled rounded dense>
-                                    </v-autocomplete>
-                                </v-col>
+                                </span>
+                                <span v-else>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="success" rounded v-bind="attrs" v-on="on"
+                                                @click="activar(item._id)">
+                                                mdi-shield-check-outline
+                                            </v-icon>
+                                        </template>
+                                        <span>Activar</span>
+                                    </v-tooltip>
 
-                                <v-col cols="12" sm="12" class="mt-n7">
-                                    <v-text-field v-model="documento" label="Documento*" disabled filled rounded dense>
-                                    </v-text-field>
-                                </v-col>
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="blue" rounded v-bind="attrs" v-on="on"
+                                                @click="sacarid(item)">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar</span>
+                                    </v-tooltip>
+                                </span>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </v-col>
 
-                                <v-col cols="6" sm="6" class="mt-n7">
-                                    <v-autocomplete v-model="seleccionadoCiudad" :items="Municipio" 
-                                    item-text="ciudad" item-value="_id" filled rounded dense label="Ciudad" 
-                                    @click="listarCiudad()">
-                                    </v-autocomplete>
-                                </v-col>
-
-                                <v-col cols="6" sm="6" class="mt-n7">
-                                    <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
-                                    </v-text-field>
-                                </v-col>
-
-                                <v-col cols="6" sm="6" class="mt-n7">
-                                    <v-text-field v-model="email" label="Email*" filled rounded dense></v-text-field>
-                                </v-col>
-
-                                <v-col cols="6" class="mt-n7">
-                                    <v-text-field v-model="celular" label="Celular*" filled rounded dense>
-                                    </v-text-field>
-                                </v-col>
-
-                            </v-row>
-                        </v-container>
-                    </v-card-text>
-                    <v-card-actions class="mt-n11">
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="cerrar()">
-                            Close
-                        </v-btn>
-                        <v-btn color="blue darken-1" text @click="editar()">
-                            Save
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
+            </template>
         </div>
-        <template>
-            <v-col cols="12">
-                <v-card>
-                    <v-card-title>
-                        Clientes
-                        <v-spacer></v-spacer>
-                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                            hide-details></v-text-field>
-                    </v-card-title>
+        <div v-if="this.$store.state.token === ''">
+            <v-row>
+                <v-col cols="12" class="mb-16 box2">
+                    <v-row>
+                        <v-col cols="12" class="d-flex justify-center">
+                            <img height="450"
+                                src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
+                        </v-col>
+                    </v-row>
+                    <center style="margin: 5vw;">
+                        <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie
+                            sesión nuevamente!</h1>
+                        <p>
+                            <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
+                        </p>
+                    </center>
+                </v-col>
+            </v-row>
 
-                    <v-data-table :headers="headers" :items="clientes" :search="search">
-                        <template v-slot:[`item.estado`]="{ item }">
-                            <span class="green--text" v-if="item.estado === 1"> Activo</span>
-                            <span class="red--text" v-else>Inactivo</span>
-                        </template>
-                        <template v-slot:[`item.opciones`]="{ item }">
-                            <span v-if="item.estado === 1">
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="red" rounded v-bind="attrs" v-on="on"
-                                            @click="desactivar(item._id)">
-                                            mdi-shield-off
-                                        </v-icon>
-                                    </template>
-                                    <span>Inactivar</span>
-                                </v-tooltip>
-
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
-                                            mdi-pencil
-                                        </v-icon>
-                                    </template>
-                                    <span>Editar</span>
-                                </v-tooltip>
-
-                            </span>
-                            <span v-else>
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="success" rounded v-bind="attrs" v-on="on"
-                                            @click="activar(item._id)">
-                                            mdi-shield-check-outline
-                                        </v-icon>
-                                    </template>
-                                    <span>Activar</span>
-                                </v-tooltip>
-
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="sacarid(item)">
-                                            mdi-pencil
-                                        </v-icon>
-                                    </template>
-                                    <span>Editar</span>
-                                </v-tooltip>
-                            </span>
-                        </template>
-                    </v-data-table>
-                </v-card>
-            </v-col>
-
-        </template>
-
+        </div>
     </v-container>
 </template>
 
@@ -264,7 +294,7 @@ export default {
     name: 'PageMuestras',
     data: () => ({
         clientes: [],
-        contactos:[],
+        contactos: [],
         Municipio: [],
 
         search: "",
@@ -282,7 +312,7 @@ export default {
         cargo: "",
         telefono: "",
 
-        contacto:"",
+        contacto: "",
         seleccionadoCiudad: "",
         selecionadoTipo: "",
         selecionadoRol: "",
@@ -350,7 +380,7 @@ export default {
                 value: "cargo",
             },
             {
-                text: "Telefono",
+                text: "Teléfono",
                 align: "start",
                 sortable: false,
                 value: "telefono",
@@ -376,15 +406,15 @@ export default {
         ],
     }),
     methods: {
-        
-        cerrar(){
+
+        cerrar() {
             this.dialog = false;
             this.dialog2 = false
             this.selecionadoTipo = ""
             this.cargo = ""
             this.telefono = ""
             this.selecionadoRol = ""
-            this.contacto= ""
+            this.contacto = ""
             this.nombre = ""
             this.apellidos = ""
             this.documento = ""
@@ -400,7 +430,7 @@ export default {
             this.cargo = ""
             this.telefono = ""
             this.selecionadoRol = ""
-            this.contacto= ""
+            this.contacto = ""
 
             this.nombre = ""
             this.apellidos = ""
@@ -419,7 +449,7 @@ export default {
                     console.log(error);
                 });
         },
-        
+
         listarCiudad() {
             axios
                 .get("/ciudad/CiudadDepartamento")
@@ -468,7 +498,7 @@ export default {
                             documento: this.documento,
                             direccion: this.direccion,
                             ciudad: this.seleccionadoCiudad,
-                            contacto:this.contacto,
+                            contacto: this.contacto,
                             celular: this.celular,
                             email: this.email.toUpperCase(),
                             password: this.documento,
@@ -492,7 +522,7 @@ export default {
                         this.documento = "";
                         this.direccion = "";
                         this.seleccionadoCiudad = "";
-                        this.contacto="";
+                        this.contacto = "";
                         this.celular = "";
                         this.email = "";
                         this.password = "";
@@ -521,7 +551,7 @@ export default {
                             apellidos: this.apellidos,
                             documento: this.documento,
                             direccion: this.direccion,
-                            contacto:this.contacto,
+                            contacto: this.contacto,
                             ciudad: this.seleccionadoCiudad,
                             celular: this.celular,
                             email: this.email.toUpperCase(),
@@ -574,7 +604,7 @@ export default {
                     nombre: this.nombre,
                     apellidos: this.apellidos,
                     documento: this.documento,
-                    contacto:this.contacto,
+                    contacto: this.contacto,
                     direccion: this.direccion,
                     ciudad: this.seleccionadoCiudad,
                     celular: this.celular,
@@ -615,13 +645,13 @@ export default {
                     nombre: this.nombre,
                     apellidos: this.apellidos,
                     documento: this.documento1,
-                    contacto:this.contacto,
+                    contacto: this.contacto,
                     direccion: this.direccion,
                     ciudad: this.seleccionadoCiudad,
                     celular: this.celular,
                     email: this.email.toUpperCase(),
                     password: this.documento,
-                    
+
                 }, header)
                     .then((response) => {
                         this.$swal.fire({
@@ -694,12 +724,12 @@ export default {
             this.direccion = usuario.direccion
             this.celular = usuario.celular
             this.email = usuario.email
-            this.cargo=usuario.cargo
-            this.telefono=usuario.telefono
-            this.selecionadoTipo= usuario.tipoPersona
+            this.cargo = usuario.cargo
+            this.telefono = usuario.telefono
+            this.selecionadoTipo = usuario.tipoPersona
             this.selecionadoRol = usuario.rol
             this.contacto = usuario.contacto
-            this.seleccionadoCiudad= usuario.ciudad
+            this.seleccionadoCiudad = usuario.ciudad
         },
 
         listarContactos() {

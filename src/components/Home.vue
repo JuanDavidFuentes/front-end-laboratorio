@@ -1,12 +1,13 @@
 <template>
     <v-container>
+        <div v-if="this.$store.state.token">
         <v-row class="my-13">
 
             <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4" v-if="$store.state.datos.rol == 'ADMIN'|| $store.state.datos.rol == 'RECEPCIONISTA'|| $store.state.datos.rol == 'SUPERVISOR'">
                 <v-card class="primary" dark >
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
-                            <v-card-title class="text-h5 ">Configuracion <br> Parametrización</v-card-title>
+                            <v-card-title class="text-h5 ">Configuración <br> Parametrización</v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
                                 <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/Configuracion" >
@@ -46,7 +47,7 @@
                 <v-card class="primary" dark>
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
-                            <v-card-title class="text-h5">Recepcion <br> Muestras </v-card-title>
+                            <v-card-title class="text-h5">Recepción <br> Muestras </v-card-title>
                             <v-card-subtitle>Listar</v-card-subtitle>
                             <v-card-actions>
                                 <v-btn class="ml-2 mt-5 accent--text" outlined rounded @click="Listar()" to="/Muestras">
@@ -129,6 +130,25 @@
             </v-col>
 
         </v-row>
+    </div>
+        <div v-if="this.$store.state.token === ''">
+            <v-row>
+                <v-col cols="12" class="mb-16 box2">
+                    <v-row>
+                        <v-col cols="12" class="d-flex justify-center">
+                            <img  height="450" src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
+                        </v-col>
+                    </v-row>
+                    <center style="margin: 5vw;">
+                        <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie sesión nuevamente!</h1>
+                        <p>
+                            <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
+                        </p>
+                    </center>
+                </v-col>
+            </v-row>
+
+        </div>
     </v-container>
 </template>
 <script>

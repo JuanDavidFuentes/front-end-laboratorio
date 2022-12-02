@@ -1,1553 +1,1592 @@
 
 <template>
     <v-container style="margin-top: 100px">
-        <v-row style="margin: 0" class="mt-n6">
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
-                <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
-                    Volver
-                </v-btn>
-            </v-col>
+        <div v-if="this.$store.state.token">
+            <v-row style="margin: 0" class="mt-n6">
+                <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
+                    <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+                        Volver
+                    </v-btn>
+                </v-col>
 
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
-                <div class="text-center black--text font-weight-Normal">
-                    <h1>Cotizaciones Activas</h1>
-                </div>
-            </v-col>
-            <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="mt-3">
-                <v-row justify="center">
-                    <v-dialog v-model="dialog" fullscreen persistent hide-overlay transition="dialog-bottom-transition">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn color="accent" dark v-bind="attrs" v-on="on">
-                                <v-icon> mdi-plus-circle-outline </v-icon>Crear cotización
-                            </v-btn>
-                        </template>
+                <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
+                    <div class="text-center black--text font-weight-Normal">
+                        <h1>Cotizaciones Activas</h1>
+                    </div>
+                </v-col>
+                <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="mt-3">
+                    <v-row justify="center">
+                        <v-dialog v-model="dialog" fullscreen persistent hide-overlay
+                            transition="dialog-bottom-transition">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn color="accent" dark v-bind="attrs" v-on="on">
+                                    <v-icon> mdi-plus-circle-outline </v-icon>Crear cotización
+                                </v-btn>
+                            </template>
 
-                        <v-card>
-                            <v-toolbar class="primary">
-                                <div v-if="get === 0">
-                                    <v-tooltip bottom>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-btn icon dark @click="cancelar()" v-bind="attrs" v-on="on">
-                                                <v-icon>mdi-close</v-icon>
-                                            </v-btn>
-                                        </template>
-                                        <span>Cancelar</span>
-                                    </v-tooltip>
-                                </div>
-                                <div v-if="get === 1">
-                                    <v-tooltip bottom>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-btn icon dark @click="cancelar2()" v-bind="attrs" v-on="on">
-                                                <v-icon>mdi-close</v-icon>
-                                            </v-btn>
-                                        </template>
-                                        <span>Cerrar</span>
-                                    </v-tooltip>
-                                </div>
-                                <v-toolbar-title class="white--text" v-if="BtnEditar === 0 && get === 0">Crear
-                                    Cotización</v-toolbar-title>
-                                <v-toolbar-title class="white--text" v-if="BtnEditar === 1">Editar Cotización
-                                </v-toolbar-title>
-                                <v-toolbar-title class="white--text" v-if="get === 1">Información Cotización
-                                </v-toolbar-title>
-                                <v-spacer></v-spacer>
-                                <div v-if="get === 0">
-                                    <v-toolbar-items>
-                                        <v-btn v-if="BtnEditar === 0" dark text @click="crearcotizacion()">
-                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                                        </v-btn>
-                                        <v-btn v-if="BtnEditar === 1" dark text @click="editarCoti()">
-                                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
-                                        </v-btn>
-                                    </v-toolbar-items>
-                                </div>
-                            </v-toolbar>
-
-                            <v-list three-line subheader>
-                                <v-row style="margin: 0">
-                                    <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="text-center">
-                                        <div class="accent mt-10" id="coti"></div>
-                                        <!-- <img height="300" width="300 "
-                                            src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" /> -->
-                                    </v-col>
-
-                                    <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="3">
-                                        <div class=" text-center black--text font-italic text-decoration-underline ">
-                                            <h1>Oferta de servicios</h1>
-                                        </div>
-                                        <div class=" text-center black--text mt-2">
-                                            <h3>{{ cotiDescripcion }}</h3>
-                                        </div>
-                                        <div class=" text-center black--text mt-2">
-                                            <h3>NIT: {{ cotiNit }}</h3>
-                                        </div>
-                                        <div class=" text-center black--text mt-2">
-                                            <h3>Dirección: {{ cotiDireccion }}</h3>
-                                        </div>
-                                        <div class=" text-center black--text mt-2">
-                                            <h3>Teléfono: {{ cotiTelefono }}</h3>
-                                        </div>
-                                        <div class=" text-center black--text mt-2">
-                                            <h3>Correo electrónico: {{ cotiCorreo }}</h3>
-                                        </div>
-                                    </v-col>
-
-                                    <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
-                                        <div class="text-center black--text headline">
-                                            <h4>Cotización No.</h4>
-                                        </div>
-                                        <div v-if="BtnEditar === 0" class="text-center red--text font-italic headline">
-                                            {{ numeroactual }}
-                                        </div>
-                                        <div v-if="BtnEditar === 1" class="text-center red--text font-italic headline">
-                                            {{ numeroCoti }}
-                                        </div>
-                                        <div class="text-center black--text headline mt-10">
-                                            <h4>Fecha de emisión:</h4>
-                                        </div>
-                                        <v-text-field v-if="get === 0" v-model="fechaEmision" type="date" outlined
-                                            dense>
-                                        </v-text-field>
-                                        <div v-if="get === 1" class=" text-center black--text mt-2">
-                                            <h3>{{ fechaEmision.slice(0, 10) }}</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
-                                        <div class="text-center black--text">
-                                            <h3>Código</h3>
-                                        </div>
-                                        <div class="text-center black--text">
-                                            <h3>{{ caliCodigo }}</h3>
-                                        </div>
-                                        <div class="text-center black--text mt-10">
-                                            <h3>Aprobación</h3>
-                                        </div>
-                                        <div class="text-center black--text">
-                                            <h3>{{ caliaprobacion }}</h3>
-                                        </div>
-                                        <div class="text-center black--text mt-10">
-                                            <h3>Versión</h3>
-                                        </div>
-                                        <div class="text-center black--text">
-                                            <h3>{{ caliVersion }}</h3>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-                            </v-list>
-                            <v-divider></v-divider>
-
-                            <v-container fluid>
-                                <v-row style=" margin: 0; border: solid 2px; border-color: white;  "
-                                    class="secondary mx-5">
-                                    <v-col cols="12">
-                                        <div class="text-center white--text ">
-                                            <h3>1. Datos del cliente</h3>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-                                <v-row style="margin: 0" class="mx-5">
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text ">
-                                            <h3>Cliente</h3>
-                                        </div>
-                                    </v-col>
-
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black;" class="pa-0 ma-0 text-center">
-                                        <v-btn v-if="botones == 1" dark class="secondary my-3" @click="Elegircliente()">
-                                            Elegir cliente
-                                        </v-btn>
-                                        <v-row style="margin:0">
-                                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"></v-col>
-                                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                                <div v-if="botones == 0"
-                                                    class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                                    hide-details>
-                                                    {{ nombre }}
-                                                </div>
-                                            </v-col>
-                                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                                <div v-if="get === 0">
-                                                    <v-tooltip v-if="botones === 0" bottom>
-                                                        <template v-slot:activator="{ on, attrs }">
-                                                            <v-icon dark class="my-3" color="red" rounded v-bind="attrs"
-                                                                v-on="on" @click="borrarclientes()">
-                                                                mdi-close-circle
-                                                            </v-icon>
-                                                        </template>
-                                                        <span>Eliminar los datos del cliente</span>
-                                                    </v-tooltip>
-                                                </div>
-                                            </v-col>
-                                        </v-row>
-                                    </v-col>
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>NIT/ C.C.</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black;" class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ documento }}
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-
-                                <v-row style="margin: 0" class="mx-5">
-                                    <v-col class="secondary"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text ">
-                                            <h3>Dirección</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ direccion }}
-                                        </div>
-                                    </v-col>
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Ciudad</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ ciudad.ciudad }}
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-
-                                <v-row style="margin: 0" class="mx-5">
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Departamento</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ ciudad.departamento }}
-                                        </div>
-                                    </v-col>
-                                    <v-col class="secondary"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;" cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Teléfono</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ telefono }}
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-                                <v-row style="margin: 0" class="mx-5">
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Contacto</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ nombrecontacto }}
-                                        </div>
-                                    </v-col>
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px;" cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Cargo</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ cargo }}
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-                                <v-row style="margin: 0" class="mx-5">
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Celular</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ celular }}
-                                        </div>
-                                    </v-col>
-                                    <v-col class="secondary"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Correo electrónico</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ email }}
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-                                <v-row style="margin: 0" class="mx-5">
-                                    <v-col class="secondary"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Validez de la oferta</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <v-text-field v-if="get === 0" class="mt-5" v-model="validezOferta" type="date"
-                                            outlined dense>
-                                        </v-text-field>
-                                        <div v-if="get === 1" class="pa-0 ma-0 font-weight-black text-center my-3"
-                                            full-width hide-details>
-                                            {{ validezOferta.slice(0, 10) }}
-                                        </div>
-                                    </v-col>
-                                    <v-col class="secondary"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
-                                        cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Entrega de resultados</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; "
-                                        class="pa-0 ma-0">
-                                        <v-text-field v-if="get === 0" class="mt-5" v-model="entregaResultados"
-                                            type="date" outlined dense> </v-text-field>
-                                        <div v-if="get === 1" class="pa-0 ma-0 font-weight-black text-center my-3"
-                                            full-width hide-details>
-                                            {{ entregaResultados.slice(0, 10) }}
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-                                <v-row style="margin: 0" class="mx-5">
-                                    <v-col class="secondary"
-                                        style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text">
-                                            <h3>Elaborador por</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ recep.nombre }} {{ recep.apellidos }}
-                                        </div>
-                                    </v-col>
-                                    <v-col class="secondary"
-                                        style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                        xs="4" sm="4" md="2" lg="2" xl="2">
-                                        <div class="text-center white--text ">
-                                            <h3>Cargo</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                        style="border: solid 1px; border-color: black; border-top: 0px;"
-                                        class="pa-0 ma-0">
-                                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
-                                            hide-details>
-                                            {{ recep.rol }}
-                                        </div>
-                                    </v-col>
-                                </v-row>
-
-                                <v-row class="secondary mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
-                                    <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4">
-                                    </v-col>
-                                    <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text">
-                                            <h3>2. Propuesta técnica y económica</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col class="text-right" cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                    </v-col>
-                                </v-row>
-
-                                <!-- item 1 -->
-                                <v-row class="secondary mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
-                                    <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text">
-                                            <h3>Ítem 1</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <div v-if="get === 0">
-                                            <v-tooltip bottom>
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn color="white" dark @click="dialog4 = true">
-                                                        <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
-                                                            mdi-plus-circle
-                                                        </v-icon>
-                                                    </v-btn>
-                                                </template>
-                                                <span>Añadir ensayo</span>
-                                            </v-tooltip>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-                                <v-row style=" margin: 0;" class="mx-5">
-                                    <v-col cols="12" class="ma-0 pa-0">
-                                        <v-simple-table>
-                                            <template v-slot:default>
-                                                <thead class="secondary">
-                                                    <tr>
-                                                        <th style=" border: solid 1px; border-color: black; "
-                                                            class="text-center white--text">
-                                                            <h2> Código de referencia </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Descripción del ensayo </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Unidades </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Técnica analítica </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Método analítico </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Limite de cuantificación </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Costo del ensayo </h2>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody v-if="MostrarEditar === 0">
-                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados"
-                                                        :key="i">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                            {{ ensayo.ensayo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.descripcion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.unidades }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.tecnica }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.metodo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.limiteCuantificacion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
-                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
-                                                                rounded @click="eliminarEnsayos(i, ensayo)">
-                                                                mdi-close-circle
-                                                            </v-icon>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="ensayosSeleccionados.length <= 0">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; ">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Costo del ítem 1 </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(costo) }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-
-
-                                                <tbody v-if="MostrarEditar === 1">
-                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados"
-                                                        :key="i">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                            {{ ensayo.ensayo.ensayo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.descripcion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.unidades }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.tecnica }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.metodo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.limiteCuantificacion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
-                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
-                                                                rounded @click="eliminarEnsayos(i, ensayo)">
-                                                                mdi-close-circle
-                                                            </v-icon>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="ensayosSeleccionados.length <= 0">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Costo del ítem 1 </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(costo) }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
+                            <v-card>
+                                <v-toolbar class="primary">
+                                    <div v-if="get === 0">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn icon dark @click="cancelar()" v-bind="attrs" v-on="on">
+                                                    <v-icon>mdi-close</v-icon>
+                                                </v-btn>
                                             </template>
-                                        </v-simple-table>
-                                    </v-col>
-                                </v-row>
-                                <!-- item 2 -->
-                                <v-row class="secondary mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black;">
-                                    <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text">
-                                            <h3>Ítem 2</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <div v-if="get === 0">
-                                            <v-tooltip bottom>
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn color="white" dark @click="dialog5 = true">
-                                                        <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
-                                                            mdi-plus-circle
-                                                        </v-icon>
-                                                    </v-btn>
-                                                </template>
-                                                <span>Añadir ensayo</span>
-                                            </v-tooltip>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-                                <v-row style=" margin: 0;" class="mx-5">
-                                    <v-col cols="12" class="ma-0 pa-0">
-                                        <v-simple-table>
-                                            <template v-slot:default>
-                                                <thead class="secondary" style="">
-                                                    <tr>
-                                                        <th style=" border: solid 1px; border-color: black;"
-                                                            class="text-center white--text">
-                                                            <h2> Código de referencia </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Descripción del ensayo </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Unidades </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Técnica analítica </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Método analítico </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Limite de cuantificación </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Costo del ensayo </h2>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody v-if="MostrarEditar2 === 0">
-                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2"
-                                                        :key="i">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                            {{ ensayo.ensayo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.descripcion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.unidades }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.tecnica }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.metodo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.limiteCuantificacion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
-                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
-                                                                rounded @click="eliminarEnsayos2(i, ensayo)">
-                                                                mdi-close-circle
-                                                            </v-icon>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="ensayosSeleccionados2.length <= 0">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary "
-                                                            style=" border: solid 1px; border-color: black; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary "
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary "
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary "
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary "
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Costo del ítem 2 </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(costo2) }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-
-                                                <tbody v-if="MostrarEditar2 === 1">
-                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados2"
-                                                        :key="i">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                            {{ ensayo.ensayo.ensayo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.descripcion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.unidades }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.tecnica }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.metodo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.limiteCuantificacion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
-                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
-                                                                rounded @click="eliminarEnsayos2(i, ensayo)">
-                                                                mdi-close-circle
-                                                            </v-icon>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="ensayosSeleccionados2.length <= 0">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Costo del ítem 2 </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                            class="-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(costo2) }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
+                                            <span>Cancelar</span>
+                                        </v-tooltip>
+                                    </div>
+                                    <div v-if="get === 1">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn icon dark @click="cancelar2()" v-bind="attrs" v-on="on">
+                                                    <v-icon>mdi-close</v-icon>
+                                                </v-btn>
                                             </template>
-                                        </v-simple-table>
-                                    </v-col>
-                                </v-row>
-                                <!-- item 3 -->
-                                <v-row class="secondary mx-5"
-                                    style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
-                                    <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
-                                    </v-col>
-                                    <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
-                                        <div class="text-center white--text ">
-                                            <h3>Ítem 3</h3>
-                                        </div>
-                                    </v-col>
-                                    <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                        <div v-if="get === 0">
-                                            <v-tooltip bottom>
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn color="white" dark @click="dialog6 = true">
-                                                        <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
-                                                            mdi-plus-circle
-                                                        </v-icon>
-                                                    </v-btn>
-                                                </template>
-                                                <span>Añadir ensayo</span>
-                                            </v-tooltip>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-                                <v-row style=" margin: 0;" class="mx-5">
-                                    <v-col cols="12" class="ma-0 pa-0">
-                                        <v-simple-table>
-                                            <template v-slot:default>
-                                                <thead class="secondary">
-                                                    <tr>
-                                                        <th style=" border: solid 1px; border-color: black;"
-                                                            class="text-center white--text">
-                                                            <h2> Código de referencia </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Descripción del ensayo </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Unidades </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Técnica analítica </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Método analítico </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Limite de cuantificación </h2>
-                                                        </th>
-                                                        <th style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="text-center white--text">
-                                                            <h2> Costo del ensayo </h2>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody v-if="MostrarEditar3 === 0">
-                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3"
-                                                        :key="i">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                            {{ ensayo.ensayo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.descripcion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.unidades }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.tecnica }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.metodo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.limiteCuantificacion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
-                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
-                                                                rounded @click="eliminarEnsayos3(i, ensayo)">
-                                                                mdi-close-circle
-                                                            </v-icon>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="ensayosSeleccionados3.length <= 0">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style=" border: solid 1px; border-color: black; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Costo del ítem 3 </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(costo3) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right:0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary" style="border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary" style="border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary" style="border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary" style="border-top: 0px;">
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Descuento </h2>
-                                                        </td>
-                                                        <td v-if="get === 0"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            <v-text-field hide-details v-model="descuento"
-                                                                type="number">
-                                                            </v-text-field>
-                                                        </td>
-                                                        <td v-if="get === 1"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(descuento) }}
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border-bottom: 0px; border-top: 0px;"
-                                                            class="secondary text-center white--text">
-                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
-                                                                económica</h2>
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Subtotal - Descuento </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px;  border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary text-center"
-                                                            style="border: solid 1px; width: 500px; border-left: 0px; border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;  border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> IVA </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;  border-top: 0px;"
-                                                            class="pa-0 ma-0">
-                                                            <div>{{ iva }}%</div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right: 0px; ">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-                                                            <v-textarea hide-details style="background-color: white;"
-                                                                v-model="cotiObservacion" auto-grow filled
-                                                                color="secondary" label="Observacion" rows="1">
-                                                            </v-textarea>
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Total </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(resultIva) }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-
-                                                <tbody v-if="MostrarEditar3 === 1">
-                                                    <tr class="text-center" v-for="(ensayo, i) in ensayosSeleccionados3"
-                                                        :key="i">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                            {{ ensayo.ensayo.ensayo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.descripcion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.unidades }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.tecnica }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.metodo }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            {{ ensayo.ensayo.limiteCuantificacion }}
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                            ${{ Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo) }}
-                                                            <v-icon v-if="get === 0" dark class="ml-9" color="red"
-                                                                rounded @click="eliminarEnsayos3(i, ensayo)">
-                                                                mdi-close-circle
-                                                            </v-icon>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="ensayosSeleccionados3.length <= 0">
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                        <td
-                                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Costo del ítem 3 </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(costo3) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Descuento </h2>
-                                                        </td>
-                                                        <td v-if="get === 0"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            <v-text-field v-model="descuento" type="number">
-                                                            </v-text-field>
-                                                        </td>
-                                                        <td v-if="get === 1"
-                                                            style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(descuento) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border-bottom: 0px; border-top: 0px;"
-                                                            class="secondary text-center white--text">
-                                                            <h2 class="mb-10">Observaciones de la propuesta técnica y
-                                                                económica</h2>
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border-bottom: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Subtotal - Descuento </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(sumar) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> IVA </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            <div>{{ iva }}%</div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-                                                            <v-textarea hide-details style="background-color: white;"
-                                                                v-model="cotiObservacion" auto-grow filled
-                                                                color="secondary" label="Observacion" rows="1">
-                                                            </v-textarea>
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td class="secondary"
-                                                            style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
-
-                                                        </td>
-                                                        <td style="border: solid 1px; border-color: black; border-top: 0px;"
-                                                            class="secondary text-right white--text">
-                                                            <h2> Total </h2>
-                                                        </td>
-                                                        <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
-                                                            class="pa-0 ma-0">
-                                                            ${{ Intl.NumberFormat("de-DE").format(resultIva) }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </template>
-                                        </v-simple-table>
-                                    </v-col>
-                                </v-row>
-                                <v-row style=" margin: 0;" class="mx-5">
-                                    <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
-                                        <v-btn div v-if="get === 0" color="red" dark @click="cancelar()">
-                                            <v-icon>mdi-close</v-icon> Cancelar
-                                        </v-btn>
-                                        <v-btn div v-if="get === 1" color="red" dark @click="cancelar2()">
-                                            <v-icon>mdi-close</v-icon> Cerrar
-                                        </v-btn>
-                                    </v-col>
-                                    <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
-                                    <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4" class="text-right">
-                                        <div v-if="get === 0">
-                                            <v-btn v-if="BtnEditar === 0" dark color="green" @click="crearcotizacion()">
+                                            <span>Cerrar</span>
+                                        </v-tooltip>
+                                    </div>
+                                    <v-toolbar-title class="white--text" v-if="BtnEditar === 0 && get === 0">Crear
+                                        Cotización</v-toolbar-title>
+                                    <v-toolbar-title class="white--text" v-if="BtnEditar === 1">Editar Cotización
+                                    </v-toolbar-title>
+                                    <v-toolbar-title class="white--text" v-if="get === 1">Información Cotización
+                                    </v-toolbar-title>
+                                    <v-spacer></v-spacer>
+                                    <div v-if="get === 0">
+                                        <v-toolbar-items>
+                                            <v-btn v-if="BtnEditar === 0" dark text @click="crearcotizacion()">
                                                 <v-icon> mdi-plus-circle-outline </v-icon>Guardar
                                             </v-btn>
-                                            <v-btn v-if="BtnEditar === 1" dark color="green" @click="editarCoti()">
+                                            <v-btn v-if="BtnEditar === 1" dark text @click="editarCoti()">
                                                 <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
                                             </v-btn>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
+                                        </v-toolbar-items>
+                                    </div>
+                                </v-toolbar>
+
+                                <v-list three-line subheader>
+                                    <v-row style="margin: 0">
+                                        <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="text-center">
+                                            <div class="accent mt-10" id="coti"></div>
+                                            <!-- <img height="300" width="300 "
+                                            src="https://agenciapublicadeempleo.sena.edu.co/imgLayout/logos/LogoSENA-naranja_vector.png" /> -->
+                                        </v-col>
+
+                                        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="3">
+                                            <div
+                                                class=" text-center black--text font-italic text-decoration-underline ">
+                                                <h1>Oferta de servicios</h1>
+                                            </div>
+                                            <div class=" text-center black--text mt-2">
+                                                <h3>{{ cotiDescripcion }}</h3>
+                                            </div>
+                                            <div class=" text-center black--text mt-2">
+                                                <h3>NIT: {{ cotiNit }}</h3>
+                                            </div>
+                                            <div class=" text-center black--text mt-2">
+                                                <h3>Dirección: {{ cotiDireccion }}</h3>
+                                            </div>
+                                            <div class=" text-center black--text mt-2">
+                                                <h3>Teléfono: {{ cotiTelefono }}</h3>
+                                            </div>
+                                            <div class=" text-center black--text mt-2">
+                                                <h3>Correo electrónico: {{ cotiCorreo }}</h3>
+                                            </div>
+                                        </v-col>
+
+                                        <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
+                                            <div class="text-center black--text headline">
+                                                <h4>Cotización No.</h4>
+                                            </div>
+                                            <div v-if="BtnEditar === 0"
+                                                class="text-center red--text font-italic headline">
+                                                {{ numeroactual }}
+                                            </div>
+                                            <div v-if="BtnEditar === 1"
+                                                class="text-center red--text font-italic headline">
+                                                {{ numeroCoti }}
+                                            </div>
+                                            <div class="text-center black--text headline mt-10">
+                                                <h4>Fecha de emisión:</h4>
+                                            </div>
+                                            <v-text-field v-if="get === 0" v-model="fechaEmision" type="date" outlined
+                                                dense>
+                                            </v-text-field>
+                                            <div v-if="get === 1" class=" text-center black--text mt-2">
+                                                <h3>{{ fechaEmision.slice(0, 10) }}</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="3" class="mt-3">
+                                            <div class="text-center black--text">
+                                                <h3>Código</h3>
+                                            </div>
+                                            <div class="text-center black--text">
+                                                <h3>{{ caliCodigo }}</h3>
+                                            </div>
+                                            <div class="text-center black--text mt-10">
+                                                <h3>Aprobación</h3>
+                                            </div>
+                                            <div class="text-center black--text">
+                                                <h3>{{ caliaprobacion }}</h3>
+                                            </div>
+                                            <div class="text-center black--text mt-10">
+                                                <h3>Versión</h3>
+                                            </div>
+                                            <div class="text-center black--text">
+                                                <h3>{{ caliVersion }}</h3>
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+                                </v-list>
+                                <v-divider></v-divider>
+
+                                <v-container fluid>
+                                    <v-row style=" margin: 0; border: solid 2px; border-color: white;  "
+                                        class="secondary mx-5">
+                                        <v-col cols="12">
+                                            <div class="text-center white--text ">
+                                                <h3>1. Datos del cliente</h3>
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row style="margin: 0" class="mx-5">
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text ">
+                                                <h3>Cliente</h3>
+                                            </div>
+                                        </v-col>
+
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black;"
+                                            class="pa-0 ma-0 text-center">
+                                            <v-btn v-if="botones == 1" dark class="secondary my-3"
+                                                @click="Elegircliente()">
+                                                Elegir cliente
+                                            </v-btn>
+                                            <v-row style="margin:0">
+                                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"></v-col>
+                                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                                    <div v-if="botones == 0"
+                                                        class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                        hide-details>
+                                                        {{ nombre }}
+                                                    </div>
+                                                </v-col>
+                                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                                    <div v-if="get === 0">
+                                                        <v-tooltip v-if="botones === 0" bottom>
+                                                            <template v-slot:activator="{ on, attrs }">
+                                                                <v-icon dark class="my-3" color="red" rounded
+                                                                    v-bind="attrs" v-on="on" @click="borrarclientes()">
+                                                                    mdi-close-circle
+                                                                </v-icon>
+                                                            </template>
+                                                            <span>Eliminar los datos del cliente</span>
+                                                        </v-tooltip>
+                                                    </div>
+                                                </v-col>
+                                            </v-row>
+                                        </v-col>
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>NIT/ C.C.</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black;" class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ documento }}
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+
+                                    <v-row style="margin: 0" class="mx-5">
+                                        <v-col class="secondary"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text ">
+                                                <h3>Dirección</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ direccion }}
+                                            </div>
+                                        </v-col>
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Ciudad</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ ciudad.ciudad }}
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+
+                                    <v-row style="margin: 0" class="mx-5">
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Departamento</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ ciudad.departamento }}
+                                            </div>
+                                        </v-col>
+                                        <v-col class="secondary"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;" cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Teléfono</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ telefono }}
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row style="margin: 0" class="mx-5">
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Contacto</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ nombrecontacto }}
+                                            </div>
+                                        </v-col>
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px;" cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Cargo</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ cargo }}
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row style="margin: 0" class="mx-5">
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Celular</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ celular }}
+                                            </div>
+                                        </v-col>
+                                        <v-col class="secondary"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Correo electrónico</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ email }}
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row style="margin: 0" class="mx-5">
+                                        <v-col class="secondary"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Validez de la oferta</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <v-text-field v-if="get === 0" class="mt-5" v-model="validezOferta"
+                                                type="date" outlined dense>
+                                            </v-text-field>
+                                            <div v-if="get === 1" class="pa-0 ma-0 font-weight-black text-center my-3"
+                                                full-width hide-details>
+                                                {{ validezOferta.slice(0, 10) }}
+                                            </div>
+                                        </v-col>
+                                        <v-col class="secondary"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Entrega de resultados</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; "
+                                            class="pa-0 ma-0">
+                                            <v-text-field v-if="get === 0" class="mt-5" v-model="entregaResultados"
+                                                type="date" outlined dense> </v-text-field>
+                                            <div v-if="get === 1" class="pa-0 ma-0 font-weight-black text-center my-3"
+                                                full-width hide-details>
+                                                {{ entregaResultados.slice(0, 10) }}
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row style="margin: 0" class="mx-5">
+                                        <v-col class="secondary"
+                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text">
+                                                <h3>Elaborador por</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ recep.nombre }} {{ recep.apellidos }}
+                                            </div>
+                                        </v-col>
+                                        <v-col class="secondary"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
+                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            <div class="text-center white--text ">
+                                                <h3>Cargo</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
+                                            <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
+                                                hide-details>
+                                                {{ recep.rol }}
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row class="secondary mx-5"
+                                        style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                                        <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4">
+                                        </v-col>
+                                        <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
+                                            <div class="text-center white--text">
+                                                <h3>2. Propuesta técnica y económica</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col class="text-right" cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
+                                        </v-col>
+                                    </v-row>
+
+                                    <!-- item 1 -->
+                                    <v-row class="secondary mx-5"
+                                        style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                                        <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
+                                            <div class="text-center white--text">
+                                                <h3>Ítem 1</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                            <div v-if="get === 0">
+                                                <v-tooltip bottom>
+                                                    <template v-slot:activator="{ on, attrs }">
+                                                        <v-btn color="white" dark @click="dialog4 = true">
+                                                            <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
+                                                                mdi-plus-circle
+                                                            </v-icon>
+                                                        </v-btn>
+                                                    </template>
+                                                    <span>Añadir ensayo</span>
+                                                </v-tooltip>
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row style=" margin: 0;" class="mx-5">
+                                        <v-col cols="12" class="ma-0 pa-0">
+                                            <v-simple-table>
+                                                <template v-slot:default>
+                                                    <thead class="secondary">
+                                                        <tr>
+                                                            <th style=" border: solid 1px; border-color: black; "
+                                                                class="text-center white--text">
+                                                                <h2> Código de referencia </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Descripción del ensayo </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Unidades </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Técnica analítica </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Método analítico </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Límite de cuantificación </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Costo del ensayo </h2>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody v-if="MostrarEditar === 0">
+                                                        <tr class="text-center"
+                                                            v-for="(ensayo, i) in ensayosSeleccionados" :key="i">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+                                                                {{ ensayo.ensayo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.descripcion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.unidades }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.tecnica }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.metodo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.limiteCuantificacion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
+                                                                <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                    rounded @click="eliminarEnsayos(i, ensayo)">
+                                                                    mdi-close-circle
+                                                                </v-icon>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-if="ensayosSeleccionados.length <= 0">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; ">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;  border-left:0px;">
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Costo del ítem 1 </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(costo) }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+
+                                                    <tbody v-if="MostrarEditar === 1">
+                                                        <tr class="text-center"
+                                                            v-for="(ensayo, i) in ensayosSeleccionados" :key="i">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+                                                                {{ ensayo.ensayo.ensayo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.descripcion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.unidades }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.tecnica }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.metodo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.limiteCuantificacion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                ${{
+                                                                        Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo)
+                                                                }}
+                                                                <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                    rounded @click="eliminarEnsayos(i, ensayo)">
+                                                                    mdi-close-circle
+                                                                </v-icon>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-if="ensayosSeleccionados.length <= 0">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Costo del ítem 1 </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(costo) }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </template>
+                                            </v-simple-table>
+                                        </v-col>
+                                    </v-row>
+                                    <!-- item 2 -->
+                                    <v-row class="secondary mx-5"
+                                        style=" margin: 0; border: solid 1px; border-color: black;">
+                                        <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
+                                            <div class="text-center white--text">
+                                                <h3>Ítem 2</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                            <div v-if="get === 0">
+                                                <v-tooltip bottom>
+                                                    <template v-slot:activator="{ on, attrs }">
+                                                        <v-btn color="white" dark @click="dialog5 = true">
+                                                            <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
+                                                                mdi-plus-circle
+                                                            </v-icon>
+                                                        </v-btn>
+                                                    </template>
+                                                    <span>Añadir ensayo</span>
+                                                </v-tooltip>
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row style=" margin: 0;" class="mx-5">
+                                        <v-col cols="12" class="ma-0 pa-0">
+                                            <v-simple-table>
+                                                <template v-slot:default>
+                                                    <thead class="secondary" style="">
+                                                        <tr>
+                                                            <th style=" border: solid 1px; border-color: black;"
+                                                                class="text-center white--text">
+                                                                <h2> Código de referencia </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Descripción del ensayo </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Unidades </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Técnica analítica </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Método analítico </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Límite de cuantificación </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Costo del ensayo </h2>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody v-if="MostrarEditar2 === 0">
+                                                        <tr class="text-center"
+                                                            v-for="(ensayo, i) in ensayosSeleccionados2" :key="i">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+                                                                {{ ensayo.ensayo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.descripcion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.unidades }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.tecnica }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.metodo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.limiteCuantificacion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
+                                                                <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                    rounded @click="eliminarEnsayos2(i, ensayo)">
+                                                                    mdi-close-circle
+                                                                </v-icon>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-if="ensayosSeleccionados2.length <= 0">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="secondary "
+                                                                style=" border: solid 1px; border-color: black; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary "
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary "
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary "
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary "
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Costo del ítem 2 </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(costo2) }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                    <tbody v-if="MostrarEditar2 === 1">
+                                                        <tr class="text-center"
+                                                            v-for="(ensayo, i) in ensayosSeleccionados2" :key="i">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+                                                                {{ ensayo.ensayo.ensayo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.descripcion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.unidades }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.tecnica }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.metodo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.limiteCuantificacion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                ${{
+                                                                        Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo)
+                                                                }}
+                                                                <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                    rounded @click="eliminarEnsayos2(i, ensayo)">
+                                                                    mdi-close-circle
+                                                                </v-icon>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-if="ensayosSeleccionados2.length <= 0">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Costo del ítem 2 </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                                class="-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(costo2) }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </template>
+                                            </v-simple-table>
+                                        </v-col>
+                                    </v-row>
+                                    <!-- item 3 -->
+                                    <v-row class="secondary mx-5"
+                                        style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                                        <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                                        </v-col>
+                                        <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
+                                            <div class="text-center white--text ">
+                                                <h3>Ítem 3</h3>
+                                            </div>
+                                        </v-col>
+                                        <v-col class="text-right" cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                            <div v-if="get === 0">
+                                                <v-tooltip bottom>
+                                                    <template v-slot:activator="{ on, attrs }">
+                                                        <v-btn color="white" dark @click="dialog6 = true">
+                                                            <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
+                                                                mdi-plus-circle
+                                                            </v-icon>
+                                                        </v-btn>
+                                                    </template>
+                                                    <span>Añadir ensayo</span>
+                                                </v-tooltip>
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row style=" margin: 0;" class="mx-5">
+                                        <v-col cols="12" class="ma-0 pa-0">
+                                            <v-simple-table>
+                                                <template v-slot:default>
+                                                    <thead class="secondary">
+                                                        <tr>
+                                                            <th style=" border: solid 1px; border-color: black;"
+                                                                class="text-center white--text">
+                                                                <h2> Código de referencia </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Descripción del ensayo </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Unidades </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Técnica analítica </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Método analítico </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Límite de cuantificación </h2>
+                                                            </th>
+                                                            <th style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="text-center white--text">
+                                                                <h2> Costo del ensayo </h2>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody v-if="MostrarEditar3 === 0">
+                                                        <tr class="text-center"
+                                                            v-for="(ensayo, i) in ensayosSeleccionados3" :key="i">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+                                                                {{ ensayo.ensayo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.descripcion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.unidades }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.tecnica }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.metodo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.limiteCuantificacion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                ${{ Intl.NumberFormat("de-DE").format(ensayo.costo) }}
+                                                                <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                    rounded @click="eliminarEnsayos3(i, ensayo)">
+                                                                    mdi-close-circle
+                                                                </v-icon>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-if="ensayosSeleccionados3.length <= 0">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style=" border: solid 1px; border-color: black; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Costo del ítem 3 </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(costo3) }}
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right:0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary" style="border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary" style="border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary" style="border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary" style="border-top: 0px;">
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Descuento </h2>
+                                                            </td>
+                                                            <td v-if="get === 0"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                <v-text-field hide-details v-model="descuento"
+                                                                    type="number">
+                                                                </v-text-field>
+                                                            </td>
+                                                            <td v-if="get === 1"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(descuento) }}
+                                                            </td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border-bottom: 0px; border-top: 0px;"
+                                                                class="secondary text-center white--text">
+                                                                <h2 class="mb-10">Observaciones de la propuesta técnica
+                                                                    y
+                                                                    económica</h2>
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Subtotal - Descuento </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(sumar) }}
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px;  border-right: 0px;  border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary text-center"
+                                                                style="border: solid 1px; width: 500px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;  border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> IVA </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;  border-top: 0px;"
+                                                                class="pa-0 ma-0">
+                                                                <div>{{ iva }}%</div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right: 0px; ">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                <v-textarea hide-details
+                                                                    style="background-color: white;"
+                                                                    v-model="cotiObservacion" auto-grow filled
+                                                                    color="secondary" label="Observacion" rows="1">
+                                                                </v-textarea>
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Total </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(resultIva) }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                    <tbody v-if="MostrarEditar3 === 1">
+                                                        <tr class="text-center"
+                                                            v-for="(ensayo, i) in ensayosSeleccionados3" :key="i">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+                                                                {{ ensayo.ensayo.ensayo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.descripcion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.unidades }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.tecnica }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.metodo }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                {{ ensayo.ensayo.limiteCuantificacion }}
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                                ${{
+                                                                        Intl.NumberFormat("de-DE").format(ensayo.costoEnsayo)
+                                                                }}
+                                                                <v-icon v-if="get === 0" dark class="ml-9" color="red"
+                                                                    rounded @click="eliminarEnsayos3(i, ensayo)">
+                                                                    mdi-close-circle
+                                                                </v-icon>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-if="ensayosSeleccionados3.length <= 0">
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                            <td
+                                                                style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Costo del ítem 3 </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(costo3) }}
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Descuento </h2>
+                                                            </td>
+                                                            <td v-if="get === 0"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                <v-text-field v-model="descuento" type="number">
+                                                                </v-text-field>
+                                                            </td>
+                                                            <td v-if="get === 1"
+                                                                style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(descuento) }}
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border-bottom: 0px; border-top: 0px;"
+                                                                class="secondary text-center white--text">
+                                                                <h2 class="mb-10">Observaciones de la propuesta técnica
+                                                                    y
+                                                                    económica</h2>
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border-bottom: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Subtotal - Descuento </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(sumar) }}
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> IVA </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                <div>{{ iva }}%</div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                <v-textarea hide-details
+                                                                    style="background-color: white;"
+                                                                    v-model="cotiObservacion" auto-grow filled
+                                                                    color="secondary" label="Observacion" rows="1">
+                                                                </v-textarea>
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td class="secondary"
+                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+
+                                                            </td>
+                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                                class="secondary text-right white--text">
+                                                                <h2> Total </h2>
+                                                            </td>
+                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px;"
+                                                                class="pa-0 ma-0">
+                                                                ${{ Intl.NumberFormat("de-DE").format(resultIva) }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </template>
+                                            </v-simple-table>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row style=" margin: 0;" class="mx-5">
+                                        <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
+                                            <v-btn div v-if="get === 0" color="red" dark @click="cancelar()">
+                                                <v-icon>mdi-close</v-icon> Cancelar
+                                            </v-btn>
+                                            <v-btn div v-if="get === 1" color="red" dark @click="cancelar2()">
+                                                <v-icon>mdi-close</v-icon> Cerrar
+                                            </v-btn>
+                                        </v-col>
+                                        <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
+                                        <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4" class="text-right">
+                                            <div v-if="get === 0">
+                                                <v-btn v-if="BtnEditar === 0" dark color="green"
+                                                    @click="crearcotizacion()">
+                                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                                                </v-btn>
+                                                <v-btn v-if="BtnEditar === 1" dark color="green" @click="editarCoti()">
+                                                    <v-icon> mdi-plus-circle-outline </v-icon>Guardar Cambios
+                                                </v-btn>
+                                            </div>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card>
+                        </v-dialog>
+                    </v-row>
+                </v-col>
+            </v-row>
+            <v-row style="margin: 0">
+                <v-col cols="12">
+                    <template>
+                        <v-card>
+                            <v-card-title>
+                                Buscar cotización
+                                <v-spacer></v-spacer>
+                                <v-radio-group v-model="cotis" row>
+                                    <v-radio @click="listar()" color="orange" label="En proceso" value="2"></v-radio>
+                                    <v-radio @click="listar()" color="green" label="Confirmadas" value="1"></v-radio>
+                                    <v-radio @click="listar()" color="red" label="Rechazadas" value="0"></v-radio>
+                                </v-radio-group>
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente"
+                                    single-line hide-details></v-text-field>
+                            </v-card-title>
+                            <v-data-table :headers="headers2" :items="cotizaciones" :search="search">
+                                <template v-slot:[`item.fecha`]="{ item }">
+                                    {{ fechaSalida(item.fecha_emision) }}
+                                </template>
+                                <template v-slot:[`item.opciones`]="{ item }">
+                                    <template v-if="item.estado === 2">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                    @click="activar(item._id)">
+                                                    mdi-check-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Comfirmar</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <!--activarRe()-->
+                                    <template v-if="item.estado === 1">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="orange" rounded v-bind="attrs" v-on="on"
+                                                    @click="activarRe(item._id)">
+                                                    mdi-minus-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Cambiar a estado "En proceso..."</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-if="item.estado === 0">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="orange" rounded v-bind="attrs" v-on="on"
+                                                    @click="desactivar(item._id)">
+                                                    mdi-minus-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Cambiar a estado "En proceso..."</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-if="item.estado === 0">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon class="ml-3" color="blue" @click="editar(item)" rounded
+                                                    v-bind="attrs" v-on="on">
+                                                    mdi-pencil
+                                                </v-icon>
+                                            </template>
+                                            <span>Editar</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-if="item.estado === 1">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon class="ml-3" rounded disabled v-bind="attrs" v-on="on">
+                                                    mdi-pencil
+                                                </v-icon>
+                                            </template>
+                                            <span>Editar</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-if="item.estado === 2">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon class="ml-3" color="blue" @click="editar(item)" rounded
+                                                    v-bind="attrs" v-on="on">
+                                                    mdi-pencil
+                                                </v-icon>
+                                            </template>
+                                            <span>Editar</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <template>
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon class="ml-3" color="black" @click="traerDatos(item)" rounded
+                                                    v-bind="attrs" v-on="on">
+                                                    mdi-printer
+                                                </v-icon>
+                                            </template>
+                                            <span>Imprimir cotización</span>
+                                        </v-tooltip>
+                                    </template>
+                                </template>
+                                <template v-slot:[`item.estado`]="{ item }">
+                                    <span class="orange--text" v-if="item.estado === 2">En proceso...</span>
+                                    <span class="green--text" v-if="item.estado === 1">Comfirmada</span>
+                                    <span class="red--text" v-if="item.estado === 0">Rechazada</span>
+                                </template>
+                            </v-data-table>
                         </v-card>
-                    </v-dialog>
-                </v-row>
-            </v-col>
-        </v-row>
-        <v-row style="margin: 0">
-            <v-col cols="12">
-                <template>
-                    <v-card>
-                        <v-card-title>
-                            Buscar cotización
-                            <v-spacer></v-spacer>
-                            <v-radio-group v-model="cotis" row>
-                                <v-radio @click="listar()" color="orange" label="En proceso" value="2"></v-radio>
-                                <v-radio @click="listar()" color="green" label="Confirmadas" value="1"></v-radio>
-                                <v-radio @click="listar()" color="red" label="Rechazadas" value="0"></v-radio>
-                            </v-radio-group>
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
-                                hide-details></v-text-field>
-                        </v-card-title>
-                        <v-data-table :headers="headers2" :items="cotizaciones" :search="search">
-                            <template v-slot:[`item.fecha`]="{ item }">
-                                {{ fechaSalida(item.fecha_emision) }}
-                            </template>
-                            <template v-slot:[`item.opciones`]="{ item }">
-                                <template v-if="item.estado === 2">
-                                    <v-tooltip bottom>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                                @click="activar(item._id)">
-                                                mdi-check-circle
-                                            </v-icon>
-                                        </template>
-                                        <span>Comfirmar</span>
-                                    </v-tooltip>
-                                </template>
-                                <!--activarRe()-->
-                                <template v-if="item.estado === 1">
-                                    <v-tooltip bottom>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-icon color="orange" rounded v-bind="attrs" v-on="on"
-                                                @click="activarRe(item._id)">
-                                                mdi-minus-circle
-                                            </v-icon>
-                                        </template>
-                                        <span>Cambiar a estado "En proceso..."</span>
-                                    </v-tooltip>
-                                </template>
-                                <template v-if="item.estado === 0">
-                                    <v-tooltip bottom>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-icon color="orange" rounded v-bind="attrs" v-on="on"
-                                                @click="desactivar(item._id)">
-                                                mdi-minus-circle
-                                            </v-icon>
-                                        </template>
-                                        <span>Cambiar a estado "En proceso..."</span>
-                                    </v-tooltip>
-                                </template>
-                                <template>
-                                    <v-tooltip bottom>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-icon class="ml-3" color="blue" @click="editar(item)" rounded
-                                                v-bind="attrs" v-on="on">
-                                                mdi-pencil
-                                            </v-icon>
-                                        </template>
-                                        <span>Editar</span>
-                                    </v-tooltip>
-                                </template>
-                                <template>
-                                    <v-tooltip bottom>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-icon class="ml-3" color="black" @click="traerDatos(item)" rounded
-                                                v-bind="attrs" v-on="on">
-                                                mdi-printer
-                                            </v-icon>
-                                        </template>
-                                        <span>Imprimir cotización</span>
-                                    </v-tooltip>
-                                </template>
-                            </template>
-                            <template v-slot:[`item.estado`]="{ item }">
-                                <span class="orange--text" v-if="item.estado === 2">En proceso...</span>
-                                <span class="green--text" v-if="item.estado === 1">Comfirmada</span>
-                                <span class="red--text" v-if="item.estado === 0">Rechazada</span>
-                            </template>
-                        </v-data-table>
-                    </v-card>
-                </template>
-            </v-col>
-        </v-row>
-        <!-- <v-row style="margin:0px"> -->
-        <!-- <v-col cols="1"></v-col>
+                    </template>
+                </v-col>
+            </v-row>
+            <!-- <v-row style="margin:0px"> -->
+            <!-- <v-col cols="1"></v-col>
             <v-col cols="10"> -->
-        <!-- <v-row style="margin:0px">
+            <!-- <v-row style="margin:0px">
                     <v-col cols="1"></v-col>
                     <v-col class="text-center" cols="10">
                         <h1>Cotizaciónes Inactivas</h1>
@@ -1619,469 +1658,469 @@
                         </v-data-table>
                     </v-card>
                 </template> -->
-        <!-- </v-col>
+            <!-- </v-col>
             <v-col cols="1"></v-col> -->
-        <!-- </v-row> -->
-        <v-row style="margin:0px">
-            <v-col class="text-left" cols="12">
-                <v-btn class="mb-16" outlined color="red darken-3" @click="Volver()">
-                    Volver
-                </v-btn>
-            </v-col>
-        </v-row>
-        <v-dialog v-model="dialog2" max-width="1000px">
-            <v-card>
-                <template>
-                    <v-card>
-                        <v-card-title>
-                            Seleccione un cliente
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente" single-line
-                                hide-details></v-text-field>
-                        </v-card-title>
-                        <v-data-table :headers="headers" :items="clientes" :search="search">
-                            <template v-slot:[`item.agregar`]="{ item }">
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarclientes(item)">
-                                            mdi-plus-circle
-                                        </v-icon>
-                                    </template>
-                                    <span>Añadir cliente</span>
-                                </v-tooltip>
-                            </template>
-                        </v-data-table>
-                    </v-card>
-                </template>
-                <div class="text-center mt-3">
-                    <h2>¿ Desea crear un nuevo cliente ?</h2>
-                </div>
-                <v-card-actions>
-                    <v-row style="margin:0">
-                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                            <v-btn color="green" rounded dark @click="aceptar()">
-                                Crear
-                            </v-btn>
-                        </v-col>
-                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                        </v-col>
-                        <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                            <v-btn color="red" @click="dialog2 = false" rounded dark>
-                                Cerrar
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-
-
-        <v-dialog v-model="dialog3" fullscreen hide-overlay transition="dialog-bottom-transition">
-            <v-card>
-                <v-toolbar class="primary">
-                    <v-btn icon dark @click="dialog3 = false">
-                        <v-icon>mdi-close</v-icon>
+            <!-- </v-row> -->
+            <v-row style="margin:0px">
+                <v-col class="text-left" cols="12">
+                    <v-btn class="mb-16" outlined color="red darken-3" @click="Volver()">
+                        Volver
                     </v-btn>
-                    <v-toolbar-title class="white--text">Crear nuevo cliente</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items v-if="si === 2">
-                        <v-btn dark text @click="crearContacto()">
-                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                        </v-btn>
-                    </v-toolbar-items>
-                    <v-toolbar-items v-if="si === 0">
-                        <v-btn dark text @click="crearCliente()">
-                            <v-icon> mdi-plus-circle-outline </v-icon>Guardar
-                        </v-btn>
-                    </v-toolbar-items>
-                </v-toolbar>
-
-                <div v-if="si === 2">
-                    <v-row style="margin:0">
-                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                        <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
-                            <h1>Ingrese los datos del contacto del cliente</h1>
-                        </v-col>
-                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
-
-                        <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
-                            <br><br>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Tipo de persona:
-                                </span>
-                                <span>
-                                    <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
-                                    </v-select>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Nombres:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="nombre" label="Nombres" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1  black--text font-weight-Normal">
-                                    Apellidos:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="apellidos" label="Apellidos" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Documento:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="documento" label="Documento" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Dirección:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="direccion" label="Dirección" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Ciudad:
-                                </span>
-                                <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio" :filter="customFilter"
-                                    item-text="ciudad" item-value="_id" label="Ciudad">
-                                </v-autocomplete>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Celular:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="celular" label="Telefono" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Correo:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="email" label="Correo" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div v-if="tipoPersona === 'Juridica'">
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Cargo:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="cargo" label="Telefono" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div v-if="tipoPersona === 'Juridica'">
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Telefono:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="telefono" label="Telefono" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-
-                        </v-col>
-                    </v-row>
+                </v-col>
+            </v-row>
+            <v-dialog v-model="dialog2" max-width="1000px">
+                <v-card>
+                    <template>
+                        <v-card>
+                            <v-card-title>
+                                Seleccione un cliente
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar cliente"
+                                    single-line hide-details></v-text-field>
+                            </v-card-title>
+                            <v-data-table :headers="headers" :items="clientes" :search="search">
+                                <template v-slot:[`item.agregar`]="{ item }">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                @click="seleccionarclientes(item)">
+                                                mdi-plus-circle
+                                            </v-icon>
+                                        </template>
+                                        <span>Añadir cliente</span>
+                                    </v-tooltip>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </template>
+                    <div class="text-center mt-3">
+                        <h2>¿ Desea crear un nuevo cliente ?</h2>
+                    </div>
                     <v-card-actions>
                         <v-row style="margin:0">
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
-                                <v-btn color="green" @click="crearContacto()" rounded dark>
+                                <v-btn color="green" rounded dark @click="aceptar()">
                                     Crear
                                 </v-btn>
                             </v-col>
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
                             </v-col>
                             <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                                <v-btn color="red" @click="dialog3 = false" rounded dark>
-                                    Cancelar
+                                <v-btn color="red" @click="dialog2 = false" rounded dark>
+                                    Cerrar
                                 </v-btn>
                             </v-col>
                         </v-row>
                     </v-card-actions>
-                </div>
+                </v-card>
+            </v-dialog>
 
-                <div v-if="si === 0">
-                    <v-row style="margin:0">
-                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                        <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
-                            <h1>Ingresar los datos del cliente</h1>
-                        </v-col>
-                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
-                    </v-row>
 
-                    <v-row>
-                        <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
-                        <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
-                            <br><br>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Tipo de persona:
-                                </span>
-                                <span>
-                                    <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
-                                    </v-select>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Nombres:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="nombre" label="Nombres" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1  black--text font-weight-Normal">
-                                    Apellidos:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="apellidos" label="Apellidos" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Documento:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="documento" label="Documento" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Contacto:
-                                </span>
-                                <v-autocomplete class="mt-2" v-model="contacto" :items="contactos"
-                                    :filter="customFilter2" item-text="nombre" item-value="_id" label="Contactos">
-                                </v-autocomplete>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Dirección:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="direccion" label="Dirección" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Ciudad:
-                                </span>
-                                <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio" :filter="customFilter"
-                                    item-text="ciudad" item-value="_id" label="Ciudad">
-                                </v-autocomplete>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Celular:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="celular" label="Celular" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Correo:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="email" label="Correo" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div v-if="tipoPersona === 'Juridica'">
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Cargo:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="cargo" label="Cargo" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                            <div v-if="tipoPersona === 'Juridica'">
-                                <span class="text-center display-1 black--text font-weight-Normal">
-                                    Telefono:
-                                </span>
-                                <span>
-                                    <v-text-field v-model="telefono" label="Telefono" type="text">
-                                    </v-text-field>
-                                </span>
-                            </div>
-                        </v-col>
-                    </v-row>
+            <v-dialog v-model="dialog3" fullscreen hide-overlay transition="dialog-bottom-transition">
+                <v-card>
+                    <v-toolbar class="primary">
+                        <v-btn icon dark @click="dialog3 = false">
+                            <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                        <v-toolbar-title class="white--text">Crear nuevo cliente</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-toolbar-items v-if="si === 2">
+                            <v-btn dark text @click="crearContacto()">
+                                <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                            </v-btn>
+                        </v-toolbar-items>
+                        <v-toolbar-items v-if="si === 0">
+                            <v-btn dark text @click="crearCliente()">
+                                <v-icon> mdi-plus-circle-outline </v-icon>Guardar
+                            </v-btn>
+                        </v-toolbar-items>
+                    </v-toolbar>
+
+                    <div v-if="si === 2">
+                        <v-row style="margin:0">
+                            <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                            <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                                <h1>Ingrese los datos del contacto del cliente</h1>
+                            </v-col>
+                            <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+
+                            <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                                <br><br>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Tipo de persona:
+                                    </span>
+                                    <span>
+                                        <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
+                                        </v-select>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Nombres:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="nombre" label="Nombres" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1  black--text font-weight-Normal">
+                                        Apellidos:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="apellidos" label="Apellidos" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Documento:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="documento" label="Documento" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Dirección:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="direccion" label="Dirección" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Ciudad:
+                                    </span>
+                                    <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio"
+                                        :filter="customFilter" item-text="ciudad" item-value="_id" label="Ciudad">
+                                    </v-autocomplete>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Celular:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="celular" label="Telefono" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Correo:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="email" label="Correo" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div v-if="tipoPersona === 'Juridica'">
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Cargo:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="cargo" label="Telefono" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div v-if="tipoPersona === 'Juridica'">
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Telefono:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="telefono" label="Telefono" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+
+                            </v-col>
+                        </v-row>
+                        <v-card-actions>
+                            <v-row style="margin:0">
+                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                                    <v-btn color="green" @click="crearContacto()" rounded dark>
+                                        Crear
+                                    </v-btn>
+                                </v-col>
+                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                </v-col>
+                                <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                                    <v-btn color="red" @click="dialog3 = false" rounded dark>
+                                        Cancelar
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-card-actions>
+                    </div>
+
+                    <div v-if="si === 0">
+                        <v-row style="margin:0">
+                            <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                            <v-col class="text-center" cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+                                <h1>Ingresar los datos del cliente</h1>
+                            </v-col>
+                            <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"></v-col>
+                        </v-row>
+
+                        <v-row>
+                            <v-col cols="12" xs="0" sm="0" md="2" lg="2" xl="2"> </v-col>
+                            <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="items-center">
+                                <br><br>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Tipo de persona:
+                                    </span>
+                                    <span>
+                                        <v-select :items="tipos" v-model="tipoPersona" label="Tipo de persona">
+                                        </v-select>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Nombres:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="nombre" label="Nombres" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1  black--text font-weight-Normal">
+                                        Apellidos:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="apellidos" label="Apellidos" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Documento:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="documento" label="Documento" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Contacto:
+                                    </span>
+                                    <v-autocomplete class="mt-2" v-model="contacto" :items="contactos"
+                                        :filter="customFilter2" item-text="nombre" item-value="_id" label="Contactos">
+                                    </v-autocomplete>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Dirección:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="direccion" label="Dirección" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Ciudad:
+                                    </span>
+                                    <v-autocomplete class="mt-2" v-model="ciudad" :items="Municipio"
+                                        :filter="customFilter" item-text="ciudad" item-value="_id" label="Ciudad">
+                                    </v-autocomplete>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Celular:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="celular" label="Celular" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Correo:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="email" label="Correo" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div v-if="tipoPersona === 'Juridica'">
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Cargo:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="cargo" label="Cargo" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                                <div v-if="tipoPersona === 'Juridica'">
+                                    <span class="text-center display-1 black--text font-weight-Normal">
+                                        Telefono:
+                                    </span>
+                                    <span>
+                                        <v-text-field v-model="telefono" label="Telefono" type="text">
+                                        </v-text-field>
+                                    </span>
+                                </div>
+                            </v-col>
+                        </v-row>
+                        <v-card-actions>
+                            <v-row style="margin:0">
+                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
+                                    <v-btn color="green" @click="crearCliente()" rounded dark>
+                                        Crear
+                                    </v-btn>
+                                </v-col>
+                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                </v-col>
+                                <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
+                                    <v-btn color="red" @click="dialog3 = false" rounded dark>
+                                        Cancelar
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-card-actions>
+                    </div>
+
+                </v-card>
+            </v-dialog>
+            <!-- ensayo -->
+            <v-dialog v-model="dialog4" max-width="1000px">
+                <v-card>
+                    <template>
+                        <v-card>
+                            <v-card-title>
+                                Seleccione un ensayo
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
+                                    single-line hide-details></v-text-field>
+                            </v-card-title>
+                            <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                                <template slot="item.agregar" slot-scope="props">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                @click="seleccionarEnsayos(props.item)">
+                                                mdi-plus-circle
+                                            </v-icon>
+                                        </template>
+                                        <span>Añadir ensayo</span>
+                                    </v-tooltip>
+                                </template>
+                                <template v-slot:[`item.ensayocosto`]="{ item }">
+                                    <template>
+                                        ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
+                                    </template>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </template>
                     <v-card-actions>
                         <v-row style="margin:0">
-                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4">
-                                <v-btn color="green" @click="crearCliente()" rounded dark>
-                                    Crear
-                                </v-btn>
-                            </v-col>
-                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
-                            </v-col>
-                            <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="text-right">
-                                <v-btn color="red" @click="dialog3 = false" rounded dark>
-                                    Cancelar
+                            <v-col cols="12" class="text-center">
+                                <v-btn color="red" @click="dialog4 = false" rounded dark>
+                                    Cerrar
                                 </v-btn>
                             </v-col>
                         </v-row>
                     </v-card-actions>
-                </div>
-
-            </v-card>
-        </v-dialog>
-        <!-- ensayo -->
-        <v-dialog v-model="dialog4" max-width="1000px">
-            <v-card>
-                <template>
-                    <v-card>
-                        <v-card-title>
-                            Seleccione un ensayo
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo" single-line
-                                hide-details></v-text-field>
-                        </v-card-title>
-                        <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                            <template slot="item.agregar" slot-scope="props">
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos(props.item)">
-                                            mdi-plus-circle
-                                        </v-icon>
-                                    </template>
-                                    <span>Añadir ensayo</span>
-                                </v-tooltip>
-                            </template>
-                            <template v-slot:[`item.ensayocosto`]="{ item }">
-                                <template>
-                                    ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
+                </v-card>
+            </v-dialog>
+            <!-- 2 -->
+            <v-dialog v-model="dialog5" max-width="1000px">
+                <v-card>
+                    <template>
+                        <v-card>
+                            <v-card-title>
+                                Seleccione un ensayo
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
+                                    single-line hide-details></v-text-field>
+                            </v-card-title>
+                            <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                                <template slot="item.agregar" slot-scope="props">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                @click="seleccionarEnsayos2(props.item)">
+                                                mdi-plus-circle
+                                            </v-icon>
+                                        </template>
+                                        <span>Añadir ensayo</span>
+                                    </v-tooltip>
                                 </template>
-                            </template>
-                        </v-data-table>
-                    </v-card>
-                </template>
-                <v-card-actions>
-                    <v-row style="margin:0">
-                        <v-col cols="12" class="text-center">
-                            <v-btn color="red" @click="dialog4 = false" rounded dark>
-                                Cerrar
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-        <!-- 2 -->
-        <v-dialog v-model="dialog5" max-width="1000px">
-            <v-card>
-                <template>
-                    <v-card>
-                        <v-card-title>
-                            Seleccione un ensayo
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo" single-line
-                                hide-details></v-text-field>
-                        </v-card-title>
-                        <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                            <template slot="item.agregar" slot-scope="props">
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos2(props.item)">
-                                            mdi-plus-circle
-                                        </v-icon>
+                                <template v-slot:[`item.ensayocosto`]="{ item }">
+                                    <template>
+                                        ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
                                     </template>
-                                    <span>Añadir ensayo</span>
-                                </v-tooltip>
-                            </template>
-                            <template v-slot:[`item.ensayocosto`]="{ item }">
-                                <template>
-                                    ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
                                 </template>
-                            </template>
-                        </v-data-table>
-                    </v-card>
-                </template>
-                <v-card-actions>
-                    <v-row style="margin:0">
-                        <v-col cols="12" class="text-center">
-                            <v-btn color="red" @click="dialog5 = false" rounded dark>
-                                Cerrar
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
+                            </v-data-table>
+                        </v-card>
+                    </template>
+                    <v-card-actions>
+                        <v-row style="margin:0">
+                            <v-col cols="12" class="text-center">
+                                <v-btn color="red" @click="dialog5 = false" rounded dark>
+                                    Cerrar
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
 
-        <!-- 3 -->
-        <v-dialog v-model="dialog6" max-width="1000px">
-            <v-card>
-                <template>
-                    <v-card>
-                        <v-card-title>
-                            Seleccione un ensayo
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo" single-line
-                                hide-details></v-text-field>
-                        </v-card-title>
-                        <v-data-table :headers="headers3" :items="ensayos" :search="search">
-                            <template slot="item.agregar" slot-scope="props">
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                            @click="seleccionarEnsayos3(props.item)">
-                                            mdi-plus-circle
-                                        </v-icon>
+            <!-- 3 -->
+            <v-dialog v-model="dialog6" max-width="1000px">
+                <v-card>
+                    <template>
+                        <v-card>
+                            <v-card-title>
+                                Seleccione un ensayo
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar ensayo"
+                                    single-line hide-details></v-text-field>
+                            </v-card-title>
+                            <v-data-table :headers="headers3" :items="ensayos" :search="search">
+                                <template slot="item.agregar" slot-scope="props">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                @click="seleccionarEnsayos3(props.item)">
+                                                mdi-plus-circle
+                                            </v-icon>
+                                        </template>
+                                        <span>Añadir ensayo</span>
+                                    </v-tooltip>
+                                </template>
+                                <template v-slot:[`item.ensayocosto`]="{ item }">
+                                    <template>
+                                        ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
                                     </template>
-                                    <span>Añadir ensayo</span>
-                                </v-tooltip>
-                            </template>
-                            <template v-slot:[`item.ensayocosto`]="{ item }">
-                                <template>
-                                    ${{ Intl.NumberFormat("de-DE").format(item.costo) }}
                                 </template>
-                            </template>
-                        </v-data-table>
-                    </v-card>
-                </template>
-                <v-card-actions>
-                    <v-row style="margin:0">
-                        <v-col cols="12" class="text-center">
-                            <v-btn color="red" @click="dialog6 = false" rounded dark>
-                                Cerrar
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-        <!-- ensayos -->
+                            </v-data-table>
+                        </v-card>
+                    </template>
+                    <v-card-actions>
+                        <v-row style="margin:0">
+                            <v-col cols="12" class="text-center">
+                                <v-btn color="red" @click="dialog6 = false" rounded dark>
+                                    Cerrar
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <!-- ensayos -->
 
-        <!-- <v-dialog v-model="dialog7" fullscreen hide-overlay transition="dialog-bottom-transition">
+            <!-- <v-dialog v-model="dialog7" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
                 <v-toolbar dark>
                     <v-btn icon dark @click="dialog7 = false">
@@ -2227,37 +2266,56 @@
                 </div>
             </v-card>
         </v-dialog> -->
-        <template>
-            <v-row justify="center">
-                <v-dialog v-model="dialog8" persistent max-width="600px">
-                    <v-card>
-                        <v-card-title>
-                            <span class="text-h5">Digite el motivo del rechazo</span>
-                        </v-card-title>
-                        <v-card-text>
-                            <v-container>
-                                <v-row>
-                                    <v-col cols="12">
-                                        <v-textarea v-model="motivo" color="secondary" filled auto-grow label="Motivo*"
-                                            rows="2" row-height="20" required>
-                                        </v-textarea>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="dialog8 = false">
-                                Cerrar
-                            </v-btn>
-                            <v-btn color="blue darken-1" text @click="confirmar()">
-                                Guardar
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
+            <template>
+                <v-row justify="center">
+                    <v-dialog v-model="dialog8" persistent max-width="600px">
+                        <v-card>
+                            <v-card-title>
+                                <span class="text-h5">Digite el motivo del rechazo</span>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-textarea v-model="motivo" color="secondary" filled auto-grow
+                                                label="Motivo*" rows="2" row-height="20" required>
+                                            </v-textarea>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="dialog8 = false">
+                                    Cerrar
+                                </v-btn>
+                                <v-btn color="blue darken-1" text @click="confirmar()">
+                                    Guardar
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+            </template>
+        </div>
+        <div v-if="this.$store.state.token === ''">
+            <v-row>
+                <v-col cols="12" class="mb-16 box2">
+                    <v-row>
+                        <v-col cols="12" class="d-flex justify-center">
+                            <img  height="450" src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
+                        </v-col>
+                    </v-row>
+                    <center style="margin: 5vw;">
+                        <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie sesión nuevamente!</h1>
+                        <p>
+                            <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
+                        </p>
+                    </center>
+                </v-col>
             </v-row>
-        </template>
+
+        </div>
     </v-container>
 </template>
 
@@ -2410,7 +2468,7 @@ export default {
             ],
             headers2: [
                 {
-                    text: 'Codigo de cotización',
+                    text: 'Código de cotización',
                     align: 'start',
                     value: "numero_cotizacion",
                 },
@@ -4075,7 +4133,7 @@ export default {
         },
         traerDatos(datos) {
             // this.$store.dispatch("setCotiImprimir", datos);
-            localStorage.setItem("datos",JSON.stringify(datos))
+            localStorage.setItem("datos", JSON.stringify(datos))
 
             window.open("http://localhost:8080/#/CotiImprimir")
             console.log(datos);
@@ -4112,7 +4170,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #coti {
     display: inline-block;
     width: 200px;
@@ -4125,5 +4183,11 @@ export default {
         mask: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Sena_Colombia_logo.svg);
         mask-size: cover;
     }
+}
+
+.box2 {
+    border: 10px solid rgb(0, 145, 7);
+    border-radius: 2000px;
+    border-top-right-radius: 50% 30%;
 }
 </style>

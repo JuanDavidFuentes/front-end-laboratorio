@@ -662,8 +662,8 @@
                                 </td>
                                 <td style="border-bottom: 0px; border-top: 0px;"
                                     class="secondary text-center white--text">
-                                    <h2 class="mb-10">Observaciones de la propuesta técnica y
-                                        económica</h2>
+                                    <h3 >Observaciones de la propuesta técnica y
+                                        económica</h3>
                                 </td>
                                 <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
 
@@ -692,8 +692,8 @@
                                 </td>
                                 <td style="border-bottom: 0px; border-top: 0px;"
                                     class="secondary text-center white--text">
-                                    <h2 class="mb-10">Observaciones de la propuesta técnica y
-                                        económica</h2>
+                                    <h3>Observaciones de la propuesta técnica y
+                                        económica</h3>
                                 </td>
                                 <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
 
@@ -712,23 +712,23 @@
                             </tr>
 
                             <tr>
-                                <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
+                                <td 
+                                    style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px; border-bottom: 0px;">
 
                                 </td>
-                                <td class="secondary"
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                <td 
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
 
                                 </td>
-                                <td class="secondary"
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                <td 
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
                                 </td>
-                                <td class="secondary"
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                <td 
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
 
                                 </td>
-                                <td class="secondary"
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                <td 
+                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
 
                                 </td>
                                 <td style="border: solid 1px; border-color: black; border-top: 0px;"
@@ -742,7 +742,7 @@
                             </tr>
 
                             <tr>
-                                <td class="secondary"
+                                <td 
                                     style="border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
 
                                 </td>

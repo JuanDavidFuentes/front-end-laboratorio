@@ -8,7 +8,9 @@ import {store} from './store/store.js';
 import {routes} from './routes/routes.js';
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://laboratorio-jjai-2.herokuapp.com/api';
+
+//https://laboratorio-alpha.vercel.app/api
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 Vue.use(VueRouter)
 Vue.use(VueSweetalert2);

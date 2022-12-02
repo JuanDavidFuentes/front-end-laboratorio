@@ -1,100 +1,124 @@
 <template>
     <v-container fluid class="mt-15">
-        <v-row>
-            <v-col cols="12">
-                <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
-                    Volver
-                </v-btn>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="12">
-                <div class="text-center black--text font-weight-Normal">
-                    <h1>Ordenes</h1>
-                </div>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="1"></v-col>
-            <v-col class="text-center" cols="10">
-                <template>
-                    <v-card>
-                        <template>
-                            <v-card>
-                                <v-card-title>
-                                    Ordenes
-                                    <v-spacer></v-spacer>
-                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar orden"
-                                        single-line hide-details>
-                                    </v-text-field>
-                                </v-card-title>
-                                <v-data-table :headers="headers" :items="ensayosOrdenes" :search="search">
-                                    <template v-slot:[`item.completar`]="{ item }">
-                                        <v-tooltip v-if="item.ensayo.estado === 'En proceso'" bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
-                                                    @click="editar(item)">
-                                                    mdi-briefcase-check
-                                                </v-icon>
-                                            </template>
-                                            <span>Termina tu tarea!!!!</span>
-                                        </v-tooltip>
-                                        <v-tooltip v-if="item.ensayo.estado === 'Realizado'" bottom>
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-icon color="blue" rounded v-bind="attrs" v-on="on"
-                                                    @click="editar(item)">
-                                                    mdi-pencil
-                                                </v-icon>
-                                            </template>
-                                            <span>Editar</span>
-                                        </v-tooltip>
-                                    </template>
-                                    <template v-slot:[`item.estado`]="{ item }">
-                                        <span class="orange--text" v-if="item.ensayo.estado === 'En proceso'">En proceso...</span>
-                                        <span class="green--text" v-if="item.ensayo.estado === 'Realizado'">Realizada!!</span>
-                                    </template>
-                                </v-data-table>
-                            </v-card>
-                        </template>
-                    </v-card>
-                </template>
-            </v-col>
-            <v-col cols="1"></v-col>
-        </v-row>
-        <template>
-            <v-row justify="center">
-                <v-dialog v-model="dialog" persistent max-width="800px">
-                    <v-card>
-                        <v-card-title>
-                            <span class="text-h5">Porfavor complete los campos</span>
-                        </v-card-title>
-                        <v-card-text>
-                            <v-container>
-                                <v-row>
-                                    <v-col cols="12">
-                                        <v-text-field color="secondary" v-model="resultado" type="number"
-                                            label="Resultado*" filled dense></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12">
-                                        <v-text-field color="secondary" v-model="incertidumbre" type="number"
-                                            label="Incertidumbre*" filled dense></v-text-field>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="dialog = false">
-                                Cerrar
-                            </v-btn>
-                            <v-btn color="blue darken-1" text @click="editar2()">
-                                Guardar
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
+        <div v-if="this.$store.state.token">
+            <v-row>
+                <v-col cols="12">
+                    <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+                        Volver
+                    </v-btn>
+                </v-col>
             </v-row>
-        </template>
+            <v-row>
+                <v-col cols="12">
+                    <div class="text-center black--text font-weight-Normal">
+                        <h1>Ordenes</h1>
+                    </div>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="1"></v-col>
+                <v-col class="text-center" cols="10">
+                    <template>
+                        <v-card>
+                            <template>
+                                <v-card>
+                                    <v-card-title>
+                                        Ordenes
+                                        <v-spacer></v-spacer>
+                                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar orden"
+                                            single-line hide-details>
+                                        </v-text-field>
+                                    </v-card-title>
+                                    <v-data-table :headers="headers" :items="ensayosOrdenes" :search="search">
+                                        <template v-slot:[`item.completar`]="{ item }">
+                                            <v-tooltip v-if="item.ensayo.estado === 'En proceso'" bottom>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                        @click="editar(item)">
+                                                        mdi-briefcase-check
+                                                    </v-icon>
+                                                </template>
+                                                <span>Termina tu tarea!!!!</span>
+                                            </v-tooltip>
+                                            <v-tooltip v-if="item.ensayo.estado === 'Realizado'" bottom>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-icon color="blue" rounded v-bind="attrs" v-on="on"
+                                                        @click="editar(item)">
+                                                        mdi-pencil
+                                                    </v-icon>
+                                                </template>
+                                                <span>Editar</span>
+                                            </v-tooltip>
+                                        </template>
+                                        <template v-slot:[`item.estado`]="{ item }">
+                                            <span class="orange--text" v-if="item.ensayo.estado === 'En proceso'">En
+                                                proceso...</span>
+                                            <span class="green--text"
+                                                v-if="item.ensayo.estado === 'Realizado'">Realizada!!</span>
+                                        </template>
+                                    </v-data-table>
+                                </v-card>
+                            </template>
+                        </v-card>
+                    </template>
+                </v-col>
+                <v-col cols="1"></v-col>
+            </v-row>
+            <template>
+                <v-row justify="center">
+                    <v-dialog v-model="dialog" persistent max-width="800px">
+                        <v-card>
+                            <v-card-title>
+                                <span class="text-h5">Porfavor complete los campos</span>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field color="secondary" v-model="resultado" type="number"
+                                                label="Resultado*" filled dense></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field color="secondary" v-model="incertidumbre" type="number"
+                                                label="Incertidumbre*" filled dense></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="dialog = false">
+                                    Cerrar
+                                </v-btn>
+                                <v-btn color="blue darken-1" text @click="editar2()">
+                                    Guardar
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+            </template>
+        </div>
+        <div v-if="this.$store.state.token === ''">
+            <v-row>
+                <v-col cols="12" class="mb-16 box2">
+                    <v-row>
+                        <v-col cols="12" class="d-flex justify-center">
+                            <img height="450"
+                                src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
+                        </v-col>
+                    </v-row>
+                    <center style="margin: 5vw;">
+                        <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie
+                            sesión nuevamente!</h1>
+                        <p>
+                            <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
+                        </p>
+                    </center>
+                </v-col>
+            </v-row>
+
+        </div>
     </v-container>
 </template>
 <script>
@@ -125,12 +149,12 @@ export default {
                     value: 'ensayo.idensayo.descripcion',
                 },
                 {
-                    text: 'Metodo',
+                    text: 'Método',
                     align: 'start',
                     value: 'ensayo.idensayo.metodo',
                 },
                 {
-                    text: 'Tecnica',
+                    text: 'Técnica',
                     align: 'start',
                     value: 'ensayo.idensayo.tecnica',
                 },
@@ -141,7 +165,7 @@ export default {
                     value: 'ensayo.idensayo.unidades',
                 },
                 {
-                    text: 'Limite de cuantificación',
+                    text: 'Límite de cuantificación',
                     align: 'start',
                     sortable: false,
                     value: 'ensayo.idensayo.limiteCuantificacion',

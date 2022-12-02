@@ -1,124 +1,154 @@
 
 <template>
   <v-container fluid class="mt-15 mb-15">
-    <v-row>
-      <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
-        <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
-          Volver
-        </v-btn>
-      </v-col>
-    </v-row>
-    <v-row style="margin: 0">
-      <v-col cols="12">
-        <template>
-          <v-card>
-            <template>
-              <v-card>
-                <v-card-title>
-                  Lista de movimientos
-                </v-card-title>
-                <v-data-table :headers="headers" :items="infoConsecutivo">
-                  <template v-slot:[`item.editar`]="{ item }">
-                    <template>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="editarC(item)">
-                            mdi-border-color
-                          </v-icon>
-                        </template>
-                        <span>Editar informacion</span>
-                      </v-tooltip>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-icon color="green" @click="editar2(item)" rounded v-bind="attrs" v-on="on">
-                            mdi-reload
-                          </v-icon>
-                        </template>
-                        <span>Editar consecutivos</span>
-                      </v-tooltip>
+    <div v-if="this.$store.state.token">
+      <v-row>
+        <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
+          <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
+            Volver
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-row style="margin: 0">
+        <v-col cols="12">
+          <template>
+            <v-card>
+              <template>
+                <v-card>
+                  <v-card-title>
+                    Información
+                  </v-card-title>
+                  <v-data-table :headers="headers" :items="infoConsecutivo">
+                   <template v-slot:[`item.editar`]="{ item }">
+                      <template>
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-icon color="blue" rounded v-bind="attrs" v-on="on" @click="editarC(item)">
+                              mdi-border-color
+                            </v-icon>
+                          </template>
+                          <span>Editar información</span>
+                        </v-tooltip>
+                      </template>
+                      <template>
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-icon color="green" @click="editar2(item)" rounded v-bind="attrs" v-on="on">
+                              mdi-reload
+                            </v-icon>
+                          </template>
+                          <span>Editar consecutivos</span>
+                        </v-tooltip>
+                      </template>
                     </template>
-                  </template>
-                </v-data-table>
-              </v-card>
-            </template>
-          </v-card>
-        </template>
-      </v-col>
-    </v-row>
+                  </v-data-table>
+                </v-card>
+              </template>
+            </v-card>
+          </template>
+        </v-col>
+      </v-row>
 
-    <v-dialog v-model="dialog2" persistent max-width="1000px">
-      <v-card>
-        <v-card-title>
-          <span class="text-h5 mb-3">Actualizar datos</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="IVA*" v-model="iva" type="number" rounded filled dense required></v-text-field>
-              </v-col>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="Descripción*" v-model="descripcion" rounded filled dense required>
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="Nit*" v-model="nit" rounded filled dense required></v-text-field>
-              </v-col>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="Direccion*" v-model="direccion" rounded filled dense required></v-text-field>
-              </v-col>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="Telefono*" v-model="telefono" rounded filled dense required></v-text-field>
-              </v-col>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="Correo*" v-model="correo" rounded filled dense required></v-text-field>
+      <v-dialog v-model="dialog2" persistent max-width="1000px">
+        <v-card>
+          <v-card-title >
+            <v-row class="mb-3">
+              <v-col class="text-center">
+                <span class="text-h4">Actualizar datos</span>
               </v-col>
             </v-row>
-          </v-container>
-          <small>* indica campo requerido</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog2 = false">
-            Cerrar
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="editardatos()">
-            Guardar
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="IVA*" v-model="iva" type="number" rounded filled dense required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="Descripción*" v-model="descripcion" rounded filled dense required>
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="Nit*" v-model="nit" rounded filled dense required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="Dirección*" v-model="direccion" rounded filled dense required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="Télefono*" v-model="telefono" rounded filled dense required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="Correo*" v-model="correo" rounded filled dense required></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+            <p class="green--text">"*" indica campo requerido</p> 
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="red" rounded @click="dialog2 = false" dark>
+              Cerrar
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="green" rounded dark @click="editardatos()">
+              Guardar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 
-    <v-dialog v-model="dialog3" persistent max-width="1000px">
-      <v-card>
-        <v-card-title>
-          <span class="text-h5 mb-3">Editar consecutivos</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="Numero de cotización*" v-model="coti" type="number" rounded filled dense required></v-text-field>
-              </v-col>
-              <v-col cols="12" class="mt-n7">
-                <v-text-field label="Numero de muestras*" v-model="muestra" type="number" rounded filled dense required>
-                </v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-          <small>* indica campo requerido</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog3 = false">
-            Cerrar
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="limpiar()">
-            Guardar
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+      <v-dialog v-model="dialog3" persistent max-width="1000px">
+        <v-card>
+          <v-card-title>
+            <span class="text-h5 mb-3">Editar consecutivos</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="Número de cotización*" v-model="coti" type="number" rounded filled dense
+                    required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="mt-n7">
+                  <v-text-field label="Número de muestras*" v-model="muestra" type="number" rounded filled dense
+                    required>
+                  </v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+            <small class="green--text">"*" indica campo requerido</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="red" rounded dark @click="dialog3 = false">
+              Cerrar
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="green" rounded dark @click="limpiar()">
+              Guardar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+    <div v-if="this.$store.state.token === ''">
+      <v-row>
+        <v-col cols="12" class="mb-16 box2">
+          <v-row>
+            <v-col cols="12" class="d-flex justify-center">
+              <img height="450"
+                src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
+            </v-col>
+          </v-row>
+          <center style="margin: 5vw;">
+            <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie sesión
+              nuevamente!</h1>
+            <p>
+              <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
+            </p>
+          </center>
+        </v-col>
+      </v-row>
+
+    </div>
   </v-container>
 </template>
     
@@ -128,9 +158,9 @@ export default {
   name: 'PageSetup',
   data: () => ({
     infoConsecutivo: [],
-    coti:0,
-    muestra:0
-,   id: "",
+    coti: 0,
+    muestra: 0
+    , id: "",
     iva: 0,
     descripcion: "",
     nit: "",
@@ -159,12 +189,6 @@ export default {
         value: 'iva',
       },
       {
-        text: 'Descripción',
-        align: 'start',
-        sortable: false,
-        value: 'descripcion',
-      },
-      {
         text: 'NIT',
         align: 'start',
         sortable: false,
@@ -174,7 +198,7 @@ export default {
         text: 'Dirección',
         align: 'start',
         sortable: false,
-        value: 'descripcion',
+        value: 'direccion',
       },
       {
         text: 'Telefono',
@@ -266,10 +290,10 @@ export default {
 
         });
     },
-    editar2(item){
+    editar2(item) {
       this.id = item._id
-      this.coti=item.numero_cotizacion
-      this.muestra=item.codMuestra
+      this.coti = item.numero_cotizacion
+      this.muestra = item.codMuestra
       this.dialog3 = true
     },
     limpiar() {
