@@ -101,37 +101,22 @@ export default {
           console.log(error);
         })
     },
-    // token(){
-    //   localStorage.setItem("token", "")
-    // }
-    // color() {
-    //   axios.get("/colores/")
-    //     .then((response) => {
-    //       console.log(response);
-    //       console.log(response.data.color[0]._id);
-    //       this.$store.dispatch("setColor", response.data.color); 
-    //       localStorage.setItem("color",JSON.stringify(response.data.color))
-    //       // localStorage.setItem("IdColor", response.data.color[0]._id)
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }
     // consecutivos cambio de año
     listar2() {
       axios.get(`/cotizacion/traerConsecutivo`)
         .then((response) => {
           this.infoConsecutivo2 = response.data.consecutivo[0]._id
+          this.anuevo()
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    anuevo() {
+    anuevo(){
       let d = new Date()
       let day = d.getDate()
       let month = d.getMonth() + 1
-      if (day === 2 && month === 12) {
+      if (day === 1 && month === 1) {
         console.log("warning");
         this.$swal.fire({
           position: "top-end",
@@ -141,9 +126,9 @@ export default {
           timer: 2500,
         });
         axios.put(`/cotizacion/reiniciar/${this.infoConsecutivo2}`, {
-          numero_cotizacion: 3,
-          informe_No: 3,
-          codMuestra: 2,
+          numero_cotizacion: 1,
+          informe_No: 1,
+          codMuestra: 1,
 
         })
           .then((response) => {
@@ -157,7 +142,6 @@ export default {
   },
   created() {
     this.listar2();
-    this.anuevo();
   }
 };
 </script>

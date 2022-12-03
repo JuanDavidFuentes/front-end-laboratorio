@@ -33,7 +33,7 @@
                       <template>
                         <v-tooltip bottom>
                           <template v-slot:activator="{ on, attrs }">
-                            <v-icon color="green" @click="editar2(item)" rounded v-bind="attrs" v-on="on">
+                            <v-icon color="green" @click="anuevo2()" rounded v-bind="attrs" v-on="on">
                               mdi-reload
                             </v-icon>
                           </template>
@@ -159,8 +159,9 @@ export default {
   data: () => ({
     infoConsecutivo: [],
     coti: 0,
-    muestra: 0
-    , id: "",
+    muestra: 0,
+    id: "",
+    infoConsecutivo2: "",
     iva: 0,
     descripcion: "",
     nit: "",
@@ -181,6 +182,12 @@ export default {
         align: 'start',
         sortable: false,
         value: 'codMuestra',
+      },
+      {
+        text: 'Consecutivo de ensayos',
+        align: 'start',
+        sortable: false,
+        value: 'informe_No',
       },
       {
         text: 'IVA',
@@ -335,10 +342,70 @@ export default {
           }
 
         });
+    },
+    listar2() {
+      axios.get(`/cotizacion/traerConsecutivo`)
+        .then((response) => {
+          this.infoConsecutivo2 = response.data.consecutivo[0]._id
+          this.anuevo()
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    anuevo() {
+      let d = new Date()
+      let day = d.getDate()
+      let month = d.getMonth() + 1
+      if (day === 1 && month === 1) {
+        console.log("warning");
+        this.$swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: "Año nuevo consecutivos nuevos",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+        axios.put(`/cotizacion/reiniciar/${this.infoConsecutivo2}`, {
+          numero_cotizacion: 1,
+          informe_No: 1,
+          codMuestra: 1,
+
+        })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+    anuevo2() {
+      axios.put(`/cotizacion/reiniciar/${this.infoConsecutivo2}`, {
+        numero_cotizacion: 1,
+        informe_No: 1,
+        codMuestra: 1
+      })
+        .then((response) => {
+          console.log(response);
+          this.$swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Consecutivos reiniciados",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   },
+
+
   created() {
     this.listar();
+    this.listar2();
   },
 }
 </script>
