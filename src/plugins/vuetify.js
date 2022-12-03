@@ -6,7 +6,7 @@ Vue.use(Vuetify);
 
 
 async function color() {
-  await axios.get("https://laboratorio-jjai-2.herokuapp.com/api/colores/")
+  await axios.get("http://localhost:4000/api/colores/")
     .then((response) => {
       console.log(response);
       localStorage.setItem("color",JSON.stringify(response.data.color))

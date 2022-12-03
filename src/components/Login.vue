@@ -59,6 +59,7 @@ export default {
     valido: "",
     show: false,
     password: '',
+    infoConsecutivo2: "",
     rules: {
       required: value => !!value || 'Required.',
       min: v => v.length >= 8 || 'Min 8 characters',
@@ -77,7 +78,6 @@ export default {
           this.$store.dispatch("setToken", response.data.token);
           this.$store.dispatch("setDatos", response.data.usuario);
           this.$router.push("/Home")
-          localStorage.setItem("token", response.data.token)
           // localStorage.setItem("datos",JSON.stringify(response.data.usuario))
         })
         .catch(error => {
@@ -117,9 +117,47 @@ export default {
     //       console.log(error);
     //     });
     // }
+    // consecutivos cambio de año
+    listar2() {
+      axios.get(`/cotizacion/traerConsecutivo`)
+        .then((response) => {
+          this.infoConsecutivo2 = response.data.consecutivo[0]._id
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    anuevo() {
+      let d = new Date()
+      let day = d.getDate()
+      let month = d.getMonth() + 1
+      if (day === 2 && month === 12) {
+        console.log("warning");
+        this.$swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: "Año nuevo consecutivos nuevos",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+        axios.put(`/cotizacion/reiniciar/${this.infoConsecutivo2}`, {
+          numero_cotizacion: 3,
+          informe_No: 3,
+          codMuestra: 2,
+
+        })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
   },
-  created(){
-    // this.token();
+  created() {
+    this.listar2();
+    this.anuevo();
   }
 };
 </script>

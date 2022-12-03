@@ -19,7 +19,7 @@
                     Información
                   </v-card-title>
                   <v-data-table :headers="headers" :items="infoConsecutivo">
-                   <template v-slot:[`item.editar`]="{ item }">
+                    <template v-slot:[`item.editar`]="{ item }">
                       <template>
                         <v-tooltip bottom>
                           <template v-slot:activator="{ on, attrs }">
@@ -51,7 +51,7 @@
 
       <v-dialog v-model="dialog2" persistent max-width="1000px">
         <v-card>
-          <v-card-title >
+          <v-card-title>
             <v-row class="mb-3">
               <v-col class="text-center">
                 <span class="text-h4">Actualizar datos</span>
@@ -82,7 +82,7 @@
                 </v-col>
               </v-row>
             </v-container>
-            <p class="green--text">"*" indica campo requerido</p> 
+            <p class="green--text">"*" indica campo requerido</p>
           </v-card-text>
           <v-card-actions>
             <v-btn color="red" rounded @click="dialog2 = false" dark>

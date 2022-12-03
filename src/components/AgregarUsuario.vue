@@ -168,8 +168,9 @@
                         </v-text-field>
                     </v-card-title>
                     <v-data-table :headers="headers" :items="Usuarios" :search="search">
-                        <template v-slot:[`item.estado`]="{ item }">
-                            <span class="green--text" v-if="item.estado === 1"> Activo</span>
+                        <template v-slot:[`item.estado`]="{ item }" >
+                            
+                            <span class="green--text" v-if="item.estado === 1 "> Activo</span>
                             <span class="red--text" v-else>Inactivo</span>
                         </template>
 
@@ -177,7 +178,7 @@
                             <span v-if="item.estado === 1">
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="error" rounded v-bind="attrs" v-on="on"
+                                        <v-icon color="red" rounded v-bind="attrs" v-on="on"
                                             @click="desactivar(item._id)">
                                             mdi-shield-off
                                         </v-icon>
@@ -275,6 +276,7 @@
                                             @click="listarCiudad()">
                                         </v-autocomplete>
                                     </v-col>
+
                                     <v-col cols="6" sm="6" class="mt-n7">
                                         <v-text-field v-model="direccion" label="Dirección*" filled rounded dense>
                                         </v-text-field>
@@ -284,10 +286,12 @@
                                         <v-text-field v-model="email" label="Email*" filled rounded
                                             dense></v-text-field>
                                     </v-col>
+
                                     <v-col cols="6" class="mt-n7">
                                         <v-text-field v-model="celular" label="Celular*" filled rounded dense>
                                         </v-text-field>
                                     </v-col>
+
                                     <v-col cols="6" sm="6" class="mt-n7">
                                         <v-text-field v-model="password" label="Contraseña*"
                                             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
@@ -692,7 +696,17 @@ export default {
         },
 
         desactivar(id) {
-            let header = { headers: { token: this.$store.state.token } };
+            if (id=== this.$store.state.datos._id) {
+                this.$swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "No puedes desactivar el usuario que estas usando actualmente",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+            } 
+            else {
+                let header = { headers: { token: this.$store.state.token } };
             axios
                 .put(`/usuarios/desactivar/${id}`, {}, header)
                 .then((response) => {
@@ -705,6 +719,7 @@ export default {
                         timer: 1500,
                     });
                     this.usuarios();
+
                 })
                 .catch((error) => {
                     this.$swal.fire({
@@ -715,6 +730,8 @@ export default {
                         timer: 1500,
                     });
                 });
+            }
+            
         },
         activar(id) {
             let header = { headers: { token: this.$store.state.token } };
@@ -756,6 +773,9 @@ export default {
             this.selecionadoRol = usuario.rol
             this.contacto = usuario.contacto
             this.seleccionadoCiudad = usuario.ciudad
+            if (this.$store.state.datos._id === usuario.id) {
+                console.log();
+            }
         },
         usuarios() {
             let header = { headers: { token: this.$store.state.token } };
@@ -764,6 +784,7 @@ export default {
                 .then((response) => {
                     console.log(response);
                     this.Usuarios = response.data.usuarios;
+                   
                 })
                 .catch((error) => {
                     console.log(error);
