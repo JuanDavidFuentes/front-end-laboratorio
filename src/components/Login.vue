@@ -102,46 +102,46 @@ export default {
         })
     },
     // consecutivos cambio de año
-    listar2() {
-      axios.get(`/cotizacion/traerConsecutivo`)
-        .then((response) => {
-          this.infoConsecutivo2 = response.data.consecutivo[0]._id
-          this.anuevo()
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    anuevo(){
-      let d = new Date()
-      let day = d.getDate()
-      let month = d.getMonth() + 1
-      if (day === 1 && month === 1) {
-        console.log("warning");
-        this.$swal.fire({
-          position: "top-end",
-          icon: "warning",
-          title: "Año nuevo consecutivos nuevos",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-        axios.put(`/cotizacion/reiniciar/${this.infoConsecutivo2}`, {
-          numero_cotizacion: 1,
-          informe_No: 1,
-          codMuestra: 1,
+  //   listar2() {
+  //     axios.get(`/cotizacion/traerConsecutivo`)
+  //       .then((response) => {
+  //         this.infoConsecutivo2 = response.data.consecutivo[0]._id
+  //         this.anuevo()
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   },
+  //   anuevo(){
+  //     let d = new Date()
+  //     let day = d.getDate()
+  //     let month = d.getMonth() + 1
+  //     if (day === 1 && month === 1) {
+  //       console.log("warning");
+  //       this.$swal.fire({
+  //         position: "top-end",
+  //         icon: "warning",
+  //         title: "Año nuevo consecutivos nuevos",
+  //         showConfirmButton: false,
+  //         timer: 2500,
+  //       });
+  //       axios.put(`/cotizacion/reiniciar/${this.infoConsecutivo2}`, {
+  //         numero_cotizacion: 1,
+  //         informe_No: 1,
+  //         codMuestra: 1,
 
-        })
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-  },
-  created() {
-    this.listar2();
+  //       })
+  //         .then((response) => {
+  //           console.log(response);
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     }
+  //   }
   }
+  // created() {
+  //   this.listar2();
+  // }
 };
 </script>

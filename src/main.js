@@ -9,8 +9,8 @@ import {routes} from './routes/routes.js';
 import axios from 'axios'
 
 
-//http://localhost:4000/api
-axios.defaults.baseURL = 'https://laboratorio-production.up.railway.app/api';
+//https://laboratorio-production.up.railway.app/api
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 Vue.use(VueRouter)
 Vue.use(VueSweetalert2);

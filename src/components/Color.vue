@@ -2,7 +2,7 @@
     <v-container>
         <div v-if="this.$store.state.token">
             <v-row style="margin: 0px;">
-                <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10" class="mt-15">
+                <v-col cols="7" class="mt-15">
                     <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
                         Volver
                     </v-btn>
@@ -15,7 +15,7 @@
                 </v-col>
             </v-row>
 
-            <v-row align="center" justify="center">
+            <v-row>
                 <v-col v-if="selecionadoColor === ''" cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
                     <div class="text-center black--text font-weight-Normal">
                         <h1>Por favor selecciona una opción</h1>
@@ -45,43 +45,50 @@
                         <h1>Color de los formatos</h1>
                     </div>
                 </v-col>
-
-                <!-- <v-col v-if="selecionadoColor==='Color Temporal'"
+            </v-row>
+            <!-- <v-col v-if="selecionadoColor==='Color Temporal'"
             cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
                         <div class="text-center black--text font-weight-Normal" >
                             <h1>Color Temporal</h1>
                         </div>
             </v-col> -->
-
-                <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5">
+            <v-row>
+                <v-col cols="12" xs="3" sm="4" md="4" lg="4" xl="4"></v-col>
+                <v-col cols="12" xs="6" sm="4" md="4" lg="4" xl="4" class="center">
+                    <v-color-picker class="" v-model="color" show-swatches swatches-max-height="300px"></v-color-picker>
+                    <!-- <v-color-picker class="ma-2" v-model="color" hide-inputs></v-color-picker> -->
                 </v-col>
-                <v-col cols="7" xs="7" sm="7" md="7" lg="7" xl="7">
-                    <v-color-picker class="ml-n3" v-model="color" hide-inputs></v-color-picker>
-                </v-col>
-
-                <div v-if="selecionadoColor === 'Color Logo'">
-                    <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarL()">
-                        Guardar Color del Logo
-                    </v-btn>
-                </div>
-
-                <div v-if="selecionadoColor === 'Color Interfaz'">
-                    <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarI()">
-                        Guardar Color del Interfaz
-                    </v-btn>
-                </div>
-
-                <div v-if="selecionadoColor === 'Color Formatos'">
-                    <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
-                        Guardar Color de los Formatos
-                    </v-btn>
-                </div>
+                <v-col cols="12" xs="3" sm="4" md="4" lg="4" xl="4"></v-col>
                 <!-- <div v-if="selecionadoColor==='Color Temporal'">
             <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
                         Guardar Color Temporal
             </v-btn>
         </div> -->
             </v-row>
+            
+            <v-row>
+                <v-col cols="12 mb-16 text-center">
+                    <div v-if="selecionadoColor === 'Color Logo'">
+                        <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarL()">
+                            Guardar Color del Logo
+                        </v-btn>
+                    </div>
+
+                    <div v-if="selecionadoColor === 'Color Interfaz'">
+                        <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarI()">
+                            Guardar Color del Interfaz
+                        </v-btn>
+                    </div>
+
+                    <div v-if="selecionadoColor === 'Color Formatos'">
+                        <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
+                            Guardar Color de los Formatos
+                        </v-btn>
+                    </div>
+                </v-col>
+            </v-row>
+
+
         </div>
         <div v-if="this.$store.state.token === ''">
             <v-row>
@@ -122,7 +129,6 @@ export default {
         traercolor() {
             this.colores = JSON.parse(localStorage.getItem("color"))
             this.idcolor = this.colores[0]._id
-            console.log(this.idcolor);
         },
         Volver1() {
             this.$router.push("/Configuracion")

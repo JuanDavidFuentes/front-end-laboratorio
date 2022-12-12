@@ -236,7 +236,6 @@ export default {
       axios.get(`/cotizacion/traerConsecutivo`)
         .then((response) => {
           this.infoConsecutivo = response.data.consecutivo
-          console.log(this.infoConsecutivo);
         })
         .catch((error) => {
           console.log(error);
@@ -253,7 +252,6 @@ export default {
       this.dialog2 = true
     },
     editardatos() {
-      console.log(this.id);
       let header = { headers: { "token": this.$store.state.token } };
       axios.put(`/cotizacion/actualizarInfo/${this.id}`, {
         iva: this.iva,
@@ -276,7 +274,6 @@ export default {
           this.dialog2 = false
         })
         .catch((error) => {
-          console.log(error);
           if (error.response.data.msg === "No hay token en la peticion") {
             this.$swal.fire({
               position: "top-end",
@@ -322,7 +319,6 @@ export default {
           this.dialog3 = false
         })
         .catch((error) => {
-          console.log(error);
           if (error.response.data.msg === "No hay token en la peticion") {
             this.$swal.fire({
               position: "top-end",
@@ -358,7 +354,6 @@ export default {
       let day = d.getDate()
       let month = d.getMonth() + 1
       if (day === 1 && month === 1) {
-        console.log("warning");
         this.$swal.fire({
           position: "top-end",
           icon: "warning",
