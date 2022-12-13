@@ -142,7 +142,8 @@
                                 <v-divider></v-divider>
 
                                 <v-container fluid>
-                                    <v-row style=" margin: 0; border: solid 2px; border-color: white;  "
+                                    <v-row border="left" colored-border color="deep-purple accent-4"
+                                        style=" margin: 0; border: solid 1px; border-color: black !important;  "
                                         class="secondary mx-5">
                                         <v-col cols="12">
                                             <div class="text-center white--text ">
@@ -153,15 +154,15 @@
 
                                     <v-row style="margin: 0" class="mx-5">
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text ">
                                                 <h3>Cliente</h3>
                                             </div>
                                         </v-col>
 
                                         <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                            style="border: solid 1px; border-color: black;"
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
                                             class="pa-0 ma-0 text-center">
                                             <v-btn v-if="botones == 1" dark class="secondary my-3"
                                                 @click="Elegircliente()">
@@ -192,14 +193,15 @@
                                             </v-row>
                                         </v-col>
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                                             cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>NIT/ C.C.</h3>
                                             </div>
                                         </v-col>
                                         <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                            style="border: solid 1px; border-color: black;" class="pa-0 ma-0">
+                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            class="pa-0 ma-0">
                                             <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                                 hide-details>
                                                 {{ documento }}
@@ -210,8 +212,8 @@
 
                                     <v-row style="margin: 0" class="mx-5">
                                         <v-col class="secondary"
-                                            style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text ">
                                                 <h3>Dirección</h3>
                                             </div>
@@ -225,7 +227,7 @@
                                             </div>
                                         </v-col>
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                                             cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Ciudad</h3>
@@ -244,8 +246,8 @@
 
                                     <v-row style="margin: 0" class="mx-5">
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Departamento</h3>
                                             </div>
@@ -259,8 +261,8 @@
                                             </div>
                                         </v-col>
                                         <v-col class="secondary"
-                                            style="border: solid 1px; border-color: black; border-top: 0px;" cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Teléfono</h3>
                                             </div>
@@ -277,8 +279,8 @@
 
                                     <v-row style="margin: 0" class="mx-5">
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Contacto</h3>
                                             </div>
@@ -292,8 +294,8 @@
                                             </div>
                                         </v-col>
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px;" cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Cargo</h3>
                                             </div>
@@ -310,8 +312,8 @@
 
                                     <v-row style="margin: 0" class="mx-5">
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;"
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Celular</h3>
                                             </div>
@@ -325,7 +327,7 @@
                                             </div>
                                         </v-col>
                                         <v-col class="secondary"
-                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                                             cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Correo electrónico</h3>
@@ -343,8 +345,8 @@
 
                                     <v-row style="margin: 0" class="mx-5">
                                         <v-col class="secondary"
-                                            style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Validez de la oferta</h3>
                                             </div>
@@ -361,7 +363,7 @@
                                             </div>
                                         </v-col>
                                         <v-col class="secondary"
-                                            style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                            style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                                             cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Entrega de resultados</h3>
@@ -381,14 +383,14 @@
 
                                     <v-row style="margin: 0" class="mx-5">
                                         <v-col class="secondary"
-                                            style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                            xs="4" sm="4" md="2" lg="2" xl="2">
+                                            style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px; "
+                                            cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                             <div class="text-center white--text">
                                                 <h3>Elaborador por</h3>
                                             </div>
                                         </v-col>
                                         <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;"
                                             class="pa-0 ma-0">
                                             <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                                 hide-details>
@@ -403,7 +405,7 @@
                                             </div>
                                         </v-col>
                                         <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                            style="border: solid 1px; border-color: black; border-top: 0px;"
+                                            style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;"
                                             class="pa-0 ma-0">
                                             <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width
                                                 hide-details>
@@ -413,7 +415,7 @@
                                     </v-row>
 
                                     <v-row class="secondary mx-5"
-                                        style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                                        style=" margin: 0; border: solid 1px; border-color: black !important;">
                                         <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4">
                                         </v-col>
                                         <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
@@ -427,7 +429,7 @@
 
                                     <!-- item 1 -->
                                     <v-row class="secondary mx-5"
-                                        style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                                        style=" margin: 0; border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
                                         <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                                         </v-col>
                                         <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
@@ -555,21 +557,21 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-right: 0px; border-top: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-left:0px; border-top: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Costo del ítem 1 </h2>
                                                             </td>
@@ -651,25 +653,25 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important;border-top: 0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important;border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important;border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important;border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important;border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            <td style="border: solid 1px; border-color: black !important;border-top: 0px; border-left:0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Costo del ítem 1 </h2>
                                                             </td>
-                                                            <td style=" border: solid 1px; border-color: black; border-top: 0px; border-left:0px;"
+                                                            <td style=" border: solid 1px; border-color: black ; border-top: 0px; border-left:0px;"
                                                                 class="pa-0 ma-0">
                                                                 ${{ Intl.NumberFormat("de-DE").format(costo) }}
                                                             </td>
@@ -681,7 +683,7 @@
                                     </v-row>
                                     <!-- item 2 -->
                                     <v-row class="secondary mx-5"
-                                        style=" margin: 0; border: solid 1px; border-color: black;">
+                                        style=" margin: 0; border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
                                         <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                                         </v-col>
                                         <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
@@ -808,21 +810,21 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="secondary "
-                                                                style=" border: solid 1px; border-color: black; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary "
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary "
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary "
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary "
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
-                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            <td style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Costo del ítem 2 </h2>
                                                             </td>
@@ -903,21 +905,21 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Costo del ítem 2 </h2>
                                                             </td>
@@ -933,7 +935,7 @@
                                     </v-row>
                                     <!-- item 3 -->
                                     <v-row class="secondary mx-5"
-                                        style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                                        style=" margin: 0; border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
                                         <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                                         </v-col>
                                         <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
@@ -1060,21 +1062,21 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="secondary"
-                                                                style=" border: solid 1px; border-color: black; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style=" border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
-                                                            <td style=" border: solid 1px; border-color: black; border-left:0px;"
+                                                            <td style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Costo del ítem 3 </h2>
                                                             </td>
@@ -1086,7 +1088,7 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right:0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px;">
 
                                                             </td>
                                                             <td class="secondary" style="border-top: 0px;">
@@ -1097,9 +1099,9 @@
                                                             <td class="secondary" style="border-top: 0px;">
 
                                                             </td>
-                                                            <td class="secondary" style="border-top: 0px;">
+                                                            <td class="secondary" style="border: solid 1px; border-color: black !important; border-left: 0px; border-bottom: 0px; border-top: 0px;">
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Descuento </h2>
                                                             </td>
@@ -1120,7 +1122,7 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
@@ -1137,10 +1139,10 @@
                                                                 style="border-bottom: 0px; border-top: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border-bottom: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left: 0px; border-bottom: 0px; border-top: 0px;">
 
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Subtotal - Descuento </h2>
                                                             </td>
@@ -1152,22 +1154,22 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px;  border-right: 0px;  border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
                                                             </td>
                                                             <td class="secondary text-center"
-                                                                style="border: solid 1px; width: 500px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-left: 0px; border-right: 0px;  border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left: 0px;  border-top: 0px;">
 
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;  border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> IVA </h2>
                                                             </td>
@@ -1179,15 +1181,15 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right: 0px; ">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; ">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;">
                                                                 <v-textarea hide-details
                                                                     style="background-color: white;"
                                                                     v-model="cotiObservacion" auto-grow filled
@@ -1195,14 +1197,14 @@
                                                                 </v-textarea>
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left: 0px; border-top: 0px;">
 
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Total </h2>
                                                             </td>
@@ -1283,21 +1285,21 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Costo del ítem 3 </h2>
                                                             </td>
@@ -1309,7 +1311,7 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
@@ -1324,10 +1326,10 @@
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border-bottom: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left: 0px; border-bottom: 0px; border-top: 0px;">
 
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Descuento </h2>
                                                             </td>
@@ -1346,7 +1348,7 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
@@ -1364,10 +1366,10 @@
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border-bottom: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left: 0px; border-bottom: 0px; border-top: 0px;">
 
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Subtotal - Descuento </h2>
                                                             </td>
@@ -1379,25 +1381,25 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left: 0px;  border-top: 0px;">
 
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> IVA </h2>
                                                             </td>
@@ -1409,15 +1411,15 @@
 
                                                         <tr>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;">
                                                                 <v-textarea hide-details
                                                                     style="background-color: white;"
                                                                     v-model="cotiObservacion" auto-grow filled
@@ -1425,14 +1427,14 @@
                                                                 </v-textarea>
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;">
 
                                                             </td>
                                                             <td class="secondary"
-                                                                style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                                                style="border: solid 1px; border-color: black !important; border-left: 0px; border-top: 0px;">
 
                                                             </td>
-                                                            <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                                            <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                                                 class="secondary text-right white--text">
                                                                 <h2> Total </h2>
                                                             </td>
@@ -2303,11 +2305,13 @@
                 <v-col cols="12" class="mb-16 box2">
                     <v-row>
                         <v-col cols="12" class="d-flex justify-center">
-                            <img  height="450" src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
+                            <img height="450"
+                                src="https://cdn.dribbble.com/users/272763/screenshots/4576659/media/e7b35df88e9ab2a2ec158aaad703a7e9.gif" />
                         </v-col>
                     </v-row>
                     <center style="margin: 5vw;">
-                        <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie sesión nuevamente!</h1>
+                        <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie
+                            sesión nuevamente!</h1>
                         <p>
                             <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
                         </p>
@@ -2914,10 +2918,7 @@ export default {
             axios.get("/ciudad/CiudadDepartamento")
                 .then(response => {
                     console.log(response);
-                    response.data.ciudad.forEach(city => {
-                        this.Municipio.push(city)
-                    })
-                    console.log(this.Municipio);
+                    this.Municipio = response.data.ciudad
                 })
                 .catch(error => {
                     console.log(error);

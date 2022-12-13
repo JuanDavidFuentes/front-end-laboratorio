@@ -178,6 +178,7 @@ export default {
             timer: 1500,
           });
           this.dialog2 = false
+          this.listar()
         })
         .catch((error) => {
           if (error.response.data.msg === "No hay token en la peticion") {

@@ -61,7 +61,7 @@
             </v-col>
         </v-row>
 
-        <v-row style=" margin: 0; border: solid 1px; border-color: black;" class="secondary mx-5">
+        <v-row style=" margin: 0; border: solid 1px; border-color: black !important;" class="secondary mx-5">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>1. Datos del cliente</h3>
@@ -70,13 +70,13 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
                 <div class="text-center white--text ">
                     <h3>Cliente</h3>
                 </div>
             </v-col>
 
-            <v-col cols="4" style="border: solid 1px; border-color: black;" class="pa-0 ma-0 text-center">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
@@ -88,12 +88,12 @@
                     </v-col>
                 </v-row>
             </v-col>
-            <v-col class="secondary" style="border: solid 1px; border-color: black;" cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;" cols="2">
                 <div class="text-center white--text ">
                     <h3>NIT/ C.C.</h3>
                 </div>
             </v-col>
-            <v-col cols="4" style="border: solid 1px; border-color: black;" class="pa-0 ma-0">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
                     {{ documento }}
                 </div>
@@ -101,7 +101,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;" cols="2">
                 <div class="text-center white--text ">
                     <h3>Dirección</h3>
                 </div>
@@ -111,7 +111,7 @@
                     {{ direccion }}
                 </div>
             </v-col>
-            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                 cols="2">
                 <div class="text-center white--text">
                     <h3>Ciudad</h3>
@@ -125,7 +125,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
                 <div class="text-center white--text">
                     <h3>Departamento</h3>
                 </div>
@@ -135,7 +135,7 @@
                     {{ ciudad.departamento }}
                 </div>
             </v-col>
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px;" cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;" cols="2">
                 <div class="text-center white--text">
                     <h3>Teléfono</h3>
                 </div>
@@ -148,7 +148,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
                 <div class="text-center white--text">
                     <h3>Contacto</h3>
                 </div>
@@ -158,7 +158,7 @@
                     {{ nombrecontacto }}
                 </div>
             </v-col>
-            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px;" cols="2">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;" cols="2">
                 <div class="text-center white--text">
                     <h3>Cargo</h3>
                 </div>
@@ -171,7 +171,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
                 <div class="text-center white--text">
                     <h3>Celular</h3>
                 </div>
@@ -181,7 +181,7 @@
                     {{ celular }}
                 </div>
             </v-col>
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                 cols="2">
                 <div class="text-center white--text">
                     <h3>Correo electrónico</h3>
@@ -195,7 +195,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;" cols="2">
                 <div class="text-center white--text">
                     <h3>Validez de la oferta</h3>
                 </div>
@@ -205,7 +205,7 @@
                     {{ validezOferta.slice(0, 10) }}
                 </div>
             </v-col>
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                 cols="2">
                 <div class="text-center white--text">
                     <h3>Entrega de resultados</h3>
@@ -219,12 +219,12 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style=" border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px;" cols="2">
                 <div class="text-center white--text">
                     <h3>Elaborador por</h3>
                 </div>
             </v-col>
-            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
                     {{ elaboradoN }} {{ elaboradoA }}
                 </div>
@@ -234,14 +234,14 @@
                     <h3>Cargo</h3>
                 </div>
             </v-col>
-            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
                     {{ elaboradoR }}
                 </div>
             </v-col>
         </v-row>
 
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black !important;">
             <v-col cols="4">
             </v-col>
             <v-col cols="4">
@@ -254,7 +254,7 @@
         </v-row>
 
         <!-- item 1 -->
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style="  margin: 0; border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="4">
             </v-col>
             <v-col cols="4">
@@ -351,21 +351,21 @@
                             </tr>
                             <tr>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-right: 0px; border-top: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-left:0px; border-right: 0px; border-top: 0px;">
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-left:0px; border-top: 0px;"
                                     class="secondary text-right white--text">
                                     <h2> Costo del ítem 1 </h2>
                                 </td>
@@ -380,7 +380,7 @@
             </v-col>
         </v-row>
         <!-- item 2 -->
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black;">
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="4">
             </v-col>
             <v-col cols="4">
@@ -476,21 +476,21 @@
                             </tr>
                             <tr>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px;"
                                     class="secondary text-right white--text">
                                     <h2> Costo del ítem 2 </h2>
                                 </td>
@@ -506,7 +506,7 @@
         </v-row>
 
         <!-- item 3 -->
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="4">
             </v-col>
             <v-col cols="4">
@@ -602,21 +602,21 @@
                             </tr>
                             <tr>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;">
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-left:0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left:0px; border-right: 0px;"
                                     class="secondary text-right white--text">
                                     <h2> Costo del ítem 3 </h2>
                                 </td>
@@ -628,7 +628,7 @@
 
                             <tr v-if="descuento > 0">
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px;">
 
                                 </td>
                                 <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
@@ -639,10 +639,10 @@
                                 <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
 
                                 </td>
-                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                <td class="secondary" style="border: solid 1px; border-color: black !important; border-left: 0px; border-bottom: 0px; border-top: 0px;">
 
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     class="secondary text-right white--text">
                                     <h2> Descuento </h2>
                                 </td>
@@ -654,24 +654,24 @@
 
                             <tr v-if="descuento > 0">
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; ">
 
                                 </td>
-                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                <td class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px; ">
 
                                 </td>
-                                <td style="border-bottom: 0px; border-top: 0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px; "
                                     class="secondary text-center white--text">
                                     <h3 >Observaciones de la propuesta técnica y
                                         económica</h3>
                                 </td>
-                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                <td class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px; ">
 
                                 </td>
-                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                <td class="secondary" style="border: solid 1px; border-color: black !important; border-left: 0px;  border-top: 0px;">
 
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     class="secondary text-right white--text">
                                     <h2> Subtotal - Descuento </h2>
                                 </td>
@@ -684,24 +684,24 @@
 
                             <tr v-if="descuento <= 0">
                                 <td class="secondary"
-                                    style="border: solid 1px; border-color: black; border-right:0px; border-bottom: 0px; border-top: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;">
 
                                 </td>
-                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                <td class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
 
                                 </td>
-                                <td style="border-bottom: 0px; border-top: 0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;"
                                     class="secondary text-center white--text">
                                     <h3>Observaciones de la propuesta técnica y
                                         económica</h3>
                                 </td>
-                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                <td class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px;">
 
                                 </td>
-                                <td class="secondary" style="border-bottom: 0px; border-top: 0px;">
+                                <td class="secondary" style="border: solid 1px; border-color: black !important; border-left: 0px;  border-top: 0px;">
 
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     class="secondary text-right white--text">
                                     <h2> Subtotal </h2>
                                 </td>
@@ -713,25 +713,25 @@
 
                             <tr>
                                 <td 
-                                    style="border: solid 1px; border-color: black; border-right:0px;  border-top: 0px; border-bottom: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-bottom: 0px;">
 
                                 </td>
                                 <td 
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px; border-bottom: 0px;">
 
                                 </td>
                                 <td 
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px; border-bottom: 0px;">
                                 </td>
                                 <td 
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; border-left: 0px; border-bottom: 0px;">
 
                                 </td>
                                 <td 
-                                    style="border: solid 1px; border-right:0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
+                                    style="border: solid 1px; border-color: black !important; border-left: 0px;  border-top: 0px; border-bottom: 0px;">
 
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     class="secondary text-right white--text">
                                     <h2> IVA </h2>
                                 </td>
@@ -759,14 +759,14 @@
 
                                 </td>
                                 <td
-                                    style="border: solid 1px; border-color: black; border-left:0px; border-right: 0px; border-top: 0px;">
+                                    style="border: solid 1px; border-color: black; border-left:0px;  border-top: 0px;">
 
                                 </td>
-                                <td style="border: solid 1px; border-color: black; border-top: 0px;"
+                                <td style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     class="secondary text-right white--text">
                                     <h2> Total </h2>
                                 </td>
-                                <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px; border-bottom: 1px;"
+                                <td style=" border: solid 1px; border-color: black; border-left:0px;  border-top:0px; "
                                     class="pa-0 ma-0">
                                     ${{ Intl.NumberFormat("de-DE").format(total) }}
                                 </td>
@@ -774,7 +774,7 @@
                         </tbody>
                     </template>
                 </v-simple-table>
-                <v-row class="secondary" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+                <v-row class="secondary" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
                     <v-col cols="12">
                         <div class="text-center white--text">
                             <h3>Observaciones del servicio</h3>
@@ -790,7 +790,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Acepto las condiciones del servicio descritas en la presente oferta incluidos sus anexos</h3>
@@ -798,7 +798,7 @@
             </v-col>
         </v-row>
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important;  border-bottom: 0px; border-right: 0px; " cols="2">
                 <div class="text-center white--text ">
                     <h3>Nombre</h3>
                 </div>
@@ -816,7 +816,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important;  border-bottom: 0px; border-right: 0px;" cols="2">
                 <div class="text-center white--text ">
                     <h3>Cargo</h3>
                 </div>
@@ -835,7 +835,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important;  border-bottom: 0px; border-right: 0px; " cols="2">
                 <div class="text-center white--text ">
                     <h3>Firma de aceptación</h3>
                 </div>
@@ -854,7 +854,7 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black; border-top: 0px; " cols="2">
+            <v-col class="secondary" style="border: solid 1px; border-color: black !important;   border-right: 0px; " cols="2">
                 <div class="text-center white--text ">
                     <h3>C.C.</h3>
                 </div>
@@ -872,7 +872,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px;">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>3. Anexo de cotizaciones</h3>
@@ -880,7 +880,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Aceptación del servicio</h3>
@@ -896,7 +896,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Condiciones comerciales</h3>
@@ -912,7 +912,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Condiciones técnicas</h3>
@@ -928,7 +928,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Garantía del servicio</h3>
@@ -944,7 +944,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="secondary mx-5" style=" margin: 0; border: solid 1px; border-color: black; border-top: 0px;">
+        <v-row class="secondary mx-5" style=" margin: 0;border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Calidad del servicio</h3>
