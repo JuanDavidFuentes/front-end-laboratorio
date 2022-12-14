@@ -46,24 +46,11 @@
                     </div>
                 </v-col>
             </v-row>
-            <!-- <v-col v-if="selecionadoColor==='Color Temporal'"
-            cols="12" xs="12" sm="12" md="12" lg="12" xl="12" >
-                        <div class="text-center black--text font-weight-Normal" >
-                            <h1>Color Temporal</h1>
-                        </div>
-            </v-col> -->
-            <v-row>
-                <v-col cols="12" xs="3" sm="4" md="4" lg="4" xl="4"></v-col>
-                <v-col cols="12" xs="6" sm="4" md="4" lg="4" xl="4" class="center">
-                    <v-color-picker class="" v-model="color" show-swatches swatches-max-height="300px"></v-color-picker>
-                    <!-- <v-color-picker class="ma-2" v-model="color" hide-inputs></v-color-picker> -->
+        
+            <v-row justify="center">
+                <v-col cols="auto" xs="auto" sm="auto" md="auto" lg="auto" xl="auto" class="center">
+                    <v-color-picker  v-model="color" show-swatches swatches-max-height="300px"></v-color-picker>
                 </v-col>
-                <v-col cols="12" xs="3" sm="4" md="4" lg="4" xl="4"></v-col>
-                <!-- <div v-if="selecionadoColor==='Color Temporal'">
-            <v-btn dark v-bind:style='{ background: `${color}` }' @click="GuardarF()">
-                        Guardar Color Temporal
-            </v-btn>
-        </div> -->
             </v-row>
             
             <v-row>
@@ -87,7 +74,6 @@
                     </div>
                 </v-col>
             </v-row>
-
 
         </div>
         <div v-if="this.$store.state.token === ''">

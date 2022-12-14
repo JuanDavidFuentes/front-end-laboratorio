@@ -89,11 +89,9 @@
                 <v-card class="primary" dark >
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
-
                             <v-card-title class="text-h5">Cotizaciones <br> </v-card-title>
                             <v-card-subtitle>Nuevo</v-card-subtitle>
                             <v-card-actions>
-
                                 <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/cotizacion">
                                     <v-icon>mdi-plus-circle-outline</v-icon>
                                     Agregar Cotizacion
@@ -129,6 +127,25 @@
                 </v-card>
             </v-col>
 
+            <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="4" v-if="$store.state.datos.rol == 'TECNICO'|| $store.state.datos.rol == 'ADMIN'">
+                <v-card class="primary" dark >
+                    <div class="d-flex flex-no-wrap justify-space-between">
+                        <div>
+                            <v-card-title class="text-h5">Informes <br/> de  resultados  </v-card-title>
+                            <v-card-subtitle>Nuevo</v-card-subtitle>
+                            <v-card-actions>
+                                <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/Informe">
+                                    <v-icon>mdi-eye</v-icon>
+                                    Ver mis Tareas
+                                </v-btn>
+                            </v-card-actions>
+                        </div>
+                        <v-avatar class="ml-n7 mr-5 mt-4" size="125">
+                            <img src="https://i.postimg.cc/FKyjHyDr/f92370bc-369c-43bf-80d1-50843b170528.jpg" alt="John">
+                        </v-avatar>
+                    </div>
+                </v-card>
+            </v-col>
         </v-row>
     </div>
         <div v-if="this.$store.state.token === ''">

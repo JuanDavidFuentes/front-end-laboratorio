@@ -7,8 +7,6 @@
         </v-btn>
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="mt-3">
-      </v-col>
-      <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="mt-3">
         <template>
           <v-row justify="center">
             <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">

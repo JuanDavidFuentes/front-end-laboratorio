@@ -1,6 +1,6 @@
 
 <template>
-    <v-container style="margin-top: 100px">
+    <v-container style="margin-top: 75px">
         <div v-if="this.$store.state.token">
             <v-row style="margin: 0" class="mt-n6">
                 <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">

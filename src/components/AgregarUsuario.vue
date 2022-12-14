@@ -335,7 +335,7 @@
                         <h1 style="    color: var(--border); font-size: 2em;">Su sesión a caducado porfavor inicie
                             sesión nuevamente!</h1>
                         <p>
-                            <v-btn rounded color="green" to="/" dark>Iniciar sesión</v-btn>
+                            <v-btn rounded color="green" @click="volver()" dark>Iniciar sesión</v-btn>
                         </p>
                     </center>
                 </v-col>
@@ -472,6 +472,9 @@ export default {
     }),
 
     methods: {
+        volver(){
+            this.$router.push("/")
+        },
         changeState(valor) {
             this.selecionadoRol = this.rolPersona[valor - 1];
             this.selecionadoTipo = this.tipoPersona[valor - 1];

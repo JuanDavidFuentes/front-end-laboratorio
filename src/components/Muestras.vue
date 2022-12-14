@@ -1,9 +1,9 @@
 <template>
-    <v-container style="margin-top: 100px">
+    <v-container style="margin-top: 70px">
         <div v-if="this.$store.state.token">
             <v-row style="margin:0">
                 <v-col cols="12" xs="12" sm="12" md="4" lg="10" xl="10">
-                    <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+                    <v-btn class="mt-n10" outlined color="red darken-3" @click="Volver()">
                         Volver
                     </v-btn>
                 </v-col>
@@ -60,19 +60,20 @@
                     <v-list three-line subheader>
                         <v-container fluid>
                             <v-row style="margin: 0">
-                                <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="2" class="text-left">
+                                <v-col cols="12" xs="12" sm="12" md="2" lg="2" xl="2" class="text-center">
                                     <div class="accent mt-10" id="muestra"></div>
                                 </v-col>
+
                                 <v-col cols="12" xs="12" sm="12" md="10" lg="10" xl="10">
                                     <v-row>
-                                        <v-col cols="10">
+                                        <v-col cols="12">
                                             <div class="text-center black--text">
                                                 <h3>RECEPCIÓN DE MUESTRAS</h3>
                                             </div>
                                         </v-col>
                                     </v-row>
                                     <v-row>
-                                        <v-col cols="10">
+                                        <v-col cols="12">
                                             <div class="text-center black--text mt-2">
                                                 <h3>CENTRO AGROTURISTICO - SAN GIL, SANTANDER</h3>
                                                 <h3>LABORATORIO LABFICAT</h3>
@@ -81,7 +82,7 @@
                                         </v-col>
                                     </v-row>
                                     <v-row>
-                                        <v-col cols="3">
+                                        <v-col cols="4">
                                             <div class="text-center black--text mt-2">
                                                 <h3>CÓDIGO:</h3>
                                                 <h3>CAT-ST-MI-002</h3>
@@ -93,7 +94,7 @@
                                                 <h3>2022-04-01</h3>
                                             </div>
                                         </v-col>
-                                        <v-col cols="5">
+                                        <v-col cols="4">
                                             <div class="text-center black--text mt-2">
                                                 <h3>VERSIÓN:</h3>
                                                 <h3>2</h3>

@@ -3,7 +3,7 @@
     <v-container class="mt-15 mb-15">
         <div v-if="this.$store.state.token">
             <v-row>
-                <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10">
+                <v-col cols="7" xs="5" sm="8" md="10" lg="10" xl="10" class="mr-2">
                     <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver1()">
                         Volver
                     </v-btn>

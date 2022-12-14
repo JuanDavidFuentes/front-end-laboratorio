@@ -9,10 +9,11 @@
       <v-toolbar-title class="accent--text font-weight-black"> Ficat</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn @click="Login()" class="accent--text" v-if="$store.state.token == '' && this.$router.history.current['path'] !='/' && this.mostrar==0 " rounded>
+
+      <!-- <v-btn @click="Login()" class="accent--text" v-if="$store.state.token == '' && this.$router.history.current['path'] !='/' && this.mostrar==0 " rounded>
         <v-icon>mdi-monitor-lock</v-icon>
         inicia Sesion 
-      </v-btn>
+      </v-btn> -->
 
       <v-btn @click="salir()" class="accent--text" v-if="$store.state.token !== ''" rounded>
         salir 

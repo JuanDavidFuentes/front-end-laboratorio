@@ -3,7 +3,7 @@
         <div v-if="this.$store.state.token">
             <v-row>
                 <v-col cols="12">
-                    <v-btn class="mt-n3" outlined color="red darken-3" @click="Volver()">
+                    <v-btn class="mt-n3 ml-15" outlined color="red darken-3" @click="Volver()">
                         Volver
                     </v-btn>
                 </v-col>
