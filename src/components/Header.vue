@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5" v-if="this.$router.history.current['path'] !=='/CotiImprimir' && this.$router.history.current['path'] !=='/ImprimirMuestra'" >
+  <div class="mt-5" v-if="this.$router.history.current['path'] !=='/CotiImprimir' && this.$router.history.current['path'] !=='/ImprimirMuestra' && this.$router.history.current['path'] !=='/PaginaImprimir'" >
     <v-app-bar app flex class="primary">
       <div class="accent" id="header"></div>
       <v-app-bar-nav-icon @click="drawer = true" v-if="$store.state.token !== ''" color="accent"></v-app-bar-nav-icon>

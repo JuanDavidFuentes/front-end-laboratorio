@@ -24,7 +24,7 @@
               </div>
               <v-avatar class="ml-n7 mr-5 mt-4 mb-3" size="120">
                 <img height=90%
-                  src="https://i.postimg.cc/mDVXxrd2/png-clipart-material-design-skin-gray-setting-icon-thumbnail.png"
+                  src="https://w7.pngwing.com/pngs/992/69/png-transparent-computer-icons-gear-car-gear-wrench-black-and-white-%D0%B4%D0%BD%D0%B5%D0%BF%D1%80.png"
                   alt="John">
               </v-avatar>
             </div>

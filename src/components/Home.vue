@@ -115,13 +115,13 @@
                             <v-card-actions>
 
                                 <v-btn class="ml-2 mt-5 accent--text" outlined rounded to="/orden">
-                                    <v-icon>mdi-eye</v-icon>
+                                    <v-icon></v-icon>
                                     Ver mis Tareas
                                 </v-btn>
                             </v-card-actions>
                         </div>
                         <v-avatar class="ml-n7 mr-5 mt-4" size="125">
-                            <img src="https://i.postimg.cc/FKyjHyDr/f92370bc-369c-43bf-80d1-50843b170528.jpg" alt="John">
+                            <img src="https://img2.freepng.es/20180420/clw/kisspng-question-mark-sign-information-language-creative-question-mark-5ad98314dc8268.9548794215242043089032.jpg" alt="John">
                         </v-avatar>
                     </div>
                 </v-card>
@@ -141,7 +141,7 @@
                             </v-card-actions>
                         </div>
                         <v-avatar class="ml-n7 mr-5 mt-4" size="125">
-                            <img src="https://i.postimg.cc/FKyjHyDr/f92370bc-369c-43bf-80d1-50843b170528.jpg" alt="John">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1s3f8paTRES1WF2m1lCl53v-f5AVhkDEx3GpdTI3dFdgWYIwcG-J9pc4cDU0eyfJFCkE&usqp=CAU" alt="John">
                         </v-avatar>
                     </div>
                 </v-card>

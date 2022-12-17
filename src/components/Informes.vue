@@ -1,6 +1,6 @@
 <template>
     <v-container fluid class="mt-15">
-        <v-row >
+        <v-row>
             <v-col cols="7" class="mt-1 ml-6">
                 <v-btn class="mt-n3 ml-10" outlined color="red darken-3" @click="Volver1()">
                     Volver
@@ -21,7 +21,19 @@
                                         single-line hide-details>
                                     </v-text-field>
                                 </v-card-title>
-                                <v-data-table :headers="headers" :items="informes" :search="search"></v-data-table>
+                                <v-data-table :headers="headers" :items="informes" :search="search">
+                                    <template v-slot:[`item.accion`]="{ item }">
+                                        <v-tooltip bottom>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon color="green" rounded v-bind="attrs" v-on="on"
+                                                    @click="ver(item)">
+                                                    mdi-eye-circle
+                                                </v-icon>
+                                            </template>
+                                            <span>Añadir cliente</span>
+                                        </v-tooltip>
+                                    </template>
+                                </v-data-table>
                             </v-card>
                         </template>
                     </v-card>
@@ -38,31 +50,38 @@ export default {
     data: () => ({
         search: '',
         ordenes: [],
-        ensayosOrdenes:[],
-        idOrden:"",
+        ensayosOrdenes: [],
+        idOrden: "",
         informes: [],
+        arrayInformes: {},
         headers: [
             {
-                text: 'Código Departamento',
+                text: 'Id Muestra',
                 align: 'start',
-                value: "",
+                value: "idMuestra.codMuestra",
             },
             {
-                text: 'Departamento',
+                text: 'Cotización',
                 align: 'start',
                 sortable: false,
-                value: '',
+                value: 'idMuestra.cotizacion.numero_cotizacion',
             },
             {
-                text: 'Código Ciudad',
+                text: 'Ensayo',
                 align: 'start',
-                value: '',
+                value: 'ensayo.idensayo.ensayo',
             },
             {
-                text: 'Ciudad',
+                text: 'Total',
                 align: 'start',
                 sortable: false,
-                value: '',
+                value: 'idMuestra.cotizacion.total',
+            },
+            {
+                text: 'Ver',
+                align: 'start',
+                sortable: false,
+                value: 'accion',
             },
         ],
     }),
@@ -71,7 +90,7 @@ export default {
             axios.get(`/Orden_servicio/InformeResultados/${this.idOrden}`)
                 .then((response) => {
                     console.log(response.data.orden);
-                    this.informes.push(response.data.orden) 
+                    this.informes.push({ ensayo: response.data.orden.ensayo[0], idMuestra: response.data.orden.idMuestra, observaciones: response.data.orden.observaciones })
                     console.log(this.informes);
                 })
                 .catch((error) => {
@@ -83,9 +102,9 @@ export default {
                 .then((response) => {
                     this.ordenes = response.data.ordenservi.reverse()
                     this.ordenes.forEach(data => {
-                        if(data.ensayo[0].estado==="Realizado"){
+                        if (data.ensayo[0].estado === "Realizado") {
                             this.ensayosOrdenes.push({ ensayo: data.ensayo[0], id: data._id })
-                            this.idOrden=data._id
+                            this.idOrden = data._id
                             this.listarInformesRealizados()
                         }
                     })
@@ -95,7 +114,14 @@ export default {
                     console.log(error);
                 });
         },
+        ver(datos){
+            // this.$store.dispatch("setCotiImprimir", datos);
+            localStorage.setItem("datosInforme", JSON.stringify(datos))
 
+            window.open("http://localhost:8080/#/PaginaImprimir")
+            console.log(datos);
+
+        },
         Volver1() {
             this.$router.push("/Home")
         },

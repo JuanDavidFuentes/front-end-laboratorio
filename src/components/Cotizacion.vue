@@ -11,7 +11,7 @@
 
                 <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4">
                     <div class="text-center black--text font-weight-Normal">
-                        <h1>Cotizaciones Activas</h1>
+                        <h1>Cotizaciones</h1>
                     </div>
                 </v-col>
                 <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="mt-3">

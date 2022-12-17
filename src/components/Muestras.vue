@@ -26,14 +26,14 @@
                                 <!-- <template v-slot:[`item.muestras`]="{ item }">
                                 <v-btn>Muestras</v-btn>
                             </template> -->
-                                <template v-slot:[`item.ver`]="{ item }">
+                                <!-- <template v-slot:[`item.ver`]="{ item }">
                                     <v-icon @click="Imprimir(item)">
                                         mdi-file-eye-outline
                                     </v-icon>
                                 </template>
                                 <template v-slot:[`item.fecha`]="{ item }">
                                     {{ fechaSalida(item.fechaRecoleccion) }}
-                                </template>
+                                </template> -->
                             </v-data-table>
                         </v-card>
                     </template>
@@ -109,7 +109,8 @@
                     <v-divider></v-divider>
                     <v-list three-line subheader>
                         <v-container fluid>
-                            <v-row style=" margin: 0; border: solid 1px; border-color: black;" class="mx-5 secondary">
+                            <v-row style=" margin: 0; border: solid 1px; border-color: black !important;"
+                                class="mx-5 secondary">
                                 <v-col>
                                     <div class="text-center white--text ">
                                         <h3>Datos del solicitante</h3>
@@ -117,14 +118,14 @@
                                 </v-col>
                             </v-row>
                             <v-row style="margin: 0" class="mx-5">
-                                <v-col style="  border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                    xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
+                                <v-col style="  border: solid 1px; border-color: black !important; border-top: 0px; "
+                                    cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
                                     <div class="text-center white--text">
                                         <h3>Solicitante</h3>
                                     </div>
                                 </v-col>
                                 <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4"
-                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    style="border: solid 1px; border-color: black ; border-top: 0px; border-left: 0px;"
                                     class="pa-0 ma-0 text-center">
                                     <h3 class="mt-1">
                                         <v-btn color="secondary" v-if="botones == 1" dark class="ma-2"
@@ -157,7 +158,7 @@
                                     </v-row>
                                 </v-col>
                                 <v-col
-                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
                                     <div class="text-center white--text ">
                                         <h3>Departamento</h3>
@@ -170,8 +171,8 @@
                                 </v-col>
                             </v-row>
                             <v-row style="margin: 0" class="mx-5">
-                                <v-col style="border: solid 1px; border-color: black; border-top: 0px; " cols="12"
-                                    xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
+                                <v-col style="border: solid 1px; border-color: black !important; border-top: 0px; "
+                                    cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
                                     <div class="text-center white--text">
                                         <h3>NIT/C.C.</h3>
                                     </div>
@@ -182,7 +183,7 @@
                                     <h3 class="mt-3">{{ soliDocumento }}</h3>
                                 </v-col>
                                 <v-col
-                                    style="border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     cols="12" xs="4" sm="4" md="2" lg="2" xl="2" class="secondary">
                                     <div class="text-center white--text">
                                         <h3>Contacto</h3>
@@ -196,8 +197,8 @@
                             </v-row>
                             <v-row style="margin: 0" class="mx-5">
                                 <v-col class="secondary"
-                                    style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12" xs="4"
-                                    sm="4" md="2" lg="2" xl="2">
+                                    style=" border: solid 1px; border-color: black !important; border-top: 0px; "
+                                    cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                     <div class="text-center white--text">
                                         <h3>Dirección</h3>
                                     </div>
@@ -208,7 +209,7 @@
                                     <h3 class="mt-3">{{ soliDireccion }}</h3>
                                 </v-col>
                                 <v-col class="secondary"
-                                    style=" border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                     <div class="text-center white--text">
                                         <h3>Teléfono</h3>
@@ -222,8 +223,8 @@
                             </v-row>
                             <v-row style="margin: 0" class="mx-5">
                                 <v-col class="secondary"
-                                    style=" border: solid 1px; border-color: black; border-top: 0px; " cols="12" xs="4"
-                                    sm="4" md="2" lg="2" xl="2">
+                                    style=" border: solid 1px; border-color: black !important; border-top: 0px; "
+                                    cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                     <div class="text-center white--text">
                                         <h3>Ciudad</h3>
                                     </div>
@@ -234,7 +235,7 @@
                                     <h3 class="mt-3">{{ soliCiudad }}</h3>
                                 </v-col>
                                 <v-col class="secondary"
-                                    style="; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    style="; border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                     <div class="text-center white--text">
                                         <h3>Correo electrónico</h3>
@@ -248,8 +249,8 @@
                             </v-row>
                             <v-row style="margin: 0" class="mx-5">
                                 <v-col class="secondary"
-                                    style="; border: solid 1px; border-color: black; border-top: 0px; " cols="12" xs="4"
-                                    sm="4" md="2" lg="2" xl="2">
+                                    style="; border: solid 1px; border-color: black !important; border-top: 0px; "
+                                    cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                     <div class="text-center white--text mt-4">
                                         <h3>Cotización</h3>
                                     </div>
@@ -265,7 +266,7 @@
                                     </h3>
                                 </v-col>
                                 <v-col class="secondary"
-                                    style="; border: solid 1px; border-color: black; border-top: 0px; border-left: 0px;"
+                                    style="; border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px;"
                                     cols="12" xs="4" sm="4" md="2" lg="2" xl="2">
                                     <div class="text-center white--text mt-4">
                                         <h3>Items</h3>
@@ -282,13 +283,25 @@
                             </v-row>
 
                             <v-row class="mx-5 secondary"
-                                style=" margin: 0; border: solid 1px; border-color: black; border-top: 1px;">
+                                style=" margin: 0; border: solid 1px; border-color: black !important; border-top: 0px; border-bottom: 0px;">
                                 <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
                                 </v-col>
                                 <v-col cols="12" xs="8" sm="4" md="4" lg="4" xl="4">
                                     <div class="text-center white--text">
                                         <h3>Datos de la muestra</h3>
                                     </div>
+                                </v-col>
+                                <v-col class="text-right" cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
+                                    <v-tooltip bottom>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn color="white" dark @click="dialog5 = true">
+                                                <v-icon color="secondary" rounded v-bind="attrs" v-on="on">
+                                                    mdi-plus-circle
+                                                </v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>Añadir ensayo</span>
+                                    </v-tooltip>
                                 </v-col>
                             </v-row>
 
@@ -353,113 +366,84 @@
                                                 <tr v-if="mostrasDatos <= 0">
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px;">
-                                                        ala1
+                                                        {{ numeroactual }}
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-autocomplete hide-details v-model="seleccionadoCiudad"
-                                                            :items="Municipio" item-text="ciudad" item-value="_id"
-                                                            label="Municipio de recolección"></v-autocomplete>
+
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-text-field hide-details v-model="direccionM"
-                                                            label="Dirección de toma de muestra*">
-                                                        </v-text-field>
+
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-text-field hide-details v-model="lugarM"
-                                                            label="Lugar de toma de muestra*">
-                                                        </v-text-field>
+
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-text-field hide-details v-model="recolectadaPor"
-                                                            label="Muestra recolectada por*">
-                                                        </v-text-field>
+
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-text-field hide-details v-model="procedimiento"
-                                                            label="Procedimiento de*">
-                                                        </v-text-field>
+
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-autocomplete hide-details v-model="tipoM"
-                                                            :items="listarTipos" item-text="tipos" item-value="_id"
-                                                            label="Tipo de muestra">
-                                                        </v-autocomplete>
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-text-field hide-details v-model="matrizM"
-                                                            label="Matriz de la muestra*">
-                                                        </v-text-field>
+
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
-                                                        <v-text-field hide-details v-model="fecha" type="date"
-                                                            label="Fecha y hora de recolección*">
-                                                        </v-text-field>
+
                                                     </td>
                                                     <td
                                                         style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
 
                                                     </td>
                                                 </tr>
-                                                <tr v-for="(datosss, i ) in mostrasDatos" :key="i">
+
+                                                <tr v-if="mostrasDatos > 0">
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px;">
-                                                        <h3>{{ datosss.codMuestra }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px;">
+                                                        {{ numeroactual }}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.munRecoleccion }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{seleccionadoCiudad}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.direccionTomaMuestra }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{direccionM}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.lugarTomaMuestra }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{lugarM}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.muestraRecolectadaPor }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{recolectadaPor}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.procedimientoMuestreo }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{procedimiento}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.tipoMuestra }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{tipoM}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.matrizMuestra }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{matrizM}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.fechaRecoleccion }}</h3>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
+                                                        {{fecha}}
                                                     </td>
                                                     <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.cotizacion }}</h3>
-                                                    </td>
-                                                    <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <h3>{{ datosss.item }}</h3>
-                                                    </td>
-                                                    <td
-                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-bottom: 0px; border-left:0px;">
-                                                        <v-icon dark class="mr-20" color="red" rounded
-                                                            @click="eliminarMuestra(i, datosss)">
-                                                            mdi-close-circle
-                                                        </v-icon>
+                                                        style="border: solid 1px; border-color: black; border-top: 0px; border-left:0px;">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -508,6 +492,71 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
+
+            <v-dialog v-model="dialog5" persistent>
+                <v-card style="padding: 0px">
+                    <v-card-title class="text-h5"> Datos Muestra</v-card-title>
+                    <v-container>
+                        <v-row>
+                            <v-card-text> </v-card-text>
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-autocomplete v-model="seleccionadoCiudad" required dense filled rounded
+                                    :items="Municipio" item-text="ciudad" item-value="_id"
+                                    label="Municipio de recolección"></v-autocomplete>
+                            </v-col>
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-text-field v-model="direccionM" required dense filled rounded
+                                    label="Dirección de toma de muestra*">
+                                </v-text-field>
+                            </v-col>
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-text-field v-model="lugarM" required dense filled rounded
+                                    label="Lugar de toma de muestra*">
+                                </v-text-field>
+                            </v-col>
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-text-field required dense filled rounded v-model="recolectadaPor"
+                                    label="Muestra recolectada por*">
+                                </v-text-field>
+                            </v-col>
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-text-field required dense filled rounded v-model="procedimiento"
+                                    label="Procedimiento de*">
+                                </v-text-field>
+                            </v-col>
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-autocomplete required dense filled rounded v-model="tipoM" :items="listarTipos"
+                                    item-text="tipos" item-value="_id" label="Tipo de muestra">
+                                </v-autocomplete>
+                            </v-col>
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-text-field required dense filled rounded v-model="matrizM"
+                                    label="Matriz de la muestra*">
+                                </v-text-field>
+                            </v-col>
+
+                            <v-col cols="5" md="6" class="mt-n7">
+                                <v-text-field required dense filled rounded v-model="fecha" type="date"
+                                    label="Fecha y hora de recolección*">
+                                </v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="12" class="mt-n7">
+                                <v-textarea required dense filled rounded style="background-color: white;"
+                                      color="secondary" label="Observacion" rows="1">
+                                </v-textarea>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn class="mr-15" outlined color="red darken-3" @click="Cerrar()">
+                            Cancelar
+                        </v-btn>
+                        <v-btn color="success" @click="Aceptarrr()"> Aceptar </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+
         </div>
         <div v-if="this.$store.state.token === ''">
             <v-row>
@@ -541,6 +590,9 @@ export default {
         dialog: false,
         dialog3: false,
         dialog4: false,
+        dialog5: false,
+        nombreCiudad:"",
+        nombreTipoM:"",
         soliNombre: '',
         soliApellido: '',
         soliDepartamento: '',
@@ -607,12 +659,12 @@ export default {
                 sortable: false,
                 value: 'munRecoleccion.ciudad',
             },
-            {
-                text: 'Fecha de recolección',
-                align: 'start',
-                sortable: false,
-                value: 'fecha',
-            },
+            // {
+            //     text: 'Fecha de recolección',
+            //     align: 'start',
+            //     sortable: false,
+            //     value: 'fecha',
+            // },
             {
                 text: '',
                 align: 'start',
@@ -963,6 +1015,16 @@ export default {
             }
 
         },
+        Aceptarrr(){
+            this.dialog5 = false;
+            this.nombreCiudad=this.seleccionadoCiudad
+            this.nombreTipoM=this.tipoM
+            this.mostrasDatos=1
+        },
+        Cerrar() {
+            this.dialog5 = false;
+        },
+
         // if (datos.contacto) {
 
         //     this.info()
@@ -995,7 +1057,7 @@ export default {
         this.listarCiudad();
         this.listarTiposs();
         this.listarCotizacioness();
-
+        this.info();
     },
     // la idea es que al mometo de guardar la muestra saca el id y con otra peticion listarla con los populates para que de esta forma se vea la informacion el la tabla
 }
