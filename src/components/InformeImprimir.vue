@@ -1,10 +1,10 @@
 <template>
     <v-container fluid>
-        <v-row style="margin-top: 100px;">
+        <v-row>
             <v-col cols="2" class="text-center mt-3">
                 <div class="accent" id="coti2"></div>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="5">
                 <div class=" text-center black--text font-italic text-decoration-underline ">
                     <h2>Informe de resultados</h2>
                 </div>
@@ -26,20 +26,33 @@
                 <div class=" text-center black--text mt-2">
                     <h5>Correo electrónico: {{ cotiCorreo }}</h5>
                 </div>
-                </v-col>
-                <v-col cols="2" class="mt-3">
+            </v-col>
+            <v-col cols="3" class="mt-3">
                 <div class="text-center black--text ">
-                    <h3>Cotización No.</h3>
+                    <h3>Informe de resultados No.</h3>
                 </div>
                 <div class="text-center red--text font-italic title mt-3">
                     {{ numeroCoti }}
                 </div>
-                <div class="text-center black--text mt-3">
-                    <h3>Fecha de emisión:</h3>
-                </div>
-                <div class="text-center black--text title mt-3">
-                    <div>{{ fechaEmision.slice(0, 10) }}</div>
-                </div>
+                <v-row>
+                    <v-col cols="6">
+                        <div class="text-center black--text mt-3">
+                            <h4>Fecha y hora de recepción de la muestra:</h4>
+                        </div>
+                        <div class="text-center black--text title mt-3">
+                            <div>{{ fechaEmision.slice(0, 10) }}</div>
+                        </div>
+                    </v-col>
+                    <v-col cols="6">
+                        <div class="text-center black--text mt-3">
+                            <h5>Fecha y hora de emisión del informe de resultados:</h5>
+                        </div>
+                        <div class="text-center black--text title mt-3">
+                            <div>{{ fechaEmision.slice(0, 10) }}</div>
+                        </div>
+                    </v-col>
+                </v-row>
+
             </v-col>
             <v-col cols="2" class="mt-5">
                 <div class="text-center black--text">
@@ -66,19 +79,22 @@
         <v-row style=" margin: 0; border: solid 1px; border-color: black !important;" class="secondary mx-5">
             <v-col cols="12">
                 <div class="text-center white--text">
-                    <h3>Datos del cliente</h3>
+                    <h3>Datos del solicitante</h3>
                 </div>
             </v-col>
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text ">
                     <h3>Solicitante</h3>
                 </div>
             </v-col>
 
-            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
@@ -90,7 +106,9 @@
                     </v-col>
                 </v-row>
             </v-col>
-            <v-col class="secondary" style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text">
                     <h3>Departamento</h3>
                 </div>
@@ -103,7 +121,9 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;" cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px;  border-right: 0px;"
+                cols="2">
                 <div class="text-center white--text ">
                     <h3>NIT/ C.C.</h3>
                 </div>
@@ -114,7 +134,9 @@
                 </div>
             </v-col>
 
-            <v-col class="secondary" style="border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text">
                     <h3>Contacto</h3>
                 </div>
@@ -124,8 +146,9 @@
                     {{ nombrecontacto }}
                 </div>
             </v-col>
-            
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;" cols="2">
+
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;" cols="2">
                 <div class="text-center white--text ">
                     <h3>Dirección</h3>
                 </div>
@@ -136,7 +159,9 @@
                 </div>
             </v-col>
 
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;" cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
+                cols="2">
                 <div class="text-center white--text">
                     <h3>Teléfono</h3>
                 </div>
@@ -146,7 +171,8 @@
                     {{ telefono }}
                 </div>
             </v-col>
-            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
+            <v-col class="secondary"
+                style=" border: solid 1px; border-color: black !important; border-top: 0px;  border-right: 0px;"
                 cols="2">
                 <div class="text-center white--text">
                     <h3>Ciudad</h3>
@@ -158,7 +184,8 @@
                 </div>
             </v-col>
 
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-left: 0px; border-right: 0px;"
                 cols="2">
                 <div class="text-center white--text">
                     <h3>Correo electrónico</h3>
@@ -171,7 +198,8 @@
             </v-col>
         </v-row>
 
-        <v-row style=" margin: 0; border: solid 1px;border-top: 0px; border-color: black !important;" class="secondary mx-5">
+        <v-row style=" margin: 0; border: solid 1px;border-top: 0px; border-color: black !important;"
+            class="secondary mx-5">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Datos de la muestra</h3>
@@ -179,18 +207,21 @@
             </v-col>
         </v-row>
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text ">
                     <h3>Municipio de recolección</h3>
                 </div>
             </v-col>
 
-            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ Municipioderecolección}}
+                            {{ Municipioderecolección }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -198,7 +229,9 @@
                 </v-row>
             </v-col>
 
-            <v-col class="secondary" style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text">
                     <h3>Procedimiento de muestreo</h3>
                 </div>
@@ -211,18 +244,21 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text ">
                     <h3>Dirección de toma de muestra</h3>
                 </div>
             </v-col>
 
-            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ DireccionDeTomaDeMuestra}}
+                            {{ DireccionDeTomaDeMuestra }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -230,9 +266,11 @@
                 </v-row>
             </v-col>
 
-            <v-col class="secondary" style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text">
-                    <h3>Tipo de muestra	</h3>
+                    <h3>Tipo de muestra </h3>
                 </div>
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
@@ -243,18 +281,21 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text ">
                     <h3>Lugar de toma de muestra</h3>
                 </div>
             </v-col>
 
-            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ LugarDeTomaDeMuestra	}}
+                            {{ LugarDeTomaDeMuestra }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -262,7 +303,9 @@
                 </v-row>
             </v-col>
 
-            <v-col class="secondary" style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text">
                     <h3>Matriz de la muestra</h3>
                 </div>
@@ -275,18 +318,21 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text ">
-                    <h3>Muestra recolectada por	</h3>
+                    <h3>Muestra recolectada por </h3>
                 </div>
             </v-col>
 
-            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0 text-center">
+            <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;"
+                class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ MuestraRecolectadaPor}}
+                            {{ MuestraRecolectadaPor }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -294,19 +340,23 @@
                 </v-row>
             </v-col>
 
-            <v-col class="secondary" style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="2">
+            <v-col class="secondary"
+                style=" border: solid 1px;border-left: 0px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="2">
                 <div class="text-center white--text">
                     <h3>Fecha y hora de recolección</h3>
                 </div>
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ FechaYHoraDeRecolección	}}
+                    {{ FechaYHoraDeRecolección }}
                 </div>
             </v-col>
         </v-row>
 
-        <v-row style=" margin: 0; border: solid 1px;border-top: 0px; border-bottom: 0px; border-color: black !important;" class="secondary mx-5">
+        <v-row
+            style=" margin: 0; border: solid 1px;border-top: 0px; border-bottom: 0px; border-color: black !important;"
+            class="secondary mx-5">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Análisis de la muestra</h3>
@@ -388,7 +438,9 @@
                 </v-simple-table>
             </v-col>
         </v-row>
-        <v-row style=" margin: 0; border: solid 1px;border-top: 0px; border-bottom: 0px; border-color: black !important;" class="secondary mx-5">
+        <v-row
+            style=" margin: 0; border: solid 1px;border-top: 0px; border-bottom: 0px; border-color: black !important;"
+            class="secondary mx-5">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Observaciones</h3>
@@ -399,13 +451,15 @@
         <v-row style=" margin: 0; border: solid 1px; border-color: black !important;" class="mx-5">
             <v-col cols="12" style="margin-top: 10px;">
                 <div class="text-center white--text">
-                    
+
                 </div>
             </v-col>
         </v-row>
-        
 
-        <v-row style=" margin: 0; border: solid 1px;border-top: 0px; border-bottom: 0px; border-color: black !important;" class="secondary mx-5">
+
+        <v-row
+            style=" margin: 0; border: solid 1px;border-top: 0px; border-bottom: 0px; border-color: black !important;"
+            class="secondary mx-5">
             <v-col cols="12">
                 <div class="text-center white--text">
                     <h3>Descripción de los ensayos</h3>
@@ -468,15 +522,18 @@
                 </div>
             </v-col>
         </v-row>
-       
+
         <v-row style="margin: 0" class="mx-5">
-            <v-col class="secondary" style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; " cols="6">
+            <v-col class="secondary"
+                style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px; "
+                cols="6">
                 <div class="text-center white--text ">
                     <h3>Revisó</h3>
                 </div>
             </v-col>
 
-            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px;" cols="6">
+            <v-col class="secondary" style=" border: solid 1px; border-color: black !important; border-top: 0px;"
+                cols="6">
                 <div class="text-center white--text">
                     <h3>Aprobó</h3>
                 </div>
@@ -484,16 +541,17 @@
         </v-row>
 
         <v-row style="margin: 0" class="mx-5">
-            <v-col  style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;" cols="6">
-            <div style="margin-top: 250px; "> 
-                
-            </div>
+            <v-col style="border: solid 1px; border-color: black !important; border-top: 0px; border-right: 0px;"
+                cols="6">
+                <div style="margin-top: 250px; ">
+
+                </div>
             </v-col>
 
             <v-col style=" border: solid 1px; border-color: black !important; border-top: 0px; " cols="6">
-            <div style="margin-top: 250px; "> 
+                <div style="margin-top: 250px; ">
 
-            </div>
+                </div>
             </v-col>
         </v-row>
     </v-container>
@@ -553,7 +611,7 @@ export default {
             console.log(this.datos);
         },
     },
-    created(){
+    created() {
         this.info();
     }
 }

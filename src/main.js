@@ -10,7 +10,7 @@ import axios from 'axios'
 
 
 //https://laboratorio-production.up.railway.app/api
-axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = 'https://laboratorio-ten.vercel.app/api';
 
 Vue.use(VueRouter)
 Vue.use(VueSweetalert2);

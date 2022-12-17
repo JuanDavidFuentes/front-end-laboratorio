@@ -4,9 +4,9 @@ import axios from 'axios'
 Vue.use(Vuetify);
 
 
-
+//https://laboratorio-production.up.railway.app
 async function color() {
-  await axios.get("https://laboratorio-production.up.railway.app/api/colores/")
+  await axios.get("https://laboratorio-ten.vercel.app/api/colores/")
     .then((response) => {
       console.log(response);
       localStorage.setItem("color",JSON.stringify(response.data.color))
