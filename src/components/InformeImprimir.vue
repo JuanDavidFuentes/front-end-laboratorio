@@ -12,19 +12,19 @@
 
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h5>{{ cotiDescripcion }}</h5>
+                    <h5>{{ infoDescripcion }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h5>NIT: {{ cotiNit }}</h5>
+                    <h5>NIT: {{ infoNit }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h5>Dirección: {{ cotiDireccion }}</h5>
+                    <h5>Dirección: {{ infoDireccion }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h5>Teléfono: {{ cotiTelefono }}</h5>
+                    <h5>Teléfono: {{ infoTelefono }}</h5>
                 </div>
                 <div class=" text-center black--text mt-2">
-                    <h5>Correo electrónico: {{ cotiCorreo }}</h5>
+                    <h5>Correo electrónico: {{ infoCorreo }}</h5>
                 </div>
             </v-col>
             <v-col cols="3" class="mt-3">
@@ -32,7 +32,7 @@
                     <h3>Informe de resultados No.</h3>
                 </div>
                 <div class="text-center red--text font-italic title mt-3">
-                    {{ numeroCoti }}
+                    {{ infoNumero }}
                 </div>
                 <v-row>
                     <v-col cols="6">
@@ -40,7 +40,7 @@
                             <h4>Fecha y hora de recepción de la muestra:</h4>
                         </div>
                         <div class="text-center black--text title mt-3">
-                            <div>{{ fechaEmision.slice(0, 10) }}</div>
+                            <div></div>
                         </div>
                     </v-col>
                     <v-col cols="6">
@@ -48,7 +48,7 @@
                             <h5>Fecha y hora de emisión del informe de resultados:</h5>
                         </div>
                         <div class="text-center black--text title mt-3">
-                            <div>{{ fechaEmision.slice(0, 10) }}</div>
+                            <div></div>
                         </div>
                     </v-col>
                 </v-row>
@@ -59,19 +59,19 @@
                     <h5>Código</h5>
                 </div>
                 <div class="text-center black--text">
-                    <h5>{{ caliCodigo }}</h5>
+                    <h5>{{ infoCodigo }}</h5>
                 </div>
                 <div class="text-center black--text mt-3">
                     <h5>Aprobación</h5>
                 </div>
                 <div class="text-center black--text">
-                    <h5>{{ caliaprobacion }}</h5>
+                    <h5>{{ infoAprobacion  }}</h5>
                 </div>
                 <div class="text-center black--text mt-3">
                     <h5>Versión</h5>
                 </div>
                 <div class="text-center black--text">
-                    <h5>{{ caliVersion }}</h5>
+                    <h5>{{  infoVersion }}</h5>
                 </div>
             </v-col>
         </v-row>
@@ -96,13 +96,10 @@
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;"
                 class="pa-0 ma-0 text-center">
                 <v-row style="margin:0">
-                    <v-col cols="2"></v-col>
-                    <v-col cols="8">
+                    <v-col cols="12">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ nombre }}
+                            {{ datosSoliN }} {{ datosSoliA }}
                         </div>
-                    </v-col>
-                    <v-col cols="2">
                     </v-col>
                 </v-row>
             </v-col>
@@ -114,9 +111,13 @@
                 </div>
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
-                <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ ciudad.departamento }}
-                </div>
+                <v-row style="margin:0">
+                    <v-col cols="12">
+                        <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
+                            {{ datosDepartamento }}
+                        </div>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
 
@@ -130,7 +131,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ documento }}
+                    {{ datosDocumento }}
                 </div>
             </v-col>
 
@@ -143,7 +144,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ nombrecontacto }}
+                    {{ datosContacto }}
                 </div>
             </v-col>
 
@@ -155,7 +156,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ direccion }}
+                    {{ datosDireccion }}
                 </div>
             </v-col>
 
@@ -168,7 +169,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ telefono }}
+                   {{ datosTelefono }}
                 </div>
             </v-col>
             <v-col class="secondary"
@@ -180,7 +181,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ ciudad.ciudad }}
+                    {{ datosCiudad }}
                 </div>
             </v-col>
 
@@ -193,7 +194,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ email }}
+                    {{ datosCorreo }}
                 </div>
             </v-col>
         </v-row>
@@ -221,7 +222,7 @@
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ Municipioderecolección }}
+                            {{ muestraMunicipio }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -238,7 +239,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ ProcedimientoDeMuestreo }}
+                    {{ muestraProcedimiento }}
                 </div>
             </v-col>
         </v-row>
@@ -258,7 +259,7 @@
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ DireccionDeTomaDeMuestra }}
+                            {{ muestraDireccion }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -275,7 +276,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ TipoDeMuestra }}
+                    {{ muestraTipo }}
                 </div>
             </v-col>
         </v-row>
@@ -295,7 +296,7 @@
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ LugarDeTomaDeMuestra }}
+                           {{ muestraLugar }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -312,7 +313,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ MatrizDeLaMuestra }}
+                    {{ muestraMatriz }}
                 </div>
             </v-col>
         </v-row>
@@ -332,7 +333,7 @@
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                         <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                            {{ MuestraRecolectadaPor }}
+                            {{ muestraRecolectada }}
                         </div>
                     </v-col>
                     <v-col cols="2">
@@ -349,7 +350,7 @@
             </v-col>
             <v-col cols="4" style="border: solid 1px; border-color: black; border-top: 0px;" class="pa-0 ma-0">
                 <div class="pa-0 ma-0 font-weight-black text-center my-3" full-width hide-details>
-                    {{ FechaYHoraDeRecolección }}
+                    {{ muestraFecha.slice(0, 10) }}
                 </div>
             </v-col>
         </v-row>
@@ -558,61 +559,141 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "PaginaImprimir",
     data: () => ({
-        cotiDescripcion: "",
-        cotiNit: "",
-        cotiDireccion: "",
-        cotiTelefono: "",
-        cotiCorreo: "",
-        caliCodigo: "",
-        caliaprobacion: "",
-        caliVersion: "",
-        datos: {},
-        datos2: [],
-        idCotizacion: "",
-        fechaEmision: "",
-        entregaResultados: "",
-        validezOferta: "",
-        descuento: "",
-        elaboradoN: "",
-        elaboradoA: "",
-        elaboradoR: "",
-        numeroCoti: "",
-        idCliente: "",
-        idcontacto: "",
-        tipoPersona: "",
-        nombre: "",
-        apellidos: "",
-        contacto: "",
-        nombrecontacto: "",
-        documento: "",
-        direccion: "",
-        ciudad: "",
-        telefono: "",
-        celular: "",
-        cargo: "",
-        email: "",
-        cotiObservacion: "",
-        observacionesS: "",
-        aceptacion: "",
-        condicionesC: "",
-        condicionesT: "",
-        garantiaS: "",
-        calidadS: "",
-        subtotal: 0,
-        total: 0,
-        iva: 0,
+        datos:[],
+        infoDatos:[],
+        calidadInforme: [],
+        infoDescripcion:"",
+        infoNit:"",
+        infoDireccion:"",
+        infoTelefono:"",
+        infoCorreo: "",
+        infoNumero: "",
+        infoFHRDM: "",
+        infoFHEIR:"",
+        infoCodigo: "",
+        infoAprobacion:"",
+        infoVersion:"",
+        datosSoliN:"",
+        datosSoliA:"",
+        datosDepartamento:"",
+        datosDocumento:"",
+        datosContacto:"",
+        datosDireccion:"",
+        datosTelefono:"",
+        datosCiudad: "",
+        datosCorreo: "",
+        muestraMunicipio: "",
+        muestraProcedimiento: "",
+        muestraDireccion: "",
+        muestraTipo: "",
+        muestraLugar: "",
+        muestraMatriz: "",
+        muestraRecolectada: "",
+        muestraFecha: "",
+        analisisMuestra:[],
+        almacenajeAnalisis:{},
+        analisisFecha: "",
+        analisisEnsayo: "",
+        analisisMetodo: "",
+        analisisTecnica: "",
+        analisisResultado: "",
+        analisisIncertidumbre: "",
+        analisisValorM:"",
+        analisisValorMinimo: "",
+        analisisUnidades: "",
+        infoObservaciones:"",
+        infoDescripcionEnsayos:"", 
     }),
     methods: {
         info() {
             this.datos = JSON.parse(localStorage.getItem("datosInforme"))
             console.log(this.datos);
+            this.infoFHRDM=""//falta
+            this.infoFHEIR=""//falta
+            this.datosSoliN=this.datos.idMuestra.solicitante.nombre
+            this.datosSoliA=this.datos.idMuestra.solicitante.apellidos
+            this.datosDepartamento=this.datos.idMuestra.solicitante.ciudad.departamento
+            this.datosDocumento=this.datos.idMuestra.solicitante.apellidos
+            if(this.datos.idMuestra.solicitante.contacto){
+                this.datosContacto=this.datos.idMuestra.solicitante.contacto.nombre
+            }else{
+                this.datosContacto=""
+            }
+            this.datosDireccion=this.datos.idMuestra.solicitante.direccion
+            this.datosTelefono=this.datos.idMuestra.solicitante.celular
+            this.datosCiudad=this.datos.idMuestra.solicitante.ciudad.ciudad
+            this.datosCorreo=this.datos.idMuestra.solicitante.email
+            this.muestraMunicipio=this.datos.idMuestra.munRecoleccion.ciudad
+            this.muestraProcedimiento=this.datos.idMuestra.procedimientoMuestreo
+            this.muestraDireccion=this.datos.idMuestra.direccionTomaMuestra
+            this.muestraTipo=this.datos.idMuestra.tipoMuestra.tipos
+            this.muestraLugar=this.datos.idMuestra.lugarTomaMuestra
+            this.muestraMatriz=this.datos.idMuestra.matrizMuestra
+            this.muestraRecolectada=this.datos.idMuestra.muestraRecolectadaPor
+            this.muestraFecha=this.datos.idMuestra.fechaRecoleccion
+
+            
+            this.analisisFecha=""// no se
+            this.analisisEnsayo=""
+            this.analisisMetodo=""
+            this.analisisTecnica=""
+            this.analisisResultado=""
+            this.analisisIncertidumbre=""
+            this.analisisValorM=""
+            this.analisisValorMinimo=""
+            this.analisisUnidades=""
+            this.infoObservaciones=""
+            this.infoDescripcionEnsayos=""
+        },
+        infoGeneral() {
+            axios.get("/cotizacion/traerInfo")
+                .then((response) => {
+                    this.infoDatos = response.data.info
+                    this.infoDescripcion=this.infoDatos[0].descripcion
+                    this.infoNit=this.infoDatos[0].nit
+                    this.infoDireccion=this.infoDatos[0].direccion
+                    this.infoTelefono=this.infoDatos[0].telefono
+                    this.infoCorreo=this.infoDatos[0].correo
+                    this.infoNumero=1
+                    // this.numerocoti = this.datos[0].numero_cotizacion
+                    // let date = new Date();
+                    // let output = String(date.getFullYear());
+                    // if (this.numerocoti.toString().length === 1) {
+                    //     this.numeroactual = `000${this.numerocoti}-${output}V${1}`
+                    // } else if (this.numerocoti.toString().length === 2) {
+                    //     this.numeroactual = `00${this.numerocoti}-${output}V${1}`
+                    // } else if (this.numerocoti.toString().length === 3) {
+                    //     this.numeroactual = `0${this.numerocoti}-${output}V${1}`
+                    // } else if (this.numerocoti.toString().length === 4) {
+                    //     this.numeroactual = `${this.numerocoti}-${output}V${1}`
+                    // }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        calidad() {
+            axios.get("/calidad/listar")
+                .then((response) => {
+                    console.log(response);
+                    this.calidadInforme = response.data.listado[0].InformeResultado
+                    this.infoCodigo= this.calidadInforme[0].codigo
+                    this.infoAprobacion= this.calidadInforme[0].aprobacion
+                    this.infoVersion= this.calidadInforme[0].version
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
     created() {
         this.info();
+        this.infoGeneral();
+        this.calidad();
     }
 }
 </script>
