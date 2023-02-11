@@ -8,9 +8,9 @@ import {store} from './store/store.js';
 import {routes} from './routes/routes.js';
 import axios from 'axios'
 
-
+//https://laboratorio-ten.vercel.app/api
 //https://laboratorio-production.up.railway.app/api
-axios.defaults.baseURL = 'https://laboratorio-ten.vercel.app/api';
+axios.defaults.baseURL = 'https://lab-wheat.vercel.app/api';
 
 Vue.use(VueRouter)
 Vue.use(VueSweetalert2);
