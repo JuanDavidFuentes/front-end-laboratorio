@@ -941,13 +941,13 @@ export default {
                     let date = new Date();
                     let output = String(date.getFullYear());
                     if (this.numerocoti.toString().length === 1) {
-                        this.numeroactual = `000${this.numerocoti + 1}-${output}`
+                        this.numeroactual = `000${this.numerocoti}-${output}`
                     } else if (this.numerocoti.toString().length === 2) {
-                        this.numeroactual = `00${this.numerocoti + 1}-${output}`
+                        this.numeroactual = `00${this.numerocoti}-${output}`
                     } else if (this.numerocoti.toString().length === 3) {
-                        this.numeroactual = `0${this.numerocoti + 1}-${output}`
+                        this.numeroactual = `0${this.numerocoti}-${output}`
                     } else if (this.numerocoti.toString().length === 4) {
-                        this.numeroactual = `${this.numerocoti + 1}-${output}`
+                        this.numeroactual = `${this.numerocoti}-${output}`
                     }
                 })
                 .catch((error) => {
