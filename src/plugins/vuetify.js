@@ -3,10 +3,10 @@ import Vuetify from 'vuetify/lib/framework';
 import axios from 'axios'
 Vue.use(Vuetify);
 
-
+//https://laboratorio-ten.vercel.app/api/colores/
 //https://laboratorio-production.up.railway.app
 async function color() {
-  await axios.get("https://laboratorio-ten.vercel.app/api/colores/")
+  await axios.get("https://lab-wheat.vercel.app/api/colores")
     .then((response) => {
       console.log(response);
       localStorage.setItem("color",JSON.stringify(response.data.color))
