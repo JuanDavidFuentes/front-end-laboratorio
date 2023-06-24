@@ -1,4 +1,3 @@
-
 <template>
     <v-container style="margin-top: 75px">
         <div v-if="this.$store.state.token">
@@ -1449,7 +1448,7 @@
                                         </v-col>
                                     </v-row>
                                     <v-row style=" margin: 0;" class="mx-5">
-                                        <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4">
+                                        <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="12">
                                             <v-btn div v-if="get === 0" color="red" dark @click="cancelar()">
                                                 <v-icon>mdi-close</v-icon> Cancelar
                                             </v-btn>
@@ -1457,8 +1456,7 @@
                                                 <v-icon>mdi-close</v-icon> Cerrar
                                             </v-btn>
                                         </v-col>
-                                        <v-col cols="12" xs="0" sm="0" md="4" lg="4" xl="4"></v-col>
-                                        <v-col cols="12" xs="6" sm="6" md="4" lg="4" xl="4" class="text-right">
+                                        <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="12" class="text-right">
                                             <div v-if="get === 0">
                                                 <v-btn v-if="BtnEditar === 0" dark color="green"
                                                     @click="crearcotizacion()">
@@ -1670,7 +1668,7 @@
                     </v-btn>
                 </v-col>
             </v-row>
-            <v-dialog v-model="dialog2" max-width="1000px">
+            <v-dialog v-model="dialog2" class="mt-2" max-width="1000px">
                 <v-card>
                     <template>
                         <v-card>
@@ -1700,14 +1698,12 @@
                     </div>
                     <v-card-actions>
                         <v-row style="margin:0">
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4">
+                            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6">
                                 <v-btn color="green" rounded dark @click="aceptar()">
                                     Crear
                                 </v-btn>
                             </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
-                            </v-col>
-                            <v-col cols="12" xs="8" sm="8" md="4" lg="4" xl="4" class="text-right">
+                            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="text-right">
                                 <v-btn color="red" @click="dialog2 = false" rounded dark>
                                     Cerrar
                                 </v-btn>
@@ -2880,6 +2876,7 @@ export default {
                         this.listarContactos()
                     })
                     .catch((error) => {
+                        console.log(error);
                         this.$swal.fire({
                             position: "top-end",
                             icon: "error",
