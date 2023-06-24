@@ -1019,6 +1019,7 @@ export default {
     }),
     methods: {
         info() {
+            console.log(this.idCliente);
             this.datos = JSON.parse(localStorage.getItem("datos"))
             console.log(this.datos);
             if (this.datos.idCliente.contacto) {

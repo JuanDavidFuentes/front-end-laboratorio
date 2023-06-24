@@ -4133,7 +4133,7 @@ export default {
             // this.$store.dispatch("setCotiImprimir", datos);
             localStorage.setItem("datos", JSON.stringify(datos))
 
-            window.open("http://localhost:8080/#/CotiImprimir")
+            window.open("https://laboratorio-n1xj.onrender.com/#/CotiImprimir")
             console.log(datos);
 
         },
